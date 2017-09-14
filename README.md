@@ -15,7 +15,7 @@
 - 第二步：拼接密钥：
 ` temp=temp+"&key=192006250b4c09247ec02edce69f6a2d";`
 - 第三步：生成签名(HMAC-SHA256签名方式)：
-* sign=hash_hmac("sha256",temp,key).toUpperCase()="6A9...AE16"
+` sign=hash_hmac("sha256",temp,key).toUpperCase()="6A9...AE16"`
 
 ### 最终发送的数据：
 * method
