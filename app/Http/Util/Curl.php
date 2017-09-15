@@ -2,6 +2,8 @@
 
 namespace App\Http\Util;
 
+use Illuminate\Support\Facades\Log;
+
 class Curl
 {
     /**
@@ -60,11 +62,13 @@ class Curl
         if (!$response) {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            echo "curl出错，错误码:$errno,url:{$url}";
+            echo "curl出错，错误码:$errno,url:{$url},error:{$error}";
+            Log::debug("curl出错，错误码:$errno,url:{$url},error:{$error}");
             curl_close($ch);
-            throw new \Exception("curl出错，错误码:$error\n" . $error);
+            throw new \Exception($error . "curl错误码:$errno " . $error);
         }
         curl_close($ch);
+        file_put_contents('dump', $response);
         return $response;
     }
 }
