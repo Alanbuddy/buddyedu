@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class Test extends Command
 {
@@ -42,9 +43,9 @@ class Test extends Command
 //        $this->postLocalFile();
         $result = $this->postServerFile();
         file_put_contents('dump', $result);
+        Log::debug(__METHOD__.__LINE__."\n".$result);
         dd($this->dumpBinaryData($result));
-//        Log::debug($result);
-        $this->info($result);
+//        $this->info($result);
 //        $bstr = file_get_contents('dump');
     }
 
@@ -80,10 +81,12 @@ class Test extends Command
     public function postServerFile()
     {
         $url = 'http://edu.com/file';
+        $url = 'http://edu.com/api/file';
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'name' => 'aaa'
+            'name' => 'aaa',
+            'api_token' => '1443e624-160e-3752-bd8d-80f4953a1fa6',
         );
         return Curl::request($url, $post_data, 'post');
     }
