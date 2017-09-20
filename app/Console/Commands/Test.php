@@ -40,10 +40,18 @@ class Test extends Command
      */
     public function handle()
     {
+        $this->info(route('api.login'));
+//        $data = $this->getBytes('中国');
+//        $this->info(implode('',$data));//e4b8ade59bbd
+
+//        file_put_contents('dumpc',$data);
+//        $this->encodeBin(416);
+        return;
+
 //        $this->postLocalFile();
         $result = $this->postServerFile();
         file_put_contents('dump', $result);
-        Log::debug(__METHOD__.__LINE__."\n".$result);
+        Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
         dd($this->dumpBinaryData($result));
 //        $this->info($result);
 //        $bstr = file_get_contents('dump');
@@ -55,14 +63,40 @@ class Test extends Command
         return '\x' . implode('\x', $bytes);
     }
 
-    public function getBytes($string)
+    /**
+     * example:
+     * [ 94 171 392 416]
+     * "\x5e\x00\xab\x00\x88\x01\xa0\x01"
+     * @param $str
+     * @param bool $isBinaryData
+     * @return array
+     * @internal param $string
+     */
+    public function getBytes($str, $isBinaryData = true)
     {
         $bytes = array();
-        for ($i = 0; $i < strlen($string); $i++) {
+        for ($i = 0; $i < strlen($str); $i++) {
+            if (!$isBinaryData)
+                $str[$i] = pack('C', ord($str[$i]));//format 参数 C - unsigned char
 //            $bytes[] = ord($string[$i]);
-            $bytes[] = bin2hex($string[$i]);
+            $bytes[] = bin2hex($str[$i]);
         }
         return $bytes;
+    }
+
+    /**
+     * 输出数字的二进制表示
+     * input 416
+     * output "110100000"
+     * @param $num
+     * @param int $base
+     */
+    public function encodeBin($num, $base = 2)
+    {
+        if ($num > 0) {
+            $this->encodeBin(intval($num / $base), $base);
+            printf("%d", $num % $base);
+        }
     }
 
     public function postLocalFile()
@@ -82,6 +116,7 @@ class Test extends Command
     {
         $url = 'http://edu.com/file';
         $url = 'http://edu.com/api/file';
+        $url = 'http://edu.com/api/v1/cut';
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
@@ -90,4 +125,5 @@ class Test extends Command
         );
         return Curl::request($url, $post_data, 'post');
     }
+
 }

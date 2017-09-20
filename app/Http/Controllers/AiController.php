@@ -9,12 +9,23 @@ use Illuminate\Support\Facades\Log;
 
 class AiController extends Controller
 {
+
     public function cut(Request $request)
     {
-        $url = "http://192.168.1.116:3000/cut";
-        $request->getContent();
-        $response = Curl::request($url);
-        dd($response);
+        $url = 'http://192.168.1.116:3000/cut';
+        Log::debug(json_encode(auth()->user()));
+        $file = $request->file('file');
+        Log::debug(__METHOD__ .__LINE__. "\n".$request->get('api_token'));
+        $upload_file = new CURLFile($file->getRealPath());
+        $post_data = [
+            'file' => $upload_file
+        ];
+        try {
+            $result = Curl::request($url, $post_data, 'post');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $result;
     }
 
     public function form()
