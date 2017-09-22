@@ -5,9 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class Test extends Command
 {
@@ -40,8 +38,21 @@ class Test extends Command
      *
      * @return mixed
      */
+    function b()
+    {
+        return function ($carry, $item) {
+            $carry += $item;
+            return $carry;
+        };
+    }
+
     public function handle()
     {
+        $arr = [1, 2, 3];
+        $r = array_reduce($arr, $this->b(),function(){return 3;});
+        $this->info($r);
+        return;
+
 //        $data = $this->getBytes('中国');
 //        $this->info(implode('',$data));//e4b8ade59bbd
 

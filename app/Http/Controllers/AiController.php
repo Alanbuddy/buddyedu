@@ -31,7 +31,7 @@ class AiController extends Controller
         $target = $this->move($file);
         $this->store2DB($file, $target);
 //        dd($file,$target);
-        return ['success' => true, 'data' => $result];
+        return $result;
     }
 
     //persist file information to databases

@@ -18,6 +18,8 @@ Route::get('/', function () {
 });
 Route::auth();
 
-Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
+Route::group(['middleware' => ['auth', 'auth' => 'role:admin']], function () {
+    Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
+});
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
