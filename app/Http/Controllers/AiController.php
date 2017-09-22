@@ -15,7 +15,7 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
-        $url = 'http://192.168.1.116:3000/cut';
+        $url = 'http://192.168.1.3:3000/cut';
         $file = $request->file('file');
         Log::debug(json_encode(auth()->user()));
         Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
@@ -26,18 +26,19 @@ class AiController extends Controller
         try {
             $result = Curl::request($url, $post_data, 'post');
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return ['success' => false, 'message' => $e->getMessage()];
         }
         $target = $this->move($file);
-        $this->store2DB($file,$target);
+        $this->store2DB($file, $target);
 //        dd($file,$target);
-        return $result;
+        return ['success' => true, 'data' => $result];
     }
+
     //persist file information to databases
-    public function store2DB(UploadedFile $file,$target)
+    public function store2DB(UploadedFile $file, $target)
     {
         $item = new File();
-        $item->path = substr($target ->getPathname(), strlen(public_path()));
+        $item->path = substr($target->getPathname(), strlen(public_path()));
         $item->user_id = auth()->user()->id;
         $item->fill($this->getFileMeta($file));
         $item->save();

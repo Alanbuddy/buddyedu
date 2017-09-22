@@ -49,9 +49,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-//        if ($exception instanceof AuthenticationException && collect($exception->guards())->contains('api')) {
-//            return response()->json(['success' => false, 'message' => 'Unauthenticated.'], 401);
-//        }
+        if ($exception instanceof AuthenticationException && collect($exception->guards())->contains('api')) {
+            return response()->json(['success' => false, 'message' => 'Unauthenticated.'], 401);
+        }
         return parent::render($request, $exception);
     }
 }

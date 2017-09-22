@@ -165,8 +165,8 @@ class Test extends Command
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-//            'api_token' => '7704373d-acff-33d7-8974-67312b0d6add',
-            'api_token' => '7704373d-acff-33d7-8974-67312b0d6ad',
+            'api_token' => '7704373d-acff-33d7-8974-67312b0d6add',
+//            'api_token' => '7704373d-acff-33d7-8974-67312b0d6ad',
         );
         return Curl::request($url, $post_data, 'post');
     }

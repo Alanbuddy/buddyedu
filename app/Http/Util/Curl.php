@@ -64,7 +64,6 @@ class Curl
         if (!$response) {
             $errno = curl_errno($ch);
             $error = curl_error($ch);
-            echo "curl出错，错误码:$errno,url:{$url},error:{$error}";
             Log::debug("curl出错，错误码:$errno,url:{$url},error:{$error}");
             curl_close($ch);
             throw new \Exception($error . "curl错误码:$errno " . $error);
