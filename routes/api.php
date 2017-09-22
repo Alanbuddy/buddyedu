@@ -20,12 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group([
     'middleware' => ['auth:api'],
-    'prefix'=>'v1',
+    'prefix' => 'v1',
 ], function () {
+    Route::get('/get', 'AiController@cut');
     Route::post('/cut', 'AiController@cut');
 });
 
 Route::post('/file', 'AiController@store');
 Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
-Route::get('/login', 'LoginController@login')->name('api.login');//调用django接口裁切App发送的原始图片
-Route::post('/register', 'AiController@store')->name('api.register');
+
+Route::resource('files','FileController');
+
+Route::post('/login', 'Auth\LoginController@login')->name('api.login');
+Route::post('/register', 'Auth\RegisterController@register')->name('api.register');

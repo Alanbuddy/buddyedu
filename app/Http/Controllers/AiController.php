@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Util\Curl;
+use App\Model\File;
 use CURLFile;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
 
 class AiController extends Controller
 {
+    use FileTrait;
 
     public function cut(Request $request)
     {
         $url = 'http://192.168.1.116:3000/cut';
-        Log::debug(json_encode(auth()->user()));
         $file = $request->file('file');
-        Log::debug(__METHOD__ .__LINE__. "\n".$request->get('api_token'));
+        Log::debug(json_encode(auth()->user()));
+        Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
         $upload_file = new CURLFile($file->getRealPath());
         $post_data = [
             'file' => $upload_file
@@ -25,7 +28,20 @@ class AiController extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+        $target = $this->move($file);
+        $this->store2DB($file,$target);
+//        dd($file,$target);
         return $result;
+    }
+    //persist file information to databases
+    public function store2DB(UploadedFile $file,$target)
+    {
+        $item = new File();
+        $item->path = substr($target ->getPathname(), strlen(public_path()));
+        $item->user_id = auth()->user()->id;
+        $item->fill($this->getFileMeta($file));
+        $item->save();
+        return $item;
     }
 
     public function form()
@@ -38,8 +54,7 @@ class AiController extends Controller
         Log::debug(json_encode(auth()->user()));
         $file = $request->file('file');
 //        Log::debug($request->getContent(true));
-//        $file->move(public_path());
-        Log::debug(__METHOD__ .__LINE__. "\n".$request->get('api_token'));
+        Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
 //        return (file_get_contents($file->getRealPath()));
 //        dd(file_get_contents("php://temp"));
 //        dd($request->getContent());

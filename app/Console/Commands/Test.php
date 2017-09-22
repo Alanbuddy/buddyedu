@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class Test extends Command
 {
@@ -40,21 +42,65 @@ class Test extends Command
      */
     public function handle()
     {
-        $this->info(route('api.login'));
 //        $data = $this->getBytes('中国');
 //        $this->info(implode('',$data));//e4b8ade59bbd
 
 //        file_put_contents('dumpc',$data);
 //        $this->encodeBin(416);
-        return;
-
 //        $this->postLocalFile();
+
+//        $this->testRegisterApi();
+//        $this->testLoginApi();
+//        $this->testRateLimit();
+
+//        $this->info(Storage::prepend('public/2017_09_21_113331GetSegmentation.png','1111'));
+//        $this->info(Storage::lastModified('public/2017_09_21_113331GetSegmentation.png'));
+//        $this->info(Storage::delete('public/phpMjHvw1'));
+//        $this->info(Storage::size('public/phpMjHvw1'));
+
+//        dd(Storage::fake('avatars'));
+//        $file=UploadedFile::fake()->image('avatar.jpg',100 ,200)->size(1000);
+//        $file->move(storage_path());
+//        $file=UploadedFile::fake()->create('document.pdf', 100);
+//        $file->move(storage_path(),'document.pdf');
+//        file_put_contents('dump',"123\r\n123");
+//        return;
         $result = $this->postServerFile();
-        file_put_contents('dump', $result);
+        file_put_contents('dump.html', $result);
         Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
         dd($this->dumpBinaryData($result));
 //        $this->info($result);
 //        $bstr = file_get_contents('dump');
+    }
+
+    public function testRateLimit()
+    {
+        $result = Curl::request('http://edu.com/api/files');//route('files.index')
+        $this->info($result);
+    }
+
+    public function testLoginApi()
+    {
+        $data = [
+//            'email' => 'cdb@example.163.com',
+            'phone' => '12312341234',
+            'password' => '123456',
+        ];
+        $result = Curl::request('http://edu.com/api/login', $data, 'post');
+        $this->info($result);
+    }
+
+    public function testRegisterApi()
+    {
+        $data = [
+            'name' => 'b',
+//            'email' => 'cdb@example.163.com',
+            'phone' => '12312341234',
+            'password' => '123456',
+        ];
+        $result = Curl::request('http://edu.com/api/register', $data, 'post');
+        $this->info($result);
+        Log::debug($result);
     }
 
     public function dumpBinaryData($data)
@@ -115,13 +161,12 @@ class Test extends Command
     public function postServerFile()
     {
         $url = 'http://edu.com/file';
-        $url = 'http://edu.com/api/file';
         $url = 'http://edu.com/api/v1/cut';
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'name' => 'aaa',
-            'api_token' => '1443e624-160e-3752-bd8d-80f4953a1fa6',
+//            'api_token' => '7704373d-acff-33d7-8974-67312b0d6add',
+            'api_token' => '7704373d-acff-33d7-8974-67312b0d6ad',
         );
         return Curl::request($url, $post_data, 'post');
     }

@@ -35,20 +35,22 @@ class Curl
         }
 
         $header = array(
-            $MethodLine,
-            "HOST:Test",
-            "Content-Length: Test",
-            "Content-type:application/octet-stream",
-            "Accept:*/*",
-            "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
+//            $MethodLine,
+//            "HOST:Test",
+//            "Content-Length: Test",
+//            "Content-type:application/octet-stream",
+            "Accept:text/json",
+//            "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
 
         );
+        $userAgent= "User-Agent:app";
 
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
+        curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
-//        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 
         // 证书
         // curl_setopt($ch,CURLOPT_CAINFO,"ca.crt");

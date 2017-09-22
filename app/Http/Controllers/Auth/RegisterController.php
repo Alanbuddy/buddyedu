@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Model\User;
 use Faker\Provider\Uuid;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
@@ -50,22 +50,28 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'email' => 'sometimes|required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+//            'password' => 'required|string|min:6|confirmed',
         ]);
+    }
+
+    public function username()
+    {
+        return 'phone';
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array $data
-     * @return \App\User
+     * @return \App\Model\User
      */
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            $this->username() => $data[$this->username()],
             'password' => bcrypt($data['password']),
             'api_token' => Uuid::uuid()
         ]);
