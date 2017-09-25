@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf6986237003e1c65b11f3fa14358920",
-    "content-hash": "fc5fcf6106feb207aef966974207bd22",
+    "hash": "45fe63020e804fd574835290e5e03014",
+    "content-hash": "fe23443f45d42040f823860779678a1c",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -2890,6 +2890,52 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "yunpian/yunpian-php-sdk",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yunpian/yunpian-php-sdk.git",
+                "reference": "ca3a6e09e89e34c1b4c97074a0924facf2c83cfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/yunpian/yunpian-php-sdk/ca3a6e09e89e34c1b4c97074a0924facf2c83cfb.zip",
+                "reference": "ca3a6e09e89e34c1b4c97074a0924facf2c83cfb",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yunpian\\Sdk\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dzh",
+                    "email": "daizhong@yunpian.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yunpian PHP SDK",
+            "homepage": "https://github.com/yunpian/yunpian-php-sdk",
+            "keywords": [
+                "sdk",
+                "yunpian"
+            ],
+            "time": "2017-03-27 03:38:36"
         },
         {
             "name": "zendframework/zend-diactoros",
