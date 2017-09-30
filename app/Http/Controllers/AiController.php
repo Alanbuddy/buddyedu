@@ -34,7 +34,6 @@ class AiController extends Controller
         return $result;
     }
 
-    //persist file information to databases
     public function store2DB(UploadedFile $file, $target)
     {
         $item = new File();
@@ -43,6 +42,20 @@ class AiController extends Controller
         $item->fill($this->getFileMeta($file));
         $item->save();
         return $item;
+    }
+
+    public function bone(Request $request)
+    {
+        $url = 'http://192.168.1.3:3000/bone';
+        $file = $request->file('file');
+        $animal = $request->file('animal');
+        $upload_file = new CURLFile($file->getRealPath());
+        $post_data = [
+            'file' => $upload_file,
+            'animal' => $animal,
+        ];
+        $result = Curl::request($url, $post_data, 'post');
+        return $result;
     }
 
     public function form()

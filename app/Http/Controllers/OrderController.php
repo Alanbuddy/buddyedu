@@ -18,6 +18,28 @@ class OrderController extends Controller
 {
     use ErrorTrait, CourseEnrollTrait;
 
+    public static function updatePaymentStatus(Request $request, $uuid)
+    {
+        $order = Order::where('uuid', $uuid)->firstOrFail();
+        $result = self::queryOrder($request, $order->uuid);
+        if ('SUCCESS' == $result['result_code']) {
+            $order->status = $result['trade_state'] == 'SUCCESS' ? 'paid' : 'refunded';
+            $order->wx_transaction_id = $result['transaction_id'];
+            $order->wx_total_fee = $result['total_fee'];
+            $order->update();
+        }
+        Log::info(json_encode($result));
+        dd($result, $result['result_code']);
+    }
+
+    public static function queryOrder(Request $request, $uuid)
+    {
+        $payOrderQuery = new WxPayOrderQuery();
+        $payOrderQuery->SetOut_trade_no($uuid);
+        $result = WxPayApi::orderQuery($payOrderQuery);
+        return $result;
+    }
+
     /**
      *
      * Display a listing of the resource.
@@ -42,27 +64,6 @@ class OrderController extends Controller
     {
         return view('admin.order.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $order = new Order();
-        $course = Course::findOrFail($request->get('course_id'));
-        $order->title = 'buy course ' . $course->name;
-        $order->product_id = $course->id;
-        $order->amount = $course->price ?: $course->original_price;
-        $order->uuid = $this->uuid();
-        auth()->user()->orders()->save($order);
-        return $order;
-    }
-
-    public function uuid()
-    {
-        return md5(uniqid(rand(), true));
-    }
-
 
     /**
      * Display the specified resource.
@@ -107,50 +108,6 @@ class OrderController extends Controller
     }
 
     //调用统一下单API
-    public function placeUnifiedOrder($order)
-    {
-        $input = new WxPayUnifiedOrder();
-        $input->SetBody('购买' . $order->title);
-        $input->SetAttach("test");
-        $input->SetOut_trade_no($order->uuid); //$input->SetOut_trade_no(WxPayConfig::MCHID . date("YmdHis"));
-        $input->SetTotal_fee($order->amount * 100);
-//        $input->SetTotal_fee(1);//dev set to 1 cent
-        $input->SetTime_start(date("YmdHis"));
-        $input->SetTime_expire(date("YmdHis", time() + 600));
-        $input->SetGoods_tag("test");
-        $input->SetNotify_url("http://baby.fumubidu.com.cn/haomama/wechat/payment/notify");
-        $input->SetTrade_type("JSAPI");//交易类型为公众号支付
-        $input->SetProduct_id("32");
-        $input->SetOpenid(auth()->user()->openid);
-        $result = WxPayApi::unifiedOrder($input);
-        Log::debug('统一下单api返回值:' . json_encode($result));
-        if ($result['result_code'] == 'FAIL') {
-            throw  new \Exception(json_encode($result));
-        }
-        return $result;
-    }
-
-    public static function queryOrder(Request $request, $uuid)
-    {
-        $payOrderQuery = new WxPayOrderQuery();
-        $payOrderQuery->SetOut_trade_no($uuid);
-        $result = WxPayApi::orderQuery($payOrderQuery);
-        return $result;
-    }
-
-    public static function updatePaymentStatus(Request $request, $uuid)
-    {
-        $order = Order::where('uuid', $uuid)->firstOrFail();
-        $result = self::queryOrder($request, $order->uuid);
-        if ('SUCCESS' == $result['result_code']) {
-            $order->status = $result['trade_state'] == 'SUCCESS' ? 'paid' : 'refunded';
-            $order->wx_transaction_id = $result['transaction_id'];
-            $order->wx_total_fee = $result['total_fee'];
-            $order->update();
-        }
-        Log::info(json_encode($result));
-        dd($result, $result['result_code']);
-    }
 
     public function pay(Request $request)
     {
@@ -200,7 +157,51 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $order = new Order();
+        $course = Course::findOrFail($request->get('course_id'));
+        $order->title = 'buy course ' . $course->name;
+        $order->product_id = $course->id;
+        $order->amount = $course->price ?: $course->original_price;
+        $order->uuid = $this->uuid();
+        auth()->user()->orders()->save($order);
+        return $order;
+    }
+
+    public function uuid()
+    {
+        return md5(uniqid(rand(), true));
+    }
+
+    public function placeUnifiedOrder($order)
+    {
+        $input = new WxPayUnifiedOrder();
+        $input->SetBody('购买' . $order->title);
+        $input->SetAttach("test");
+        $input->SetOut_trade_no($order->uuid); //$input->SetOut_trade_no(WxPayConfig::MCHID . date("YmdHis"));
+        $input->SetTotal_fee($order->amount * 100);
+//        $input->SetTotal_fee(1);//dev set to 1 cent
+        $input->SetTime_start(date("YmdHis"));
+        $input->SetTime_expire(date("YmdHis", time() + 600));
+        $input->SetGoods_tag("test");
+        $input->SetNotify_url("http://baby.fumubidu.com.cn/haomama/wechat/payment/notify");
+        $input->SetTrade_type("JSAPI");//交易类型为公众号支付
+        $input->SetProduct_id("32");
+        $input->SetOpenid(auth()->user()->openid);
+        $result = WxPayApi::unifiedOrder($input);
+        Log::debug('统一下单api返回值:' . json_encode($result));
+        if ($result['result_code'] == 'FAIL') {
+            throw  new \Exception(json_encode($result));
+        }
+        return $result;
+    }
+
     //退款
+
     public function refund(Request $request, $uuid)
     {
         $order = Order::where('uuid', $uuid)->firstOrFail();
