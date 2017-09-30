@@ -69,7 +69,6 @@ class Curl
             throw new \Exception($error . "curl错误码:$errno " . $error);
         }
         curl_close($ch);
-        file_put_contents('dump', $response);
         return $response;
     }
 }

@@ -23,3 +23,4 @@ Route::group(['middleware' => ['auth', 'auth' => 'role:admin']], function () {
 });
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
+Route::get('/sms/send', 'YunpianController@send')->name('sms.send');

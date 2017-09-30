@@ -48,10 +48,10 @@ class Test extends Command
 
     public function handle()
     {
-        $arr = [1, 2, 3];
-        $r = array_reduce($arr, $this->b(),function(){return 3;});
-        $this->info($r);
-        return;
+//        $arr = [1, 2, 3];
+//        $r = array_reduce($arr, $this->b(),function(){return 3;});
+//        $this->info($r);
+//        return;
 
 //        $data = $this->getBytes('中国');
 //        $this->info(implode('',$data));//e4b8ade59bbd
@@ -75,6 +75,7 @@ class Test extends Command
 //        $file=UploadedFile::fake()->create('document.pdf', 100);
 //        $file->move(storage_path(),'document.pdf');
 //        file_put_contents('dump',"123\r\n123");
+
 //        return;
         $result = $this->postServerFile();
         file_put_contents('dump.html', $result);
@@ -173,11 +174,10 @@ class Test extends Command
     {
         $url = 'http://edu.com/file';
         $url = 'http://edu.com/api/v1/cut';
-        $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
+        $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'api_token' => '7704373d-acff-33d7-8974-67312b0d6add',
-//            'api_token' => '7704373d-acff-33d7-8974-67312b0d6ad',
+            'api_token' => 'beea27c9-5e19-36bb-a90c-a9fef9541170',
         );
         return Curl::request($url, $post_data, 'post');
     }
