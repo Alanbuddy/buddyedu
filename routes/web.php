@@ -24,3 +24,6 @@ Route::group(['middleware' => ['auth', 'auth' => 'role:admin']], function () {
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'YunpianController@send')->name('sms.send');
+
+//用户支付完成后，微信服务器通知商启系统支付情况的回调地址
+Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');

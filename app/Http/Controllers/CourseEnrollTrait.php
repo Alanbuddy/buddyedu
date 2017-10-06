@@ -21,14 +21,14 @@ trait CourseEnrollTrait
         $user = auth()->user() ?: User::find($user_id);
         $success = true;
         if ($course->type == 'offline' && $course->quota)
-            if($course->students()->count() == $course->quota)
-        if (empty($user))
-            throw new \Exception("User doesn't exist");
+            if ($course->students()->count() == $course->quota)
+                if (empty($user))
+                    throw new \Exception("User doesn't exist");
 //        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
 //        $course->users()->attach(auth()->user(), ['type' => $type]);
         $count = $this->hasEnrolled($course, $user->id);
         if ($count == 0) {
-            $changed = $course->users()->attach($user, [
+            $course->users()->attach($user, [
                 'user_type' => 'student',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

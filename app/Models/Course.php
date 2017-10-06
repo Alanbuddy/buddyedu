@@ -83,4 +83,3 @@ class Course extends Model
     }
 
 }
-
