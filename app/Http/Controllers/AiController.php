@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Util\Curl;
-use App\Model\File;
+use App\Models\File;
 use CURLFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -15,7 +15,7 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
-        $url = 'http://192.168.1.3:3000/cut';
+        $url = env('AI_CUT_URL');
         $file = $request->file('file');
         Log::debug(json_encode(auth()->user()));
         Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
@@ -46,7 +46,7 @@ class AiController extends Controller
 
     public function bone(Request $request)
     {
-        $url = 'http://192.168.1.3:3000/bone';
+        $url = env('AI_BONE_URL');
         $file = $request->file('file');
         $animal = $request->file('animal');
         $upload_file = new CURLFile($file->getRealPath());

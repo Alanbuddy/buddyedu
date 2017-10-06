@@ -18,12 +18,18 @@ Route::get('/', function () {
 });
 Route::auth();
 
-Route::group(['middleware' => ['auth', 'auth' => 'role:admin']], function () {
-    Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
-});
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->group(
+        function () {
+            Route::get('/test', 'TestController@index')->name('test');
+        });
+
+Route::resource('courses', 'CourseController');
+Route::resource('comments', 'CommentController');
+Route::resource('order', 'OrderController');
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'YunpianController@send')->name('sms.send');
-
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');

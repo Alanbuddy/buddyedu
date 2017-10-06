@@ -16,7 +16,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        dd(2);
+//        return 3;
+        return view('a');
     }
 
     /**

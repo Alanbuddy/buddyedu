@@ -159,7 +159,7 @@ class Test extends Command
 
     public function postLocalFile()
     {
-        $url = 'http://192.168.1.116:3000/cut';
+        $url = env('AI_CUT_URL');
 //        $result=Curl::request($url,[]);
 
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
@@ -172,7 +172,7 @@ class Test extends Command
 
     public function postServerFile()
     {
-        $url = 'http://edu.com/file';
+//        $url = 'http://edu.com/file';
         $url = 'http://edu.com/api/v1/cut';
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $post_data = array(

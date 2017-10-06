@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,17 +14,19 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        $institution = Role::firstOrCreate([
             'name' => 'institution'
         ]);
-        DB::table('roles')->insert([
+        $teacher = Role::firstOrCreate([
             'name' => 'teacher'
         ]);
-        DB::table('roles')->insert([
+        $admin = Role::firstOrCreate([
             'name' => 'admin'
         ]);
-        DB::table('roles')->insert([
+        $operator = Role::firstOrCreate([
             'name' => 'operator'
         ]);
+        $user = User::find(3);
+        $user->attachRole($admin);
     }
 }
