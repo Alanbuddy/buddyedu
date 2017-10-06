@@ -10,14 +10,24 @@ trait FileTrait
 {
     public function move(UploadedFile $file, $directory = '', $targetName = '')
     {
-        $directory = $directory ?: public_path('storage');
+        $directory = $directory ?: $this->defaultDirectory();
         $defaultName = $this->defaultNaming($file);
         return $file->move($directory, $targetName ?: $defaultName);
     }
 
-    public function delete($file)
+    /**
+     * example: public/storage/2017-10-06
+     * @return string
+     */
+    public function defaultDirectory()
     {
-        Storage::delete($file);
+        return public_path('storage/') . date('Y-m-d');
+    }
+
+    public function defaultNaming(UploadedFile $file, $format = 'Y-m-d_His')
+    {
+        $meta = $this->getFileMeta($file);
+        return date($format) . $meta['name'];
     }
 
     public function getFileMeta(UploadedFile $file)
@@ -29,10 +39,9 @@ trait FileTrait
         return $meta;
     }
 
-    public function defaultNaming(UploadedFile $file, $format = 'Y-m-d_His')
+    public function delete($file)
     {
-        $meta = $this->getFileMeta($file);
-        return date($format) . $meta['name'];
+        Storage::delete($file);
     }
 
     public function decodeBase64Image($data)
@@ -44,7 +53,7 @@ trait FileTrait
 //            $tmp = tmpfile();
 //            fwrite($tmp, $decoded);
 //            return $tmp;
-            return tap(new File($suffix,tmpfile()), function ($file) use ($decoded) {
+            return tap(new File($suffix, tmpfile()), function ($file) use ($decoded) {
                 fwrite($file->tmpFile, $decoded);
             });
         }

@@ -39,7 +39,16 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $course = new Course();
+        $course = $course->fill($request->only([
+            'name', 'price', 'discount'
+        ]));
+        $course->status = 'draft';
+        $course->save();
+        return ['success' => true, 'data' => $course];
     }
 
     /**
@@ -50,7 +59,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return $course;
     }
 
     /**
