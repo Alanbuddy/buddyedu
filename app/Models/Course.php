@@ -10,18 +10,6 @@ class Course extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    public function lessons()
-    {
-        return $this->belongsToMany(Lesson::class)
-            ->withPivot('no');
-    }
-
-    public function onGoingLessons()
-    {
-        return $this->belongsToMany(Lesson::class)
-            ->whereNotNull('lessons.end')
-            ->where('lessons.end', '>', date('Y-m-d H:i:s', time()));
-    }
 
     public function comments()
     {
@@ -69,17 +57,6 @@ class Course extends Model
     public function orders()
     {
         return $this->hasMany('App\Models\Order', 'product_id');
-    }
-
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function shareRecords()
-    {
-        return $this->hasMany(Behavior::class)
-            ->where('behaviors.type', 'wx.share');
     }
 
 }
