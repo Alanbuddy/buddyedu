@@ -165,6 +165,7 @@ class OrderController extends Controller
         $order = new Order();
         $course = Course::findOrFail($request->get('course_id'));
         $order->title = 'buy course ' . $course->name;
+        $order->merchant_id = $request->get('merchat_id');
         $order->product_id = $course->id;
         $order->amount = $course->price ?: $course->original_price;
         $order->uuid = $this->uuid();

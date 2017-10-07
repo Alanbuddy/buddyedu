@@ -39,9 +39,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
+        $this->validate($request, $this->rules());
         $course = new Course();
         $course = $course->fill($request->only([
             'name', 'price', 'discount'
@@ -49,6 +47,17 @@ class CourseController extends Controller
         $course->status = 'draft';
         $course->save();
         return ['success' => true, 'data' => $course];
+    }
+
+    /**
+     * course store and update validation rules
+     * @return  array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+        ];
     }
 
     /**
