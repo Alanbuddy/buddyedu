@@ -32,5 +32,5 @@ Route::post('/file', 'AiController@store');
 
 Route::resource('files', 'FileController');
 
-Route::post('/login', 'Auth\LoginController@login')->name('api.login');
+Route::post('/login', 'Auth\LoginController@apiLogin')->name('api.login');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');

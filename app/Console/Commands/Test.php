@@ -75,11 +75,14 @@ class Test extends Command
 //        $file=UploadedFile::fake()->create('document.pdf', 100);
 //        $file->move(storage_path(),'document.pdf');
 //        file_put_contents('dump',"123\r\n123");
-
 //        return;
-        $result = $this->postServerFile();
+
+//        $result = $this->postServerFile();
+
+        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
         Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
+        echo $result;
         dd($this->dumpBinaryData($result));
 //        $this->info($result);
 //        $bstr = file_get_contents('dump');
@@ -94,9 +97,8 @@ class Test extends Command
     public function testLoginApi()
     {
         $data = [
-//            'email' => 'cdb@example.163.com',
-            'phone' => '12312341234',
-            'password' => '123456',
+            'phone' => '13096023973',
+            'password' => 'secret',
         ];
         $result = Curl::request('http://edu.com/api/login', $data, 'post');
         $this->info($result);
@@ -177,7 +179,19 @@ class Test extends Command
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'api_token' => 'beea27c9-5e19-36bb-a90c-a9fef9541170',
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+        );
+        return Curl::request($url, $post_data, 'post');
+    }
+
+    public function postServerFile_Bone()
+    {
+        $url = 'http://edu.com/api/v1/bone';
+        $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
+        $post_data = array(
+            'file' => $upload_file,
+            'animal'=>'goose',
+            'api_token'=> '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $post_data, 'post');
     }

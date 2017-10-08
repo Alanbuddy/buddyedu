@@ -15,8 +15,10 @@ class CreateMerchantsTable extends Migration
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->integer('admin_id')->unsigned();
-            $table->enum('status', ['authorized', 'unauthorized']);
+            $table->string('address')->default('');
+            $table->enum('status', ['authorized', 'unauthorized'])->default('unauthorized');
 
             $table->foreign('admin_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

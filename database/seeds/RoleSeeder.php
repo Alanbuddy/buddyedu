@@ -14,19 +14,19 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        $admin = Role::firstOrCreate([
+            'name' => 'admin'
+        ]);
         $institution = Role::firstOrCreate([
             'name' => 'institution'
         ]);
         $teacher = Role::firstOrCreate([
             'name' => 'teacher'
         ]);
-        $admin = Role::firstOrCreate([
-            'name' => 'admin'
-        ]);
         $operator = Role::firstOrCreate([
             'name' => 'operator'
         ]);
-        $user = User::find(3);
+        $user = User::find(1);
         $user->attachRole($admin);
     }
 }

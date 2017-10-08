@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Util\Curl;
 use App\Models\File;
+use App\Models\Record;
 use CURLFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -29,8 +30,10 @@ class AiController extends Controller
             return ['success' => false, 'message' => $e->getMessage()];
         }
         $target = $this->move($file);
-        $this->store2DB($file, $target);
+        $entry = $this->store2DB($file, $target);
 //        dd($file,$target);
+        $merchant_id = 0;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $merchant_id);
         return $result;
     }
 
@@ -44,17 +47,32 @@ class AiController extends Controller
         return $item;
     }
 
+    public function recordApiCall($api, $file, $merchant_id = null)
+    {
+        $record = new Record();
+        $record->api = $api;
+        $record->file = $file;
+        $record->merchant_id = $merchant_id;
+        $record->user_id = auth()->user()->id;
+        $record->save();
+        return $record;
+    }
+
     public function bone(Request $request)
     {
         $url = env('AI_BONE_URL');
         $file = $request->file('file');
-        $animal = $request->file('animal');
+        $animal = $request->get('animal');
         $upload_file = new CURLFile($file->getRealPath());
         $post_data = [
             'file' => $upload_file,
             'animal' => $animal,
         ];
         $result = Curl::request($url, $post_data, 'post');
+        $merchant_id = 1;
+        $target = $this->move($file);
+        $entry = $this->store2DB($file, $target);
+        $this->recordApiCall($request->route()->getName(), $entry->path, $merchant_id);
         return $result;
     }
 
@@ -73,7 +91,7 @@ class AiController extends Controller
 //        dd(file_get_contents("php://temp"));
 //        dd($request->getContent());
 //        Log::debug(file_get_contents($request->file('file')));
-        $url = 'http://192.168.1.116:3000/cut';
+        $url = 'http://192.168.1.107:3000/cut';
         $upload_file = new CURLFile($file->getRealPath());
         $post_data = [
             'file' => $upload_file
@@ -83,8 +101,6 @@ class AiController extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-
-//        file_put_contents('dump', $result);
         return $result;
     }
 

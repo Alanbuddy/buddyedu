@@ -15,6 +15,8 @@ class AlterUserAddColumnPhone extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone', 15)->unique()->nullable();
+            $table->string('avatar')->nullable()->default('');
+            $table->json('wx')->nullable()->comment('wechat user info');
         });
     }
 
@@ -27,6 +29,8 @@ class AlterUserAddColumnPhone extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(['phone']);
+            $table->dropColumn('avatar');
+            $table->dropColumn('wx');
         });
     }
 }
