@@ -15,9 +15,11 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('api');
             $table->unsignedInteger('merchant_id')->nullable()->default(0);
             $table->unsignedInteger('user_id')->nullable()->default(0);
-            $table->string('api');
+            $table->unsignedInteger('time_cost')->nullable()->default(0);
+            $table->binary('result')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });

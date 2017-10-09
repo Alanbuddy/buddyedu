@@ -25,9 +25,11 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/test', 'TestController@index')->name('test');
         });
 
+Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
 Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');
 Route::resource('order', 'OrderController');
+Route::resource('records', 'RecordController');
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'YunpianController@send')->name('sms.send');

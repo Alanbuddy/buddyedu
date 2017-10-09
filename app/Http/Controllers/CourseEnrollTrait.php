@@ -18,14 +18,8 @@ trait CourseEnrollTrait
     //学生加入课程
     public function enroll(Course $course, $user_id = 0)
     {
-        $user = auth()->user() ?: User::find($user_id);
+        $user = auth()->user() ?: User::findOrFail($user_id);
         $success = true;
-        if ($course->type == 'offline' && $course->quota)
-            if ($course->students()->count() == $course->quota)
-                if (empty($user))
-                    throw new \Exception("User doesn't exist");
-//        $user_type = $user->hasRole('teacher') ? 'teacher' : 'student';
-//        $course->users()->attach(auth()->user(), ['type' => $type]);
         $count = $this->hasEnrolled($course, $user->id);
         if ($count == 0) {
             $course->users()->attach($user, [
@@ -46,5 +40,23 @@ trait CourseEnrollTrait
             ->where('user_type', 'student')
             ->where('user_id', $userId)
             ->count();
+    }
+
+    public function getEnrollOrder($course)
+    {
+        $user = auth()->user();
+        return $user->orders()
+            ->where('product_id', $course->id)
+            ->where('status', 'paid')
+            ->orderBy('id', 'desc')
+            ->first();
+    }
+
+    public function isCourseFull($course)
+    {
+        return ($course->quota
+            && $course->students()->count() == $course->quota)
+            ? true
+            : false;
     }
 }

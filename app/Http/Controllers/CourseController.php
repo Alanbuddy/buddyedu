@@ -9,6 +9,12 @@ class CourseController extends Controller
 {
     use CourseEnrollTrait;
 
+    function __construct()
+    {
+        $this->middleware('role:admin|operator|teacher')
+            ->only(['index', 'create', 'store', 'destroy', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +22,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-        dd(2);
-//        return 3;
         return view('a');
     }
 
@@ -94,14 +98,18 @@ class CourseController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course $course
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function enrollIn(Course $course)
+    {
+        $user = auth()->user();
+        $order = $this->getEnrollOrder($course);
+        return $order
+            ? $this->enroll($course, $user->id)
+            : ['success' => false, 'message' => 'no finished order found'];
     }
 }

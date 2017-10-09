@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facades\MessageFacade;
+use App\Http\Wechat\WxApi;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\User;
@@ -49,7 +50,6 @@ class OrderController extends Controller
     public function index()
     {
         $items = Order::orderBy('id', 'desc')->paginate(10);
-//        dd($items);
         return view('admin.order.index', [
             'items' => $items
         ]);
@@ -113,24 +113,21 @@ class OrderController extends Controller
     {
         $course = Course::findOrFail($request->get('course_id'));
         if ($this->hasEnrolled($course, auth()->user()->id)) {
-            Log::info(__METHOD__ . '已经加入课程');
+            Log::debug(__METHOD__ . '已经加入课程');
             return ['success' => false, 'message' => '已经加入课程'];
         }
-        if ($course->type == 'offline'
-            && $course->quota
-            && $course->students()->count() == $course->quota
+        if ($course->quota && $course->students()->count() == $course->quota
         ) {
-            Log::info(__METHOD__ . '课程学员已满');
+            Log::debug(__METHOD__ . '课程学员已满');
             return ['success' => false, 'message' => '课程学员已满'];
         }
 
-        Log::info(__FILE__ . __LINE__);
         $order = $this->store($request);
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
 //            dd($ret);
-            Log::info(__FILE__ . __LINE__);
+            Log::debug(__FILE__ . __LINE__);
             $appId = $ret['appid'];
             $timeStamp = time();
             $nonceStr = WxApi::getNonceStr();

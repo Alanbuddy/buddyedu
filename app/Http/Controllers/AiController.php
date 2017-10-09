@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Util\Curl;
 use App\Models\File;
 use App\Models\Record;
+use Closure;
 use CURLFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
+use Time;
 
 class AiController extends Controller
 {
@@ -16,26 +18,39 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
+
         $url = env('AI_CUT_URL');
         $file = $request->file('file');
         Log::debug(json_encode(auth()->user()));
         Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
-        $upload_file = new CURLFile($file->getRealPath());
+        $upload_file = new CURLFile($file->getRealPath());//eg.  /tmp/phpeU0gU6
         $post_data = [
             'file' => $upload_file
         ];
         try {
-            $result = Curl::request($url, $post_data, 'post');
+            list($result, $timeCost) = timedProxy(
+                function () use ($url, $post_data, $request) {
+                    return Curl::request($url, $post_data, 'post');
+                });
         } catch (\Exception $e) {
             return ['success' => false, 'message' => $e->getMessage()];
         }
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
 //        dd($file,$target);
-        $merchant_id = 0;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $merchant_id);
+        $merchant_id = 1;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $result);
+
         return $result;
     }
+
+//    public function timedProxy(Closure $closure)
+//    {
+//        $begin = Time::milisecond();
+//        $result = call_user_func($closure);
+//        $timeCost = Time::milisecond() - $begin;
+//        return [$result, $timeCost];
+//    }
 
     public function store2DB(UploadedFile $file, $target)
     {
@@ -47,13 +62,15 @@ class AiController extends Controller
         return $item;
     }
 
-    public function recordApiCall($api, $file, $merchant_id = null)
+    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $result = null)
     {
         $record = new Record();
         $record->api = $api;
         $record->file = $file;
+        $record->time_cost = $time_cost;
         $record->merchant_id = $merchant_id;
         $record->user_id = auth()->user()->id;
+        $record->result = $result;
         $record->save();
         return $record;
     }
@@ -68,11 +85,13 @@ class AiController extends Controller
             'file' => $upload_file,
             'animal' => $animal,
         ];
-        $result = Curl::request($url, $post_data, 'post');
+        list($result, $timeCost) = $this->timedProxy(function () use ($url, $post_data, $request) {
+            return Curl::request($url, $post_data, 'post');
+        });
         $merchant_id = 1;
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
-        $this->recordApiCall($request->route()->getName(), $entry->path, $merchant_id);
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $result);
         return $result;
     }
 

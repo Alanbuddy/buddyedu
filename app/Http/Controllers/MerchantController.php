@@ -80,7 +80,12 @@ class MerchantController extends Controller
      */
     public function update(Request $request, Merchant $merchant)
     {
-        //
+        $data = $request->only([
+            'name',
+            'address',
+        ]);
+        $merchant->update($data);
+        return ['success' => true];
     }
 
     /**
@@ -91,6 +96,15 @@ class MerchantController extends Controller
      */
     public function destroy(Merchant $merchant)
     {
-        //
+        $merchant->delete();
+        return ['success' => true];
+    }
+
+    public function toggle(Merchant $merchant)
+    {
+        $merchant->update([
+            'status' => $merchant->status == 'authorized' ? 'unauthorized' : 'authorized'
+        ]);
+        return $merchant;
     }
 }
