@@ -37,7 +37,7 @@ register</h1>
 </tr>
 </tbody>
 </table>
-<h2>return (when succeed)</h2>
+<h2>return (on succeed)</h2>
 <p><span data-type="object" data-size="2">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"success"</span>
 :<span class="json_string">true</span>
 ,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"data"</span>
@@ -87,7 +87,7 @@ register</h1>
 </tr>
 </tbody>
 </table>
-<h2>return (when succeed)<br></h2>
+<h2>return (on succeed)<br></h2>
 <p><span data-type="object" data-size="2">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"success"</span>
 :<span class="json_string">true</span>
 ,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"data"</span>
@@ -114,7 +114,7 @@ register</h1>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span>
 <br>&nbsp;}</span>
 </p>
-<h2><span data-type="object" data-size="2">return (when failed)<br></span>
+<h2><span data-type="object" data-size="2">return (on failed)<br></span>
 </h2>
 <p><span data-type="object" data-size="2">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"message"</span>
 :<span class="json_string">"The given data was invalid."</span>
