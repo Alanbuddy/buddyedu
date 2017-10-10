@@ -75,6 +75,7 @@ class LoginController extends Controller
     {
         if ($request->route()->getName() == 'api.login')
             return [
+                'success'=>true,
                 'data' => ['user' => $user]
             ];
     }

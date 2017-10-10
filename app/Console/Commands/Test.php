@@ -60,7 +60,7 @@ class Test extends Command
 //        $this->encodeBin(416);
 //        $this->postLocalFile();
 
-//        $this->testRegisterApi();
+        $this->testRegisterApi();
 //        $this->testLoginApi();
 //        $this->testRateLimit();
 
@@ -75,9 +75,11 @@ class Test extends Command
 //        $file=UploadedFile::fake()->create('document.pdf', 100);
 //        $file->move(storage_path(),'document.pdf');
 //        file_put_contents('dump',"123\r\n123");
-//        return;
+        return;
 
-        $result = $this->postServerFile();
+//        $result = $this->postServerFile();
+//        $result = $this->testResetPasswordApi();
+        $result = $this->testResetSendToken();
 
 //        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
@@ -96,8 +98,8 @@ class Test extends Command
     public function testLoginApi()
     {
         $data = [
-            'phone' => '13096023973',
-            'password' => 'secret',
+            'phone' => '12312341237',
+            'password' => '123456',
         ];
         $result = Curl::request('http://edu.com/api/login', $data, 'post');
         $this->info($result);
@@ -108,13 +110,36 @@ class Test extends Command
         $data = [
             'name' => 'b',
 //            'email' => 'cdb@example.163.com',
-            'phone' => '12312341234',
+            'phone' => '1'.rand(1000000000,9999999999),
             'password' => '123456',
+            'password_confirmation' => '123456',
         ];
         $result = Curl::request('http://edu.com/api/register', $data, 'post');
         $this->info($result);
         Log::debug($result);
     }
+
+    public function testResetSendToken()
+    {
+        $result = Curl::request('http://edu.com/password/sms/send?phone=18911209450');
+        $this->info($result);
+        return $result;
+
+    }
+
+    public function testResetPasswordApi()
+    {
+        $data = [
+            'phone' => '12312341234',
+            'password' => '123456',
+            'password_confirmation' => '123456',
+            'token' => '254179',
+        ];
+        $result = Curl::request('http://edu.com/password/reset', $data, 'post');
+        $this->info($result);
+        Log::debug($result);
+    }
+
 
     public function dumpBinaryData($data)
     {

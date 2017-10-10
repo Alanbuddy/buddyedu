@@ -18,7 +18,6 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
-
         $url = env('AI_CUT_URL');
         $file = $request->file('file');
         Log::debug(json_encode(auth()->user()));

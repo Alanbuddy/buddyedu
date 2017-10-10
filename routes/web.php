@@ -32,6 +32,7 @@ Route::resource('order', 'OrderController');
 Route::resource('records', 'RecordController');
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
-Route::get('/sms/send', 'YunpianController@send')->name('sms.send');
+Route::get('/sms/send', 'SmsController@send')->name('sms.send');
+Route::get('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.reset.sms');
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');

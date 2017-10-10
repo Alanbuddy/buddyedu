@@ -16,7 +16,8 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+//        'passwords' => 'users',
+        'passwords' => 'sms',
     ],
 
     /*
@@ -97,6 +98,13 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],
+        //通过发送手机验证码重置密码
+        'sms' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 10,
+            'column'=>'phone'
         ],
     ],
 
