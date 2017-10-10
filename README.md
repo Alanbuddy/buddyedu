@@ -24,7 +24,7 @@ register</h1>
 <tr><td>password</td>
 <td>string</td>
 <td>true</td>
-<td>password length is at least 6 characters long<br></td>
+<td>password is at least 6 characters long<br></td>
 <td valign="top"><br></td>
 <td>123456</td>
 </tr>
@@ -61,11 +61,11 @@ register</h1>
 </p>
 <hr><h1><b>login</b>
 <br></h1>
-<h3>URL</h3>
+<h2>url</h2>
 <p>/api/login</p>
-<h3>method</h3>
+<h2>method</h2>
 <p>POST</p>
-<h3>parameters</h3>
+<h2>parameters</h2>
 <table width="618" height="126"><thead><tr><td>name</td>
 <td>type</td>
 <td>required</td>
@@ -128,11 +128,11 @@ register</h1>
 <p><span data-type="object" data-size="2"><br></span>
 </p>
 <hr><h1>cut image<br></h1>
-<h3>URL</h3>
+<h2>url</h2>
 <p>/api/v1/cut</p>
-<h3>method</h3>
+<h2>method</h2>
 <p>POST</p>
-<h3>parameters</h3>
+<h2>parameters</h2>
 <table width="618" height="126"><thead><tr><td>name</td>
 <td>type</td>
 <td>required</td>
@@ -155,11 +155,11 @@ register</h1>
 </tbody>
 </table>
 <hr><h1>get bone and segments<br></h1>
-<h3>URL</h3>
+<h2>url</h2>
 <p>/api/v1/bone</p>
-<h3>method</h3>
+<h2>method</h2>
 <p>POST</p>
-<h3>parameters</h3>
+<h2>parameters</h2>
 <table width="618" height="126"><thead><tr><td>name</td>
 <td>type</td>
 <td>required</td>
@@ -187,4 +187,109 @@ register</h1>
 </tr>
 </tbody>
 </table>
-
+<hr><h1>send reset password verification code<br></h1>
+<h2>url</h2>
+<p>/password/sms/send</p>
+<h2>method<br></h2>
+<p>GET</p>
+<h2>parameters</h2>
+<table><thead><tr><td>name</td>
+<td>type</td>
+<td>required</td>
+<td>description</td>
+<td>example</td>
+</tr>
+</thead>
+<tbody><tr><td>phone</td>
+<td>string</td>
+<td>true</td>
+<td>phone number<br></td>
+<td valign="top"><br></td>
+<td>18911209450</td>
+</tr>
+</tbody>
+</table>
+<h2>return (on failed)</h2>
+<p><span data-type="object" data-size="3">{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"success"</span>
+:<span class="json_string">false</span>
+,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"message"</span>
+:<span class="json_string">"发送失败"</span>
+,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"data"</span>
+:<span data-type="object" data-size="3">{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"success"</span>
+:<span class="json_string">false</span>
+,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"message"</span>
+:<span class="json_string">"账户余额不足"</span>
+,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json_key">"error"</span>
+:<span class="json_string">"请充值后重试"</span>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; }</span>
+<br>}</span>
+</p>
+<hr><h1>reset password<br></h1>
+<h2>url</h2>
+<p>/password/reset</p>
+<h2>method<br></h2>
+<p>POST</p>
+<h2>parameters</h2>
+<table><thead><tr><td>name</td>
+<td>type</td>
+<td>required</td>
+<td>description</td>
+<td>example</td>
+</tr>
+</thead>
+<tbody><tr><td>phone</td>
+<td>string</td>
+<td>true</td>
+<td>phone number<br></td>
+<td>18911209450</td>
+</tr>
+<tr><td>password</td>
+<td>string</td>
+<td>true</td>
+<td>password is at least 6 characters long<br></td>
+<td>123456</td>
+</tr>
+<tr><td>password_confirmation</td>
+<td>string</td>
+<td>true</td>
+<td><br></td>
+<td>123456</td>
+</tr>
+<tr><td>token</td>
+<td>string</td>
+<td>true</td>
+<td valign="top"><br>verification code sent through sms</td>
+<td>837572</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>return (on succeed)</p>
+<p>{"success":true}</p>
+<hr><h1>send sms<br></h1>
+<h2>url<br></h2>
+<p>/sms/send</p>
+<h2>method</h2>
+<p>GET</p>
+<h2>parameters</h2>
+<table><thead><tr><td>name</td>
+<td>type</td>
+<td>required</td>
+<td>description</td>
+<td>example</td>
+</tr>
+</thead>
+<tbody><tr><td>phone</td>
+<td>string</td>
+<td>true</td>
+<td>phone number<br></td>
+<td>18911209450<br></td>
+</tr>
+<tr><td>content</td>
+<td>string</td>
+<td>true</td>
+<td>the text content<br></td>
+<td>您的验证码是223344</td>
+</tr>
+</tbody>
+</table>

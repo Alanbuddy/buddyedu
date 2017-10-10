@@ -60,7 +60,7 @@ class Test extends Command
 //        $this->encodeBin(416);
 //        $this->postLocalFile();
 
-        $this->testRegisterApi();
+//        $this->testRegisterApi();
 //        $this->testLoginApi();
 //        $this->testRateLimit();
 
@@ -75,11 +75,11 @@ class Test extends Command
 //        $file=UploadedFile::fake()->create('document.pdf', 100);
 //        $file->move(storage_path(),'document.pdf');
 //        file_put_contents('dump',"123\r\n123");
-        return;
+//        return;
 
 //        $result = $this->postServerFile();
-//        $result = $this->testResetPasswordApi();
-        $result = $this->testResetSendToken();
+        $result = $this->testResetPasswordApi();
+//        $result = $this->testResetSendToken();
 
 //        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
@@ -130,12 +130,12 @@ class Test extends Command
     public function testResetPasswordApi()
     {
         $data = [
-            'phone' => '12312341234',
+            'phone' => '18911209450',
             'password' => '123456',
             'password_confirmation' => '123456',
-            'token' => '254179',
+            'token' => '442243',
         ];
-        $result = Curl::request('http://edu.com/password/reset', $data, 'post');
+        $result = Curl::request('http://edu.com/api/password/reset', $data, 'post');
         $this->info($result);
         Log::debug($result);
     }
