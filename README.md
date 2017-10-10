@@ -263,8 +263,10 @@ register</h1>
 </tbody>
 </table>
 <p><br></p>
-<p>return (on succeed)</p>
+<h2>return (on succeed)</h2>
 <p>{"success":true}</p>
+<h2>return (on failed)</h2>
+{<br>&nbsp;&nbsp;&nbsp; "success":false,<br>&nbsp;&nbsp;&nbsp; "message":"This password reset token is invalid."<br>}
 <hr><h1>send sms<br></h1>
 <h2>url<br></h2>
 <p>/sms/send</p>
