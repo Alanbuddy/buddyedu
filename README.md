@@ -6,12 +6,12 @@ register</h1>
 <h3>method</h3>
 <p>POST</p>
 <h3>parameters</h3>
-<table width="618" height="126"><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td valign="top"><br></td>
-<td>example</td>
+<table width="618" height="126"><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th valign="top"><br></th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>phone</td>
@@ -66,11 +66,11 @@ register</h1>
 <h2>method</h2>
 <p>POST</p>
 <h2>parameters</h2>
-<table width="618" height="126"><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table width="618" height="126"><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>phone</td>
@@ -133,11 +133,11 @@ register</h1>
 <h2>method</h2>
 <p>POST</p>
 <h2>parameters</h2>
-<table width="618" height="126"><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table width="618" height="126"><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>file</td>
@@ -160,11 +160,11 @@ register</h1>
 <h2>method</h2>
 <p>POST</p>
 <h2>parameters</h2>
-<table width="618" height="126"><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table width="618" height="126"><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>file</td>
@@ -193,11 +193,11 @@ register</h1>
 <h2>method<br></h2>
 <p>GET</p>
 <h2>parameters</h2>
-<table><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>phone</td>
@@ -229,11 +229,11 @@ register</h1>
 <h2>method<br></h2>
 <p>POST</p>
 <h2>parameters</h2>
-<table><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>phone</td>
@@ -271,11 +271,11 @@ register</h1>
 <h2>method</h2>
 <p>GET</p>
 <h2>parameters</h2>
-<table><thead><tr><td>name</td>
-<td>type</td>
-<td>required</td>
-<td>description</td>
-<td>example</td>
+<table><thead><tr><th><td>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
 </tr>
 </thead>
 <tbody><tr><td>phone</td>
