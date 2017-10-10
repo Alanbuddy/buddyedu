@@ -257,7 +257,7 @@ register</h1>
 <tr><td>token</td>
 <td>string</td>
 <td>true</td>
-<td><br>verification code sent through sms</td>
+<td>verification code sent through sms</td>
 <td>837572</td>
 </tr>
 </tbody>
