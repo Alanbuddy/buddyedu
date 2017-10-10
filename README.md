@@ -204,7 +204,6 @@ register</h1>
 <td>string</td>
 <td>true</td>
 <td>phone number<br></td>
-<td valign="top"><br></td>
 <td>18911209450</td>
 </tr>
 </tbody>
