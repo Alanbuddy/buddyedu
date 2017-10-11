@@ -52,19 +52,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (Str::startsWith($request->getRequestUri(), '/api') && $exception instanceof HttpException) {
-            return response()->json(['success' => false, 'message' => class_basename($exception)], $exception->getStatusCode());
-        }
-
-        if (Str::startsWith($request->getRequestUri(), '/api')
-            && ( $exception instanceof AuthenticationException || $exception instanceof ValidationException)) {
 //        if ($request->route() && collect($request->route()->computedMiddleware)->contains('api')) {
-            return response()->json(['success' => false, 'message' => $exception->getMessage()], $exception->status);
-        }
-
         if (Str::startsWith($request->getRequestUri(), '/api')) {
-            return response()->json(['success' => false, 'message' => $exception->getMessage()],
-                property_exists($exception, 'status') ? $exception->status : 500);
+            if ($exception instanceof HttpException) {
+                return response()->json(['success' => false, 'message' => class_basename($exception)], $exception->getStatusCode());
+            } else if ($exception instanceof AuthenticationException) {
+                return response()->json(['success' => false, 'message' => $exception->getMessage()], 401);
+            } else if ($exception instanceof ValidationException) {
+                return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
+            } else {
+                return response()->json(['success' => false, 'message' => $exception->getMessage()],
+                    property_exists($exception, 'status') ? $exception->status : 500);
+            }
         }
 
         return parent::render($request, $exception);

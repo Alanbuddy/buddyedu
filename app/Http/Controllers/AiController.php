@@ -10,7 +10,6 @@ use CURLFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
-use Time;
 
 class AiController extends Controller
 {
