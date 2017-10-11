@@ -10,7 +10,6 @@ register</h1>
 <th>type</th>
 <th>required</th>
 <th>description</th>
-<th valign="top"><br></th>
 <th>example</th>
 </tr>
 </thead>
@@ -18,21 +17,18 @@ register</h1>
 <td>string</td>
 <td>true</td>
 <td>phone number<br></td>
-<td valign="top"><br></td>
 <td>18911209450</td>
 </tr>
 <tr><td>password</td>
 <td>string</td>
 <td>true</td>
 <td>password is at least 6 characters long<br></td>
-<td valign="top"><br></td>
 <td>123456</td>
 </tr>
 <tr><td>password_confirmation</td>
 <td>string</td>
 <td>true</td>
 <td><br></td>
-<td valign="top"><br></td>
 <td>123456</td>
 </tr>
 </tbody>
