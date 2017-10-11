@@ -77,10 +77,10 @@ class Test extends Command
 //        file_put_contents('dump',"123\r\n123");
 //        return;
 
-//        $result = $this->postServerFile();
-        $result = $this->testResetPasswordApi();
+//        $result = $this->testResetPasswordApi();
 //        $result = $this->testResetSendToken();
 
+        $result = $this->postServerFile();
 //        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
         Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
@@ -130,7 +130,7 @@ class Test extends Command
     public function testResetPasswordApi()
     {
         $data = [
-            'phone' => '18911209450',
+            'phone' => '189112094',
             'password' => '123456',
             'password_confirmation' => '123456',
             'token' => '442243',
@@ -203,7 +203,7 @@ class Test extends Command
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+//            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $post_data, 'post');
     }
