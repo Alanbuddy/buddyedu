@@ -6,6 +6,7 @@ use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class Test extends Command
 {
@@ -14,7 +15,7 @@ class Test extends Command
      *
      * @var string
      */
-    protected $signature = 't';
+    protected $signature = 't {method?}';
 
     /**
      * The console command description.
@@ -80,7 +81,18 @@ class Test extends Command
 //        $result = $this->testResetPasswordApi();
 //        $result = $this->testResetSendToken();
 
-        $result = $this->postServerFile();
+        $method = $this->argument('method');
+        if ($method) {
+            $result = call_user_func([$this, $method]);
+        } else {
+            $this->info('Method list:');
+            foreach (get_class_methods($this) as $k => $v) {
+                if (Str::startsWith($v, 'post'))
+                    $this->info($v);
+            }
+            $result = $this->postServerFile();
+        }
+
 //        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
         Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
@@ -110,7 +122,7 @@ class Test extends Command
         $data = [
             'name' => 'b',
 //            'email' => 'cdb@example.163.com',
-            'phone' => '1'.rand(1000000000,9999999999),
+            'phone' => '1' . rand(1000000000, 9999999999),
             'password' => '123456',
             'password_confirmation' => '123456',
         ];
@@ -189,6 +201,7 @@ class Test extends Command
 //        $result=Curl::request($url,[]);
 
         $upload_file = new CURLFile('/home/gao/projects/django_demo/GetSegmentation.png');
+        $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
         $post_data = array(
             'file' => $upload_file
         );
@@ -201,9 +214,10 @@ class Test extends Command
 //        $url = 'http://edu.com/file';
         $url = 'http://edu.com/api/v1/cut';
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
+        $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
         $post_data = array(
             'file' => $upload_file,
-//            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $post_data, 'post');
     }
@@ -214,8 +228,21 @@ class Test extends Command
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $post_data = array(
             'file' => $upload_file,
-            'animal'=>'goose',
-            'api_token'=> '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+            'animal' => 'goose',
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+        );
+        return Curl::request($url, $post_data, 'post');
+    }
+
+    public function postVideo()
+    {
+        $url = 'http://edu.com/api/files';
+        $url = 'http://edu.com/api/v1/files';
+        $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
+        $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
+        $post_data = array(
+            'file' => $upload_file,
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $post_data, 'post');
     }

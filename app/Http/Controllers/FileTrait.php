@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Testing\File;
+use App\Models\File;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,5 +58,15 @@ trait FileTrait
             });
         }
 
+    }
+
+    public function store2DB(UploadedFile $file, $target)
+    {
+        $item = new File();
+        $item->path = substr($target->getPathname(), strlen(public_path()));
+        $item->user_id = auth()->user()->id;
+        $item->fill($this->getFileMeta($file));
+        $item->save();
+        return $item;
     }
 }

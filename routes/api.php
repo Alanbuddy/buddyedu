@@ -25,12 +25,13 @@ Route::middleware(['auth:api'])
             Route::get('/get', 'AiController@cut');
             Route::post('/cut', 'AiController@cut')->name('cut');
             Route::post('/bone', 'AiController@bone')->name('bone');
+            Route::resource('files', 'FileController');
         });
 
 Route::post('/file', 'AiController@store');
 //Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
+//Route::resource('files', 'FileController');
 
-Route::resource('files', 'FileController');
 
 Route::get('/test', 'TestController@apiIndex');
 Route::post('/login', 'Auth\LoginController@apiLogin')->name('api.login');

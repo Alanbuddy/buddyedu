@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Util\Curl;
 use App\Models\File;
 use App\Models\Record;
-use Closure;
 use CURLFile;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
