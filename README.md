@@ -160,7 +160,7 @@ register</h1>
 <h2>method</h2>
 <p>POST</p>
 <h2>parameters</h2>
-<table width="618" height="126"><thead><tr><th>name</th>
+<table><thead><tr><th>name</th>
 <th>type</th>
 <th>required</th>
 <th>description</th>
