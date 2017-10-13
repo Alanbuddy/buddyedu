@@ -107,7 +107,7 @@ class Test extends Command
         $this->info($result);
     }
 
-    public function testLoginApi()
+    public function postLoginApi()
     {
         $data = [
             'phone' => '12312341237',
