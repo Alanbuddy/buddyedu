@@ -9,6 +9,11 @@ class FileController extends Controller
 {
     use FileTrait;
 
+    public function __construct()
+    {
+        $this->middleware('role:amdin');
+    }
+
     /**
      * Display a listing of the resource.
      *

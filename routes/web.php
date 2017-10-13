@@ -30,6 +30,7 @@ Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');
 Route::resource('order', 'OrderController');
 Route::resource('records', 'RecordController');
+Route::resource('files', 'FileController');
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'SmsController@send')->name('sms.send');

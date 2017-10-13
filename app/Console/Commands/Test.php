@@ -247,4 +247,13 @@ class Test extends Command
         return Curl::request($url, $post_data, 'post');
     }
 
+    public function getFiles()
+    {
+        $url = 'http://edu.com/api/v1/files';
+        $data = array(
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+        );
+        return Curl::request($url,$data);
+    }
+
 }

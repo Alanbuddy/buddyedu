@@ -27,23 +27,19 @@ class Curl
             curl_setopt($ch, CURLOPT_PROXYPORT, $proxyPort);
         }
         if (strtoupper($method) == "GET") {
-            $MethodLine = "GET HTTP/1/1";
+            if ($data)
+                curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($data));
         } else {
             curl_setopt($ch, CURLOPT_POST, 1);
-            $MethodLine = "POST {$url}} HTTP/1/1";
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         }
 
         $header = array(
-//            $MethodLine,
-//            "HOST:Test",
-//            "Content-Length: Test",
-//            "Content-type:image/png",
             "Accept:text/json",
 //            "User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
 
         );
-        $userAgent= "User-Agent:app";
+        $userAgent = "User-Agent:app";
 
         curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -57,9 +53,7 @@ class Curl
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-
         $response = curl_exec($ch);
-
 
         if (!$response) {
             $errno = curl_errno($ch);
