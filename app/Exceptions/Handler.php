@@ -52,6 +52,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException && $exception->status === 423) {
+            return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
+        }
 //        if ($request->route() && collect($request->route()->computedMiddleware)->contains('api')) {
         if (Str::startsWith($request->getRequestUri(), '/api')) {
             if ($exception instanceof HttpException) {
@@ -61,7 +64,7 @@ class Handler extends ExceptionHandler
             } else if ($exception instanceof ValidationException) {
                 return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
             } else {
-                return response()->json(['success' => false, 'message' => $exception->getMessage().$exception->getFile().$exception->getLine()],
+                return response()->json(['success' => false, 'message' => $exception->getMessage() . $exception->getFile() . $exception->getLine()],
                     property_exists($exception, 'status') ? $exception->status : 500);
             }
         }

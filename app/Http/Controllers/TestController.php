@@ -8,7 +8,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
-        dd($request->route()->computedMiddleware);
+//        dd($request->route()->computedMiddleware);
 //        throw new \Exception();
         return 33333;
     }
