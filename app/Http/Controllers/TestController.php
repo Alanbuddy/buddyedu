@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\User;
+use App\Notifications\OrderPaid;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -10,7 +13,11 @@ class TestController extends Controller
     {
 //        dd($request->route()->computedMiddleware);
 //        throw new \Exception();
-        return 33333;
+//        return 33333;
+        $user = User::find(1);
+        $order=new Order();
+        $user->notify(new OrderPaid($order));
+        return 1;
     }
 
     public function apiIndex(Request $request)

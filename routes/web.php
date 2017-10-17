@@ -25,7 +25,9 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/test', 'TestController@index')->name('test');
         });
 
+Route::get('/phpinfo', function(){ phpinfo();});
 Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
+Route::resource('users', 'UserController');
 Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');
 Route::resource('order', 'OrderController');
