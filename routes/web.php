@@ -25,8 +25,17 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/test', 'TestController@index')->name('test');
         });
 
-Route::get('/phpinfo', function(){ phpinfo();});
-Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
+Route::middleware(['auth', 'role:admin'])
+    ->group(
+        function () {
+            Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
+            Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
+            Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
+        }
+    );
 Route::resource('users', 'UserController');
 Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');

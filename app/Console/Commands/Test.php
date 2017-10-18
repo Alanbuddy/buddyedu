@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -47,8 +48,40 @@ class Test extends Command
         };
     }
 
+    public function geo()
+    {
+        $text = file_get_contents('/home/aj/projects/BuddyEdu/geo.js');
+//        $this->info($text);
+        $lines = explode("\n", $text);
+        foreach ($lines as $line) {
+//            $this->info($line);
+            $isMatch = preg_match("/\"(\w*?)\"/", $line, $matches);
+            if ($isMatch) {
+                $id = $matches[1];
+//                $this->info($matches[1]);
+                $isMatch = preg_match("/\[(.*?)\]/", $line, $matches);
+                if ($isMatch) {
+//                    $this->info($matches[1]);
+                    $matches[1] = str_replace(['"', ' '], '', $matches[1]);
+                    $counties = explode(',', $matches[1]);
+                    foreach ($counties as $i => $county) {
+                        $this->info($id . $county);
+//                        $this->info($id . '_' . $i);
+                        DB::table('locations')->insert([
+                            'id' => $id . '_' . $i,
+                            'name' => $county,
+                            'parent' => $id
+                        ]);
+                    }
+                }
+            }
+        }
+    }
+
     public function handle()
     {
+        $this->geo();
+        return;
 //        $arr = [1, 2, 3];
 //        $r = array_reduce($arr, $this->b(),function(){return 3;});
 //        $this->info($r);
@@ -253,7 +286,7 @@ class Test extends Command
         $data = array(
             'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
-        return Curl::request($url,$data);
+        return Curl::request($url, $data);
     }
 
 }

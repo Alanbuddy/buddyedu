@@ -60,6 +60,7 @@ class OrderPaid extends Notification
         return [
             'order_id'=>$this->order->id,
             'order_created_at'=>$this->order->created_at,
+            'content'=>'you have paid',
         ];
     }
 }
