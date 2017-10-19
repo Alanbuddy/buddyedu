@@ -10,59 +10,6 @@ Dsy.prototype.Exists = function (id) {
     return true;
 };
 
-s = ["province", "city", "county"];
-
-function change(v, p_city, p_town) {
-
-    var str = "0";
-    for (var i = 0; i < v; i++) {
-        str += ("_" + (document.getElementById(s[i]).selectedIndex - 1));
-    }
-
-    var ss = document.getElementById(s[v]);
-    with (ss) {
-        length = 0;
-        options[0] = new Option(opt0[v], opt0[v]);
-        if (v && document.getElementById(s[v - 1]).selectedIndex > 0 || !v) {
-            if (dsy.Exists(str)) {
-                ar = dsy.Items[str];
-                vIndex = 0;
-
-                for (i = 0; i < ar.length; i++) {
-                    options[length] = new Option(ar[i], ar[i]);
-
-                    if (ar[i] === p_city || ar[i] === p_town) vIndex = length - 1;
-                }
-                if (v) options[vIndex].selected = true;
-
-            }
-        }
-        if (++v < s.length) {
-            change(v, p_city, p_town);
-        }
-    }
-}
-
-function preselect(p_key, p_city, p_town) {
-    //alert(p_key);
-    var index;
-
-    var provinces = new Array("北京市", "天津市", "上海市", "重庆市", "河北省", "山西省", "内蒙古", "辽宁省", "吉林省", "黑龙江省", "江苏省", "浙江省", "安徽省", "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省", "广西", "海南省", "四川省", "贵州省", "云南省", "西藏", "陕西省", "甘肃省", "青海省", "宁夏", "新疆", "香港", "澳门", "台湾省");
-    var cnt = provinces.length;
-    //alert(cnt);
-    for (i = 0; i < cnt; i++) {
-        if (p_key == provinces[i]) {
-            index = i;
-            break;
-        }
-    }
-    //alert(s[0]);
-    if (index < provinces.length) {
-        document.getElementById(s[0]).selectedIndex = index + 1;
-        change(1, p_city, p_town);
-    }
-}
-
 var dsy = new Dsy();
 
 dsy.add("0_0_0", ["东城区", "西城区", "崇文区", "宣武区", "朝阳区", "丰台区", "石景山区", "海淀区", "门头沟区", "房山区", "通州区", "顺义区", "昌平区", "大兴区", "怀柔区", "平谷区", "密云县", "延庆县", "延庆镇"]);
@@ -441,3 +388,82 @@ dsy.add("0_32", ["澳门特别行政区"]);
 dsy.add("0_33_0", [" "]);
 dsy.add("0_33", ["台北", "高雄", "台中", "花莲", "基隆", "嘉义", "金门", "连江", "苗栗", "南投", "澎湖", "屏东", "台东", "台南", "桃园", "新竹", "宜兰", "云林", "彰化"]);
 dsy.add("0", ["北京市", "天津市", "上海市", "重庆市", "河北省", "山西省", "内蒙古", "辽宁省", "吉林省", "黑龙江省", "江苏省", "浙江省", "安徽省", "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省", "广西", "海南省", "四川省", "贵州省", "云南省", "西藏", "陕西省", "甘肃省", "青海省", "宁夏", "新疆", "香港", "澳门", "台湾省"]);
+
+
+
+
+s = ["province", "city", "county"];
+
+opt0 = ['省份', '地级市', '市、县级市、县'];
+
+function change(v, p_city, p_town) {
+
+    var str = "0";
+    for (var i = 0; i < v; i++) {
+        str += ("_" + (document.getElementById(s[i]).selectedIndex - 1));
+    }
+
+    var ss = document.getElementById(s[v]);
+    with (ss) {
+        length = 0;
+        options[0] = new Option(opt0[v], opt0[v]);
+        if (v && document.getElementById(s[v - 1]).selectedIndex > 0 || !v) {
+            if (dsy.Exists(str)) {
+                ar = dsy.Items[str];
+                vIndex = 0;
+
+                for (i = 0; i < ar.length; i++) {
+                    options[length] = new Option(ar[i], ar[i]);
+
+                    if (ar[i] === p_city || ar[i] === p_town) vIndex = length - 1;
+                }
+                if (v) options[vIndex].selected = true;
+
+            }
+        }
+        if (++v < s.length) {
+            change(v, p_city, p_town);
+        }
+    }
+}
+
+function init() {
+    pSelect = document.getElementById(s[0]);
+    pSelect.options[0]=new Option(opt0[0]);
+    provinces.forEach(function (p) {
+        var node = new Option(p, p);
+        pSelect.appendChild(node);
+    });
+    pSelect.addEventListener('change', function () {
+        change(1,0,0)
+    });
+    cSelect = document.getElementById(s[1]);
+    cSelect.addEventListener('change', function () {
+        console.log('change');
+        change(2,0,0)
+    });
+}
+
+var provinces = new Array("北京市", "天津市", "上海市", "重庆市", "河北省", "山西省", "内蒙古", "辽宁省", "吉林省", "黑龙江省", "江苏省", "浙江省", "安徽省", "福建省", "江西省", "山东省", "河南省", "湖北省", "湖南省", "广东省", "广西", "海南省", "四川省", "贵州省", "云南省", "西藏", "陕西省", "甘肃省", "青海省", "宁夏", "新疆", "香港", "澳门", "台湾省");
+
+function preselect(p_key, p_city, p_town) {
+    //alert(p_key);
+    var index;
+
+    var cnt = provinces.length;
+    //alert(cnt);
+    for (i = 0; i < cnt; i++) {
+        if (p_key == provinces[i]) {
+            index = i;
+            break;
+        }
+    }
+    //alert(s[0]);
+    if (index < provinces.length) {
+        document.getElementById(s[0]).selectedIndex = index + 1;
+        change(1, p_city, p_town);
+    }
+}
+
+init();
+preselect('北京市');

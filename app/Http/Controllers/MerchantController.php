@@ -25,8 +25,8 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        Cache::put('a',3,10);
-        dd(Cache::get('a'));
+//        Cache::put('a',3,10);
+//        dd(Cache::get('a'));
         return view('merchant.create');
     }
 
