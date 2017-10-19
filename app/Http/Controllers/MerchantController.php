@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Merchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MerchantController extends Controller
 {
@@ -24,7 +25,9 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        //
+        Cache::put('a',3,10);
+        dd(Cache::get('a'));
+        return view('merchant.create');
     }
 
     /**

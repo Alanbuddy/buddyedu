@@ -39,6 +39,7 @@ Route::middleware(['auth', 'role:admin'])
 Route::resource('users', 'UserController');
 Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');
+Route::resource('merchants', 'MerchantController');
 Route::resource('order', 'OrderController');
 Route::resource('records', 'RecordController');
 Route::resource('files', 'FileController');
