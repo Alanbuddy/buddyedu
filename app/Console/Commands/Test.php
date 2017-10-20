@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Util\Curl;
 use CURLFile;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -80,8 +81,12 @@ class Test extends Command
 
     public function handle()
     {
-        $this->geo();
-        return;
+//        $this->geo();
+
+//        cache(["8"=>9],10);
+        Cache::tags(['people', 'artists'])->put('John', $john='john', $minutes=10);
+        Cache::tags(['people'])->flush();
+        dd(cache("8"));
 //        $arr = [1, 2, 3];
 //        $r = array_reduce($arr, $this->b(),function(){return 3;});
 //        $this->info($r);

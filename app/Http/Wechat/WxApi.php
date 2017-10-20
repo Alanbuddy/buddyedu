@@ -47,7 +47,6 @@ class WxApi
     {
         $accessToken = Setting::where('key', 'access_token')->first();
         $data = json_decode($accessToken->value);
-//        dd(time().' '.$data->expire_time);
         if ($data->expire_time < time() || $forceRefresh) {
             Log::info("access token expired  !!!");
             $url = "https://api.weixin.qq.com/cgi-bin/token";
@@ -72,7 +71,6 @@ class WxApi
         return ['success' => true, 'data' => $data];
     }
 
-    // call userinfo inteface
     public static function userInfo($access_token, $openid)
     {
         $url = "https://api.weixin.qq.com/sns/userinfo"
