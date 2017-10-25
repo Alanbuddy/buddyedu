@@ -15,8 +15,15 @@ class CreateMerchantsTable extends Migration
     {
         Schema::create('merchants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('admin_id')->unsigned();
+            $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->integer('ratio')->unsigned()->nullable();
+            $table->string('province')->default('');
+            $table->string('city')->default('');
+            $table->string('county')->default('');
+            $table->string('street')->default('');
             $table->string('address')->default('');
             $table->enum('status', ['authorized', 'unauthorized'])->default('unauthorized');
 

@@ -10,7 +10,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Create</div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form" method="POST" action="{{route('login')}}">
+                <form class="form-horizontal" role="form" method="POST" action="{{route('merchants.store')}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label class="col-md-4 control-label">name</label>
@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-sign-in"></i>Login
+                                <i class="fa fa-btn fa-sign-in"></i>Commit
                             </button>
                         </div>
                     </div>

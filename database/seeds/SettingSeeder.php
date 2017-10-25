@@ -14,5 +14,7 @@ class SettingSeeder extends Seeder
     {
         DB::table('settings')->insert([ 'key' => 'access_token',
             'value' => '{"access_token":"example","expire_time":1497937039}' ]);
+        DB::table('settings')->insert([ 'key' => 'split_ratio',
+            'value' => '0.8' ]);
     }
 }

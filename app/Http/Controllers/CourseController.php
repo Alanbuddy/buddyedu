@@ -95,7 +95,12 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course = $course->fill($request->only([
+            'name', 'price', 'discount'
+        ]));
+        $course->status = 'draft';
+        $course->update();
+        return ['success' => true, 'data' => $course];
     }
 
     public function destroy(Course $course)
@@ -111,5 +116,13 @@ class CourseController extends Controller
         return $order
             ? $this->enroll($course, $user->id)
             : ['success' => false, 'message' => 'no finished order found'];
+    }
+
+    public function toggle(Course $course)
+    {
+        $course->update([
+            'status' => $course->status == 'draft' ? 'publish' : 'draft'
+        ]);
+        return $course;
     }
 }

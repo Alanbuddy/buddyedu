@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Cache;
 
 class MerchantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['index','store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,9 @@ class MerchantController extends Controller
      */
     public function index()
     {
-        //
+        $items = Merchant::orderBy('id', 'desc')
+            ->paginate(10);
+        return $items;
     }
 
     /**
@@ -45,8 +52,13 @@ class MerchantController extends Controller
         $item = new Merchant();
         $item->fill($request->only([
             'name',
-            'address',
+            'phone',
+            'province',
+            'city',
+            'county',
+            'street',
         ]));
+        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
         $item->admin_id = auth()->user()->id;
         $item->save();
         return $item;
