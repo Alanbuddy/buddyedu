@@ -22,7 +22,7 @@ class FinanceController extends Controller
 
         $ratio =$this->getSplitRatio();
         $splitAmount = $amount * $ratio;
-        tranferMoney();
+        //TODO tranferMoney();
     }
 
     public static function getSplitRatio($merchant_id)
