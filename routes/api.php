@@ -35,5 +35,7 @@ Route::post('/file', 'AiController@store');
 
 Route::get('/test', 'TestController@apiIndex');
 Route::post('/login', 'Auth\LoginController@login')->name('api.login');
+Route::get('/login/sms', 'Auth\LoginController@sendLoginSms')->name('api.login.sms.send');
+Route::post('/login/sms', 'Auth\LoginController@loginBySms')->name('api.login.sms');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('api.password.reset');

@@ -139,7 +139,7 @@ register</h1>
 <tbody><tr><td>file</td>
 <td>string</td>
 <td>true</td>
-<td>image that user drawed<br></td>
+<td>image that user drew<br></td>
 <td><br></td>
 </tr>
 <tr><td>api_token</td>

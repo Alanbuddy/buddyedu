@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Notifications\OrderPaid;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\DB;
+use League\OAuth2\Server\RequestEvent;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['index', 'store']);
+    }
+
     public function index()
     {
 
@@ -36,6 +44,22 @@ class UserController extends Controller
         $notification = auth()->user()->notifications()->find($notification);
         $notification->markAsRead();
         dd($notification);
+    }
+
+    public function storeTeacher(Request $request)
+    {
+        $data = $request->only(['name', 'phone','merchant_id']);
+        $user = null;
+        DB::transaction(function () use ($user, $data) {
+            $user = User::create([
+                'name' => $data['name'],
+                $this->username() => $data[$this->username()],
+                'password' => bcrypt($data['password']),
+                'api_token' => Uuid::uuid()
+            ]);
+            $user->attachRole(Role::where('name', 'teacher')->first());
+        });
+        return $user;
     }
 
 }

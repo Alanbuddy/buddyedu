@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Merchant;
+use App\Models\Role;
+use App\Models\User;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -10,7 +14,7 @@ class MerchantController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['index','store']);
+        $this->middleware('auth')->only(['index', 'store']);
     }
 
     /**
@@ -38,9 +42,6 @@ class MerchantController extends Controller
     }
 
     /**
-     * merchant apply to become our partner
-     * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -49,17 +50,28 @@ class MerchantController extends Controller
         $this->validate($request, [
 
         ]);
-        $item = new Merchant();
-        $item->fill($request->only([
+
+        $data = $request->only([
             'name',
+            'adminName',
             'phone',
             'province',
             'city',
             'county',
             'street',
-        ]));
-        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
-        $item->admin_id = auth()->user()->id;
+        ]);
+        $admin = User::create([
+            'name' => $data['adminName'],
+            'phone' => $data['phone'],
+            'password' => '',
+            'api_token' => Uuid::uuid(),
+        ]);
+        $admin->attachRole(Role::find(1));
+        $item = Merchant::create([
+            'name' => $data['name'],
+            'admin_id' => $admin->id
+        ]);
+//        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
         $item->save();
         return $item;
     }
@@ -121,5 +133,15 @@ class MerchantController extends Controller
             'status' => $merchant->status == 'authorized' ? 'unauthorized' : 'authorized'
         ]);
         return $merchant;
+    }
+
+    public function authorizeCourse(Merchant $merchant, Course $course, $operation)
+    {
+        if ($operation == 'attach') {
+            $merchant->courses()->attach($course);
+        } else {
+            $merchant->courses()->detach($course);
+        }
+        return ['success' => true];
     }
 }

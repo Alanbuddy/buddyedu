@@ -15,5 +15,8 @@ return [
 
     'failed' => '用户名或密码错误',
     'throttle' => '登录次数过多 请 :seconds 秒后再试 .',
+    'merchant' => [
+        'unauthorized' => '未授权',
+    ]
 
 ];

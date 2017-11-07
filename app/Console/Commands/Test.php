@@ -79,14 +79,18 @@ class Test extends Command
         }
     }
 
+    public function testCache()
+    {
+//        cache(["8"=>9],10);
+        Cache::tags(['people', 'artists'])->put('John', $john = 'john', $minutes = 10);
+        Cache::tags(['people'])->flush();
+        dd(cache("8"));
+    }
+
     public function handle()
     {
 //        $this->geo();
 
-//        cache(["8"=>9],10);
-        Cache::tags(['people', 'artists'])->put('John', $john='john', $minutes=10);
-        Cache::tags(['people'])->flush();
-        dd(cache("8"));
 //        $arr = [1, 2, 3];
 //        $r = array_reduce($arr, $this->b(),function(){return 3;});
 //        $this->info($r);
@@ -137,6 +141,17 @@ class Test extends Command
         dd($this->dumpBinaryData($result));
 //        $this->info($result);
 //        $bstr = file_get_contents('dump');
+    }
+
+    public function postLoginBySms()
+    {
+        Curl::request('http://edu.com/api/login/sms?phone=18911209450');//route('api.login.sms')
+        $token = $this->ask('input token');
+        $result = Curl::request('http://edu.com/api/login/sms', [
+            'phone' => 18911209450,
+            'token' => $token
+        ], 'POST');
+        dd($result);
     }
 
     public function testRateLimit()
@@ -290,6 +305,15 @@ class Test extends Command
         $url = 'http://edu.com/api/v1/files';
         $data = array(
             'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+        );
+        return Curl::request($url, $data);
+    }
+
+    public function testCreateMerchant()
+    {
+        $url = 'http://edu.com/merchants/store';
+        $data = array(
+            'name' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $data);
     }

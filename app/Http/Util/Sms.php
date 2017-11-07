@@ -20,10 +20,7 @@ class Sms
      */
     public static function sendSingleSms($phoneNo, $content)
     {
-        $apiKey = config('services.sms.key');
-        //初始化client,apikey作为所有请求的默认值
-        $client = YunpianClient::create($apiKey);
-
+        $client = self::createClient();
         $param = [YunpianClient::MOBILE => $phoneNo, YunpianClient::TEXT => $content];
         $result = $client->sms()->single_send($param);
         $ret = [];
@@ -51,5 +48,12 @@ class Sms
     public static function createVerificationCodeText($code)
     {
         return '【云片网】您的验证码是' . $code ?: self::makeCode() . '有效期10分钟';
+    }
+
+    public static function createClient()
+    {
+        $apiKey = config('services.sms.key');
+        //初始化client,apikey作为所有请求的默认值
+        return YunpianClient::create($apiKey);
     }
 }
