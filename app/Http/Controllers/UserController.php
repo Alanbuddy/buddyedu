@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\OrderPaid;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
@@ -46,15 +47,22 @@ class UserController extends Controller
         dd($notification);
     }
 
+    public function store(Request $request)
+    {
+        if ($request->has('merchant_id')) {
+            return $this->storeTeacher($request);
+        }
+
+    }
+
     public function storeTeacher(Request $request)
     {
-        $data = $request->only(['name', 'phone','merchant_id']);
+        $data = $request->only(['name', 'phone', 'merchant_id']);
         $user = null;
         DB::transaction(function () use ($user, $data) {
             $user = User::create([
                 'name' => $data['name'],
-                $this->username() => $data[$this->username()],
-                'password' => bcrypt($data['password']),
+                'password' => bcrypt('secret'),
                 'api_token' => Uuid::uuid()
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
