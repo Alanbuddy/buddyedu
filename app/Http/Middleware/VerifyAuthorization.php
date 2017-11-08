@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Merchant;
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class VerifyAuthorization
 {
@@ -16,9 +17,17 @@ class VerifyAuthorization
      */
     public function handle($request, Closure $next)
     {
-        $merchant = Merchant::find($request->get('merchant_id'));
+        $user = auth()->user();
+        $merchant = null;
+        if ($user->hasRole('teacher')) {
+            $merchant = $user->merchant()->first();
+        } else {
+            $merchant = Merchant::where('admin_id', $user->id)->first();
+        }
+//
         if ($merchant->status == 'unauthorized') {
-            return ['success' => false, 'message' => trans('auth.merchant.unauthorized')];
+            Log::debug("merchant {$merchant->id} unauthorized");
+//            return ['success' => false, 'message' => trans('auth.merchant.unauthorized')];
         }
         return $next($request);
     }

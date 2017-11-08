@@ -55,8 +55,8 @@ register</h1>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;}</span>
 <span data-type="object" data-size="2"></span>
 </p>
-<hr><h1><b>login</b>
-<br></h1>
+<hr>
+<h1><b>login</b></h1>
 <h2>url</h2>
 <p>/api/login</p>
 <h2>method</h2>
@@ -123,6 +123,44 @@ register</h1>
 </p>
 <p><span data-type="object" data-size="2"><br></span>
 </p>
+<hr><h1>login by sms/send sms</h1>
+<h2>url</h2>
+<p>/api/login/sms</p>
+<h2>method</h2>
+<p>GET</p>
+<hr><h1>login by sms/post login</h1>
+<h2>url</h2>
+<p>/api/login/sms</p>
+<h2>method</h2>
+<p>POST</p>
+<table width="618" height="126"><thead><tr><th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr><td>file</td>
+<td>string</td>
+<td>true</td>
+<td>image that user drew<br></td>
+<td><br></td>
+</tr>
+<tr><td>phone</td>
+<td>string</td>
+<td>true</td>
+<td>phone no.</td>
+<td>150974</td>
+</tr>
+<tr><td>token</td>
+<td>string</td>
+<td>true</td>
+<td>verify code sent by sms <br></td>
+<td>150974</td>
+</tr>
+</tbody>
+</table>
+
 <hr><h1>cut image<br></h1>
 <h2>url</h2>
 <p>/api/v1/cut</p>
