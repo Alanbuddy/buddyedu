@@ -140,12 +140,7 @@ register</h1>
 <th>example</th>
 </tr>
 </thead>
-<tbody><tr><td>file</td>
-<td>string</td>
-<td>true</td>
-<td>image that user drew<br></td>
-<td><br></td>
-</tr>
+<tbody>
 <tr><td>phone</td>
 <td>string</td>
 <td>true</td>

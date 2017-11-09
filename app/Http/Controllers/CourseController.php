@@ -125,4 +125,9 @@ class CourseController extends Controller
         ]);
         return $course;
     }
+
+    public function merchants(Course $course)
+    {
+        return $course->merchants()->get();
+    }
 }

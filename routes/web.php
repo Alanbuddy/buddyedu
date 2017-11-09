@@ -37,9 +37,10 @@ Route::middleware(['auth', 'role:admin'])
         }
     );
 Route::resource('users', 'UserController');
+Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
 Route::resource('courses', 'CourseController');
 Route::resource('comments', 'CommentController');
-Route::get('/merchants/{merchant}/course/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');
+Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
 Route::resource('merchants', 'MerchantController');
 Route::resource('order', 'OrderController');
 Route::resource('records', 'RecordController');

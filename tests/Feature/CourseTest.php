@@ -25,4 +25,5 @@ class CourseTest extends TestCase
                 'success' => true,
             ]);
     }
+
 }

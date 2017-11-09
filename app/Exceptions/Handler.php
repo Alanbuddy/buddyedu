@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
             } else if ($exception instanceof ValidationException) {
                 return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
             } else {
-                return response()->json(['success' => false, 'message' => $exception->getMessage() . $exception->getFile() . $exception->getLine()],
+                return response()->json(['success' => false, 'message' => $exception->getMessage() .' exception position:'. $exception->getFile() . $exception->getLine()],
                     property_exists($exception, 'status') ? $exception->status : 500);
             }
         }

@@ -59,4 +59,9 @@ class Course extends Model
         return $this->hasMany('App\Models\Order', 'product_id');
     }
 
+    public function merchants()
+    {
+        return $this->belongsToMany('App\Models\Merchant');
+    }
+
 }

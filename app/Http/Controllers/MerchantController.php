@@ -137,9 +137,9 @@ class MerchantController extends Controller
 
     public function authorizeCourse(Merchant $merchant, Course $course, $operation)
     {
-        if ($operation == 'attach') {
+        if ($operation == 'authorize') {
             $merchant->courses()->attach($course);
-        } else {
+        } else if ($operation == 'cancel') {
             $merchant->courses()->detach($course);
         }
         return ['success' => true];
