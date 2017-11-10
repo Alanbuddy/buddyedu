@@ -26,7 +26,6 @@ class VerifyAuthorization
             $merchant = Merchant::where('admin_id', $user->id)->first();
         }
         $this->checkMerchantAuthorization($merchant);
-        $student = User::findOrFail($request->get('student_id'));
 
         return $next($request);
     }

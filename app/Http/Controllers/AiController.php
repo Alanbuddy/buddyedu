@@ -16,10 +16,9 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
+        Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
         $url = env('AI_CUT_URL');
         $file = $request->file('file');
-        Log::debug(json_encode(auth()->user()));
-        Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
         $upload_file = new CURLFile($file->getRealPath());//eg.  /tmp/phpeU0gU6
         $post_data = [
             'file' => $upload_file
@@ -41,13 +40,6 @@ class AiController extends Controller
         return $result;
     }
 
-//    public function timedProxy(Closure $closure)
-//    {
-//        $begin = Time::milisecond();
-//        $result = call_user_func($closure);
-//        $timeCost = Time::milisecond() - $begin;
-//        return [$result, $timeCost];
-//    }
 
     public function store2DB(UploadedFile $file, $target)
     {
