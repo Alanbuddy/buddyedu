@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//        监听查询事件
+        DB::listen(function ($query) {
+            Log::debug($query->sql);
+//            Log::info($query->time);
+            Log::debug( $query->bindings);
+        });
+        $this->app->resolving(SearchService::class, function ($api, $app) {
+            Log::debug(' 解析「SearchSearvice」类型的对象时调用');
+        });
     }
 
     /**

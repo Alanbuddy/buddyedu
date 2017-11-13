@@ -135,12 +135,23 @@ class MerchantController extends Controller
         return $merchant;
     }
 
+    /**
+     * 课程授权
+     */
     public function authorizeCourse(Merchant $merchant, Course $course, $operation)
     {
-        if ($operation == 'authorize') {
-            $merchant->courses()->attach($course);
-        } else if ($operation == 'cancel') {
-            $merchant->courses()->detach($course);
+        switch ($operation) {
+            case 'apply':
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'applying']]);
+                break;
+            case 'authorize':
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
+                break;
+            case 'cancel':
+                $merchant->courses()->detach($course);
+                break;
+            default:
+                return ['success' => false, 'message' => trans('error.unsupported')];
         }
         return ['success' => true];
     }

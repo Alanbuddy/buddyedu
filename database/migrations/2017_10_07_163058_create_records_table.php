@@ -18,6 +18,7 @@ class CreateRecordsTable extends Migration
             $table->string('api');
             $table->unsignedInteger('merchant_id')->nullable()->default(0);
             $table->unsignedInteger('user_id')->nullable()->default(0);
+            $table->unsignedInteger('student_id')->nullable()->default(0);
             $table->unsignedInteger('time_cost')->nullable()->default(0);
             $table->binary('result')->nullable();
             $table->string('file')->nullable();

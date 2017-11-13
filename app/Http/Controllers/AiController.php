@@ -35,7 +35,8 @@ class AiController extends Controller
         $entry = $this->store2DB($file, $target);
 //        dd($file,$target);
         $merchant_id = 1;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $result);
+        $student_id = 1;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id,$student_id, $result);
 
         return $result;
     }
@@ -51,7 +52,7 @@ class AiController extends Controller
         return $item;
     }
 
-    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $result = null)
+    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $student_id=null,$result = null)
     {
         $record = new Record();
         $record->api = $api;
@@ -59,6 +60,7 @@ class AiController extends Controller
         $record->time_cost = $time_cost;
         $record->merchant_id = $merchant_id;
         $record->user_id = auth()->user()->id;
+        $record->student_id = $student_id;
         $record->result = $result;
         $record->save();
         return $record;

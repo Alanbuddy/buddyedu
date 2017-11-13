@@ -25,7 +25,8 @@ class VerifyAuthorization
         } else {
             $merchant = Merchant::where('admin_id', $user->id)->first();
         }
-        $this->checkMerchantAuthorization($merchant);
+//        $this->checkMerchantAuthorization($merchant);
+        $this->checkMerchantCourseAuthorization($merchant);
 
         return $next($request);
     }
@@ -39,7 +40,18 @@ class VerifyAuthorization
         if ($merchant->status == 'unauthorized') {
             throw new \Exception(trans('auth.merchant.unauthorized'));
             Log::debug("merchant {$merchant->id} unauthorized");
-//            return ['success' => false, 'message' => trans('auth.merchant.unauthorized')];
+        }
+    }
+
+
+    public function checkMerchantCourseAuthorization($merchant, $course = 1)
+    {
+        $count = $merchant->courses()
+            ->where('course_id', $course)
+            ->wherePivot('status', 'approved')
+            ->count();
+        if ($count == 0) {
+            throw new \Exception(trans('auth.course.unauthorized'));
         }
     }
 }
