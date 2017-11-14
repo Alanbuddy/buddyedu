@@ -127,7 +127,7 @@ class Test extends Command
         if ($method) {
             $result = call_user_func([$this, $method]);
         } else {
-            $this->info('Method list:');
+            $this->info('Methods:');
             foreach (get_class_methods($this) as $k => $v) {
                 if (Str::startsWith($v, 'post'))
                     $this->info($v);

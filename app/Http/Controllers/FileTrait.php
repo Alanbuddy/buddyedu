@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use Faker\Provider\Uuid;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,12 +17,14 @@ trait FileTrait
     }
 
     /**
-     * example: public/storage/2017-10-06
+     * example: public/storage/2017-10-06/58/03
      * @return string
      */
     public function defaultDirectory()
     {
-        return public_path('storage/') . date('Y-m-d');
+        $key = Uuid::uuid();
+        $parts = array_slice(str_split($hash = sha1($key), 2), 0, 2);
+        return public_path('storage/') . date('Y-m-d') .'/'. implode('/', $parts);
     }
 
     public function defaultNaming(UploadedFile $file, $format = 'Y-m-d_His')

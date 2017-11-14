@@ -70,4 +70,9 @@ class UserController extends Controller
         return $user;
     }
 
+    public function studentPainting(Request $request, User $user)
+    {
+
+    }
+
 }
