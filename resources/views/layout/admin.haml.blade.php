@@ -25,39 +25,37 @@
         .main
           .sidebar
             %ul
-              %li.course_li
+              %li
                 %a{href: "#"}
                   %img.mini-icon{src: "icon/1A.png"}
                   %span.f18.sidebar-title 开课情况
-              %li.lesson-li
+              %li
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/2A.png"}
                   %span.f18.sidebar-title 课程授权
-              %li.teacher_li
+              %li
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/3A.png"}
                   %span.f18.sidebar-title 机构管理
-              %li.setting_li
+              %li
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/4A.png"}
                   %span.f18.sidebar-title 学员管理
-              %li.user_li
+              %li
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/5A.png"}
                   %span.f18.sidebar-title 金额统计
-              %li.statistics_li
+              %li
                 %a{:href => "#"}
                   %img.mini-icon{src: "icon/6A.png"}
                   %span.f18.sidebar-title 信息统计
       .content-area
-        .main-top
-         
-      @yield('content')
+        @yield('content')
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src = "js/ajax.js"></script>
     <script src = "js/mobile-notification.js"></script>
-    <script src="js/plugin/jquery.pagination.js"></script>
+    <script src="js/jquery.pagination.js"></script>
 
 
 
