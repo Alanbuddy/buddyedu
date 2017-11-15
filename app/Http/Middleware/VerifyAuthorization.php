@@ -18,15 +18,15 @@ class VerifyAuthorization
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user();
-        $merchant = null;
-        if ($user->hasRole('teacher')) {
-            $merchant = $user->merchant()->first();
-        } else {
-            $merchant = Merchant::where('admin_id', $user->id)->first();
-        }
-//        $this->checkMerchantAuthorization($merchant);
-        $this->checkMerchantCourseAuthorization($merchant);
+//        $user = auth()->user();
+//        $merchant = null;
+//        if ($user->hasRole('teacher')) {
+//            $merchant = $user->merchant()->first();
+//        } else {
+//            $merchant = Merchant::where('admin_id', $user->id)->first();
+//        }
+////        $this->checkMerchantAuthorization($merchant);
+//        $this->checkMerchantCourseAuthorization($merchant);
 
         return $next($request);
     }

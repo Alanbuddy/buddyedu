@@ -4,6 +4,7 @@ namespace Illuminate\Routing;
 
 use Closure;
 use ArrayObject;
+use Illuminate\Support\Facades\Log;
 use JsonSerializable;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -707,6 +708,9 @@ class Router implements RegistrarContract, BindingRegistrar
      */
     public static function toResponse($request, $response)
     {
+        foreach ($request->headers as $k=>$h){
+            Log::debug($k,$h);
+        }
         if ($response instanceof Responsable) {
             $response = $response->toResponse($request);
         }

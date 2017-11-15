@@ -15,7 +15,7 @@ class TestController extends Controller
 //        throw new \Exception();
 //        return 33333;
         $user = User::find(1);
-        $order=new Order();
+        $order = new Order();
         $user->notify(new OrderPaid($order));
         return 1;
     }
@@ -26,5 +26,10 @@ class TestController extends Controller
             'name' => 'required'
         ]);
         return 2;
+    }
+
+    public function callAction($method, $parameters)
+    {
+        return 'callAction';
     }
 }
