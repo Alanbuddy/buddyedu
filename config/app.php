@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Bkwld\LaravelHaml\ServiceProvider::class
 
     ],
 

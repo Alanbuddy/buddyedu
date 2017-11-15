@@ -8,52 +8,63 @@
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title
       @yield('title') 管理员
-    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
-    %link{:href => "css/notification.css", :rel => "stylesheet" }
-    %link{:href => "css/admin-layout.css", :rel => "stylesheet"}
-    %link{:href => "css/pagination.css", :rel => "stylesheet"}
-    %link{:href => "css/wangEditor.min.css", :rel => "stylesheet"}
+    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "/css/notification.css", :rel => "stylesheet" }
+    %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
+    %link{:href => "/css/pagination.css", :rel => "stylesheet"}
+    %link{:href => "/css/wangEditor.min.css", :rel => "stylesheet"}
 
     @yield('css')
    
   %body
     .wrapper
       .layout-left
-        %img.logo2{src: "icon/bird.png"}
+        %img.logo{src: "/icon/bird.png"}
         .main
           .sidebar
             %ul
               %li
-                %a{href: "#"}
-                  %img.mini-icon{src: "icon/1A.png"}
-                  %span.f18.sidebar-title 开课情况
+                %a.a-item{href: "#"}
+                  %img.mini-icon{src: "/icon/1A.png"}
+                  %span.f16c.sidebar-title 开课情况
               %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/2A.png"}
-                  %span.f18.sidebar-title 课程授权
+                %a.a-item{:href => "#"}
+                  %img.mini-icon{src: "/icon/2A.png"}
+                  %span.f16c.sidebar-title 课程授权
               %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/3A.png"}
-                  %span.f18.sidebar-title 机构管理
+                %a.a-item{:href => "#"}
+                  %img.mini-icon{src: "/icon/3A.png"}
+                  %span.f16c.sidebar-title 机构管理
               %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/4A.png"}
-                  %span.f18.sidebar-title 学员管理
+                %a.a-item{:href => "#"}
+                  %img.mini-icon{src: "/icon/4A.png"}
+                  %span.f16c.sidebar-title 学员管理
               %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/5A.png"}
-                  %span.f18.sidebar-title 金额统计
+                %a.a-item{:href => "#"}
+                  %img.mini-icon{src: "/icon/5A.png"}
+                  %span.f16c.sidebar-title 金额统计
               %li
-                %a{:href => "#"}
-                  %img.mini-icon{src: "icon/6A.png"}
-                  %span.f18.sidebar-title 信息统计
+                %a.active{:href => "#"}
+                  %img.mini-icon{src: "/icon/6A.png"}
+                  %span.f16c.sidebar-title 信息统计
+          .log-div
+            .sidebar
+              %ul
+                %li
+                  %a.a-item{href: "#"}
+                    %img.mini-icon{src: "/icon/7A.png"}
+                    %span.f16c.sidebar-title 申请处理
+                %li
+                  %a.a-item{:href => "#"}
+                    %img.mini-icon{src: "/icon/8A.png"}
+                    %span.f16c.sidebar-title 退出登录
       .content-area
         @yield('content')
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src = "js/ajax.js"></script>
-    <script src = "js/mobile-notification.js"></script>
-    <script src="js/jquery.pagination.js"></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src = "/js/ajax.js"></script>
+    <script src = "/js/mobile-notification.js"></script>
+    <script src="/js/jquery.pagination.js"></script>
 
 
 
