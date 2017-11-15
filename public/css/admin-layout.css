@@ -1,0 +1,563 @@
+html {
+  font-family: "Microsoft YaHei";
+  font-size: 16px;
+  height: 100%;
+}
+body {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+/*css reset*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,pre, form, fieldset, input, textarea, p, 
+blockquote, th, td, button, label, table {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset, img {
+  border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol, ul {
+  list-style: none;
+}
+caption, th {
+  text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before, q:after {
+  content: '';
+}
+abbr, acronym {
+  border: 0;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/*文字排版*/
+.f12a {
+  font-size: 1.2em;
+  color: #5d6578;
+}
+.f12b {
+  font-size: 1.2em;
+  color: #8c929f;
+}
+.f12c {
+  font-size: 1.2em;
+  color: #365ba9;
+}
+.f12d {
+  font-size: 1.2em;
+  color: #75cc79;
+}
+.f12e {
+  font-size: 1.2em;
+  color: #f58799;
+}
+.f12f {
+  font-size: 1.2em;
+  color: #f6b36c;
+}
+.f14a {
+  font-size: 1.4em;
+  color: #365ba9;
+  font-weight: bold;
+}
+.f14b {
+  font-size: 1.4em;
+  color: #365ba9;
+}
+.f14c {
+  font-size: 1.4em;
+  color: #5d6578;
+  font-weight: bold;
+}
+.f14d {
+  font-size: 1.4em;
+  color: #5d6578;
+}
+.f14e {
+  font-size: 1.4em;
+  color: #8c92cf;
+}
+.f16a {
+  font-size: 1.6em;
+  color: #333a48;
+  font-weight: bold;
+}
+.f16b {
+  font-size: 1.6em;
+  color: #365ba9;
+  font-weight: bold;
+}
+.f16c {
+  font-size: 1.6em;
+  color: #fff;
+  font-weight: bold;
+}
+.f16d {
+  font-size: 1.6em;
+  color: #5d6578;
+}
+.f24a {
+  font-size: 2.4em;
+  color: #333a48;
+  font-weight: bold;
+}
+.f24b {
+  font-size: 2.4em;
+  color: #365ba9;
+  font-weight: bold;
+}
+.f24c {
+  font-size: 2.4em;
+  color: #5d6578;
+  font-weight: bold;
+}
+.fb {
+  font-weight: bold;
+}
+.fn {
+  font-weight: normal;
+}
+.t2 {
+  text-indent: 2em;
+}
+.lh150 {
+  line-height: 150%;
+}
+.lh180 {
+  line-height: 180%;
+}
+.lh200 {
+  line-height: 200%;
+}
+.unl {
+  text-decoration: underline;
+}
+.no-unl {
+  text-decoration: none;
+}
+
+/*定位*/
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.tc {
+  text-align: center;
+}
+.fl {
+  float: left;
+  display: inline;
+}
+.fr {
+  float: right;
+  display: inline;
+}
+.cb {
+  clear: both;
+}
+.cl {
+  clear: left;
+}
+.cr {
+  clear: right;
+}
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+.vm {
+  text-align: middle;
+}
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.zoom {
+  zoom: 1;
+}
+.hidden {
+  visibility: hidden;
+}
+.none {
+  display: none;
+}
+
+/*web project layout*/
+.bg1 {
+  background: #2e2f4a;
+}
+.bg2 {
+  background: #eaebf2;
+}
+.bg3 {
+  background: #fff;
+}
+.th-bg {
+  background: #f5f6fa;
+}
+.tb-hover {
+  background: #f4f6ff;
+}
+
+
+.ui-timepicker-wrapper {
+  width: 14em;
+  height: 10em;
+  font-size: 1.4em;
+}
+.ui-datepicker {
+  width: 16.5em;
+  font-size: 1.2em;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.layout-left {
+  width: 200px;
+  min-height: 100%;
+  background: #2e2f4a;
+}
+.logo2 {
+  background: rgb(255,255,255);
+  background: rgba(255,255,255, .16);
+  width: 100%;
+  max-width: 200px;
+}
+
+.mini-icon {
+  margin-right: 8px;
+  width: 100%;
+  max-width: 20px;
+}
+.sidebar {
+  width: 200px;
+}
+.sidebar ul {
+  list-style: none;
+}
+.sidebar a {
+  display: inline-block;
+  padding: 17.5px 0 17.5px 36px;
+  width: 200px;
+}
+.sidebar .active-li {
+  position: relative;
+  background: rgba(255,255,255, .16);
+}
+.sidebar .active-li::before {
+  content: "";
+  width: 4px;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255, .5);
+}
+.sidebar .active-li::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-right: 12px solid #eaebf2;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+.sidebar-title {
+  vertical-align: middle;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.content-area {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+.main-top {
+  padding-left: 24px;
+  padding-right: 24px; 
+  height: 8.8em;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -os-align-items: center;
+  -o-align-items: center;
+  display: flex;
+  align-items: center;
+}
+.main-content {
+  position: absolute;
+  padding: 68px 24px 24px 24px;
+  top: 8.8em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.main-content {
+  margin-left: 200px;
+}
+.table-div {
+  position: absolute;
+  margin: 24px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tabbable {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tab-content {
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.set {
+  list-style: none;
+}
+.set li {
+  position: relative;
+  float: left;
+}
+.set li a{
+  color: #6f6f7e;
+  height: 1.5em;
+  padding: 0 10px;
+}
+.set li .set-left-border {
+  border-left: 1px solid #adadbe;
+  padding-right: 0;
+}
+.left-border {
+  border-left: 1px solid #adadbe;
+}
+.right-border {
+  border-right: 1px solid #adadbe;
+}
+.set li .dot {
+  position: absolute;
+  right: 3px;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  background: #e9657e;
+  border-radius: 3px;
+  display: none;
+}
+
+
+.user-search-box {
+  width: 400px;
+  border-radius: 20px;
+  padding: 0 20px;
+  margin: 2.2% 0;
+}
+.input-style {
+  width: 332px;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  outline: none;
+  background: transparent;
+  display: inline-block;
+}
+.search {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: url("/haomama/icon/admin/search.png") no-repeat
+}
+/*.delete {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: image-url("delete.png") no-repeat
+}*/
+
+.btn-position {
+  position: absolute;
+  right: 2.07%;
+  top: 24px;
+  z-index: 10;
+}
+.nav {
+  margin-left: -1px;
+}
+.nav a {
+  background: #adadbe;
+}
+.desc-div {
+  padding: 2.1% 3.24%;
+}
+
+.undiscover {
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.table-height th {
+  vertical-align: middle !important;
+  height: 48px;
+  line-height: 48px;
+}
+.table-height td {
+  vertical-align: middle !important;
+  height: 48px;
+  line-height: 48px;
+}
+.table-height tbody tr:last-child {
+  border-bottom: 4px solid #eaebf2;
+}
+.border-btm {
+  border-bottom: 4px solid #eaebf2;
+}
+
+.select-page {
+  text-align: right;
+}
+.totalitems {
+  font-size: 12px;
+  color: #969696;
+  margin-right: 0.5%;
+}
+.choice-page {
+  display: inline-block;
+  vertical-align: middle;
+}
+.pagination {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-datepicker .ui-datepicker-title {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+}
+.ui-datepicker .ui-datepicker-title select {
+  vertical-align: middle;
+}
+#ui-datepicker-div {
+  width: 195px;
+  font-size: 12px;
+  font-family: "微软雅黑";
+}
+
+
+.direction {
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.wangedit-area, h1 {
+  font-size: 24px;
+}
+.wangedit-area, h2 {
+  font-size: 22px;
+}
+.wangedit-area, h3 {
+  font-size: 20px;
+}
+.wangedit-area, h4 {
+  font-size: 18px;
+}
+.wangedit-area, h5 {
+  font-size: 16px;
+}
+
+
+.search-statistics {
+  width: 100%;
+  margin: 0;
+}
+.form-time-statistics {
+  width: 100%;
+  padding: 13px 0;
+  margin: 0;
+}
+#datepicker-1, #datepicker-2, #datepicker-3, #datepicker-4, #datepicker-5, #datepicker-6{
+  width: 14.85%;
+}
+.input-caption-statistics {
+  font-size: 16px;
+  vertical-align: middle;
+}
+.input-area-statistics {
+  margin: 0 8px;
+}
+.search-btn-statistics {
+  background: #10c078;
+  margin-left: 12px;
+  height: 32px;
+  color: #fff;
+}
+.search-btn-statistics:hover {
+  color: #fff;
+}
+.quick-choice {
+  float: right;
+  width: 14.85%;
+  margin-right: 10px;
+}
