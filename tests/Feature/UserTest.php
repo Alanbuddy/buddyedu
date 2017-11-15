@@ -18,7 +18,8 @@ class UserTest extends TestCase
         $this->actingAs(User::find(1));
         $response = $this->post(route('users.store'), [
             'name' => 'teacherDemo',
-            'phone' => '122' . rand(1000000, 29999999),
+//            'phone' => '122' . rand(1000000, 29999999),
+            'phone' => '18810794104',
             'merchant_id' => 1
         ]);
         $response->assertStatus(200);

@@ -318,4 +318,14 @@ class Test extends Command
         return Curl::request($url, $data);
     }
 
+    public function createTeacher()
+    {
+
+        $url = 'http://edu.com/merchants/store';
+        $data = array(
+            'name' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+        );
+        return Curl::request($url, $data);
+    }
+
 }
