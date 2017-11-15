@@ -47,7 +47,7 @@ class Sms
 
     public static function createVerificationCodeText($code)
     {
-        return '【云片网】您的验证码是' . $code ?: self::makeCode() . '有效期10分钟';
+        return '【社区儿童中心】您的验证码是' . $code ?: self::makeCode() . '有效期10分钟';
     }
 
     public static function createClient()

@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:api','va'])
+//Route::middleware(['auth:api','va'])
+Route::middleware(['va'])
     ->prefix('v1')
     ->group(
         function () {
@@ -39,3 +40,6 @@ Route::get('/login/sms', 'Auth\LoginController@sendLoginSms')->name('api.login.s
 Route::post('/login/sms', 'Auth\LoginController@loginBySms')->name('api.login.sms');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('api.password.reset');
+
+
+Route::resource('class','ClassController');

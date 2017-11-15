@@ -13,13 +13,14 @@ trait CanResetPassword
      */
     public function getEmailForPasswordReset()
     {
-        return $this->email;
+        return $this->{config('auth.username')};
     }
+
 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)

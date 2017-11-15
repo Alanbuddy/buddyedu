@@ -63,6 +63,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'password' => bcrypt('secret'),
+                'phone' => $data['phone'],
                 'api_token' => Uuid::uuid()
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());

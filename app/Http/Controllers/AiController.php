@@ -16,6 +16,7 @@ class AiController extends Controller
 
     public function cut(Request $request)
     {
+        Log::debug(json_encode($request->headers));
         Log::debug(__METHOD__ . __LINE__ . "\n" . $request->get('api_token'));
         $url = env('AI_CUT_URL');
         $file = $request->file('file');
@@ -36,7 +37,7 @@ class AiController extends Controller
 //        dd($file,$target);
         $merchant_id = 1;
         $student_id = 1;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id,$student_id, $result);
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $student_id, $result);
 
         return $result;
     }
@@ -46,20 +47,22 @@ class AiController extends Controller
     {
         $item = new File();
         $item->path = substr($target->getPathname(), strlen(public_path()));
-        $item->user_id = auth()->user()->id;
+        $item->user_id = 1;
+//        $item->user_id = auth()->user()->id;
         $item->fill($this->getFileMeta($file));
         $item->save();
         return $item;
     }
 
-    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $student_id=null,$result = null)
+    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $student_id = null, $result = null)
     {
         $record = new Record();
         $record->api = $api;
         $record->file = $file;
         $record->time_cost = $time_cost;
         $record->merchant_id = $merchant_id;
-        $record->user_id = auth()->user()->id;
+        $record->user_id = 1;
+//        $record->user_id = auth()->user()->id;
         $record->student_id = $student_id;
         $record->result = $result;
         $record->save();
@@ -76,13 +79,15 @@ class AiController extends Controller
             'file' => $upload_file,
             'animal' => $animal,
         ];
-        list($result, $timeCost) = $this->timedProxy(function () use ($url, $post_data, $request) {
+        list($result, $timeCost) = timedProxy(function () use ($url, $post_data, $request) {
             return Curl::request($url, $post_data, 'post');
         });
-        $merchant_id = 1;
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $result);
+        $merchant_id = 1;
+        $student_id = 1;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $student_id, $result);
+        Log::debug($result);
         return $result;
     }
 
