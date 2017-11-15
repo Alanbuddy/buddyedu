@@ -15,8 +15,6 @@
     %link{:href => "css/wangEditor.min.css", :rel => "stylesheet"}
 
     @yield('css')
-    // :javascript
-    //   window.logout = "#{route('logout')}"
    
   %body
     .wrapper
