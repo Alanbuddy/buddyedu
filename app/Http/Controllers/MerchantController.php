@@ -26,7 +26,7 @@ class MerchantController extends Controller
     {
         $items = Merchant::orderBy('id', 'desc')
             ->paginate(10);
-        return $items;
+
     }
 
     /**
