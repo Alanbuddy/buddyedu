@@ -2,18 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class UserTest extends TestCase
+class Schedule extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testCreateTeacher()
+    public function testExample()
     {
         $this->actingAs(User::find(1));
         $response = $this->post(route('users.store'), [

@@ -148,7 +148,7 @@ class Test extends Command
         Curl::request('http://edu.com/api/login/sms?phone=18911209450');//route('api.login.sms')
         $token = $this->ask('input token');
         $result = Curl::request('http://edu.com/api/login/sms', [
-            'phone' => 18911209450,
+            'phone' => '18810794104',
             'token' => $token
         ], 'POST');
         dd($result);

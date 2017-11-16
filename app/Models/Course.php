@@ -59,6 +59,12 @@ class Course extends Model
         return $this->hasMany('App\Models\Order', 'product_id');
     }
 
+    //课程安排
+    public function schedules()
+    {
+        return $this->hasMany('App\Models\Schedule');
+    }
+
     public function merchants()
     {
         return $this->belongsToMany('App\Models\Merchant');

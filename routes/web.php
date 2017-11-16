@@ -32,21 +32,32 @@ Route::middleware(['auth', 'role:admin'])
     ->group(
         function () {
             Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
-            Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
         }
     );
+Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
+
 Route::resource('schedules', 'ScheduleController');
-Route::resource('users', 'UserController');
+Route::resource('schedules', 'ScheduleController');
+
 Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
-Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
+Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
 Route::resource('courses', 'CourseController');
+
+Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
+Route::resource('users', 'UserController');
+
 Route::resource('comments', 'CommentController');
+
 Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
 Route::resource('merchants', 'MerchantController');
+
 Route::resource('order', 'OrderController');
+
 Route::resource('records', 'RecordController');
+
 Route::resource('files', 'FileController');
+
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'SmsController@send')->name('sms.send');
