@@ -104,7 +104,7 @@ a:hover {
 }
 .f16c {
   font-size: 1.6em;
-  color: #fff;
+  color: #5d6578;
   font-weight: bold;
 }
 .f16d {
@@ -250,61 +250,50 @@ a:hover {
   justify-content: space-between;
 }
 .layout-left {
-  width: 200px;
+  width: 160px;
   min-height: 100%;
-  background: #2e2f4a;
+  background: #f4fafe;
 }
-.logo2 {
-  background: rgb(255,255,255);
-  background: rgba(255,255,255, .16);
-  width: 100%;
-  max-width: 200px;
+.logo {
+  height: 136px;
 }
-
 .mini-icon {
   margin-right: 8px;
   width: 100%;
-  max-width: 20px;
+  max-width: 24px;
+  margin-top: -4px;
 }
 .sidebar {
-  width: 200px;
+  width: 160px;
 }
 .sidebar ul {
   list-style: none;
 }
-.sidebar a {
+.a-item {
   display: inline-block;
-  padding: 17.5px 0 17.5px 36px;
-  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 30px;
+  margin-bottom: 8px;
 }
-.sidebar .active-li {
-  position: relative;
-  background: rgba(255,255,255, .16);
-}
-.sidebar .active-li::before {
-  content: "";
-  width: 4px;
-  height: 60px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(255,255,255, .5);
-}
-.sidebar .active-li::after {
-  content: "";
-  position: absolute;
-  top: 18px;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-right: 12px solid #eaebf2;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
+.active {
+  display: inline-block;
+  border: 2px solid #365ba9;
+  width: 132px;
+  border-radius: 25px;
+  background: #d0e7f9;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 14px;
+  text-align: center;
 }
 .sidebar-title {
   vertical-align: middle;
-  color: #fff;
   text-decoration: none;
+}
+.log-div {
+  position: absolute;
+  bottom: 40px;
 }
 
 
@@ -313,32 +302,15 @@ a:hover {
   width: 100%;
   min-height: 100%;
 }
-.main-top {
-  padding-left: 24px;
-  padding-right: 24px; 
-  height: 8.8em;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -os-flex;
-  display: -o-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -os-align-items: center;
-  -o-align-items: center;
-  display: flex;
-  align-items: center;
-}
+
 .main-content {
   position: absolute;
-  padding: 68px 24px 24px 24px;
-  top: 8.8em;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 }
-.main-content {
-  margin-left: 200px;
-}
+
 .table-div {
   position: absolute;
   margin: 24px;
@@ -395,6 +367,7 @@ a:hover {
   border-radius: 3px;
   display: none;
 }
+
 
 
 .user-search-box {
