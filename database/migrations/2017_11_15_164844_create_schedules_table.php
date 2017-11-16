@@ -15,6 +15,11 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('time');
+            $table->string('status')->nullable();
+            $table->unsignedInteger('course_id')->comment('课程ID');
+            $table->unsignedInteger('merchant_id')->comment('机构ID');
+            $table->unsignedInteger('point_id')->comment('教学点ID');
             $table->timestamps();
         });
     }
