@@ -24,7 +24,7 @@
           .sidebar
             %ul
               %li
-                %a.a-item{href: "#"}
+                %a.active{href: "#"}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.f16c.sidebar-title 开课情况
               %li
@@ -44,20 +44,18 @@
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.f16c.sidebar-title 金额统计
               %li
-                %a.active{:href => "#"}
+                %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.f16c.sidebar-title 信息统计
-          .log-div
-            .sidebar
-              %ul
-                %li
-                  %a.a-item{href: "#"}
-                    %img.mini-icon{src: "/icon/7A.png"}
-                    %span.f16c.sidebar-title 申请处理
-                %li
-                  %a.a-item{:href => "#"}
-                    %img.mini-icon{src: "/icon/8A.png"}
-                    %span.f16c.sidebar-title 退出登录
+              %li.apply
+                %a.a-item{href: "#"}
+                  %img.mini-icon{src: "/icon/7A.png"}
+                  %span.f16c.sidebar-title 申请处理
+              %li.logout
+                %a.a-item{:href => "#"}
+                  %img.mini-icon{src: "/icon/8A.png"}
+                  %span.f16c.sidebar-title 退出登录
+          
       .content-area
         @yield('content')
     <script src="/js/jquery-3.2.1.min.js"></script>
