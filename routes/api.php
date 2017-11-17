@@ -43,3 +43,4 @@ Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('api.
 
 
 Route::resource('class','ClassController');
+Route::get('/schedules', 'ScheduleController@latest')->name('api.merchants.schedules.latest4');

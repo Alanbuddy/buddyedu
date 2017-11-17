@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\OrderPaid;
@@ -52,14 +53,13 @@ class UserController extends Controller
         if ($request->has('merchant_id')) {
             return $this->storeTeacher($request);
         }
-
     }
 
     public function storeTeacher(Request $request)
     {
         $data = $request->only(['name', 'phone', 'merchant_id']);
         $user = null;
-        DB::transaction(function () use ($user, $data) {
+        DB::transaction(function () use ($request, $user, $data) {
             $user = User::create([
                 'name' => $data['name'],
                 'password' => bcrypt('secret'),
@@ -67,6 +67,8 @@ class UserController extends Controller
                 'api_token' => Uuid::uuid()
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
+            $merchant = Merchant::find($request->get('merchant_id'));
+            $merchant->teachers()->save($user);
         });
         return $user;
     }

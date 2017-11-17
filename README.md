@@ -323,3 +323,27 @@ register</h1>
 </tr>
 </tbody>
 </table>
+
+<h1>get latest 4 schedules</h1>
+<h2>url</h2>
+<p>/api/schedules?merchant_id=1</p>
+<h2>parameters</h2>
+<table><thead><tr><th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr><td>merchant_id</td>
+<td>string</td>
+<td>true</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+
+</table>
+<h2>return</h2>
+[<br>&nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "id":4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "begin":"2017-11-17 00:00:00",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "end":"2017-11-18 00:00:00",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "status":"applying",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "course_id":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "merchant_id":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "point_id":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "created_at":"2017-11-17 15:40:38",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "updated_at":"2017-11-17 15:40:38"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>&nbsp;&nbsp;&nbsp; ]
+

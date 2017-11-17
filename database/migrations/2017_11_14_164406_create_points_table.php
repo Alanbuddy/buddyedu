@@ -21,7 +21,11 @@ class CreatePointsTable extends Migration
             $table->unsignedInteger('province_id')->nullable();
             $table->unsignedInteger('city_id')->nullable();
             $table->unsignedInteger('county_id')->nullable();
+            $table->unsignedInteger('merchant_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('merchant_id')->references('id')->on('merchants')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

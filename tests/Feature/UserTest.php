@@ -19,7 +19,6 @@ class UserTest extends TestCase
         $response = $this->post(route('users.store'), [
             'name' => 'teacherDemo',
             'phone' => '122' . rand(1000000, 29999999),
-//            'phone' => '17610076052',
             'merchant_id' => 1
         ]);
         $response->assertStatus(200);

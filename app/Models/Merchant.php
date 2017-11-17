@@ -24,4 +24,19 @@ class Merchant extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+
+    public function teachers()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
+    public function points()
+    {
+        return $this->hasMany(Point::class);
+    }
 }

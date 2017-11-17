@@ -54,6 +54,8 @@ Route::resource('merchants', 'MerchantController');
 
 Route::resource('order', 'OrderController');
 
+Route::resource('points', 'PointController');
+
 Route::resource('records', 'RecordController');
 
 Route::resource('files', 'FileController');
