@@ -208,8 +208,8 @@ a:hover {
 }
 
 /*web project layout*/
-.bg1 {
-  background: #2e2f4a;
+.bg16b {
+  background: #d0e7f9;
 }
 .bg2 {
   background: #eaebf2;
@@ -269,12 +269,14 @@ a:hover {
 .sidebar ul {
   list-style: none;
 }
+.sidebar li {
+  margin-bottom: 8px;
+}
 .a-item {
   display: inline-block;
   height: 40px;
   line-height: 40px;
   margin-left: 30px;
-  margin-bottom: 8px;
 }
 .active {
   display: inline-block;
@@ -291,9 +293,65 @@ a:hover {
   vertical-align: middle;
   text-decoration: none;
 }
-.log-div {
+.logout {
   position: absolute;
   bottom: 40px;
+}
+.apply {
+  position: absolute;
+  bottom: 88px;
+}
+.title-div {
+  margin-top: 40px;
+  margin-bottom: 48px;
+}
+.title-icon {
+  width: 48px;
+  margin-left: 24px;
+  margin-right: 16px;
+}
+.title {
+  vertical-align: middle;
+}
+.tab-title {
+  display: flex;
+  justify-content: space-between;
+}
+.tab-title ul {
+  list-style: none;
+  margin-left: 24px;
+}
+.tab-title li {
+  float: left;
+  height: 32px;
+  line-height: 32px;
+  width: 128px;
+  border-radius: 18px;
+  text-align: center;
+  margin-right: 16px;
+}
+
+.user-search-box {
+  width: 440px;
+  border-radius: 20px;
+}
+.input-style {
+  width: 416px;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  outline: none;
+  background: transparent;
+  display: inline-block;
+}
+.search {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background: url("/icon/search.png") no-repeat;
+  margin-right: 4px;
 }
 
 
@@ -312,26 +370,11 @@ a:hover {
 }
 
 .table-div {
-  position: absolute;
-  margin: 24px;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.tabbable {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-left: 24px;
+  margin-top: 24px;
+  margin-right: 40px;
 }
 .tab-content {
-  position: absolute;
-  top: 44px;
-  bottom: 0;
-  left: 0;
-  right: 0;
   overflow: auto;
 }
 
@@ -370,29 +413,7 @@ a:hover {
 
 
 
-.user-search-box {
-  width: 400px;
-  border-radius: 20px;
-  padding: 0 20px;
-  margin: 2.2% 0;
-}
-.input-style {
-  width: 332px;
-  height: 40px;
-  line-height: 40px;
-  border: none;
-  outline: none;
-  background: transparent;
-  display: inline-block;
-}
-.search {
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  background: url("/haomama/icon/admin/search.png") no-repeat
-}
+
 /*.delete {
   display: inline-block;
   vertical-align: middle;
