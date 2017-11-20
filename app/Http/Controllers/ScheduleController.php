@@ -85,7 +85,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        return view('schedule.show');
+        return view('schedule.class-info',$schedule);
     }
 
     /**
