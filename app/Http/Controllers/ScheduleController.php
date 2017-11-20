@@ -18,12 +18,16 @@ class ScheduleController extends Controller
     public function latest(Request $request)
     {
         $merchant = Merchant::findOrFail($request->get('merchant_id'));
+        $now = Carbon::now();
         $items = $merchant->schedules()
             ->where('schedules.course_id', 1)
-            ->where('schedules.begin', '>=', Carbon::now()->toDateString())
+            ->where('schedules.begin', '>=', $now->toDateString())
             ->orderBy('id', 'desc')
             ->limit($request->get('size', 4))
             ->get();
+        foreach ($items as $item) {
+            $item->finished = $item->end > $now->toDateTimeString();
+        }
         return $items;
     }
 
