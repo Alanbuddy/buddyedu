@@ -16,9 +16,7 @@
 	-os-align-items: center;
 	-o-align-items: center;
 	align-items: center;
-}
-.mt32 {
-  margin-top: 27px;
+  padding: 40px;
 }
 .mt16 {
   margin-top: 10px;
@@ -35,4 +33,11 @@
 }
 .p-div {
   margin-bottom: 18px;
+}
+.left-span {
+  vertical-align: top;
+}
+.right-span {
+  display: inline-block;
+  width: 90%;
 }

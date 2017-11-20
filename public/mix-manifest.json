@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/admin_course.css": "/css/admin_course.css"
+    "/css/admin_course.css": "/css/admin_course.css",
+    "/css/auth-course-index.css": "/css/auth-course-index.css",
+    "/css/review.css": "/css/review.css",
+    "/css/class_info.css": "/css/class_info.css"
 }
