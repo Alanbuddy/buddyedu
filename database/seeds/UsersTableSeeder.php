@@ -26,5 +26,12 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);
+        DB::table('users')->insert([
+            'name' => 'teacher demo',
+            'email' => str_random(10) . '@gmail.com',
+            'phone' => '17610076052',
+            'password' => bcrypt('secret'),
+            'api_token' => \Faker\Provider\Uuid::uuid(),
+        ]);
     }
 }

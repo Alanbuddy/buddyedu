@@ -3,12 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Merchant;
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
 class ScheduleController extends Controller
 {
+    public function __construct()
+    {
+    }
+
+    public function latest(Request $request)
+    {
+        $merchant = Merchant::findOrFail($request->get('merchant_id'));
+        $items = $merchant->schedules()
+            ->where('schedules.course_id', 1)
+            ->where('schedules.begin', '>=', Carbon::now()->toDateString())
+            ->orderBy('id', 'desc')
+            ->limit($request->get('size', 4))
+            ->get();
+        return $items;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +56,13 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'time' => 'required',
+            'begin' => 'required',
+            'end' => 'required',
         ]);
         $schedule = new Schedule();
         $schedule->fill($request->only([
-            'time',
+            'begin',
+            'end',
             'course_id',
             'merchant_id',
             'point_id',
