@@ -11,7 +11,7 @@ class FileController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:amdin');
+        $this->middleware('role:amdin')->only(['index']);
     }
 
     /**

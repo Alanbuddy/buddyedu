@@ -15,6 +15,7 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('quota')->nullable()->comment('学生限额');
             $table->timestamp('begin')->nullable();
             $table->timestamp('end')->nullable();
             $table->string('status')->nullable();

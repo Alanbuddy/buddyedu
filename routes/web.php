@@ -37,7 +37,7 @@ Route::middleware(['auth', 'role:admin'])
     );
 Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
-Route::resource('schedules', 'ScheduleController');
+Route::get('/schedules/{schedule}/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
 Route::resource('schedules', 'ScheduleController');
 
 Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构

@@ -23,10 +23,9 @@ class ScheduleController extends Controller
             ->where('schedules.course_id', 1)
             ->where('schedules.begin', '>=', $now->toDateString())
             ->orderBy('id', 'desc')
-            ->limit($request->get('size', 4))
             ->get();
         foreach ($items as $item) {
-            $item->finished = $item->end > $now->toDateTimeString();
+            $item->finished = $item->end < $now->toDateTimeString();
         }
         return $items;
     }
@@ -38,7 +37,11 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('schedule.index');
+        $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return $items;
+        return view('schedule.index', compact('items'));
     }
 
     /**
@@ -85,7 +88,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        return view('schedule.class-info',$schedule);
+        return view('schedule.class-info', $schedule);
     }
 
     /**
@@ -142,5 +145,18 @@ class ScheduleController extends Controller
                 return ['success' => false, 'message' => trans('error.unsupported')];
         }
         return ['success' => true];
+    }
+
+    public function finished()
+    {
+        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
+            ->paginate(10);
+        return $items;
+    }
+
+    public function students(Request $request, Schedule $schedule)
+    {
+        $items= $schedule->users()->get();
+        return $items;
     }
 }

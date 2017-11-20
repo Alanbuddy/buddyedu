@@ -28,6 +28,7 @@ Route::middleware(['va'])
             Route::post('/bone', 'AiController@bone')->name('bone');
             Route::resource('files', 'FileController');
             Route::get('/schedules', 'ScheduleController@latest')->name('api.merchants.schedules.latest4');
+            Route::get('/schedules/{schedule}/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
         });
 
 Route::post('/file', 'AiController@store');
@@ -41,4 +42,5 @@ Route::get('/login/sms', 'Auth\LoginController@sendLoginSms')->name('api.login.s
 Route::post('/login/sms', 'Auth\LoginController@loginBySms')->name('api.login.sms');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('api.password.reset');
+
 

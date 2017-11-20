@@ -6,6 +6,7 @@ use App\Facades\MessageFacade;
 use App\Http\Controllers\CourseEnrollTrait;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Wechat\WxPayApi;
@@ -59,9 +60,9 @@ class PayNotifyCallBack extends WxPayNotify
             $order->status = 'paid';
             $order->save();
             Log::debug('paid successfully');
-            $course = Course::find($order->product_id);
-            $this->enroll($course, $order->user_id);
-            MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $course);
+            $schedule = Schedule::find($order->product_id);
+            $this->enroll($schedule, $order->user_id);
+            MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $schedule);
             return true;
         } else {
             Log::debug('失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!');
