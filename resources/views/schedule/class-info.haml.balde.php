@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/class_info.css') }}">
 
 @endsection
 
@@ -8,17 +8,23 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/1.png"}
-    %span.f24a.title 开课情况
+    %img.title-icon{src: "/icon/back.png"}
+    %span.f24a.title 当前开课>
+    %span.f16a 这是一门课的名称
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 当前开课(23)
-      %li.f14c.bg16b 历史开课(15)
-    .user-search-box
-      .search#search-btn
-      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
-      
+      %li.f14a.bg16b 基础信息
+      %li.f14c.bg16b 报名情况
+
+  .desc-div
+    .name-money
+      .name-div
+        %p.f24b.mt32 这是一门课的名称
+        %p.f12a.mt16 某一机构的很长的名字 
+      .money-div
+        %span.f24c.mr8 ￥2400
+        %span.f12a 75%分成
   
   .desc-div
     // - if(count($items) == 0) 
