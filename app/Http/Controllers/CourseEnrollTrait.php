@@ -10,35 +10,31 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Course;
+use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
 
 trait CourseEnrollTrait
 {
     //学生加入课程
-    public function enroll(Course $course, $user_id = 0)
+    public function enroll(Schedule $schedule, $user_id = 0)
     {
         $user = auth()->user() ?: User::findOrFail($user_id);
         $success = true;
-        $count = $this->hasEnrolled($course, $user->id);
+        $count = $this->hasEnrolled($schedule, $user->id);
         if ($count == 0) {
-            $course->users()->attach($user, [
-                'user_type' => 'student',
+            $schedule->users()->attach($user, [
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
         }
-        $changed = $course->users()->syncWithoutDetaching($user, ['user_type' => 'student']);
+        $changed = $schedule->users()->syncWithoutDetaching($user);
         return ['success' => $success, 'changed' => $changed];
     }
 
-    public function hasEnrolled($course, $userId)
+    public function hasEnrolled($schedule)
     {
-        return $course->users()
-            ->withPivot('type')
-            ->where('type', 'enroll')
-            ->where('user_type', 'student')
-            ->where('user_id', $userId)
+        return $schedule->users()
             ->count();
     }
 
@@ -52,9 +48,9 @@ trait CourseEnrollTrait
             ->first();
     }
 
-    public function isCourseFull($course)
+    public function isFull($schedule)
     {
-        return ($course->quota
+        return ($schedule->quota
             && $course->students()->count() == $course->quota)
             ? true
             : false;

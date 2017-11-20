@@ -10,17 +10,22 @@ class Schedule extends Model
 
     public function course()
     {
-        $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function merchant()
     {
-        $this->belongsTo(Merchant::class);
+        return $this->belongsTo(Merchant::class);
     }
 
     public function point()
     {
-        $this->belongsTo(Point::class);
+        return $this->belongsTo(Point::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }
 

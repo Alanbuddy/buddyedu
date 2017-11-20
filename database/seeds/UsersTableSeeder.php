@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'email' => str_random(10) . '@gmail.com',
             'phone' => '17610076052',
             'password' => bcrypt('secret'),
-            'api_token' => \Faker\Provider\Uuid::uuid(),
+            'api_token' =>'da262427-88c6-356a-a431-8686856c81b3',
         ]);
     }
 }
