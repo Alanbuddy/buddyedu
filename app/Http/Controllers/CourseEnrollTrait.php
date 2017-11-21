@@ -51,7 +51,7 @@ trait CourseEnrollTrait
     public function isFull($schedule)
     {
         return ($schedule->quota
-            && $course->students()->count() == $course->quota)
+            && $schedule->students()->count() == $schedule->quota)
             ? true
             : false;
     }
