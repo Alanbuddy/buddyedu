@@ -1,0 +1,49 @@
+.tooltip-div {
+  position: absolute;
+  top: 45px;
+  width: 320px;
+  padding: 20px;
+  -webkit-filter: drop-shadow(0 0 3px rgba(51, 58, 72, 0.16) #333a48);
+          filter: drop-shadow(0 0 3px rgba(51, 58, 72, 0.16) #333a48);
+  right: 155px;
+  background: #fff;
+}
+
+.tip-parent {
+  position: relative;
+}
+
+.triangle {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid #FFF;
+  border-left: 20px solid transparent;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  width: 12px;
+}
+
+.upload-btn {
+  display: inline-block;
+  width: 160px;
+  height: 32px;
+  background: #f4fafe;
+  border: 2px solid #e4f3ff;
+  line-height: 30px;
+  text-align: center;
+}
+
+.file-div {
+  margin-top: 10px;
+}
+
+.file-div img {
+  margin-right: 10px;
+}
+

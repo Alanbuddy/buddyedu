@@ -15,5 +15,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.sass('resources/assets/sass/admin_course.scss', 'public/css')
 	.sass('resources/assets/sass/auth-course-index.scss', 'public/css')
 	.sass('resources/assets/sass/review.scss', 'public/css')
+	.sass('resources/assets/sass/org-manage.scss', 'public/css')
 	.sass('resources/assets/sass/class_info.scss', 'public/css');
    // .sass('resources/assets/sass/app.scss', 'public/css');
