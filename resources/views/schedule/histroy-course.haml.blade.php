@@ -1,6 +1,5 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
 
 @endsection
 
@@ -13,13 +12,12 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 当前开课(23)
-      %li.f14c 历史开课(15)
+      %li.f14c 当前开课(23)
+      %li.f14a.bg16b 历史开课(15)
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
       
-  
   .desc-div
     // - if(count($items) == 0) 
     //   .undiscover.f14
@@ -42,8 +40,7 @@
             %td 教学点的名字很长
             %td 老师名字
             %td 12/15
-            %td.green 上课中
-            // %td.orange 报名中
+            %td 已结课   
 
     .select-page 
       %span.choice-page

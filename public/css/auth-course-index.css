@@ -1,0 +1,83 @@
+.add-icon {
+  display: inline-block;
+  width: 48px;
+  margin-right: 80px;
+}
+
+.search-add {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.desc-div {
+  position: absolute;
+  top: 200px;
+  left: 24px;
+  right: 40px;
+  bottom: 40px;
+  overflow: auto;
+  padding-top: 3.24%;
+  padding-left: 3.24%;
+  border: 1px solid #e4f3ff;
+}
+
+.frame-div {
+  position: relative;
+  width: 360px;
+  padding: 24px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  float: left;
+  border: 1px solid #e4f3ff;
+}
+
+.course-icon {
+  width: 64px;
+  border-radius: 8px;
+  float: left;
+  border: 1px solid #e4f3ff;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+
+.course-name {
+  margin-top: 15px;
+  margin-bottom: 7px;
+}
+
+.mt24 {
+  margin-top: 20px;
+}
+
+.add-div {
+  position: absolute;
+  right: 24px;
+  top: 40px;
+  border-radius: 20px;
+  height: 32px;
+  width: 80px;
+  border: 1px solid #e4f3ff;
+  text-align: center;
+  line-height: 30px;
+  background: #f4fafe;
+}
+
+.small-add {
+  width: 12px;
+  vertical-align: baseline;
+}
+
