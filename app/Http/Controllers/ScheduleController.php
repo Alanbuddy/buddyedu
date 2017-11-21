@@ -40,7 +40,7 @@ class ScheduleController extends Controller
         $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return $items;
+//        return $items;
         return view('schedule.index', compact('items'));
     }
 
