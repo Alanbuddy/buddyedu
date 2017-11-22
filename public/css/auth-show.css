@@ -1,4 +1,4 @@
-.name-money {
+.items-div {
   background: #f4fafe;
   height: 120px;
   display: -moz-flex;
@@ -19,58 +19,30 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 40px;
+  margin-left: 24px;
+  margin-bottom: 40px;
+  margin-right: 40px;
+  border: 1px solid #e4f3ff;
 }
 
-.mt16 {
-  margin-top: 10px;
-}
-
-.mr8 {
-  margin-right: 8px;
-}
-
-.ml80 {
-  margin-left: 80px;
-}
-
-.info-div {
-  padding-top: 40px;
+.item-div {
+  position: relative;
+  width: 24%;
   padding-left: 40px;
+  padding-top: 20px;
 }
 
-.p-div {
+.item-div p {
   margin-bottom: 18px;
 }
 
-.left-span {
-  vertical-align: top;
-}
-
-.right-span {
-  display: inline-block;
-  width: 90%;
-}
-
-.icon {
-  width: 64px;
-  border: 1px solid #e4f3ff;
-  border-radius: 8px;
-}
-
-.name-div span {
-  vertical-align: middle;
-}
-
-.desc-div {
+.item-div img {
   position: absolute;
-  top: 200px;
-  left: 24px;
   right: 40px;
-  bottom: 40px;
-  overflow: auto;
-  padding-top: 0;
-  padding-left: 0;
-  padding-right: 0;
+  bottom: 30px;
+}
+
+.item-div:not(:last-child) {
+  border-right: 1px solid #e4f3ff;
 }
 

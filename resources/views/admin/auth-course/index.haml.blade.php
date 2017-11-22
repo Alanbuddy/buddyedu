@@ -70,7 +70,7 @@
           %input.hidden{:type => "file"}
           %btn.upload-btn.f14b{:type => "button"} 上传
           %label.f14d 课程网址:
-          %input.form-control.input-web-width.f12b{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'}
+          %input.form-control.input-web-width.f12b{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 课程简介:
           %textarea.area-width.form-control
