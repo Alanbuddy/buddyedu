@@ -1,0 +1,67 @@
+.tooltip-div {
+  position: absolute;
+  top: 50px;
+  width: 320px;
+  padding: 20px;
+  filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
+  right: 110px;
+  background: #fff;
+  // display: none;
+}
+.tip-parent {
+  position: relative;
+}
+.triangle {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid #FFF;
+  border-left: 20px solid transparent;
+}
+.close {
+  position: absolute;
+  right: 20px;
+  width: 12px;
+}
+.span-div {
+  margin-top: 16px;
+  margin-bottom: 10px;
+}
+.box-div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -o-justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.box {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border: 1px solid #e4f3ff;
+}
+.red-box {
+  background: #f58799;
+  color: #fff;
+  font-size: 1.2em;
+}
+.green-box {
+  background: #75cc79;
+  color: #fff;
+  font-size: 1.2em;
+}
+.gray-box {
+  background: #f4fafe;
+  color: #8c929f;
+  font-size: 1.2em;
+}
+

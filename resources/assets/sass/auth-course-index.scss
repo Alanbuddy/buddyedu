@@ -1,21 +1,4 @@
-.add-icon {
-  display: inline-block;
-  width: 48px;
-  margin-right: 80px;
-}
-.search-add {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
-  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  -ms-justify-content: space-between;
-  -o-justify-content: space-between;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 .desc-div {
   position: absolute;
   top: 200px;
@@ -66,4 +49,88 @@
 .small-add {
   width: 12px;
   vertical-align: baseline;
+}
+#addModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -440px;
+    margin-top: -330px;
+    width: 880px;
+    height: 660px;
+  }
+  .modal-backdrop {
+    background-color: rgba(51, 58, 72, 0.16);
+  }
+  .modal-body {
+    margin: 0;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  .close {
+    position: absolute;
+    width: 64px;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 15;
+  }
+  .add-c {
+    margin-top: 30px;
+    margin-bottom: 24px;
+  }
+  .input-width {
+    width: 160px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 40px;
+  }
+  #auth-price {
+    padding: 0;
+    padding-left: 4px;
+  }
+  .upload-btn {
+    display: inline-block;
+    width: 160px;
+    height: 30px;
+    margin-left: 8px;
+    margin-right: 40px;
+    background: #f4fafe;
+    border: 2px solid #e4f3ff;  
+    line-height: 30px;
+    text-align: center;  
+  }
+  .mb24 {
+    margin-bottom: 24px;
+  }
+  .input-web-width {
+    width: 434px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 40px;
+  }
+  .area-width {
+    display: inline-block;
+    width: 709px;
+    margin-left: 8px;
+  }
+  .input-caption {
+    vertical-align: top;
+  }
+  .area-height {
+    display: inline-block;
+    height: 240px;
+  }
+  .add-btn-width {
+    display: inline-block;
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #365ba9;
+    margin-right: 40px;
+  }
 }

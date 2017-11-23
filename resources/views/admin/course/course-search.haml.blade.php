@@ -1,6 +1,5 @@
 @extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/class_info.css') }}">
 
 @endsection
 

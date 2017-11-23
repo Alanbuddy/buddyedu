@@ -14,8 +14,8 @@
   .tab-title
     %ul.clearfix
       %li.f14c 添加课程(23)
-      %li.f14a.bg16b 添加教学点(15)
-      %li.f14c 开课申请(15)
+      %li.f14c 添加教学点(15)
+      %li.f14a.bg16b 开课申请(15)
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -31,21 +31,16 @@
         %thead.f14b.th-bg
           %tr
             %th 申请机构
-            %th 教学点
-            %th 面积
+            %th 申请课程
             %th 负责人
             %th 联系方式
-            %th 所在地
             %th{colspan: 2} 操作
         %tbody
           %tr
             %td 某一机构名称
             %td 这是一门课的名称
-            %td 200m²
             %td 负责人名字
             %td 13211122334
-            %td
-              %img{src: "/icon/location.png"}
             %td#green 通过
             %td.f12e 驳回
 

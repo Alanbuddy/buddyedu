@@ -40,7 +40,7 @@
             %td 教学点的名字很长
             %td 老师名字
             %td 12/15
-            %td 已结课   
+            %td.f12a 已结课   
 
     .select-page 
       %span.choice-page

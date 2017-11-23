@@ -41,3 +41,23 @@
   display: inline-block;
   width: 90%;
 }
+.icon {
+  width: 64px;
+  border: 1px solid #e4f3ff;
+  border-radius: 8px;
+}
+.name-div span {
+  vertical-align: middle;
+}
+.desc-div {
+  position: absolute;
+  top: 200px;
+  left: 24px;
+  right: 40px;
+  bottom: 40px;
+  overflow: auto;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  // border: 1px solid #e4f3ff;
+}
