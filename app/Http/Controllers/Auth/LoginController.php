@@ -20,7 +20,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers,AuthenticatesUsersBySms;
+    use AuthenticatesUsers, AuthenticatesUsersBySms;
 
     protected $redirectTo = '/';
 
