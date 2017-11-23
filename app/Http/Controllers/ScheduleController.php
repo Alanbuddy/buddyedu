@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Merchant;
 use App\Models\Schedule;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class ScheduleController extends Controller
@@ -15,13 +18,18 @@ class ScheduleController extends Controller
     {
     }
 
+    //教师选班级
     public function latest(Request $request)
     {
+        $this->validate($request, [
+            'merchant_id' => 'required'
+        ]);
         $merchant = Merchant::findOrFail($request->get('merchant_id'));
         $now = Carbon::now();
         $items = $merchant->schedules()
             ->where('schedules.course_id', 1)
             ->where('schedules.begin', '>=', $now->toDateString())
+            ->with('point')
             ->orderBy('id', 'desc')
             ->get();
         foreach ($items as $item) {
@@ -156,7 +164,27 @@ class ScheduleController extends Controller
 
     public function students(Request $request, Schedule $schedule)
     {
-        $items= $schedule->users()->get();
-        return $items;
+        $this->validate($request, [
+            'schedule_id' => 'required|numeric'
+        ]);
+        $schedule = Schedule::findOrFail($request->get('schedule_id'));
+        $items = $schedule->users()->get();
+        $data = compact('items', 'point');
+//        return $items;
+        return ['success' => true, 'data' => $data];
+    }
+
+    public function signIn(Request $request)
+    {
+        $arr = $request->get('users');
+        Log::debug('-------');
+        Log::debug($arr);
+        $items = User::whereIn('id', implode(',', $arr))
+            ->get();
+        foreach ($items as $item) {
+            $attendance = new Attendance();
+            $item->attendances()->save($attendance);
+        }
+        return ['success' => true];
     }
 }

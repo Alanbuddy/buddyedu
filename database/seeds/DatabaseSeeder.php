@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MerchantSeeder::class);
         $this->call(CourseSeeder::class);
         $this->call(PointSeeder::class);
+        $this->call(ScheduleSeeder::class);
+        $this->call(AttendanceSeeder::class);
     }
 }

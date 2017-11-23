@@ -28,7 +28,8 @@ Route::middleware(['va'])
             Route::post('/bone', 'AiController@bone')->name('bone');
             Route::resource('files', 'FileController');
             Route::get('/schedules', 'ScheduleController@latest')->name('api.merchants.schedules.latest4');
-            Route::get('/schedules/{schedule}/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
+            Route::get('/schedules/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
+            Route::post('/schedules/sign-in', 'ScheduleController@signIn')->name('schedule.signIn');//签到
         });
 
 Route::post('/file', 'AiController@store');

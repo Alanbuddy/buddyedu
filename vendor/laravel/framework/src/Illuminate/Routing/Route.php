@@ -222,7 +222,6 @@ class Route
     {
         if (! $this->controller) {
             $class = $this->parseControllerCallback()[0];
-
             $this->controller = $this->container->make(ltrim($class, '\\'));
         }
 

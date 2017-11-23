@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class Schedule extends TestCase
+class signIn extends TestCase
 {
     /**
      * A basic test example.
@@ -15,12 +14,11 @@ class Schedule extends TestCase
      */
     public function testExample()
     {
-        $this->actingAs(User::find(1));
-        $response = $this->post(route('schedules.store'), [
-            'begin' => date('Y-m-d'),
-            'end' => date('Y-m-d H:i:s',strtotime('-4 hour')),
+//        $this->actingAs(User::find(1));
+        $response = $this->post(route('schedule.signIn'), [
+            'users' => [1, 2],
             'status' => 'applying',
-            'course_id' => 1,
+            'schedule_id' => 1,
             'point_id' => 1,
             'merchant_id' => 1
         ]);
