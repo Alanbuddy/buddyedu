@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/class_info.css') }}">
 

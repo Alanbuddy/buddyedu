@@ -7,5 +7,10 @@
     "/css/auth-show.css": "/css/auth-show.css",
     "/css/teacher-show.css": "/css/teacher-show.css",
     "/css/student-show.css": "/css/student-show.css",
+    "/css/edu-point.css": "/css/edu-point.css",
+    "/css/agent-add.css": "/css/agent-add.css",
+    "/css/auth-course-add.css": "/css/auth-course-add.css",
+    "/css/agent-edu-add.css": "/css/agent-edu-add.css",
+    "/css/agent-teacher-add.css": "/css/agent-teacher-add.css",
     "/css/class_info.css": "/css/class_info.css"
 }

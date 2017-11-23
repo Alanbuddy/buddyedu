@@ -397,6 +397,10 @@ a:hover {
   color: #e4f3ff !important;
   font-size: 1.2em;
 }
+.red {
+  color: #f58799 !important;
+  font-size: 1.2em;
+}
 .add-icon {
   display: inline-block;
   width: 48px;
