@@ -87,6 +87,7 @@ class Test extends Command
         dd(cache("8"));
     }
 
+
     public function handle()
     {
 //        $this->geo();

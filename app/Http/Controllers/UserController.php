@@ -64,6 +64,8 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'password' => bcrypt('secret'),
                 'phone' => $data['phone'],
+                'merchant_id' => $data['merchant_id'],
+                'type'=>'teacher',
                 'api_token' => Uuid::uuid()
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());

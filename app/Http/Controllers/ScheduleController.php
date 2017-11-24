@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
@@ -19,16 +20,18 @@ class ScheduleController extends Controller
     }
 
     //教师选班级
+    //test url: /api/v1/schedules?merchant_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3
     public function latest(Request $request)
     {
         $this->validate($request, [
             'merchant_id' => 'required'
         ]);
-        $merchant = Merchant::findOrFail($request->get('merchant_id'));
+        $teacher = auth()->user();
         $now = Carbon::now();
-        $items = $merchant->schedules()
-            ->where('schedules.course_id', 1)
-            ->where('schedules.begin', '>=', $now->toDateString())
+        $items = $teacher
+            ->schedules()
+            ->where('schedules.merchant_id', $teacher->merchant_id)
+//            ->where('schedules.end', '>', $now->toDateString())
             ->with('point')
             ->orderBy('id', 'desc')
             ->get();
@@ -71,20 +74,34 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'begin' => 'required',
-            'end' => 'required',
+            'begin' => 'required|date',
+            'end' => 'required|date',
+            'teachers' => 'required|array',
         ]);
-        $schedule = new Schedule();
-        $schedule->fill($request->only([
-            'begin',
-            'end',
-            'course_id',
-            'merchant_id',
-            'point_id',
-        ]));
 
-        $schedule->status = 'applying';
-        $schedule->save();
+        DB::transaction(function () use ($request) {
+
+            $schedule = new Schedule();
+            $schedule->fill($request->only([
+                'begin',
+                'end',
+                'course_id',
+                'merchant_id',
+                'point_id',
+            ]));
+
+            $schedule->status = 'applying';
+            $schedule->save();
+            $arr = [];
+            foreach ($request->teachers as $k => $v) {
+                $arr[$v] = [
+                    'type' => 'teacher',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ];
+            }
+            $schedule->users()->sync($arr);
+        });
         return ['success' => true];
     }
 
@@ -176,13 +193,23 @@ class ScheduleController extends Controller
 
     public function signIn(Request $request)
     {
+        $this->validate($request, [
+            'merchant_id' => 'required',
+            'point_id' => 'required',
+            'schedule_id' => 'required'
+        ]);
         $arr = $request->get('users');
-        Log::debug('-------');
-        Log::debug($arr);
-        $items = User::whereIn('id', implode(',', $arr))
+        $items = User::whereIn('id', $arr)
             ->get();
         foreach ($items as $item) {
             $attendance = new Attendance();
+            $attendance->fill(array_merge($request->only([
+                'merchant_id',
+                'point_id',
+                'schedule_id',
+            ]), [
+                'teacher_id' => auth()->user()->id,
+            ]));
             $item->attendances()->save($attendance);
         }
         return ['success' => true];
