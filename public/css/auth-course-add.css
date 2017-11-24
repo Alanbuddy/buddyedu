@@ -93,3 +93,58 @@
   vertical-align: baseline;
 }
 
+#addModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -160px;
+  margin-top: -100px;
+  width: 320px;
+  height: 158px;
+}
+
+#addModal .modal-backdrop {
+  background-color: rgba(51, 58, 72, 0.16);
+}
+
+#addModal .modal-body {
+  margin: 0;
+  padding: 24px;
+}
+
+#addModal .close {
+  position: absolute;
+  width: 12px;
+  right: 10px;
+  top: 10px;
+  opacity: 1;
+  z-index: 15;
+}
+
+#addModal .conform-btn {
+  display: inline-block;
+  width: 120px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background: #365ba9;
+  color: #fff;
+  font-size: 14px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+#addModal .cancel-btn {
+  display: inline-block;
+  width: 120px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  background: #fff;
+  cursor: pointer;
+}
+
+#addModal p {
+  margin-bottom: 18px;
+}
+

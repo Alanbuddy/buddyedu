@@ -46,7 +46,7 @@
   border: 1px solid #e4f3ff;
   border-radius: 8px;
 }
-.name-div span {
+.f24b {
   vertical-align: middle;
 }
 .desc-div {
@@ -60,4 +60,22 @@
   padding-left: 0;
   padding-right: 0;
   // border: 1px solid #e4f3ff;
+}
+
+.add-div {
+  display: inline-block;
+  border-radius: 20px;
+  height: 30px;
+  width: 80px;
+  border: 1px solid #e4f3ff;
+  text-align: center;
+  line-height: 30px;
+  background: #f4fafe;
+  margin-left: 16px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.small-add {
+  width: 12px;
+  vertical-align: baseline;
 }

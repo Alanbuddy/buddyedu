@@ -1,67 +1,54 @@
 .name-money {
   background: #f4fafe;
   height: 120px;
+  display: -webkit-flex;
   display: -moz-flex;
   display: -os-flex;
   display: -o-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   -os-justify-content: space-between;
   -o-justify-content: space-between;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
   -moz-align-items: center;
   -os-align-items: center;
   -o-align-items: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   padding: 40px;
 }
-
 .mt16 {
   margin-top: 10px;
 }
-
 .mr8 {
   margin-right: 8px;
 }
-
 .ml80 {
   margin-left: 80px;
 }
-
 .info-div {
   padding-top: 40px;
   padding-left: 40px;
 }
-
 .p-div {
   margin-bottom: 18px;
 }
-
 .left-span {
   vertical-align: top;
 }
-
 .right-span {
   display: inline-block;
   width: 90%;
 }
-
 .icon {
   width: 64px;
   border: 1px solid #e4f3ff;
   border-radius: 8px;
 }
-
 .f24b {
   vertical-align: middle;
 }
-
 .desc-div {
   position: absolute;
   top: 200px;
@@ -72,6 +59,7 @@
   padding-top: 0;
   padding-left: 0;
   padding-right: 0;
+  // border: 1px solid #e4f3ff;
 }
 
 .add-div {
@@ -87,9 +75,60 @@
   vertical-align: middle;
   cursor: pointer;
 }
-
 .small-add {
   width: 12px;
   vertical-align: baseline;
 }
 
+
+
+#addModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -160px;
+    margin-top: -100px;
+    width: 320px;
+    height: 158px;
+  }
+  .modal-backdrop {
+    background-color: rgba(51, 58, 72, 0.16);
+  }
+  .modal-body {
+    margin: 0;
+    padding: 24px;
+  }
+  .close {
+    position: absolute;
+    width: 12px;
+    right: 10px;
+    top: 10px;
+    opacity: 1;
+    z-index: 15;
+  }
+  .conform-btn {
+    display: inline-block;
+    width: 120px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #365ba9;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  .cancel-btn {
+    display: inline-block;
+    width: 120px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+  }
+  p {
+    margin-bottom: 18px;
+  }
+}
