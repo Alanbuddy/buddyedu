@@ -11,13 +11,17 @@ class ScheduleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('schedules')->insert([
-            'begin' => date('Y-m-d'),
-            'end' => date('Y-m-d H:i:s',strtotime('+4 hour')),
-            'status' => 'applying',
-            'course_id' => 1,
-            'point_id' => 1,
-            'merchant_id' => 1
-        ]);
+        for ($i = 0; $i < 4; $i++) {
+            $schedule = \App\Models\Schedule::create([
+//            'begin' => date('Y-m-d'),
+                'begin' => date('Y-m-d H:i:s', strtotime(($i - 1) . ' month')),
+                'end' => date('Y-m-d H:i:s', strtotime('+4 month')),
+                'status' => 'applying',
+                'course_id' => 1,
+                'point_id' => 1,
+                'merchant_id' => 1
+            ]);
+            $schedule->users()->sync([3 => ['type' => 'teacher'], 4 => ['type' => 'teacher']]);
+        }
     }
 }
