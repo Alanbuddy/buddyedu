@@ -13,8 +13,8 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 添加课程(23)
-      %li.f14c 添加教学点(15)
+      %li.f14c 添加课程(23)
+      %li.f14a.bg16b 添加教学点(15)
       %li.f14c 开课申请(15)
   
   .desc-div
@@ -26,7 +26,7 @@
       %table.table.table-hover.table-height
         %thead.f14b.th-bg
           %tr
-            %th 课程名称
+            %th 教学点名称
             %th 申请时间
             %th 处理时间
             %th 课程状态

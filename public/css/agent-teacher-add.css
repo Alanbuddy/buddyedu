@@ -40,7 +40,7 @@
   margin-right: 40px;
 }
 
-#addModal #auth-price {
+#addModal select {
   padding: 0;
   padding-left: 4px;
 }
@@ -92,5 +92,10 @@
   text-align: center;
   background: #365ba9;
   margin-right: 40px;
+  cursor: pointer;
+}
+
+#addModal .input-profile {
+  vertical-align: top;
 }
 
