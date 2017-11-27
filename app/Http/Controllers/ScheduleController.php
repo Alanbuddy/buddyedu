@@ -17,6 +17,7 @@ class ScheduleController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth', 'role:admin|merchant'])->only('index');
     }
 
     //教师选班级
@@ -46,13 +47,21 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-//        return $items;
-        return view('schedule.index', compact('items'));
+        if ($request->get('type') == 'finished') {
+            return $this->finished($request);
+        }
+        $user = auth()->user();
+        if ($user->hasRole('admin')) {
+            $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        } else {
+            $items = $user->merchant()->schedules()
+                ->paginate(10);
+        }
+        return view('admin.course.course-list', compact('items'));
     }
 
     /**
@@ -172,13 +181,16 @@ class ScheduleController extends Controller
         return ['success' => true];
     }
 
+
     public function finished()
     {
         $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
             ->paginate(10);
-        return $items;
+        return view('admin.course.history-course', compact('items'));
     }
 
+
+    // /api/v1/schedules/students?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3
     public function students(Request $request, Schedule $schedule)
     {
         $this->validate($request, [
@@ -198,7 +210,7 @@ class ScheduleController extends Controller
             'point_id' => 'required',
             'schedule_id' => 'required'
         ]);
-        $arr = $request->get('users');
+        $arr = $request->get('students');
         $items = User::whereIn('id', $arr)
             ->get();
         foreach ($items as $item) {
