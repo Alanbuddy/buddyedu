@@ -55,6 +55,7 @@ class ScheduleController extends Controller
         $user = auth()->user();
         if ($user->hasRole('admin')) {
             $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
+                ->with(['point', 'merchant'])
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         } else {
@@ -62,6 +63,23 @@ class ScheduleController extends Controller
                 ->paginate(10);
         }
         return view('admin.course.course-list', compact('items'));
+    }
+
+    /**
+     * 历史开课
+     * /schedules?type=finished
+     */
+    public function finished()
+    {
+        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
+            ->paginate(10);
+        return view('admin.course.histroy-course', compact('items'));
+    }
+
+    public function search(Request $request)
+    {
+        $items = [];
+        return view('admin.course.course-search', compact('items'));
     }
 
     /**
@@ -179,14 +197,6 @@ class ScheduleController extends Controller
                 return ['success' => false, 'message' => trans('error.unsupported')];
         }
         return ['success' => true];
-    }
-
-
-    public function finished()
-    {
-        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
-            ->paginate(10);
-        return view('admin.course.history-course', compact('items'));
     }
 
 
