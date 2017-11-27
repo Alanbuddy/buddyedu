@@ -23,9 +23,16 @@ class Schedule extends Model
         return $this->belongsTo(Point::class);
     }
 
-    public function users()
+    public function teachers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+            ->wherePivot('type', 'teacher');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class)
+            ->wherePivot('type', 'student');
     }
 }
 
