@@ -63,6 +63,7 @@ class ScheduleController extends Controller
             $items = $user->merchant()->schedules()
                 ->paginate(10);
         }
+        dd($items);
         return view('admin.course.course-list', compact('items'));
     }
 
