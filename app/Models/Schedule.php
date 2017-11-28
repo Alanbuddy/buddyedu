@@ -34,5 +34,6 @@ class Schedule extends Model
         return $this->belongsToMany(User::class)
             ->wherePivot('type', 'student');
     }
+
 }
 
