@@ -63,7 +63,6 @@
 <script src = "/js/ajax.js"></script>
 <script src = "/js/mobile-notification.js"></script>
 <script src="/js/jquery.pagination.js"></script>
-
-
+<script src="/js/admin-layout.js"></script>
 
 @yield('script')

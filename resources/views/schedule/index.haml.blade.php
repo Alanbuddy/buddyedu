@@ -1,6 +1,6 @@
-@extends('layout.agent')
+@extends('layout.admin')
 @section('css')
-<link rel="stylesheet" href="{{ mix('/css/edu-point.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
 
 @endsection
 
@@ -8,51 +8,50 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/7.png"}
-    %span.f24a.title 通知查看
+    %img.title-icon{src: "/icon/1.png"}
+    %span.f24a.title 开课情况
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 添加课程(23)
-      %li.f14c 添加教学点(15)
-      %li.f14c 开课申请(15)
+      %li.f14a.bg16b 当前开课(23)
+      %li.f14c 历史开课(15)
+    .user-search-box
+      .search#search-btn
+      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+      
   
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 课程名称
-            %th 申请时间
-            %th 处理时间
-            %th 课程状态
-        %tbody
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td 2017.12.23 13:12:23
-            %td.red 审核驳回
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td ——
-            %td.red 审核中
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td 2017.12.23 13:12:23
-            %td.f12a 已通过
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 课程名称
+              %th 开课机构
+              %th 教学点
+              %th 上课老师
+              %th 报名人数/班级人数
+              %th 课程状态
+          %tbody
+            %tr
+              %td 这是一门课的名称
+              %td 某一机构名称
+              %td 教学点的名字很长
+              %td 老师名字
+              %td 12/15
+              %td.green 上课中
+              // %td.orange 报名中
 
-    .select-page 
-      %span.choice-page
+      .select-page 
+        %span.choice-page
 
   
 @endsection
 
 @section('script')
+
 
 @endsection
