@@ -1,7 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
-
+:javascript
+  window.course_search = "#{route('schedule.search')}"
 @endsection
 
 @section('content')
@@ -19,7 +20,6 @@
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
       
-  
   .desc-div
     - if(count($items) == 0) 
       .undiscover.f14
@@ -51,11 +51,11 @@
 
       .select-page 
         %span.choice-page
-
+          != $items->links()
   
 @endsection
 
 @section('script')
-
+<script src= "/js/course-list.js"></script>
 
 @endsection

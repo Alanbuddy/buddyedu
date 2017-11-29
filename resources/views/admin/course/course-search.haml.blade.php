@@ -46,6 +46,7 @@
 
       .select-page 
         %span.choice-page
+          != $items->links()
 
 @endsection
 
