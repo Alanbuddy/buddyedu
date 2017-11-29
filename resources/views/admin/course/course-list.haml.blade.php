@@ -15,7 +15,8 @@
   .tab-title
     %ul.clearfix
       %li.f14a.bg16b 当前开课(23)
-      %li.f14c 历史开课(15)
+      %li
+        %a.f14c{href: route('schedules.index')."?type=finished"} 历史开课(15)
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -38,7 +39,8 @@
           %tbody
             - foreach ($items as $item)
               %tr
-                %td= $item->course->name
+                %td
+                  %a{href: route('schedules.show',$item->id)}= $item->course->name
                 %td= $item->merchant->name
                 %td= $item->point->name
                 %td
