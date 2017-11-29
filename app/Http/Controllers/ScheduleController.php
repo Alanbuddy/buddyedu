@@ -141,7 +141,8 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        return view('admin.course.course-info', $schedule);
+        $item=$schedule;
+        return view('admin.course.course-info', compact('item'));
     }
 
     /**

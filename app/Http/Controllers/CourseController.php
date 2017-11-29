@@ -46,7 +46,7 @@ class CourseController extends Controller
         $this->validate($request, $this->rules());
         $course = new Course();
         $course = $course->fill($request->only([
-            'name', 'price', 'discount'
+            'name', 'price', 'proportion', 'icon', 'url', 'description', 'detail'
         ]));
         $course->status = 'draft';
         $course->save();
@@ -126,6 +126,9 @@ class CourseController extends Controller
         return $course;
     }
 
+    /**
+     * 授权机构
+     */
     public function merchants(Course $course)
     {
         return $course->merchants()->get();

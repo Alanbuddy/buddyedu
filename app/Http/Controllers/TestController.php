@@ -30,6 +30,7 @@ class TestController extends Controller
 
     public function callAction($method, $parameters)
     {
-        return 'callAction';
+        $a=route('cut');
+        return $a;
     }
 }
