@@ -21,7 +21,7 @@ class ScheduleSeeder extends Seeder
                 'point_id' => 1,
                 'merchant_id' => 1
             ]);
-            $schedule->users()->sync([3 => ['type' => 'teacher'], 4 => ['type' => 'teacher']]);
+            $schedule->teachers()->sync([3 => ['type' => 'teacher'], 4 => ['type' => 'teacher']]);
         }
     }
 }

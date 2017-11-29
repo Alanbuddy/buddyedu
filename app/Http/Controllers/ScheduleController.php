@@ -103,8 +103,8 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'course_id' => 'required',
             'begin' => 'required|date',
-            'end' => 'required|date',
             'teachers' => 'required|array',
         ]);
 
@@ -142,7 +142,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        return view('schedule.class-info', $schedule);
+        return view('admin.course.course-info', $schedule);
     }
 
     /**
@@ -209,10 +209,9 @@ class ScheduleController extends Controller
             'schedule_id' => 'required|numeric'
         ]);
         $schedule = Schedule::findOrFail($request->get('schedule_id'));
-        $items = $schedule->users()->get();
-        $data = compact('items', 'point');
+        $items = $schedule->students()->get();
 //        return $items;
-        return ['success' => true, 'data' => $data];
+        return ['success' => true, 'data' => $items];
     }
 
     public function signIn(Request $request)
