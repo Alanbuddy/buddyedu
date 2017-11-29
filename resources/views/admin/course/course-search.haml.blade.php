@@ -16,32 +16,36 @@
       %li.f14a.bg16b 相关课程
 
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 课程名称
-            %th 开课机构
-            %th 教学点
-            %th 上课老师
-            %th 报名人数/班级人数
-            %th 课程状态
-        %tbody
-          %tr
-            %td 这是一门课的名称
-            %td 某一机构名称
-            %td 机构教学点的长名称
-            %td 老师名字
-            %td 12/15
-            %td.green 上课中
-            // %td 已结课
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 课程名称
+              %th 开课机构
+              %th 教学点
+              %th 上课老师
+              %th 报名人数/班级人数
+              %th 课程状态
+          %tbody
+            - foreach ($items as $item)
+              %tr
+                %td= $item->course->name
+                %td= $item->merchant->name
+                %td= $item->point->name
+                %td
+                  - foreach ($item->teachers as $teacher)
+                    %span= $teacher->name
+                %td 12/15
+                - if ($item)
+                %td.green 上课中
+                // %td 已结课
 
-    .select-page 
-      %span.choice-page
+      .select-page 
+        %span.choice-page
 
 @endsection
 

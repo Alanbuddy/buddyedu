@@ -36,14 +36,15 @@
               %th 报名人数/班级人数
               %th 课程状态
           %tbody
-            %tr
-              %td 这是一门课的名称
-              %td 某一机构名称
-              %td 教学点的名字很长
-              %td 老师名字
-              %td 12/15
-              %td.green 上课中
-              // %td.orange 报名中
+            - foreach ($item as $items)
+              %tr
+                %td= $item.course.name
+                %td 某一机构名称
+                %td 教学点的名字很长
+                %td 老师名字
+                %td 12/15
+                %td.green 上课中
+                // %td.orange 报名中
 
       .select-page 
         %span.choice-page
