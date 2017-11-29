@@ -56,6 +56,7 @@ class ScheduleController extends Controller
         if ($user->hasRole('admin')) {
             $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
                 ->with(['course', 'point', 'merchant', 'teachers'])
+                ->withCount('students')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         } else {
