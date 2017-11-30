@@ -147,12 +147,34 @@ class MerchantController extends Controller
             case 'authorize':
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
                 break;
-            case 'cancel':
-                $merchant->courses()->detach($course);
+            case 'reject':
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
                 break;
             default:
                 return ['success' => false, 'message' => trans('error.unsupported')];
         }
         return ['success' => true];
+    }
+
+    /**
+     * get 开设课程
+     * @param Merchant $merchant
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function courses(Merchant $merchant)
+    {
+        return $merchant->courses()
+            ->wherePivot('status', 'approved')
+            ->get();
+    }
+
+    /**
+     * get 教学点
+     * @param Merchant $merchant
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function points(Merchant $merchant)
+    {
+        return $merchant->points()->get();
     }
 }

@@ -28,9 +28,9 @@ class TestController extends Controller
         return 2;
     }
 
-    public function callAction($method, $parameters)
-    {
-        $a=route('cut');
-        return $a;
-    }
+//    public function callAction($method, $parameters)
+//    {
+//        $a=route('cut');
+//        return $a;
+//    }
 }

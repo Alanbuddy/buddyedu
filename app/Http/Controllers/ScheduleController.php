@@ -90,7 +90,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('schedule.create');
+        return view('agent.course.index');
     }
 
     /**
