@@ -39,7 +39,7 @@
               %li
                 %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/4A.png"}
-                  %span.f16c.sidebar-title 学员管理
+                  %span.f16c.sidebar-title 学生管理
               %li
                 %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/5A.png"}
@@ -47,7 +47,7 @@
               %li
                 %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/6A.png"}
-                  %span.f16c.sidebar-title 信息统计
+                  %span.f16c.sidebar-title 学生统计
               %li.apply
                 %a.a-item{href: "#"}
                   %img.mini-icon{src: "/icon/7A.png"}
