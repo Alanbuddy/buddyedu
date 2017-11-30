@@ -17,6 +17,7 @@ class ScheduleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'role:admin|merchant'])->only([
+            'create',
             'index',
             'store'
         ]);
@@ -55,17 +56,18 @@ class ScheduleController extends Controller
             return $this->finished($request);
         }
         $user = auth()->user();
-        if ($user->hasRole('admin')) {
+        $isAdmin=$user->hasRole('admin');
+        if ($isAdmin) {
             $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
                 ->with(['course', 'point', 'merchant', 'teachers'])
                 ->withCount('students')
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         } else {
-            $items = $user->merchant()->schedules()
+            $items = auth()->user()->ownMerchant->schedules()
                 ->paginate(10);
         }
-        return view('admin.course.course-list', compact('items'));
+        return view($isAdmin?'admin.course.course-list':'agent.course.index', compact('items'));
     }
 
     /**
@@ -92,9 +94,6 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $items = auth()->user()->ownMerchant()->schedules()
-            ->paginate(10);
-        return view('agent.course.index', compact('items'));
     }
 
     /**
