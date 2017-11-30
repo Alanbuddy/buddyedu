@@ -17,7 +17,10 @@ class ScheduleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant'])->only('index');
+        $this->middleware(['auth', 'role:admin|merchant'])->only([
+            'index',
+            'store'
+        ]);
     }
 
     //教师选班级
@@ -103,7 +106,9 @@ class ScheduleController extends Controller
     {
         $this->validate($request, [
             'course_id' => 'required',
+            'point_id' => 'required',
             'begin' => 'required|date',
+            'end' => 'required|date',
             'teachers' => 'required|array',
         ]);
 
@@ -116,9 +121,11 @@ class ScheduleController extends Controller
                 'course_id',
                 'merchant_id',
                 'point_id',
+                'quota'
             ]));
 
             $schedule->status = 'applying';
+            $schedule->merchant_id = auth()->user()->ownMerchant()->id;
             $schedule->save();
             $arr = [];
             foreach ($request->teachers as $k => $v) {
@@ -141,7 +148,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        $item=$schedule;
+        $item = $schedule;
         return view('admin.course.course-info', compact('item'));
     }
 
@@ -222,6 +229,7 @@ class ScheduleController extends Controller
             'schedule_id' => 'required'
         ]);
         $arr = $request->get('students');
+        Log::debug(json_encode($arr));
         $items = User::whereIn('id', $arr)
             ->get();
         foreach ($items as $item) {
