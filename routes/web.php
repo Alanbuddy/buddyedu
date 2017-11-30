@@ -51,6 +51,7 @@ Route::resource('users', 'UserController');
 Route::resource('comments', 'CommentController');
 
 Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
+Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
 Route::resource('merchants', 'MerchantController');
 
 Route::resource('order', 'OrderController');
