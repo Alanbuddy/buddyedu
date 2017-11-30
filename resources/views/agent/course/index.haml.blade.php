@@ -26,32 +26,37 @@
       
   
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 课程名称
-            %th 教学点
-            %th 上课老师
-            %th 报名人数/班级人数
-            %th 课程状态
-        %tbody
-          %tr
-            %td 这是一门课的名称
-            %td 教学点的名字很长
-            %td 老师名字
-            %td 12/15
-            %td.green 上课中
-            // %td.red 审核中
-            // %td.red 审核驳回
-            // %td.orange 报名中
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 课程名称
+              %th 教学点
+              %th 上课老师
+              %th 报名人数/班级人数
+              %th 课程状态
+          %tbody
+            - foreach ($items as $item)
+              %tr
+                %td
+                  %a{href: route('schedules.show',$item->id)}= $item->course->name
+                %td= $item->point->name
+                %td
+                  - foreach ($item->teachers as $teacher)
+                    %span= $teacher->name
+                %td 12/15
+                - if ($item)
+                %td.green 上课中
+                // %td.red 审核中
+                // %td.red 审核驳回
+                // %td.orange 报名中
 
-    .select-page 
-      %span.choice-page
+      .select-page 
+        %span.choice-page
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -63,16 +68,16 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 开设课程:
           %select.form-control.input-width.f14d#course{:type => "text"}
-            %option{value: "1"} 课程名
+            %option{value: 1} 课程名
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"}  
-            %option{value: "2"} xxx教学点
+            %option{value: 1} xxx教学点
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
-            %option{value: "1"} 教师a
-            %option{value: "2"} 教师b
+            %option{value: 1} 教师a
+            %option{value: 2} 教师b
         .controls.controls-row.mb24
           %label.input-caption.f14d 班级人数:
           %input.form-control.input-width.f14d#num{:type => "text"}
