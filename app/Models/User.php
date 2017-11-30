@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function ownMerchant()
     {
-        return $this->hasMany(Merchant::class,'admin_id');
+        return $this->hasOne(Merchant::class,'admin_id');
     }
 
 
