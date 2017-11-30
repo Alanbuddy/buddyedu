@@ -92,7 +92,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $items = auth()->user()->merchant()->schedules()
+        $items = auth()->user()->ownMerchant()->schedules()
             ->paginate(10);
         return view('agent.course.index', compact('items'));
     }
