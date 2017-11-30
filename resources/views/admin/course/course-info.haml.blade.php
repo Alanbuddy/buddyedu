@@ -11,7 +11,7 @@
     %a{href: route('schedules.index')}
       %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 当前开课 >
-    %span.f16a.title= $item->name
+    %span.f16a.title= $item->course->name
 
   .tab-title
     %ul.clearfix
@@ -21,8 +21,8 @@
   .desc-div
     .name-money
       .name-div
-        %p.f24b 这是一门课的名称
-        %p.f12a.mt16 某一机构的很长的名字 
+        %p.f24b= $item->course->name 
+        %p.f12a.mt16= $item->point->name 
       .money-div
         %span.f24c.mr8 ￥2400
         %span.f12a (75%分成)
@@ -37,10 +37,10 @@
         %span 0/36
       .p-div
         %span 上课时间：
-        %span 2018-2-21
+        %span= $item->begin
       .p-div
         %span 上课地点：
-        %span 机构给的很长的一个地址信息
+        %span= $item->point->name
       .p-div
         %span.left-span 课程介绍：
         %span.right-span 精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材
