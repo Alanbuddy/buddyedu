@@ -1,7 +1,10 @@
 @extends('layout.agent')
 @section('css')
+<link rel="stylesheet" href="/css/select2.min.css">
 <link rel="stylesheet" href="{{ mix('/css/agent-add.css') }}">
-
+:javascript
+  window.course_store = "#{route('schedules.store')}"
+  window.schedule_create = "#{route('schedules.create')}"
 @endsection
 
 @section('content')
@@ -54,37 +57,35 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body
         %p.f24b.add-c 添加开课
         .controls.controls-row.mb24
           %label.input-caption.f14d 开设课程:
-          %select.form-control.input-width{:type => "text"}
-            %option 课程名
+          %select.form-control.input-width.f14d#course{:type => "text"}
+            %option{value: "1"} 课程名
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
-          %select.form-control.input-width.manager{:type => "text"}  
-            %option xxx教学点
+          %select.form-control.input-width.manager.f14d#point{:type => "text"}  
+            %option{value: "2"} xxx教学点
         .controls.controls-row.mb24
-          %label.input-caption.f14d 授课老师:
-          %select.form-control.input-width{:type => "text", multiple: "multiple"}
-            %option 教师a
-            %option 教师a
-            %option 教师a
-            %option 教师a
-            %option 教师a
+          %label.input-caption.f14d.teacher 授课老师:
+          %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
+            %option{value: "1"} 教师a
+            %option{value: "2"} 教师b
         .controls.controls-row.mb24
           %label.input-caption.f14d 班级人数:
-          %input.form-control.input-width{:type => "text"}
+          %input.form-control.input-width.f14d#num{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 上课时间:
           %input.form-control.input-width{:type => "text"}
         .btn-div     
-          %btn.f16d.add-btn-width 提交申请
+          %btn.f16d.add-btn-width#apply 提交申请
   
 @endsection
 
 @section('script')
+<script src= "/js/select2.min.js"></script>
 <script src= "/js/agent-add.js"></script>
 
 @endsection
