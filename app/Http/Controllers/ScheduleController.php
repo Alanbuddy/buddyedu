@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class ScheduleController extends Controller
 {
@@ -125,7 +124,7 @@ class ScheduleController extends Controller
             ]));
 
             $schedule->status = 'applying';
-            $schedule->merchant_id = auth()->user()->ownMerchant()->id;
+            $schedule->merchant_id = auth()->user()->ownMerchant->id;
             $schedule->save();
             $arr = [];
             foreach ($request->teachers as $k => $v) {
