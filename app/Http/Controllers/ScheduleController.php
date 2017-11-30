@@ -134,7 +134,7 @@ class ScheduleController extends Controller
                     'updated_at' => Carbon::now(),
                 ];
             }
-            $schedule->users()->sync($arr);
+            $schedule->teachers()->sync($arr);
         });
         return ['success' => true];
     }
