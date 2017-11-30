@@ -12,7 +12,8 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14c 当前开课(23)
+      %li
+        %a.f14c{href: route('schedules.index')} 当前开课(23)
       %li.f14a.bg16b 历史开课(15)
     .user-search-box
       .search#search-btn
@@ -47,7 +48,7 @@
 
       .select-page 
         %span.choice-page
-
+          != $items->links()
   
 @endsection
 

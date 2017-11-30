@@ -7,7 +7,8 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/back.png"}
+    %a{href: route('schedules.index')}
+      %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 搜索
     %span.f16a.title "名称"
 
