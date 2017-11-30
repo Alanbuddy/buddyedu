@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsTo(Merchant::class);
     }
 
+    public function ownMerchant()
+    {
+        return $this->hasMany(Merchant::class,'admin_id');
+    }
+
 
     public function attendances()
     {
