@@ -9,14 +9,14 @@
 .main-content
   .title-div
     %img.title-icon{src: "/icon/4.png"}
-    %span.f24a.title 学员管理
+    %span.f24a.title 学生管理
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 全部学员(23)
+      %li.f14a.bg16b 全部学生(23)
     .user-search-box
       .search#search-btn
-      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学员手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
       
   .desc-div
     // - if(count($items) == 0) 
@@ -28,14 +28,14 @@
         %thead.f14b.th-bg
           %tr
             %th 手机号
-            %th 学员姓名
-            %th 学员年龄
+            %th 学生姓名
+            %th 学生年龄
             %th 报名课程
             %th 缴费总额
         %tbody
           %tr
             %td 13211223344
-            %td 学员姓名
+            %td 学生姓名
             %td 8岁
             %td 5门
             %td.f12a ￥5,400

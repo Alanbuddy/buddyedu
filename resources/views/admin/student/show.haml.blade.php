@@ -9,8 +9,8 @@
 .main-content
   .title-div
     %img.title-icon{src: "/icon/back.png"}
-    %span.f16a.title 学员管理 >
-    %span.f16a.title 学员姓名
+    %span.f16a.title 学生管理 >
+    %span.f16a.title 学生姓名
 
   .tab-title
     %ul.clearfix

@@ -26,13 +26,13 @@
       %table.table.table-hover.table-height
         %thead.f14b.th-bg
           %tr
-            %th 学员姓名
+            %th 学生姓名
             %th 机构名称
             %th 评论内容
             %th{colspan: 2} 操作
         %tbody
           %tr
-            %td 学员姓名
+            %td 学生姓名
             %td 某一机构名称
             %td 机构里面的环境很好，上课氛围非常好
             %td#green 展示
