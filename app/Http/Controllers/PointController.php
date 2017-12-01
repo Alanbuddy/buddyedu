@@ -10,7 +10,6 @@ class PointController extends Controller
     public function __construct()
     {
         $this->middleware('role:admin|merchant')->only([
-            'index',
             'store',
         ]);
     }
@@ -22,7 +21,10 @@ class PointController extends Controller
      */
     public function index()
     {
-        return view('point.index');
+        $items = Point::whereNull('approved')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('point.index', compact('items'));
     }
 
     /**
@@ -49,6 +51,8 @@ class PointController extends Controller
         $item = new Point();
         $item->fill($request->only([
             'name',
+            'admin',
+            'contact',
             'area',
             'address',
             'province_id',
@@ -104,5 +108,11 @@ class PointController extends Controller
     public function destroy(Point $point)
     {
         //
+    }
+
+    public function approve(Point $point, $operation)
+    {
+        $point->approved = $operation == 'approve' ? true : false;
+        return ['success' => true];
     }
 }

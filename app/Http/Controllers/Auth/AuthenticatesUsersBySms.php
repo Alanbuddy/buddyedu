@@ -12,15 +12,19 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Util\SendSms;
 use App\Http\Util\Sms;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
 trait AuthenticatesUsersBySms
 {
+
 
     public function sendLoginSms(Request $request)
     {
@@ -45,9 +49,13 @@ trait AuthenticatesUsersBySms
     {
         $user = $this->validateCredentials($request->only(['phone', 'token']));
         if (!$user instanceof CanResetPassword) {
-            return ['success' => false,'message'=>trans($user)];
+            return ['success' => false, 'message' => trans($user)];
         }
         $this->myBroker()->deleteToken($user);
+
+        if ($request->has('password')) {
+            $this->resetPassword($user, $request->password);
+        }
         return ['success' => true, 'user' => $user];
     }
 
@@ -74,4 +82,17 @@ trait AuthenticatesUsersBySms
         return $user;
     }
 
+    //Copy from ResetsPasswords;
+    public function resetPassword($user, $password)
+    {
+        $user->password = Hash::make($password);
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
+    }
 }

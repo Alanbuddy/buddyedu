@@ -56,7 +56,7 @@ class ScheduleController extends Controller
             return $this->finished($request);
         }
         $user = auth()->user();
-        $isAdmin=$user->hasRole('admin');
+        $isAdmin = $user->hasRole('admin');
         if ($isAdmin) {
             $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
                 ->with(['course', 'point', 'merchant', 'teachers'])
@@ -67,7 +67,7 @@ class ScheduleController extends Controller
             $items = auth()->user()->ownMerchant->schedules()
                 ->paginate(10);
         }
-        return view($isAdmin?'admin.course.course-list':'agent.course.index', compact('items'));
+        return view($isAdmin ? 'admin.course.course-list' : 'agent.course.index', compact('items'));
     }
 
     /**
@@ -219,6 +219,17 @@ class ScheduleController extends Controller
         $items = $schedule->students()->get();
 //        return $items;
         return ['success' => true, 'data' => $items];
+    }
+
+    //
+    public function enrolls(Schedule $schedule)
+    {
+
+        $items = $schedule->students()
+            ->paginate(10);
+        dd($items);
+        return view('', compact('items'));
+
     }
 
     public function signIn(Request $request)

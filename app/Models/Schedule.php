@@ -32,7 +32,9 @@ class Schedule extends Model
     public function students()
     {
         return $this->belongsToMany(User::class)
-            ->wherePivot('type', 'student');
+            ->wherePivot('type', 'student')
+            ->withPivot('created_at','updated_at');
+
     }
 
 }
