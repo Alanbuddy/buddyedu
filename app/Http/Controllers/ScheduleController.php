@@ -226,7 +226,8 @@ class ScheduleController extends Controller
         $this->validate($request, [
             'merchant_id' => 'required',
             'point_id' => 'required',
-            'schedule_id' => 'required'
+            'schedule_id' => 'required',
+            'students' => 'required|array'
         ]);
         $arr = $request->get('students');
         Log::debug(json_encode($arr));
