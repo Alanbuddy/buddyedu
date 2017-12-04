@@ -33,16 +33,17 @@ trait AuthenticatesUsersBySms
         if (is_null($user)) {
             return ['success' => false, 'message' => '用户不存在'];
         }
-        $code = Sms::makeCode();
-        Log::debug($code);
-        $this->myBroker()->createCustomToken($user, $code);
-        $content = Sms::createVerificationCodeText($code);
-        $result = Sms::sendSingleSms($request->get('phone'), $content);
+        $result = $this->sen($request, $user);
         if ($result['success']) {
             return ['success' => true];
         } else {
             return ['success' => false, 'message' => '发送失败', 'data' => $result];
         }
+    }
+
+    public function sendVerifyCode()
+    {
+
     }
 
     public function loginBySms(Request $request)
@@ -94,5 +95,20 @@ trait AuthenticatesUsersBySms
         event(new PasswordReset($user));
 
         $this->guard()->login($user);
+    }
+
+    /**
+     * @param Request $request
+     * @param $user
+     * @return mixed
+     */
+    public function sen(Request $request, $user)
+    {
+        $code = Sms::makeCode();
+        Log::debug($code);
+        $this->myBroker()->createCustomToken($user, $code);
+        $content = Sms::createVerificationCodeText($code);
+        $result = Sms::sendSingleSms($request->get('phone'), $content);
+        return $result;
     }
 }
