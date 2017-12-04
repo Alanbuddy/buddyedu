@@ -151,7 +151,6 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $item = $schedule;
-        dd($item);
         return view('admin.course.course-info', compact('item'));
     }
 
@@ -229,7 +228,7 @@ class ScheduleController extends Controller
     {
         $items = $schedule->students()
             ->paginate(10);
-        return view('admin.course.register', compact('items', 'schedule'));
+        return view('admin.course.course-register', compact('items'));
 
     }
 
