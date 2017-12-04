@@ -34,7 +34,7 @@ class PointController extends Controller
      */
     public function create()
     {
-        return view('point.create');
+        return view('agent.edu-point.index');
     }
 
     /**
