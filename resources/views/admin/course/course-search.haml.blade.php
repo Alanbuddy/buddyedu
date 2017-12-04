@@ -9,12 +9,14 @@
   .title-div
     %a{href: route('schedules.index')}
       %img.title-icon{src: "/icon/back.png"}
+    // %span.f16a.title= '搜索"'.$key.'"'
     %span.f16a.title 搜索
-    %span.f16a.title "名称"
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 相关课程
+      %li.f14a.bg16b 当前开课(5)
+      %li
+        %a.f14c{href: route('schedule.search')."?type=history"} 历史开课(3)
 
   .desc-div
     - if(count($items) == 0) 
@@ -40,10 +42,8 @@
                 %td
                   - foreach ($item->teachers as $teacher)
                     %span= $teacher->name
-                %td 12/15
-                - if ($item)
+                %td= $item->students_count."/".$item->quota
                 %td.green 上课中
-                // %td 已结课
 
       .select-page 
         %span.choice-page

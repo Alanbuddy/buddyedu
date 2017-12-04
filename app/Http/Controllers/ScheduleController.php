@@ -151,6 +151,7 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $item = $schedule;
+        dd($item);
         return view('admin.course.course-info', compact('item'));
     }
 

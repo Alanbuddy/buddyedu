@@ -8,15 +8,15 @@
 
 .main-content
   .title-div
-    %a{href: route('schedules.index')}
-      %img.title-icon{src: "/icon/back.png"}
+    %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 当前开课 >
     %span.f16a.title= $item->course->name
 
   .tab-title
     %ul.clearfix
       %li.f14a.bg16b 基础信息
-      %li.f14c 报名情况
+      %li
+        %a.f14c{href: route('schedule.student',$item)} 报名情况
 
   .desc-div
     .name-money
@@ -32,7 +32,7 @@
         %span 某老师、某某老师
       .p-div
         %span 报名人数：
-        %span 10/15
+        // %span= $item->students_count."/".$item->quota
         %span.ml80 课程进度：
         %span 0/36
       .p-div
