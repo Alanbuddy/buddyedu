@@ -21,10 +21,12 @@ class PointController extends Controller
      */
     public function index()
     {
-        $items = Point::whereNull('approved')
+        $items = auth()->user()
+            ->ownMerchant
+            ->points()
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('point.index', compact('items'));
+        return view('agent.edu-point.index', compact('items'));
     }
 
     /**

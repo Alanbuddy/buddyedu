@@ -11,7 +11,7 @@ class FileController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:amdin')->only(['index']);
+//        $this->middleware('role:amdin')->only(['index']);
     }
 
     /**
@@ -21,9 +21,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        return 2;
         $items = File::orderBy('id', 'desc')->get();
-        return $items;
+//        return $items;
+        return view('files', compact('items'));
     }
 
     /**
@@ -76,7 +76,7 @@ class FileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Model\File $file
+     * @param  \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, File $file)
@@ -87,7 +87,7 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\File $file
+     * @param  \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
     public function destroy(File $file)
