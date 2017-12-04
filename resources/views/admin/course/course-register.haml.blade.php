@@ -9,11 +9,12 @@
   .title-div
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 当前开课 >
-    %span.f16a.title 这是一门课的名称
+    %span.f16a.title 
 
   .tab-title
     %ul.clearfix
-      %li.f14c 基础信息
+      %li
+        %a.f14c{href: route('schedules.show',$schedule->id))} 基础信息
       %li.f14a.bg16b 报名情况
 
   .desc-div
