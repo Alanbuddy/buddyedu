@@ -26,7 +26,7 @@ trait AuthenticatesUsersBySms
 {
 
 
-    public function sendLoginSms(Request $request)
+    public function sendVerifySms(Request $request)
     {
         $this->validate($request, ['phone' => 'required|digits:11']);
         $user = $this->myBroker()->getUser($request->only('phone'));

@@ -55,6 +55,11 @@ class UserController extends Controller
         }
     }
 
+    public function storePhone(Request $request)
+    {
+
+    }
+
     public function storeTeacher(Request $request)
     {
         $data = $request->only(['name', 'phone', 'merchant_id']);

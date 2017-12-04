@@ -83,8 +83,10 @@ class ScheduleController extends Controller
 
     public function search(Request $request)
     {
+        $key = $request->get('key');
+        $isHistory = $request->get('type');
         $items = [];
-        return view('admin.course.course-search', compact('items'));
+        return view('admin.course.course-search', compact('items', 'key'));
     }
 
     /**
@@ -224,11 +226,9 @@ class ScheduleController extends Controller
     //
     public function enrolls(Schedule $schedule)
     {
-
         $items = $schedule->students()
             ->paginate(10);
-        dd($items);
-        return view('', compact('items'));
+        return view('admin.course.register', compact('items'));
 
     }
 
