@@ -14,9 +14,9 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 当前开课(23)
+      %li.f14a.bg16b= "当前开课(".$items->total().")"
       %li
-        %a.f14c{href: route('schedules.index')."?type=finished"} 历史开课(15)
+        %a.f14c{href: route('schedules.index')."?type=finished"} 历史开课
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -46,8 +46,8 @@
                 %td
                   - foreach ($item->teachers as $teacher)
                     %span= $teacher->name
-                %td 12/15
-                - if ($item)
+                %td= $item->students_count."/".$item->quota
+                - if ($item->status)
                 %td.green 上课中
                 // %td.orange 报名中
 

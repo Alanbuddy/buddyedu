@@ -1,25 +1,23 @@
 @extends('layout.admin')
 @section('css')
-:javascript
-  window.course_search = "#{route('schedule.search')}"
+
 @endsection
 
 @section('content')
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/1.png"}
-    %span.f24a.title 开课情况
+    %a{href: route('schedules.index')}
+      %img.title-icon{src: "/icon/back.png"}
+    // %span.f16a.title= '搜索"'.$key.'"'
+    %span.f16a.title 搜索
 
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('schedules.index')} 当前开课
-      %li.f14a.bg16b= "历史开课(".$items->total().")"
-    .user-search-box
-      .search#search-btn
-      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
-      
+        %a.f14c{href: route('schedule.search')} 当前开课(5)
+      %li.f14a.bg16b 历史开课(3)
+
   .desc-div
     - if(count($items) == 0) 
       .undiscover.f14
@@ -38,8 +36,7 @@
           %tbody
             - foreach ($items as $item)
               %tr
-                %td
-                  %a{href: route('schedules.show',$item->id)}= $item->course->name
+                %td= $item->course->name
                 %td= $item->merchant->name
                 %td= $item->point->name
                 %td
@@ -51,10 +48,10 @@
       .select-page 
         %span.choice-page
           != $items->links()
-  
+
 @endsection
 
 @section('script')
-<script src= "/js/search.js"></script>
+
 
 @endsection

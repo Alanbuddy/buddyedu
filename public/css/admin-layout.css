@@ -341,6 +341,11 @@ a:hover {
   margin-right: 16px;
   cursor: pointer;
 }
+.tab-title li a {
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+}
 .tab-title li a:hover {
   color: #5d6578;
   font-weight: bold;
@@ -473,15 +478,6 @@ a:hover {
 
 .select-page {
   text-align: right;
-}
-.totalitems {
-  font-size: 12px;
-  color: #969696;
-  margin-right: 0.5%;
-}
-.choice-page {
-  display: inline-block;
-  vertical-align: middle;
 }
 .pagination {
   display: inline-block;
