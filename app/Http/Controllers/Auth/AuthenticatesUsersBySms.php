@@ -26,24 +26,46 @@ trait AuthenticatesUsersBySms
 {
 
 
-    public function sendVerifySms(Request $request)
+    //send verify code for login
+    public function sendVerifySmsForLogin(Request $request)
     {
         $this->validate($request, ['phone' => 'required|digits:11']);
         $user = $this->myBroker()->getUser($request->only('phone'));
         if (is_null($user)) {
             return ['success' => false, 'message' => '用户不存在'];
         }
-        $result = $this->sen($request, $user);
+        list($result, $code) = $this->sendVerifyCode($request->get('phone'));
         if ($result['success']) {
+            $this->storeToken($user, $code);
             return ['success' => true];
         } else {
             return ['success' => false, 'message' => '发送失败', 'data' => $result];
         }
     }
 
-    public function sendVerifyCode()
+    public function sendVerifySms(Request $request)
     {
+        $this->validate($request, ['phone' => 'required|digits:11']);
+        $phone = $request->get('phone');
+        $user = new User();
+        $user->fill(compact('phone'));
+        list($result, $code) = $this->sendVerifyCode($phone);
+        if ($result['success']) {
+            $this->storeToken($user, $code);
+            return ['success' => true];
+        } else {
+            return ['success' => false, 'message' => '发送失败', 'data' => $result];
+        }
 
+    }
+
+    public function sendVerifyCode($phone)
+    {
+        $code = Sms::makeCode();
+        Log::debug($code);
+        $content = Sms::createVerificationCodeText($code);
+        $result = Sms::sendSingleSms($phone, $content);
+        return [$result, $code];
     }
 
     public function loginBySms(Request $request)
@@ -60,6 +82,29 @@ trait AuthenticatesUsersBySms
         return ['success' => true, 'user' => $user];
     }
 
+    public function validateCode(Request $request)
+    {
+        $credentials = $request->only(['phone', 'token']);
+        $user = new User();
+        $user->fill($request->only(['phone']));
+        if (!$this->myBroker()->tokenExists($user, $credentials['token'])) {
+            return ['success' => false];
+        } else {
+            $this->myBroker()->deleteToken($user);
+            return ['success' => true];
+        }
+    }
+
+    public function bindPhone(Request $request)
+    {
+        $result = $this->validateCode($request);
+        if ($result['success']) {
+            auth()->user()->update([
+                'phone' => $request->get('phone')
+            ]);
+        }
+
+    }
 
     /**
      * @return \Illuminate\Contracts\Auth\PasswordBroker
@@ -102,13 +147,8 @@ trait AuthenticatesUsersBySms
      * @param $user
      * @return mixed
      */
-    public function sen(Request $request, $user)
+    public function storeToken($user, $code)
     {
-        $code = Sms::makeCode();
-        Log::debug($code);
         $this->myBroker()->createCustomToken($user, $code);
-        $content = Sms::createVerificationCodeText($code);
-        $result = Sms::sendSingleSms($request->get('phone'), $content);
-        return $result;
     }
 }
