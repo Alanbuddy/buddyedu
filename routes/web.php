@@ -37,6 +37,7 @@ Route::middleware(['auth', 'role:admin'])
     );
 Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms-verify.send');
 Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
+Route::post('/phone/bind', 'UserController@bindPhone')->name('user.phone.bind');
 Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
 Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');

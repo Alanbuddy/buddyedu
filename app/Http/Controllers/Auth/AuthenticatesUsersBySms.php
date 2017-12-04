@@ -95,6 +95,17 @@ trait AuthenticatesUsersBySms
         }
     }
 
+    public function bindPhone(Request $request)
+    {
+        $result = $this->validateCode($request);
+        if ($result['success']) {
+            auth()->user()->update([
+                'phone' => $request->get('phone')
+            ]);
+        }
+
+    }
+
     /**
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */

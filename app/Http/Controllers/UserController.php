@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
 use App\Models\Merchant;
 use App\Models\Role;
 use App\Models\User;
@@ -14,6 +15,8 @@ use League\OAuth2\Server\RequestEvent;
 
 class UserController extends Controller
 {
+    use AuthenticatesUsersBySms;
+
     public function __construct()
     {
         $this->middleware('auth')->only(['index', 'store']);
@@ -55,10 +58,6 @@ class UserController extends Controller
         }
     }
 
-    public function storePhone(Request $request)
-    {
-
-    }
 
     public function storeTeacher(Request $request)
     {
@@ -70,7 +69,7 @@ class UserController extends Controller
                 'password' => bcrypt('secret'),
                 'phone' => $data['phone'],
                 'merchant_id' => $data['merchant_id'],
-                'type'=>'teacher',
+                'type' => 'teacher',
                 'api_token' => Uuid::uuid()
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
