@@ -15,6 +15,7 @@ class AlterCourseAddProportin extends Migration
     {
         //
         Schema::table('courses', function (Blueprint $table) {
+            $table->unsignedInteger('lessons_count')->nullable();
             $table->float('proportion')->nullable();
             $table->string('url')->nullable();
             $table->string('icon')->nullable();
@@ -34,6 +35,7 @@ class AlterCourseAddProportin extends Migration
             $table->dropColumn('url');
             $table->dropColumn('icon');
             $table->dropColumn('detail');
+            $table->unsignedInteger('lessons_count')->nullable();
         });
     }
 }

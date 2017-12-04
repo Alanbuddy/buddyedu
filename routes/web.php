@@ -35,10 +35,12 @@ Route::middleware(['auth', 'role:admin'])
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
         }
     );
+Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms.verify.send');
+Route::post('/sms/verify', 'SmsController@sendVerifySms')->name('sms.verify.send');
 Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
 Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
-Route::get('/schedules/{schedule}/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
+Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
 Route::resource('schedules', 'ScheduleController');
 
 Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
@@ -56,6 +58,7 @@ Route::resource('merchants', 'MerchantController');
 
 Route::resource('order', 'OrderController');
 
+Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//
 Route::resource('points', 'PointController');
 
 Route::resource('records', 'RecordController');
