@@ -1,6 +1,7 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/agent-edu-add.css') }}">
+<link href="/css/pick-pcc.min.1.0.1.css">
 
 @endsection
 
@@ -40,7 +41,6 @@
             %td 12/15
             %td xxxxx
             %td.f12a 很长的地址信息
-
     .select-page 
       %span.choice-page
 
@@ -59,7 +59,9 @@
           %input.form-control.input-width.manager{:type => "text"}  
         .controls.controls-row.mb24
           %label.input-caption.f14d 省市区
-          %input.form-control.input-width.location{:type => "text"}
+          .a
+            %a.pick-area.pick-area1{:name => "xx省/xx市/xx县"}
+          // %input.form-control.input-width.location{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d.vt 详细地址
           %textarea.form-control.textarea-width{:type => "text"}
@@ -73,6 +75,7 @@
 
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<script src="/js/pick-pcc.min.1.0.1.js"></script>
 <script src= "/js/edu-add.js"></script>
-
+<script src= "/js/pick.js"></script>
 @endsection
