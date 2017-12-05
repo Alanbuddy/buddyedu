@@ -21,7 +21,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        $items = File::orderBy('id', 'desc')->get();
+        $items = File::orderBy('id', 'desc')->paginate(10);
 //        return $items;
         return view('files', compact('items'));
     }
