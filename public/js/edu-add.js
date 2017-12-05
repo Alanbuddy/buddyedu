@@ -70,7 +70,8 @@ $(document).ready(function(){
     var city = $("#city").val();
     var county = $("#county").val();
     var street = $("#street").val();
-    var merchant_id = "11";
+    var location = JSON.stringify([lat, lng]);
+    var merchant_id = $("#merchant-id").attr("data-merchant");
     if(address == null){
       showMsg("没有选择省市区", "center");
     }
@@ -79,6 +80,7 @@ $(document).ready(function(){
       type: 'post',
       url: window.points_store,
       data: {
+        name: name,
         admin: admin,
         contact: contact,
         area: area,
@@ -87,11 +89,12 @@ $(document).ready(function(){
         city: city,
         county: county,
         merchant_id: merchant_id,
-        geolocation: [lat, lng],
+        geolocation: location,
         _token: window.token
       },
       success: function(data){
         if(data.success){
+          $("#addModal").modal("hide");
           location.href = window.points_index;
         }
       }

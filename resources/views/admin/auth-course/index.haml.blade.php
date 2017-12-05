@@ -59,7 +59,7 @@
           %input.form-control.input-width{:type => "text"}
           %label.input-caption.f14d 课程定价:
           %input.form-control.input-width{:type => "text"}
-          %label.input-caption.f14d 机构定价:
+          %label.input-caption.f14d 机构分成:
           %select.form-control.input-width#auth-price
             %option 请选择类型
             %option 20
