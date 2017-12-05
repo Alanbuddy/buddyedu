@@ -21,7 +21,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        $items = File::orderBy('id', 'desc')->get();
+        $items = File::orderBy('id', 'desc')->paginate(10);
 //        return $items;
         return view('files', compact('items'));
     }
@@ -47,6 +47,8 @@ class FileController extends Controller
         $file = $request->file('file');
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
+        $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id'));
+        $entry->save();
         return ['success' => true, 'data' => $entry];
     }
 

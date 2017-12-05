@@ -34,6 +34,7 @@ class AiController extends Controller
         }
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
+        $entry->save();
 //        dd($file,$target);
         $merchant_id = 1;
         $student_id = 1;
@@ -84,6 +85,7 @@ class AiController extends Controller
         });
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
+        $entry->save();
         $merchant_id = 1;
         $student_id = 1;
         $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $student_id, $result);
