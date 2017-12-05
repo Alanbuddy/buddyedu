@@ -22,7 +22,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('a');
+        $items = Course::orderBy('id', 'desc')
+            ->paginate(10);
+        return view('admin.auth-course.index', compact('items'));
     }
 
     /**
