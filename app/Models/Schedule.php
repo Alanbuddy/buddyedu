@@ -37,5 +37,6 @@ class Schedule extends Model
 
     }
 
+
 }
 

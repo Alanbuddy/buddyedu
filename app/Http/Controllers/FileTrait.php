@@ -24,7 +24,7 @@ trait FileTrait
     {
         $key = Uuid::uuid();
         $parts = array_slice(str_split($hash = sha1($key), 2), 0, 2);
-        return public_path('storage/') . date('Y-m-d') .'/'. implode('/', $parts);
+        return public_path('storage/') . date('Y-m-d') . '/' . implode('/', $parts);
     }
 
     public function defaultNaming(UploadedFile $file, $format = 'Y-m-d_His')
@@ -63,13 +63,18 @@ trait FileTrait
 
     }
 
+    /**
+     * construct a File object,initiated with some base information
+     * @param UploadedFile $file
+     * @param $target
+     * @return File
+     */
     public function store2DB(UploadedFile $file, $target)
     {
         $item = new File();
         $item->path = substr($target->getPathname(), strlen(public_path()));
         $item->user_id = auth()->user()->id;
         $item->fill($this->getFileMeta($file));
-        $item->save();
         return $item;
     }
 }

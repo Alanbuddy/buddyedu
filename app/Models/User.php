@@ -34,6 +34,18 @@ class User extends Authenticatable
         return $this->hasMany(File::class);
     }
 
+    public function drawings()
+    {
+        return $this->hasMany(File::class)
+            ->where('extension', 'png');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(File::class)
+            ->where('extension', 'mp4');
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -46,7 +58,7 @@ class User extends Authenticatable
 
     public function ownMerchant()
     {
-        return $this->hasOne(Merchant::class,'admin_id');
+        return $this->hasOne(Merchant::class, 'admin_id');
     }
 
 

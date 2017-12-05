@@ -47,6 +47,8 @@ class FileController extends Controller
         $file = $request->file('file');
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
+        $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id'));
+        $entry->save();
         return ['success' => true, 'data' => $entry];
     }
 

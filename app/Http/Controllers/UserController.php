@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only(['index', 'store']);
+        $this->middleware('auth')->except(['']);
     }
 
     public function index()
@@ -84,4 +84,41 @@ class UserController extends Controller
 
     }
 
+    public function bindPhone(Request $request)
+    {
+        $result = $this->validateCode($request);
+        if ($result['success']) {
+            auth()->user()->update([
+                'phone' => $request->get('phone')
+            ]);
+            return ['success' => true];
+        }
+        return ['success' => false];
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $data = $request->only('birthday', 'name', 'gender');
+        $user->update($data);
+        return ['success' => true];
+    }
+
+    public function drawings(Request $request)
+    {
+        $items = auth()->user()->drawings();
+        if ($request->has('schedule_id')) {
+            $items->where('schedule_id', $request->get('schedule_id'));
+        }
+        $items = $items->paginate(10);
+        return view('', compact('items'));
+    }
+
+    public function schedules(Request $request)
+    {
+        $items = auth()->user()
+            ->schedules()
+            ->get();
+        return $items;
+        return view('', compact('items'));
+    }
 }
