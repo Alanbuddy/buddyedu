@@ -1,7 +1,9 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/agent-edu-add.css') }}">
-<link href="/css/pick-pcc.min.1.0.1.css">
+:javascript
+  window.points_store = "#{route('points.store')}"
+  window.points_index = "#{route('points.index')}"
 
 @endsection
 
@@ -53,29 +55,35 @@
         %p.f24b.add-c 添加教学点
         .controls.controls-row.mb24
           %label.input-caption.f14d 名称设置
-          %input.form-control.input-width{:type => "text"}
+          %input.form-control.input-width#edu-name{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 面积
-          %input.form-control.input-width.manager{:type => "text"}  
+          %input.form-control.input-width.area#edu-area{:type => "text"}  
         .controls.controls-row.mb24
-          %label.input-caption.f14d 省市区
-          .a
-            %a.pick-area.pick-area1{:name => "xx省/xx市/xx县"}
-          // %input.form-control.input-width.location{:type => "text"}
+          %label.input-caption.f14d 负责人
+          %input.form-control.input-width.admin#edu-admin{:type => "text"}  
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 联系方式
+          %input.form-control.input-width#edu-phone{:type => "text"}  
+        .controls.controls-row.mb24
+          %label.input-caption.f14d.city-select 省市区
+          %span.citys
+            %select.form-control#province
+            %select.form-control#city
+            %select.form-control#county
         .controls.controls-row.mb24
           %label.input-caption.f14d.vt 详细地址
-          %textarea.form-control.textarea-width{:type => "text"}
+          %textarea.form-control.textarea-width#street{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 地理位置
           %span.get-location.f14b 获取地址
           #container
         .btn-div     
-          %btn.f16d.add-btn-width 提交申请
+          %btn.f16d.add-btn-width#submit 提交申请
 @endsection
 
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
-<script src="/js/pick-pcc.min.1.0.1.js"></script>
+<script src="/js/city.js"></script>
 <script src= "/js/edu-add.js"></script>
-<script src= "/js/pick.js"></script>
 @endsection

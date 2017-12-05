@@ -3,9 +3,9 @@
   left: 50%;
   top: 50%;
   margin-left: -240px;
-  margin-top: -333px;
+  margin-top: -379px;
   width: 480px;
-  height: 666px;
+  height: 758px;
 }
 
 #addModal .modal-backdrop {
@@ -52,10 +52,15 @@
   text-align: center;
   background: #365ba9;
   margin-left: 80px;
+  cursor: pointer;
 }
 
-#addModal .manager {
+#addModal .area {
   margin-left: 36px;
+}
+
+#addModal .admin {
+  margin-left: 22px;
 }
 
 #addModal .location {
@@ -92,5 +97,24 @@
   height: 144px;
   margin-top: 16px;
   margin-left: 67px;
+}
+
+#addModal #province,
+#addModal #city,
+#addModal #county {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  padding-left: 5px;
+}
+
+#addModal .citys {
+  font-size: 0;
+}
+
+#addModal .city-select {
+  margin-right: 22px;
 }
 
