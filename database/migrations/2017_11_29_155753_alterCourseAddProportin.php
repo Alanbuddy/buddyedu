@@ -35,7 +35,6 @@ class AlterCourseAddProportin extends Migration
             $table->dropColumn('url');
             $table->dropColumn('icon');
             $table->dropColumn('detail');
-            $table->unsignedInteger('lessons_count')->nullable();
         });
     }
 }

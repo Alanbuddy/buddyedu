@@ -18,9 +18,10 @@ class CreatePointsTable extends Migration
             $table->string('name');
             $table->string('area');
             $table->string('address');
-            $table->unsignedInteger('province_id')->nullable();
-            $table->unsignedInteger('city_id')->nullable();
-            $table->unsignedInteger('county_id')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('county')->nullable();
+            $table->string('geolocation')->nullable();
             $table->unsignedInteger('merchant_id')->nullable();
             $table->timestamps();
 

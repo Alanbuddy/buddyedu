@@ -57,9 +57,10 @@ class PointController extends Controller
             'contact',
             'area',
             'address',
-            'province_id',
-            'city_id',
-            'county_id',
+            'province',
+            'city',
+            'county',
+            'geolocation',
             'merchant_id'
         ]));
 
