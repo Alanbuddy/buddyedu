@@ -17,6 +17,7 @@ class AlterFiles extends Migration
             $table->unsignedInteger('schedule_id')->nullable();
             $table->unsignedInteger('merchant_id')->nullable();
             $table->unsignedInteger('point_id')->nullable();
+            $table->unsignedInteger('student_id')->nullable();
         });
     }
 
@@ -31,6 +32,7 @@ class AlterFiles extends Migration
             $table->dropColumn('schedule_id');
             $table->dropColumn('merchant_id');
             $table->dropColumn('point_id');
+            $table->dropColumn('student_id');
         });
     }
 }

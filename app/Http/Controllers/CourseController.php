@@ -11,7 +11,7 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin|operator|teacher')
+        $this->middleware(['auth', 'role:admin|operator|teacher'])
             ->only(['index', 'create', 'store', 'destroy', 'update']);
     }
 
@@ -20,10 +20,19 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Course::orderBy('id', 'desc')
-            ->paginate(10);
+        $items = Course::orderBy('id', 'desc');
+        $search = $request->has('key');
+        if ($search) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($search) {
+            $items->withPath(route('courses.index') . '?' . http_build_query([
+                    'key' => $request->key,
+                ]));
+        }
         return view('admin.auth-course.index', compact('items'));
     }
 
