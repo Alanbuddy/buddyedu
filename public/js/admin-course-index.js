@@ -56,12 +56,12 @@ $(document).ready(function(){
   }
 
   $("#submit").click(function(){
-    var name = $("#name").val();
-    var price = $("#price").val();
+    var name = $("#name").val().tirm();
+    var price = $("#price").val().tirm();
     var proportion = parseFloat($("#auth-price").val());
     var icon = $(".course-icon-path").text();
-    var url = $("#web").val();
-    var description = $("#profile").val();
+    var url = $("#web").val().tirm();
+    var description = $("#profile").val().tirm();
     var detail = editor.txt.html();
     var ret = check_input(name,  price, proportion, icon, description);
     if(ret == false) {

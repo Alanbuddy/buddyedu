@@ -21,7 +21,7 @@
   .desc-div
     // - if(count($items) == 0) 
     //   .undiscover.f14
-    //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
     .table-box
       %table.table.table-hover.table-height

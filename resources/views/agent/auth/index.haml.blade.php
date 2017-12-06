@@ -22,7 +22,7 @@
   .desc-div.clearfix
     // - if(count($items) == 0) 
     //   .undiscover.f14
-    //     %img.undiscover-icon{src: "icon/admin/undiscover.png"}
+    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
     .frame-div
       %img.course-icon{src: "icon/bird.png"}
