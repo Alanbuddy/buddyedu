@@ -59,6 +59,7 @@ Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantContro
 Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
 Route::resource('merchants', 'MerchantController');
 
+Route::get('/statistics/orders', 'OrderController@statistics')->name('orders.statistics');//课程相关统计信息
 Route::resource('order', 'OrderController');
 
 Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//

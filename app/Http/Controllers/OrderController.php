@@ -6,6 +6,7 @@ use App\Facades\MessageFacade;
 use App\Http\Wechat\WxApi;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -107,11 +108,10 @@ class OrderController extends Controller
         //
     }
 
-    //调用统一下单API
 
     public function pay(Request $request)
     {
-        $course = Course::findOrFail($request->get('course_id'));
+        $course = Schedule::findOrFail($request->get('schedule_id'));
         if ($this->hasEnrolled($course, auth()->user()->id)) {
             Log::debug(__METHOD__ . '已经加入课程');
             return ['success' => false, 'message' => '已经加入课程'];
@@ -126,8 +126,7 @@ class OrderController extends Controller
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
-//            dd($ret);
-            Log::debug(__FILE__ . __LINE__);
+            Log::debug(__FILE__ . __LINE__ . json_encode($ret));
             $appId = $ret['appid'];
             $timeStamp = time();
             $nonceStr = WxApi::getNonceStr();
@@ -146,11 +145,7 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             print($e->getMessage());
             $this->logError('wxpay.unifiedOrder', $e->getMessage(), '', '');
-//            return ['success' => false];
-            if ($request->ajax()) {
-                return ['success' => false, 'message' => $e->getMessage()];
-            }
-            return view('admin.order.pay');
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 
@@ -160,7 +155,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = new Order();
-        $course = Course::findOrFail($request->get('course_id'));
+        $course = Schedule::findOrFail($request->get('schedule_id'));
         $order->title = 'buy course ' . $course->name;
         $order->merchant_id = $request->get('merchat_id');
         $order->product_id = $course->id;
@@ -186,7 +181,7 @@ class OrderController extends Controller
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("test");
-        $input->SetNotify_url("http://baby.fumubidu.com.cn/haomama/wechat/payment/notify");
+        $input->SetNotify_url(route('wechat.payment.notify'));
         $input->SetTrade_type("JSAPI");//交易类型为公众号支付
         $input->SetProduct_id("32");
         $input->SetOpenid(auth()->user()->openid);

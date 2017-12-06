@@ -13,7 +13,7 @@ class TestController extends Controller
     {
 //        dd($request->route()->computedMiddleware);
 //        throw new \Exception();
-//        return 33333;
+        return route('wechat.payment.notify');
         $user = User::find(1);
         $order = new Order();
         $user->notify(new OrderPaid($order));
