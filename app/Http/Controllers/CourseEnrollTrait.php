@@ -23,18 +23,19 @@ trait CourseEnrollTrait
         $success = true;
         $count = $this->hasEnrolled($schedule, $user->id);
         if ($count == 0) {
-            $schedule->students()->attach($user, [
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
+            $schedule->students()->attach($user);
+//                [
+//                'created_at' => Carbon::now(),
+//                'updated_at' => Carbon::now()
+//            ]);
         }
-        $changed = $schedule->users()->syncWithoutDetaching($user);
+        $changed = $schedule->students()->syncWithoutDetaching([$user_id => ['type' => 'student']]);
         return ['success' => $success, 'changed' => $changed];
     }
 
     public function hasEnrolled($schedule)
     {
-        return $schedule->users()
+        return $schedule->students()
             ->count();
     }
 

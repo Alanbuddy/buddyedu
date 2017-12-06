@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Controllers\CourseEnrollTrait;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\Schedule;
 use Illuminate\Console\Command;
 
 class enroll extends Command
@@ -42,18 +43,19 @@ class enroll extends Command
     public function handle()
     {
         $course_id = $this->ask('course id');
-        $course = Course::find($course_id);
+        $course = Schedule::find($course_id);
         $user_id = $this->ask("user id");
         $result = $this->enroll($course, $user_id);
         $this->info(json_encode($result));
         $order = new Order();
         $order->fill([
-            'title' => $course->name,
+            'title' => 'title:' . $course->name,
             'user_id' => $user_id,
             'product_id' => $course->id,
             'status' => 'paid',
-            'amount' => $course->price?:$course->original_price,
-            'uuid'=>'test'
+            'amount' => $course->course->price,
+            'merchant_id' => $course->merchant->id,
+            'uuid' => 'test'
         ]);
         $order->save();
     }

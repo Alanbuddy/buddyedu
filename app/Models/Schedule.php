@@ -26,14 +26,15 @@ class Schedule extends Model
     public function teachers()
     {
         return $this->belongsToMany(User::class)
-            ->wherePivot('type', 'teacher');
+            ->wherePivot('type', 'teacher')
+            ->withTimestamps();
     }
 
     public function students()
     {
         return $this->belongsToMany(User::class)
             ->wherePivot('type', 'student')
-            ->withPivot('created_at','updated_at');
+            ->withPivot('created_at', 'updated_at');
 
     }
 

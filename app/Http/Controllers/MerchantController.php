@@ -9,6 +9,7 @@ use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class MerchantController extends Controller
 {
