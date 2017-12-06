@@ -101,6 +101,7 @@
     border: 2px solid #e4f3ff;  
     line-height: 30px;
     text-align: center;  
+    cursor: pointer;
   }
   .mb24 {
     margin-bottom: 24px;
@@ -116,8 +117,9 @@
     display: inline-block;
     width: 709px;
     margin-left: 8px;
+    font-size: 14px;
   }
-  .input-caption {
+  .input-top {
     vertical-align: top;
   }
   .area-height {
@@ -132,5 +134,9 @@
     text-align: center;
     background: #365ba9;
     margin-right: 40px;
+    cursor: pointer;
+  }
+  .w-e-text-container {
+    height: 200px !important;
   }
 }

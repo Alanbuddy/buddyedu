@@ -113,6 +113,7 @@
   border: 2px solid #e4f3ff;
   line-height: 30px;
   text-align: center;
+  cursor: pointer;
 }
 
 #addModal .mb24 {
@@ -131,9 +132,10 @@
   display: inline-block;
   width: 709px;
   margin-left: 8px;
+  font-size: 14px;
 }
 
-#addModal .input-caption {
+#addModal .input-top {
   vertical-align: top;
 }
 
@@ -150,5 +152,10 @@
   text-align: center;
   background: #365ba9;
   margin-right: 40px;
+  cursor: pointer;
+}
+
+#addModal .w-e-text-container {
+  height: 200px !important;
 }
 

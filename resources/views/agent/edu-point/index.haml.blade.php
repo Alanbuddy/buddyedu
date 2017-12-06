@@ -12,7 +12,7 @@
 .main-content
   .title-div
     %img.title-icon{src: "/icon/9.png"}
-    %span.f24a.title 教学点
+    %span.f24a.title#merchant-id{"data-merchant" => auth()->user()->ownMerchant->id} 教学点
 
   .tab-title
     %ul.clearfix

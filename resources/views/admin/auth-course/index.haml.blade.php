@@ -1,7 +1,9 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-course-index.css') }}">
-
+:javascript
+  window.courses_store = "#{route('courses.store')}"
+  window.courses_index = "#{route('courses.index')}"
 @endsection
 
 @section('content')
@@ -59,7 +61,7 @@
           %input.form-control.input-width{:type => "text"}
           %label.input-caption.f14d 课程定价:
           %input.form-control.input-width{:type => "text"}
-          %label.input-caption.f14d 机构定价:
+          %label.input-caption.f14d 机构分成:
           %select.form-control.input-width#auth-price
             %option 请选择类型
             %option 20
@@ -67,22 +69,25 @@
             //   %option{value: $category->id}= $category->name      
         .controls.controls-row.mb24
           %label.f14d 课程图标:
-          %input.hidden{:type => "file"}
+          %input.hidden{:onchange => "upload(this)", :type => "file"}
+          %span.course-icon-path{style: "display:none;"}
           %btn.upload-btn.f14b{:type => "button"} 上传
           %label.f14d 课程网址:
           %input.form-control.input-web-width.f12b{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
         .controls.controls-row.mb24
-          %label.input-caption.f14d 课程简介:
+          %label.input-caption.f14d.input-top 课程简介:
           %textarea.area-width.form-control
         .controls.controls-row.mb24
-          %label.input-caption.f14d 详细介绍:
-          %textarea.area-width.form-control.area-height
+          %label.input-caption.f14d.input-top 详细介绍:
+          %span.area-width.area-height
+            #edit-area
         %btn.f16d.add-btn-width.fr 确认添加
 
 
 @endsection
 
 @section('script')
+<script src="/js/wangEditor.min.js"></script>
 <script src= "/js/admin-course-index.js"></script>
 
 @endsection

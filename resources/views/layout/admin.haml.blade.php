@@ -17,6 +17,7 @@
     @yield('css')
     :javascript
       window.token = "#{csrf_token()}"
+      window.fileUplod = "#{route('files.store')}"
   %body
     .wrapper
       .layout-left
@@ -25,7 +26,7 @@
           .sidebar
             %ul
               %li
-                %a.active{href: "#"}
+                %a.active_li{href: "#"}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.f16c.sidebar-title 开课情况
               %li
@@ -62,6 +63,7 @@
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src = "/js/ajax.js"></script>
+<script src = "/js/regex.js"></script>
 <script src = "/js/mobile-notification.js"></script>
 <script src="/js/jquery.pagination.js"></script>
 <script src="/js/admin-layout.js"></script>
