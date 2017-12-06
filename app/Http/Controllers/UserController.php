@@ -20,11 +20,21 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
+        $this->middleware('role:admin|merchant')->except(['']);
     }
 
     public function index()
     {
 
+    }
+
+    public function teacherIndex()
+    {
+        $user = auth()->user();
+        $items = $user->ownMerchant
+            ->teachers()
+            ->paginate(10);
+        return view('agent.teacher.index', compact('items'));
     }
 
     public function show(User $user)
@@ -56,6 +66,7 @@ class UserController extends Controller
         if ($request->has('merchant_id')) {
             return $this->storeTeacher($request);
         }
+
     }
 
 
