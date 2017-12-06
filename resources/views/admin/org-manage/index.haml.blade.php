@@ -1,6 +1,9 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/org-manage.css') }}">
+:javascript
+  window.merchants_index = "#{route('merchants.index')}"
+  window.merchants_store = "#{route('merchants.store')}"
 
 @endsection
 
@@ -33,25 +36,12 @@
             %th 当前开课/历史开课
             %th 负责人
             %th 联系方式
-            %th 课程状态
         %tbody
           %tr
             %td 某一机构名称
             %td １/5
             %td 负责人名字
-            %td 13012345678
-            %td.tip-parent
-              %img{src:"/icon/attachment1.png"}
-              .tooltip-div
-                .triangle
-                %img.close{src: "/icon/smallclose.png"}
-                %btn.upload-btn.f14b 上传附件
-                .file-div.f14d.clearfix
-                  %span.fl 往来文件
-                  %img.fr{src: "/icon/delete.png"}
-                .file-div.f14d.clearfix
-                  %span.fl 往来文件
-                  %img.fr{src: "/icon/delete.png"}
+            %td.f12a 13012345678
     .select-page 
       %span.choice-page
 
@@ -70,15 +60,15 @@
           %input.form-control.input-width.manager#admin{:type => "text"}  
         .controls.controls-row.mb24
           %label.input-caption.f14d 联系方式:
-          %input.form-control.input-width#contact{:type => "text"}
+          %input.form-control.input-width#phone{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 初始密码:
           %input.form-control.input-width#password{:type => "text"}
         .btn-div     
-          %btn.f16d.add-btn-width 提交申请
+          %btn.f16d.add-btn-width#submit 提交申请
 @endsection
 
 @section('script')
-<script src= "/js/admin-course-index.js"></script>
+<script src= "/js/admin-merchant-add.js"></script>
 
 @endsection
