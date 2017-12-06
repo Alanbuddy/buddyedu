@@ -19,18 +19,8 @@ trait CourseEnrollTrait
     //学生加入课程
     public function enroll(Schedule $schedule, $user_id = 0)
     {
-        $user = auth()->user() ?: User::findOrFail($user_id);
-        $success = true;
-        $count = $this->hasEnrolled($schedule, $user->id);
-        if ($count == 0) {
-            $schedule->students()->attach($user);
-//                [
-//                'created_at' => Carbon::now(),
-//                'updated_at' => Carbon::now()
-//            ]);
-        }
         $changed = $schedule->students()->syncWithoutDetaching([$user_id => ['type' => 'student']]);
-        return ['success' => $success, 'changed' => $changed];
+        return ['success' => true, 'changed' => $changed];
     }
 
     public function hasEnrolled($schedule)

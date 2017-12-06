@@ -15,8 +15,4 @@ class Order extends Model
         return $this->belongsTo(Schedule::class, 'product_id');
     }
 
-    public function c()
-    {
-        
-    }
 }
