@@ -56,15 +56,12 @@ class MerchantController extends Controller
             'name',
             'adminName',
             'phone',
-            'province',
-            'city',
-            'county',
-            'street',
+            'password'
         ]);
         $admin = User::create([
             'name' => $data['adminName'],
             'phone' => $data['phone'],
-            'password' => '',
+            'password' => $data['password'],
             'api_token' => Uuid::uuid(),
         ]);
         $admin->attachRole(Role::find(1));
