@@ -11,7 +11,7 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware('role:admin|operator|teacher')
+        $this->middleware(['auth', 'role:admin|operator|teacher'])
             ->only(['index', 'create', 'store', 'destroy', 'update']);
     }
 
