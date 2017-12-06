@@ -17,7 +17,7 @@
     @yield('css')
     :javascript
       window.token = "#{csrf_token()}"
-      window.fileUplod = "#{route('files.store')}"
+      window.fileUpload = "#{route('files.store')}"
   %body
     .wrapper
       .layout-left
