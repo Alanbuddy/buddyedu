@@ -1,45 +1,4 @@
-.tooltip-div {
-  position: absolute;
-  top: 50px;
-  width: 320px;
-  padding: 20px;
-  filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
-  right: 160px;
-  background: #fff;
-  // display: none;
-}
-.tip-parent {
-  position: relative;
-}
-.triangle {
-  position: absolute;
-  right: 0;
-  top: -20px;
-  width: 0;
-  height: 0;
-  border-bottom: 20px solid #FFF;
-  border-left: 20px solid transparent;
-}
-.close {
-  position: absolute;
-  right: 20px;
-  width: 12px;
-}
-.upload-btn {
-  display: inline-block;
-  width: 160px;
-  height: 32px;
-  background: #f4fafe;
-  border: 2px solid #e4f3ff;  
-  line-height: 30px;
-  text-align: center;
-}
-.file-div {
-  margin-top: 10px;
-  img {
-    margin-right: 10px;
-  }
-}
+
 
 #addModal {
   .modal-dialog {
@@ -89,6 +48,7 @@
     text-align: center;
     background: #365ba9;
     margin-left: 80px;
+    cursor: pointer;
   }
   .manager {
     margin-left: 22px;
