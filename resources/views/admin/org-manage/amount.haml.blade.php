@@ -39,9 +39,10 @@
             %td 13211223344
             %td 李小米
             %td.green -￥3200
-            // %td.orange +￥3200
+            // %td.red +￥3200
 
-    .select-page 
+    .select-page.clearfix
+      %span.f14a.fl 导出明细 
       %span.choice-page
     
     

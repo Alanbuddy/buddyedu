@@ -59,18 +59,21 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body
         %p.f24b.add-c 添加课程
         .controls.controls-row.mb24
           %label.input-caption.f14d 机构名称:
-          %input.form-control.input-width{:type => "text"}
+          %input.form-control.input-width#name{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 负责人:
-          %input.form-control.input-width.manager{:type => "text"}  
+          %input.form-control.input-width.manager#admin{:type => "text"}  
         .controls.controls-row.mb24
           %label.input-caption.f14d 联系方式:
-          %input.form-control.input-width{:type => "text"}
+          %input.form-control.input-width#contact{:type => "text"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 初始密码:
+          %input.form-control.input-width#password{:type => "text"}
         .btn-div     
           %btn.f16d.add-btn-width 提交申请
 @endsection
