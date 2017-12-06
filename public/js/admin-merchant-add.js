@@ -9,14 +9,25 @@ $(document).ready(function(){
     $(".hidden").click();
   });
 
+  function check_input(name, admin, phone, password){
+    if(name == "" || admin == "" || phone == "" || password == ""){
+      showMsg("有关键信息没有填写", "center");
+      return false;
+    }
+  }
+
   $("#submit").click(function(){
     var name = $("#name").val();
     var admin = $("#admin").val();
     var phone = $("#phone").val();
     var password = $("#password").val();
+    var ret = check_input(name, admin, phone, password);
+    if(ret == false){
+      return false;
+    }
     $.ajax({
       type: 'post',
-      url: window.merchants_index,
+      url: window.merchants_store,
       data:{
         name: name,
         adminName: admin,
