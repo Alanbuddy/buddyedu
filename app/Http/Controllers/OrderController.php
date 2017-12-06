@@ -253,9 +253,10 @@ class OrderController extends Controller
         if (isset($left)) {
             $query->where('orders.created_at', '>', $left);
         }
-        if ($right) {
+        if (isset($right)) {
             $query->where('orders.created_at', '<', $right);
         }
+
         $query->select(DB::raw('left(created_at,10) as date'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
             ->addSelect(DB::raw('sum(round(wx_total_fee/100,2)) as total_fee'))

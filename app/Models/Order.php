@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use SoftDeletes;
-    protected $guarded=[];
+    protected $guarded = [];
 
-    public function course()
+    public function schedule()
     {
-        return $this->belongsTo(Course::class,'product_id');
+        return $this->belongsTo(Schedule::class, 'product_id');
+    }
+
+    public function c()
+    {
+        
     }
 }

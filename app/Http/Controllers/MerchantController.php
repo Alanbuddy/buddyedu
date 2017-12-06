@@ -56,25 +56,25 @@ class MerchantController extends Controller
             'name',
             'adminName',
             'phone',
-            'province',
-            'city',
-            'county',
-            'street',
+            'password'
         ]);
-        $admin = User::create([
-            'name' => $data['adminName'],
-            'phone' => $data['phone'],
-            'password' => '',
-            'api_token' => Uuid::uuid(),
-        ]);
-        $admin->attachRole(Role::find(1));
-        $item = Merchant::create([
-            'name' => $data['name'],
-            'admin_id' => $admin->id
-        ]);
+        $item = new Merchant();
+        DB::transaction(function () use ($item, $data) {
+            $admin = User::create([
+                'name' => $data['adminName'],
+                'phone' => $data['phone'],
+                'password' => $data['password'],
+                'api_token' => Uuid::uuid(),
+            ]);
+            $admin->attachRole(Role::find(1));
+            $item->fill([
+                'name' => $data['name'],
+                'admin_id' => $admin->id
+            ]);
 //        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
-        $item->save();
-        return $item;
+            $item->save();
+        });
+        return ['success' => true, 'data' => $item];
     }
 
     /**
@@ -152,7 +152,7 @@ class MerchantController extends Controller
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
                 break;
             default:
-                return ['success' => false, 'message' => trans('error.unsupported')];
+                return ['success' => false, 'message' => trans('error . unsupported')];
         }
         return ['success' => true];
     }

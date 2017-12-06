@@ -23,7 +23,7 @@ trait CourseEnrollTrait
         $success = true;
         $count = $this->hasEnrolled($schedule, $user->id);
         if ($count == 0) {
-            $schedule->users()->attach($user, [
+            $schedule->students()->attach($user, [
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
