@@ -11,6 +11,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
+        return date('Y-m-d H:i:s');
 //        dd($request->route()->computedMiddleware);
 //        throw new \Exception();
         return route('wechat.payment.notify');

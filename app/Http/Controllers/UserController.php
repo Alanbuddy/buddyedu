@@ -72,16 +72,21 @@ class UserController extends Controller
 
     public function storeTeacher(Request $request)
     {
-        $data = $request->only(['name', 'phone', 'merchant_id']);
         $user = null;
-        DB::transaction(function () use ($request, $user, $data) {
+        DB::transaction(function () use ($request, $user, $request) {
             $user = User::create([
-                'name' => $data['name'],
+                'name' => $request->name,
                 'password' => bcrypt('secret'),
-                'phone' => $data['phone'],
-                'merchant_id' => $data['merchant_id'],
+                'phone' => $request->phone,
+                'avatar' => $request->avatar,
+                'gender' => $request->gender,
+                'birthday' => $request->birthday,
+                'merchant_id' => auth()->user()->ownMerchant->id,
                 'type' => 'teacher',
-                'api_token' => Uuid::uuid()
+                'api_token' => Uuid::uuid(),
+                'extra' => json_encode($request->only([
+                    'title', 'certificate_id', 'id', 'school', 'intruction', 'cv'
+                ])),
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
             $merchant = Merchant::find($request->get('merchant_id'));

@@ -15,6 +15,7 @@ class CourseSeeder extends Seeder
         DB::table('courses')->insert([
            'name'=>'demo course',
             'price'=>10,
+            'lessons_count'=>12,
             'status'=>'draft',
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),

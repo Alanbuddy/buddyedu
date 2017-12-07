@@ -249,17 +249,23 @@ class OrderController extends Controller
                 ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
                 : date('Y-m-d H:i:s', strtotime($right));
         }
-        $query = Order::where('status', 'paid');
-        $query->with('schedule.course')
+        $query = Order::orderBy('id', 'desc');
+        $query->where('status', 'paid')
+            ->with('schedule.course')
             ->with('schedule.point')
             ->with('user');
-        dd($query->get());
         if (isset($left)) {
             $query->where('orders.created_at', '>', $left);
         }
         if (isset($right)) {
             $query->where('orders.created_at', '<', $right);
         }
+
+        $items=$query->paginate(10);
+        $incomeOfToday=Order::where('created_at','>',date('Y-m-d'))
+            ->where('created_at','<',date('Y-m-d',strtotime('today +1 days')))
+            ->sum('amount');
+        dd($incomeOfToday);
 
         $query->select(DB::raw('left(created_at,10) as date'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
