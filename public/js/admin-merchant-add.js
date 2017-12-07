@@ -17,10 +17,10 @@ $(document).ready(function(){
   }
 
   $("#submit").click(function(){
-    var name = $("#name").val();
-    var admin = $("#admin").val();
-    var phone = $("#phone").val();
-    var password = $("#password").val();
+    var name = $("#name").val().tirm();
+    var admin = $("#admin").val().tirm();
+    var phone = $("#phone").val().tirm();
+    var password = $("#password").val().tirm();
     var ret = check_input(name, admin, phone, password);
     if(ret == false){
       return false;
@@ -42,5 +42,21 @@ $(document).ready(function(){
         }
       }
     });
+  });
+
+  function search(){
+    var value = $("#search-input").val();
+    location.href = window.merchants_index + "?key=" + value;
+  }
+    
+  $("#search-btn").click(function(){
+    search();
+  });
+
+  $("#search-input").keydown(function(event){
+    var code = event.which;
+    if (code == 13){
+      search();
+    }
   });
 });
