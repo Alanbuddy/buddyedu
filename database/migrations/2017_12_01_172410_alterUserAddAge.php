@@ -10,7 +10,8 @@ class AlterUserAddAge extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->date('birthday')->nullable();
-            $table->enum('gender', ['m', 'f'])->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->json('extra');
         });
     }
 
@@ -24,6 +25,7 @@ class AlterUserAddAge extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('birthday');
             $table->dropColumn('gender');
+            $table->dropColumn('extra');
         });
     }
 }

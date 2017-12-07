@@ -87,7 +87,7 @@ class UserController extends Controller
             $merchant = Merchant::find($request->get('merchant_id'));
             $merchant->teachers()->save($user);
         });
-        return $user;
+        return ['success' => true, 'data' => $user];
     }
 
     public function studentPainting(Request $request, User $user)

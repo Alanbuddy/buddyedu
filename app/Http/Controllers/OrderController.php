@@ -250,9 +250,9 @@ class OrderController extends Controller
                 : date('Y-m-d H:i:s', strtotime($right));
         }
         $query = Order::where('status', 'paid');
-        $query->with(['schedule' => function ($query) {
-            $query->select('id','course_id');
-        }]);
+        $query->with('schedule.course')
+            ->with('schedule.point')
+            ->with('user');
         dd($query->get());
         if (isset($left)) {
             $query->where('orders.created_at', '>', $left);
