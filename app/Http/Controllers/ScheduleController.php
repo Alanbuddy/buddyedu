@@ -37,10 +37,13 @@ class ScheduleController extends Controller
             ->where('schedules.merchant_id', $teacher->merchant_id)
 //            ->where('schedules.end', '>', $now->toDateString())
             ->with('point')
+            ->with('course')
             ->orderBy('id', 'desc')
             ->get();
+
         foreach ($items as $item) {
             $item->finished = $item->end < $now->toDateTimeString();
+            $item->lessons_count = $item->course->lessons_count;
         }
         return $items;
     }
