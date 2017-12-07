@@ -68,6 +68,9 @@
           %input.hidden{:onchange => "upload(this)", :type => "file"}
           %span.course-icon-path{style: "display:none;"}
           %btn.upload-btn.f14b{:type => "button"} 上传
+          %label.input-caption.f14d 课程节数:
+          %input.form-control.input-width#length{:type => "text"}
+        .controls.controls-row.mb24
           %label.f14d 课程网址:
           %input.form-control.input-web-width.f12b#web{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
         .controls.controls-row.mb24

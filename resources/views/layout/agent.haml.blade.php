@@ -15,7 +15,9 @@
     %link{:href => "/css/wangEditor.min.css", :rel => "stylesheet"}
 
     @yield('css')
-   
+    :javascript
+      window.token = "#{csrf_token()}"
+      window.fileUpload = "#{route('files.store')}"
   %body
     .wrapper
       .layout-left

@@ -48,22 +48,23 @@ $(document).ready(function(){
   editor.customConfig.uploadImgTimeout = 3600000;
   editor.create();
 
-  function check_input(name, price, proportion, icon, description){
-    if(name == "" || price == "" || proportion == "" || icon == "" || description == ""){
+  function check_input(name, price, proportion, icon, lessons_count, description){
+    if(name == "" || price == "" || proportion == "" || icon == "" || lessons_count == "" || description == ""){
       showMsg("有关键信息没有填写", "center");
       return false;
     }
   }
 
   $("#submit").click(function(){
-    var name = $("#name").val().tirm();
-    var price = $("#price").val().tirm();
+    var name = $("#name").val().trim();
+    var price = $("#price").val().trim();
     var proportion = parseFloat($("#auth-price").val());
     var icon = $(".course-icon-path").text();
-    var url = $("#web").val().tirm();
-    var description = $("#profile").val().tirm();
+    var lessons_count = $("#length").val().trim();
+    var url = $("#web").val().trim();
+    var description = $("#profile").val().trim();
     var detail = editor.txt.html();
-    var ret = check_input(name,  price, proportion, icon, description);
+    var ret = check_input(name,  price, proportion, icon, lessons_count, description);
     if(ret == false) {
       return false;
     }
@@ -87,9 +88,11 @@ $(document).ready(function(){
         price: price,
         proportion: proportion,
         icon: icon,
+        lessons_count: lessons_count,
         url: url,
         description: description,
-        detail: detail
+        detail: detail,
+        _token: window.token
       },
       success: function(data){
         if(data.success){
