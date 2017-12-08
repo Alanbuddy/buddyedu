@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Facades\MessageFacade;
 use App\Http\Wechat\WxApi;
 use App\Models\Course;
+use App\Models\Merchant;
 use App\Models\Order;
 use App\Models\Schedule;
 use App\Models\User;
@@ -261,11 +262,20 @@ class OrderController extends Controller
             $query->where('orders.created_at', '<', $right);
         }
 
-        $items=$query->paginate(10);
-        $incomeOfToday=Order::where('created_at','>',date('Y-m-d'))
-            ->where('created_at','<',date('Y-m-d',strtotime('today +1 days')))
+        $items = $query->paginate(10);
+        $incomeOfToday = Order::where('status', 'paid')
+            ->where('created_at', '>', date('Y-m-d'))
+            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')))
             ->sum('amount');
-        dd($incomeOfToday);
+        $incomeOfThisWeek = Order::where('status', 'paid')
+            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
+            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
+            ->sum('amount');
+        $income = Order::where('status', 'paid')
+            ->sum('amount');
+
+        dd($items, $incomeOfToday, $incomeOfThisWeek, $income);
+
 
         $query->select(DB::raw('left(created_at,10) as date'))
             ->addSelect(DB::raw('count(*) as thorough_orders_count'))
@@ -281,4 +291,25 @@ class OrderController extends Controller
             ])));
         return view('admin.statistics.amount', compact('items'));
     }
+
+    public function merchantTransactions(Request $request, Merchant $merchant)
+    {
+        $query = $merchant->orders()
+            ->orderBy('id', 'desc')
+            ->where('orders.status', 'paid')
+            ->with('schedule.course')
+            ->with('schedule.point')
+            ->with('user')
+            ->get();
+        dd($query);
+    }
+
+    public function merchantIncomeGroupByCourse(Request $request, Merchant $merchant)
+    {
+        $query = $merchant->courses()
+            ->get();
+        dd($query);
+
+    }
+
 }
