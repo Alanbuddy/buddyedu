@@ -38,3 +38,84 @@
 .item-div:not(:last-child) {
   border-right: 1px solid #e4f3ff;
 }
+.date-box {
+  position: absolute;
+  right: 40px;
+  top: 50px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.inner-box {
+  display: inline-block;
+  width: 75px;
+  text-align: center;
+}
+td span {
+  cursor: pointer;
+}
+
+
+.pie-box {
+  display: flex;
+  justify-content: space-between;
+  -webkit-display: flex;
+  -moz-display: flex;
+  -ms-display: flex;
+  -o-display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+}
+.gender-pie, .age-pie {
+  width: 48%;
+  height: 350px;
+  border: 1px solid #c8c8c8;
+}
+.kids-nums {
+  margin-bottom: 40px;
+  border: 1px solid #c8c8c8;
+}
+.pie-title {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #f4fafe;
+  border-bottom: 1px solid #c8c8c8;
+  padding-left: 20px;
+}
+.column-title {
+  @extend .pie-title;
+  text-align: left;
+}
+.figure-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-display: flex;
+  -moz-display: flex;
+  -ms-display: flex;
+  -o-display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+}
+#gender-statistics {
+  min-width: 71.35%;
+  height: 300px;
+}
+#age-statistics {
+  min-width: 83.3%;
+  height: 300px;
+}
+#nums-statistics {
+  min-width: 91%;
+  height: 240px;
+}
+
+

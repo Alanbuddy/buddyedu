@@ -53,6 +53,10 @@
                 %a.a-item{href: "#"}
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.f16c.sidebar-title 申请处理
+              %li.client
+                %a.a-item{href: "#"}
+                  %img.mini-icon{src: "/icon/10A.png"}
+                  %span.f16c.sidebar-title 人员管理
               %li.logout
                 %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/8A.png"}
