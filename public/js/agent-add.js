@@ -15,9 +15,7 @@ $(document).ready(function(){
   	var point = $("#point").val();
   	var teacher = $("#teacher-select").val();
   	var num = $("#num").val();
-  	console.log(course);
-  	console.log(teacher);
-  	console.log(point);
+  
   	$.ajax({
   	  url: window.course_store,
   	  type: 'post',

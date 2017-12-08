@@ -17,10 +17,10 @@ $(document).ready(function(){
   }
 
   $("#submit").click(function(){
-    var name = $("#name").val().tirm();
-    var admin = $("#admin").val().tirm();
-    var phone = $("#phone").val().tirm();
-    var password = $("#password").val().tirm();
+    var name = $("#name").val().trim();
+    var admin = $("#admin").val().trim();
+    var phone = $("#phone").val().trim();
+    var password = $("#password").val().trim();
     var ret = check_input(name, admin, phone, password);
     if(ret == false){
       return false;
@@ -32,7 +32,8 @@ $(document).ready(function(){
         name: name,
         adminName: admin,
         phone: phone,
-        password: password
+        password: password,
+        _token: window.token
       },
       success: function(data){
         console.log(data);
