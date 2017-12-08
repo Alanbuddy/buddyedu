@@ -57,6 +57,8 @@ Route::resource('comments', 'CommentController');
 
 Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
 Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
+Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
+Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
 Route::resource('merchants', 'MerchantController');
 
 Route::get('/statistics/orders', 'OrderController@statistics')->name('orders.statistics');//相关统计信息

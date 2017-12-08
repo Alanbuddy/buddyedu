@@ -12,7 +12,11 @@ class MerchantSeeder extends Seeder
     public function run()
     {
         DB::table('merchants')->insert([
-            'name' => 'demo merchant',
+            'name' => 'demo merchant 1',
+            'admin_id' => 1,
+        ]);
+        DB::table('merchants')->insert([
+            'name' => 'demo merchant 2',
             'admin_id' => 1,
         ]);
     }

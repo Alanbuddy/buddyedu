@@ -49,7 +49,7 @@ class enroll extends Command
         $this->info(json_encode($result));
         $order = new Order();
         $order->fill([
-            'title' => 'title:' . $course->name,
+            'title' => 'test ' . $course->course->name,
             'user_id' => $user_id,
             'product_id' => $course->id,
             'status' => 'paid',

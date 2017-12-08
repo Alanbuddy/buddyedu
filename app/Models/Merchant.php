@@ -39,4 +39,9 @@ class Merchant extends Model
     {
         return $this->hasMany(Point::class);
     }
+
+    public function orders()
+    {
+        return $this->hasManyThrough(Order::class, Schedule::class, 'merchant_id', 'product_id');
+    }
 }
