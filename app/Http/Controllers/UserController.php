@@ -29,7 +29,7 @@ class UserController extends Controller
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->whereNull('role_id')
             ->paginate(10);
-        return view('admin.student.index', compact('items');
+        return view('admin.student.index', compact('items'));
 
     }
 
