@@ -51,6 +51,7 @@ Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseControll
 Route::resource('courses', 'CourseController');
 
 Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
+Route::get('/admins/', 'UserController@adminIndex')->name('teachers.index');
 Route::resource('users', 'UserController');
 
 Route::resource('comments', 'CommentController');

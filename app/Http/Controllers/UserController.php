@@ -33,6 +33,17 @@ class UserController extends Controller
 
     }
 
+    public function adminIndex()
+    {
+        $items = Role::where('name', 'merchant')
+            ->first()->users()
+            ->orderBy('users.id', 'desc')
+            ->paginate(10);
+        dd($items);
+        return view('', compact('items'));
+
+    }
+
     public function teacherIndex()
     {
         $user = auth()->user();

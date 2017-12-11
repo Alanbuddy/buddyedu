@@ -42,11 +42,11 @@
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.f16c.sidebar-title 学生管理
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('orders.statistics')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.f16c.sidebar-title 金额统计
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('users.statistics')}
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.f16c.sidebar-title 学生统计
               %li.apply

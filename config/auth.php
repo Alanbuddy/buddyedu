@@ -2,6 +2,7 @@
 
 return [
 
+    'model'=>'App\Models\User',
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
