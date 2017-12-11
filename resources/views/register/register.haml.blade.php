@@ -18,8 +18,7 @@
           %p.desc-word 这是一些说明文字
         .desc-div
           .input-div
-            %p.register-title 忘记密码
-            // %p.register-title 修改密码
+            %p.register-title 注册
             .input-group.no-margin-bottom
               %span.input-group-addon.miniphoto
               .input-inside-div
@@ -33,9 +32,8 @@
             .input-group
               %span.input-group-addon.password-photo
               %input.form-box.f16#password{placeholder: "请设置密码", type: "password"} 
-            %button.btn.click-btn.f24.margin-t48#end_btn{type: "button"} 完成
-            %p.signup.f16.pointer#to_signin 未忘密码？立即登录
-            // %p.signup.f16.pointer#to_signin 不想修改？返回登录
+            %button.btn.click-btn.f24.margin-t48#signup_btn{type: "button"} 注册账号
+            %p.signup.f16.pointer#to_signin 已有账号？立即登录
           
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

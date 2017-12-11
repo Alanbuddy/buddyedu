@@ -14,8 +14,9 @@ $(document).ready(function(){
   	var course = $("#course").val();
   	var point = $("#point").val();
   	var teacher = $("#teacher-select").val();
-  	var num = $("#num").val();
-  
+  	var num = $("#num").val().trim();
+    var begin = $("#datepicker1").val();
+    var end = $("#datepicker2").val();
   	$.ajax({
   	  url: window.course_store,
   	  type: 'post',
@@ -25,8 +26,8 @@ $(document).ready(function(){
   	    point_id: point,
   	    teachers: teacher,
   	    quota: num,
-  	    begin: "2017-12-23",
-  	    end: "2017-12-24"
+  	    begin: begin,
+  	    end: end
   	  },
   	  success: function( data ) {
   	    if(data.success){
@@ -35,4 +36,20 @@ $(document).ready(function(){
   	  }
   	});
   });
+
+  $( "#datepicker1" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange : '-70:+10'
+      });
+  $( "#datepicker1" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
+  $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+  $( "#datepicker2" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange : '-70:+10'
+      });
+  $( "#datepicker2" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
+  $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 });
