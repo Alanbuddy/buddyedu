@@ -302,6 +302,10 @@ a:hover {
   position: absolute;
   bottom: 88px;
 }
+.client {
+  position: absolute;
+  bottom: 136px;
+}
 .title-div {
   margin-top: 40px;
   margin-bottom: 48px;
@@ -403,7 +407,7 @@ a:hover {
   font-size: 1.2em;
 }
 .orange {
-  color: #e4f3ff !important;
+  color: #f6b36c !important;
   font-size: 1.2em;
 }
 .red {
