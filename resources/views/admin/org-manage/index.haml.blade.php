@@ -16,7 +16,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 合作机构(29)
+      %li.f14a.bg16b='合作机构('.$items->total().')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -37,11 +37,12 @@
             %th 负责人
             %th 联系方式
         %tbody
-          %tr
-            %td 某一机构名称
-            %td １/5
-            %td 负责人名字
-            %td.f12a 13012345678
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->ongoingSchedules.'/'.$item->schedules_count
+              %td=$item->admin->name
+              %td.f12a=$item->admin->phone
     .select-page 
       %span.choice-page
 

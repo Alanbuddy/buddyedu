@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Merchant;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -26,6 +27,13 @@ class MerchantController extends Controller
     public function index()
     {
         $items = Merchant::orderBy('id', 'desc')
+            ->withCount(['schedules as ongoingSchedules' => function ($query) {
+                $query->where('end', '>', Carbon::now()->toDateTimeString());
+            }])
+            ->withCount(['schedules' => function ($query) {
+                $query->where('end', '<=', Carbon::now()->toDateTimeString());
+            }])
+            ->with('admin')
             ->paginate(10);
         return view('admin.org-manage.index', compact('items'));
 
