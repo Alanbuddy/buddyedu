@@ -17,9 +17,9 @@
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
-      
+
   .desc-div
-    // - if(count($items) == 0) 
+    // - if(count($items) == 0)
     //   .undiscover.f14
     //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
@@ -33,14 +33,15 @@
             %th 报名课程
             %th 缴费总额
         %tbody
-          %tr
-            %td 13211223344
-            %td 学生姓名
-            %td 8岁
-            %td 5门
-            %td.f12a ￥5,400
+          -foreach($items as $item)
+            %tr
+              %td=$item->phone
+              %td=$item->name
+              %td=$item->birthday??'未知'
+              %td=$item->enrolled_shedules_count
+              %td.f12a='￥'.($item->total??0)
 
-    .select-page 
+    .select-page
       %span.choice-page
 
 @endsection

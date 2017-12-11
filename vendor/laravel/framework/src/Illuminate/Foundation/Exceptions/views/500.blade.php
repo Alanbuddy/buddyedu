@@ -2,4 +2,6 @@
 
 @section('title', 'Error')
 
-@section('message', 'Whoops, looks like something went wrong.')
+@section('message')
+    {{$exception->getMessage()}}
+@endsection

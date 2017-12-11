@@ -26,27 +26,27 @@
           .sidebar
             %ul
               %li
-                %a.active_li{href: "#"}
+                %a.active_li{href: route('schedules.index')}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.f16c.sidebar-title 开课情况
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('courses.index')}
                   %img.mini-icon{src: "/icon/2A.png"}
                   %span.f16c.sidebar-title 课程授权
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('merchants.index')}
                   %img.mini-icon{src: "/icon/3A.png"}
                   %span.f16c.sidebar-title 机构管理
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('users.index')}
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.f16c.sidebar-title 学生管理
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('orders.statistics')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.f16c.sidebar-title 金额统计
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('users.statistics')}
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.f16c.sidebar-title 学生统计
               %li.apply

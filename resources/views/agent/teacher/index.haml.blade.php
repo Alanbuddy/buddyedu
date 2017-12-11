@@ -23,10 +23,10 @@
         .search#search-btn
         %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入老师姓名/手机号", value: "", :onfocus=>"this.style.color='#5d6578'"}
       %img.add-icon{src: "/icon/add.png"}
-      
-  
+
+
   .desc-div
-    // - if(count($items) == 0) 
+    // - if(count($items) == 0)
     //   .undiscover.f14
     //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
@@ -40,17 +40,18 @@
             %th 当前开课/历史开课
             %th 手机号
         %tbody
-          %tr
-            %td 老师名字
-            %td 女
-            %td 29
-            %td 1/0
-            %td.f12a 13211223344
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->gender=='female'?'女':'男'
+              %td=date('Y')-date('Y',strtotime($item->birthday))
+              %td=$item->ongoingSchedules.'/'.$item->coaching_schedules_count
+              %td.f12a=$item->phone
 
-    .select-page 
+    .select-page
       %span.choice-page
 
-#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modalheader
@@ -72,7 +73,7 @@
             %option{value: "一级教师"} 一级教师
             %option{value: "二级教师"} 二级教师
             %option{value: "三级教师"} 三级教师
-                  
+
         .controls.controls-row.mb24
           %label.f14d 老师图像
           %input.hidden{:onchange => "upload(this)", :type => "file"}

@@ -16,7 +16,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 全部教学点(23)
+      %li.f14a.bg16b='全部教学点('.$items->total().')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -38,11 +38,12 @@
             %th 面积
             %th 详细地址
         %tbody
+        -foreach($items as $item)
           %tr
-            %td 教学点的名字很长
-            %td 12/15
-            %td xxxxx
-            %td.f12a 很长的地址信息
+            %td=$item->name
+            %td=$item->ongoingSchedules.'/'.$item->schedules_count
+            %td=$item->area
+            %td.f12a=$item->address
     .select-page 
       %span.choice-page
 

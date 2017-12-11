@@ -51,12 +51,17 @@ Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseControll
 Route::resource('courses', 'CourseController');
 
 Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
+Route::get('/admins/', 'UserController@adminIndex')->name('admins.index');
 Route::resource('users', 'UserController');
 
 Route::resource('comments', 'CommentController');
 
 Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
 Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
+Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');//开课授权
+Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
+Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
+Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');//课程授权
 Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
 Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
 Route::resource('merchants', 'MerchantController');

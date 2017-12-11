@@ -28,5 +28,11 @@ class RoleSeeder extends Seeder
         ]);
         $user = User::find(1);
         $user->attachRole($admin);
+        $user = User::find(2);
+        $user->attachRole($merchant);
+        $user = User::find(3);
+        $user->attachRole($teacher);
+        $user = User::find(4);
+        $user->attachRole($teacher);
     }
 }

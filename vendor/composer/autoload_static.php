@@ -413,6 +413,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
     public static $classMap = array (
         'App\\Console\\Commands\\Test' => __DIR__ . '/../..' . '/app/Console/Commands/Test.php',
         'App\\Console\\Commands\\enroll' => __DIR__ . '/../..' . '/app/Console/Commands/enroll.php',
+        'App\\Console\\Commands\\refund' => __DIR__ . '/../..' . '/app/Console/Commands/refund.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\Event' => __DIR__ . '/../..' . '/app/Events/Event.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -2179,6 +2180,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'League\\OAuth2\\Server\\ResponseTypes\\BearerTokenResponse' => __DIR__ . '/..' . '/league/oauth2-server/src/ResponseTypes/BearerTokenResponse.php',
         'League\\OAuth2\\Server\\ResponseTypes\\RedirectResponse' => __DIR__ . '/..' . '/league/oauth2-server/src/ResponseTypes/RedirectResponse.php',
         'League\\OAuth2\\Server\\ResponseTypes\\ResponseTypeInterface' => __DIR__ . '/..' . '/league/oauth2-server/src/ResponseTypes/ResponseTypeInterface.php',
+        'MerchantCourseSeeder' => __DIR__ . '/../..' . '/database/seeds/MerchantCourseSeeder.php',
         'MerchantSeeder' => __DIR__ . '/../..' . '/database/seeds/MerchantSeeder.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',

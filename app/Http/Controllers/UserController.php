@@ -7,6 +7,7 @@ use App\Models\Merchant;
 use App\Models\Role;
 use App\Models\User;
 use App\Notifications\OrderPaid;
+use Carbon\Carbon;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
@@ -23,17 +24,57 @@ class UserController extends Controller
         $this->middleware('role:admin|merchant')->except(['']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $items = User::orderBy('id', 'desc')
+            ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
+            ->whereNull('role_id')
+            ->withCount('enrolledShedules')
+            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) as total'));
+        if ($request->has('key')) {
+            $items->where('name', 'like', '%' . $request->key . '%')
+                ->orWhere('phone', 'like', '%' . $request->key . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->has('key')) {
+            $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
+        return view(auth()->user()->hasRole('admin') ? 'admin.student.index'
+            : 'agent', compact('items'));
 
     }
 
-    public function teacherIndex()
+    public function adminIndex()
+    {
+        $items = Role::where('name', 'merchant')
+            ->first()->users()
+            ->orderBy('users.id', 'desc')
+            ->paginate(10);
+        dd($items);
+        return view('', compact('items'));
+
+    }
+
+    public function teacherIndex(Request $request)
     {
         $user = auth()->user();
         $items = $user->ownMerchant
             ->teachers()
-            ->paginate(10);
+            ->withCount(['coachingSchedules as ongoingSchedules' => function ($query) {
+                $query->where('end', '>', Carbon::now()->toDateTimeString());
+            }])
+            ->withCount(['coachingSchedules' => function ($query) {
+                $query->where('end', '<=', Carbon::now()->toDateTimeString());
+            }])
+            ->orderBy('id', 'desc');
+
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
+            $items->withPath(route('teachers.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
         return view('agent.teacher.index', compact('items'));
     }
 

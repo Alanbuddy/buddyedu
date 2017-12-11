@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Commands\\Test' => $baseDir . '/app/Console/Commands/Test.php',
     'App\\Console\\Commands\\enroll' => $baseDir . '/app/Console/Commands/enroll.php',
+    'App\\Console\\Commands\\refund' => $baseDir . '/app/Console/Commands/refund.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\Event' => $baseDir . '/app/Events/Event.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -1774,6 +1775,7 @@ return array(
     'League\\OAuth2\\Server\\ResponseTypes\\BearerTokenResponse' => $vendorDir . '/league/oauth2-server/src/ResponseTypes/BearerTokenResponse.php',
     'League\\OAuth2\\Server\\ResponseTypes\\RedirectResponse' => $vendorDir . '/league/oauth2-server/src/ResponseTypes/RedirectResponse.php',
     'League\\OAuth2\\Server\\ResponseTypes\\ResponseTypeInterface' => $vendorDir . '/league/oauth2-server/src/ResponseTypes/ResponseTypeInterface.php',
+    'MerchantCourseSeeder' => $baseDir . '/database/seeds/MerchantCourseSeeder.php',
     'MerchantSeeder' => $baseDir . '/database/seeds/MerchantSeeder.php',
     'Mockery' => $vendorDir . '/mockery/mockery/library/Mockery.php',
     'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => $vendorDir . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',

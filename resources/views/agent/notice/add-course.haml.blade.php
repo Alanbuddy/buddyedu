@@ -31,23 +31,19 @@
             %th 处理时间
             %th 课程状态
         %tbody
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td 2017.12.23 13:12:23
-            %td.red 审核驳回
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td _
-            %td.red 审核中
-          %tr
-            %td 这是一门课的名称
-            %td 2017.12.23 13:12:23
-            %td 2017.12.23 13:12:23
-            %td.f12a 已通过
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->pivot->created_at
+              %td=$item->pivot->updated_at
+              -if($item->pivot->status=='rejected')
+                %td.red 审核驳回
+              -if($item->pivot->status=='applying')
+                %td.red 审核中
+              -if($item->pivot->status=='approved')
+                %td.f12a 已通过
 
-    .select-page 
+    .select-page
       %span.choice-page
 
   

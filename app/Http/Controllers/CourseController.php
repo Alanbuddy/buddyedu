@@ -11,8 +11,13 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware(['auth', 'role:admin|operator|teacher'])
+        $this->middleware(['auth', 'role:admin|operator|merchant'])
             ->only(['index', 'create', 'store', 'destroy', 'update']);
+    }
+
+    public function isAdmin()
+    {
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -22,18 +27,23 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Course::orderBy('id', 'desc');
-        $search = $request->has('key');
-        if ($search) {
+        $isAdmin = $this->isAdmin();
+
+        if ($isAdmin) {
+            $items = Course::orderBy('id', 'desc')->withCount('merchants');
+        } else {
+            $merchant = auth()->user()->ownMerchant;
+            $items = $merchant ? $merchant->courses()->orderBy('id', 'desc')
+                : collect([]);
+        }
+        if ($request->key) {
             $items->where('name', 'like', '%' . $request->get('key') . '%');
         }
         $items = $items->paginate(10);
-        if ($search) {
-            $items->withPath(route('courses.index') . '?' . http_build_query([
-                    'key' => $request->key,
-                ]));
+        if ($request->key) {
+            $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('admin.auth-course.index', compact('items'));
+        return view($isAdmin ? 'admin.auth-course.index' : 'agent.course.index', compact('items'));
     }
 
     /**
@@ -57,7 +67,7 @@ class CourseController extends Controller
         $this->validate($request, $this->rules());
         $course = new Course();
         $course = $course->fill($request->only([
-            'name', 'price', 'proportion', 'icon', 'url', 'description', 'detail','lessons_count'
+            'name', 'price', 'proportion', 'icon', 'url', 'description', 'detail', 'lessons_count'
         ]));
         $course->status = 'draft';
         $course->save();
