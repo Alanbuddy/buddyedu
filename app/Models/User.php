@@ -71,4 +71,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Schedule::class);
     }
+
+    public function enrolledShedules()
+    {
+        return $this->belongsToMany(Schedule::class)
+            ->wherePivot('type', 'student');
+    }
+
+    public function coachingSchedules()
+    {
+        return $this->belongsToMany(Schedule::class)
+            ->wherePivot('type', 'teacher');
+    }
 }

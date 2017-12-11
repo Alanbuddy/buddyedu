@@ -214,7 +214,6 @@ class ScheduleController extends Controller
         return ['success' => true];
     }
 
-
     // /api/v1/schedules/students?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3
     public function students(Request $request, Schedule $schedule)
     {
@@ -254,6 +253,7 @@ class ScheduleController extends Controller
                 'merchant_id',
                 'point_id',
                 'schedule_id',
+                'ordinal_no',
             ]), [
                 'teacher_id' => auth()->user()->id,
             ]));
@@ -261,4 +261,35 @@ class ScheduleController extends Controller
         }
         return ['success' => true];
     }
+
+    //url:   /api/v1/schedules/attendances?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3
+    //ordinal_no is 1 based index
+    public function attendances(Request $request)
+    {
+        $schedule = Schedule::findOrFail($request->schedule_id);
+        if ($request->has('ordinal_no')) {
+            $items = $schedule->attendances()
+                ->where('ordinal_no', $request->oridanl_no)
+                ->with('student')
+                ->get();
+        } else {
+            $course = $schedule->course;
+            $items = $schedule->attendances()
+                ->select(DB::raw('count("id") as count'))
+                ->addSelect('ordinal_no')
+                ->groupBy('ordinal_no')
+                ->get();
+            $arr = [];
+            foreach ($items as $item) {
+                $arr[] = $item->ordinal_no;
+            }
+            $arr2 = range(1, $course->lessons_count);
+            $diff = collect($arr2)->diff(collect($arr))->values();
+            foreach ($diff as $item) {
+                $items->push(new Attendance(['ordinal_no' => $item, 'count' => 0]));
+            }
+        }
+        return ['success' => true, 'data' => $items];
+    }
+
 }

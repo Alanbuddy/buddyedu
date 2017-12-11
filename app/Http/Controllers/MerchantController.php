@@ -16,7 +16,9 @@ class MerchantController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin'])->only(['index', 'store']);
+        $this->middleware('auth');
+        $this->middleware('role:admin')->only(['index']);
+        $this->middleware('role:admin|merchant')->except(['index']);
     }
 
     /**
@@ -24,7 +26,7 @@ class MerchantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $items = Merchant::orderBy('id', 'desc')
             ->withCount(['schedules as ongoingSchedules' => function ($query) {
@@ -33,8 +35,14 @@ class MerchantController extends Controller
             ->withCount(['schedules' => function ($query) {
                 $query->where('end', '<=', Carbon::now()->toDateTimeString());
             }])
-            ->with('admin')
-            ->paginate(10);
+            ->with('admin');
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
+            $items->withPath(route('points.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
         return view('admin.org-manage.index', compact('items'));
 
     }
@@ -168,8 +176,6 @@ class MerchantController extends Controller
 
     /**
      * get 开设课程
-     * @param Merchant $merchant
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function courses(Merchant $merchant)
     {
@@ -178,22 +184,39 @@ class MerchantController extends Controller
             ->get();
     }
 
-    public function courseApplications(Merchant $merchant)
+    public function getMerchant()
     {
+        return auth()->user()->ownMerchant;
+    }
+
+    public function courseApplications()
+    {
+        $merchant = $this->getMerchant();
         $items = $merchant->courses()
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return $items;
+        return view('agent.notice.add-course', compact('items'));
     }
 
-    public function scheduleApplications(Merchant $merchant)
+    public function scheduleApplications()
     {
+        $merchant = $this->getMerchant();
         $items = $merchant->schedules()
+            ->with('course')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return $items;
+        return view('agent.notice.course-apply', compact('items'));
     }
 
+    public function pointApplications()
+    {
+        $merchant = $this->getMerchant();
+        $items = $merchant->points()
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+//        dd($items);
+        return view('agent.notice.edu-point', compact('items'));
+    }
 
     /**
      * get 教学点

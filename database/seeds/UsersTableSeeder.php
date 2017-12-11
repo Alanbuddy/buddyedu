@@ -25,6 +25,7 @@ class UsersTableSeeder extends Seeder
                 'email' => str_random(10) . '@gmail.com',
                 'phone' => '1' . rand(1000000000, 9999999999),
                 'password' => bcrypt('secret'),
+                'birthday'=>date('Y-m-d H:i:s'),
                 'api_token' => \Faker\Provider\Uuid::uuid(),
             ]);
         }

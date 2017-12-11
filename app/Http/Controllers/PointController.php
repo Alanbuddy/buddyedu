@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Point;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:admin|merchant')->only([
-            'store',
-        ]);
+        $this->middleware('role:admin|merchant')->except([]);
     }
 
     /**
@@ -19,13 +18,28 @@ class PointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = auth()->user()
-            ->ownMerchant
-            ->points()
+        $merchant = auth()->user()->ownMerchant;
+        if (!$merchant) {
+            abort(500, 'no merchant found');
+        }
+        $items = $merchant->points()
+            ->withCount(['schedules as ongoingSchedules' => function ($query) {
+                $query->where('end', '>', Carbon::now()->toDateTimeString());
+            }])
+            ->withCount(['schedules' => function ($query) {
+                $query->where('end', '<=', Carbon::now()->toDateTimeString());
+            }])
             ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->with('schedules');
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
+            $items->withPath(route('points.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
         return view('agent.edu-point.index', compact('items'));
     }
 

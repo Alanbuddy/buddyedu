@@ -26,35 +26,35 @@
           .sidebar
             %ul
               %li
-                %a.active_li{href: "#"}
+                %a.active_li{href: route('schedules.index')}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.f16c.sidebar-title 开课情况
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('courses.index')}
                   %img.mini-icon{src: "/icon/2A.png"}
                   %span.f16c.sidebar-title 课程授权
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('points.index')}
                   %img.mini-icon{src: "/icon/9A.png"}
                   %span.f16c.sidebar-title 教学点
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('teachers.index')}
                   %img.mini-icon{src: "/icon/10A.png"}
                   %span.f16c.sidebar-title 授课老师
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('users.index')}
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.f16c.sidebar-title 学生管理
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('orders.statistics')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.f16c.sidebar-title 金额统计
               %li
-                %a.a-item{:href => "#"}
+                %a.a-item{:href => route('users.statistics')}
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.f16c.sidebar-title 学生统计
               %li.apply
-                %a.a-item{href: "#"}
+                %a.a-item{:href => route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.f16c.sidebar-title 通知查看
               %li.logout

@@ -30,24 +30,18 @@ class CourseController extends Controller
         $isAdmin = $this->isAdmin();
 
         if ($isAdmin) {
-            $items = Course::orderBy('id', 'desc')
-                ->withCount('merchants');
-
+            $items = Course::orderBy('id', 'desc')->withCount('merchants');
         } else {
             $merchant = auth()->user()->ownMerchant;
-            $items = $merchant ? $merchant->courses() ->orderBy('id', 'desc')
+            $items = $merchant ? $merchant->courses()->orderBy('id', 'desc')
                 : collect([]);
         }
-
-        $search = $request->has('key');
-        if ($search) {
+        if ($request->key) {
             $items->where('name', 'like', '%' . $request->get('key') . '%');
         }
         $items = $items->paginate(10);
-        if ($search) {
-            $items->withPath(route('courses.index') . '?' . http_build_query([
-                    'key' => $request->key,
-                ]));
+        if ($request->key) {
+            $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
         return view($isAdmin ? 'admin.auth-course.index' : 'agent.course.index', compact('items'));
     }
