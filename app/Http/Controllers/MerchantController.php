@@ -146,7 +146,7 @@ class MerchantController extends Controller
             case 'apply':
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'applying']]);
                 break;
-            case 'authorize':
+            case 'approve':
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
                 break;
             case 'reject':
@@ -169,6 +169,23 @@ class MerchantController extends Controller
             ->wherePivot('status', 'approved')
             ->get();
     }
+
+    public function courseApplications(Merchant $merchant)
+    {
+        $items = $merchant->courses()
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return $items;
+    }
+
+    public function scheduleApplications(Merchant $merchant)
+    {
+        $items = $merchant->schedules()
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return $items;
+    }
+
 
     /**
      * get 教学点
