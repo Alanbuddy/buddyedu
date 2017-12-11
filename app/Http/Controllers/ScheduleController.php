@@ -67,7 +67,8 @@ class ScheduleController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate(10);
         } else {
-            $items = auth()->user()->ownMerchant->schedules()
+            $items = auth()->user()->ownMerchant
+                ->schedules()
                 ->paginate(10);
         }
         return view($isAdmin ? 'schedule.course-list' : 'agent.course.index', compact('items'));

@@ -15,7 +15,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 课程类目(12)
+      %li.f14a.bg16b='课程类目('.$items->count().')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -27,25 +27,14 @@
     //   .undiscover.f14
     //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
-    .frame-div
-      %img.course-icon{src: "icon/bird.png"}
-      %p.course-name.f16b Buddy动物园
-      %p.f12b 5机构已添加
-      %p.mt24.f12b 这里有一点不太长的简单介绍一下这个产品的功能，大概只需要二三行字就可以，不可以太长了。
+    -foreach($items as $item)
+      .frame-div
+        %img.course-icon{src: $item->icon??'icon/bird.png'}
+        %p.course-name.f16b=$item->name
+        %p.f12b=$item->merchants_count.'机构已添加'
+        %p.mt24.f12b=$item->description??'没有简介'
 
-    .frame-div
-      %img.course-icon{src: "icon/bird.png"}
-      %p.course-name.f16b Buddy动物园
-      %p.f12b 5机构已添加
-      %p.mt24.f12b 这里有一点不太长的简单介绍一下这个产品的功能，大概只需要二三行字就可以，不可以太长了。
-    
-    .frame-div
-      %img.course-icon{src: "icon/bird.png"}
-      %p.course-name.f16b Buddy动物园
-      %p.f12b 5机构已添加
-      %p.mt24.f12b 这里有一点不太长的简单介绍一下这个产品的功能，大概只需要二三行字就可以，不可以太长了。
-
-#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
     .modal-content
       .modalheader
