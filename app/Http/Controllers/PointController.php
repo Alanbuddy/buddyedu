@@ -10,7 +10,7 @@ class PointController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:admin|merchant')->except([]);
+        $this->middleware(['auth', 'role:admin|merchant'])->except([]);
     }
 
     /**
