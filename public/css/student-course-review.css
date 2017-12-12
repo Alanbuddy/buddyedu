@@ -1,0 +1,37 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.32rem;
+  padding-top: 0.48rem;
+}
+
+.title {
+  color: #365ba9;
+}
+
+.mb48 {
+  margin-bottom: 0.48rem;
+}
+
+.text-color {
+  color: #5d6578;
+}
+
+.date-color {
+  color: #8c929f;
+}
+
+.avatar-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.16rem;
+}
+
+.avatar {
+  width: 0.64rem;
+  margin-right: 0.16rem;
+}
+

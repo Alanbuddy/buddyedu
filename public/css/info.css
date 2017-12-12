@@ -1,0 +1,104 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.64rem;
+  padding-top: 1.6rem;
+}
+
+.close {
+  position: absolute;
+  top: 0.48rem;
+  right: 0.48rem;
+  width: 0.88rem;
+}
+
+.title {
+  color: #365ba9;
+  margin-bottom: 0.96rem;
+}
+
+.input-group {
+  width: 100%;
+  padding-bottom: 0.16rem;
+  border-bottom: 2px solid #365ba9;
+  padding-left: 0.16rem;
+  height: 0.48rem;
+}
+
+.miniphoto {
+  background: url("/icon/phonenumber.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.form-box {
+  width: 100%;
+  border: 0;
+  padding: 0.04rem 0;
+  padding-left: 4%;
+  color: #365ba9;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
+}
+
+.form-verify-box {
+  width: 50%;
+}
+
+.verify-photo {
+  background: url("/icon/number.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.click-btn {
+  width: 100%;
+  padding: 0;
+  background: #365ba9;
+  line-height: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+#next_btn {
+  color: #fff;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.notice {
+  color: #365ba9;
+  text-align: left;
+  padding: 0.11rem 0;
+  visibility: hidden;
+}
+
+.verify-code-span {
+  color: #365ba9;
+  margin-right: 0.1rem;
+}
+
+.input-inside-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+

@@ -24,5 +24,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.sass('resources/assets/sass/auth-course-add.scss', 'public/css')
 	.sass('resources/assets/sass/agent-edu-add.scss', 'public/css')
 	.sass('resources/assets/sass/agent-teacher-add.scss', 'public/css')
+	.sass('resources/assets/sass/info.scss', 'public/css')
+	.sass('resources/assets/sass/profile.scss', 'public/css')
+	.sass('resources/assets/sass/student-product.scss', 'public/css')
+	.sass('resources/assets/sass/student-course.scss', 'public/css')
+	.sass('resources/assets/sass/student-course-review.scss', 'public/css')
 	.sass('resources/assets/sass/class_info.scss', 'public/css');
    // .sass('resources/assets/sass/app.scss', 'public/css');
