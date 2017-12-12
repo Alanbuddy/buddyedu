@@ -2,6 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/select2.min.css">
 <link rel="stylesheet" href="{{ mix('/css/agent-add.css') }}">
+<link rel="stylesheet" href="/css/jquery-ui.min.css">
 :javascript
   window.course_store = "#{route('schedules.store')}"
   window.schedule_create = "#{route('schedules.create')}"
@@ -82,8 +83,11 @@
           %label.input-caption.f14d 班级人数:
           %input.form-control.input-width.f14d#num{:type => "text"}
         .controls.controls-row.mb24
-          %label.input-caption.f14d 上课时间:
-          %input.form-control.input-width{:type => "text"}
+          %label.input-caption.f14d 开始时间:
+          %input.form-control.input-width#datepicker1{:type => "text"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 结束时间:
+          %input.form-control.input-width#datepicker2{:type => "text"}
         .btn-div     
           %btn.f16d.add-btn-width#apply 提交申请
   
@@ -91,6 +95,8 @@
 
 @section('script')
 <script src= "/js/select2.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/datepicker-zh-TW.js"></script>
 <script src= "/js/agent-add.js"></script>
 
 @endsection
