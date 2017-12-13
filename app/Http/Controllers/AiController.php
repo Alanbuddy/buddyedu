@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Log;
 class AiController extends Controller
 {
     use FileTrait;
+    public function __construct()
+    {
+        $this->middleware('va');
+    }
 
     public function cut(Request $request)
     {

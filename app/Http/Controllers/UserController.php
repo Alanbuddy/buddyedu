@@ -39,7 +39,7 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view(auth()->user()->hasRole('admin') ? 'admin.student.index'
+        return view($this->isAdmin() ? 'admin.student.index'
             : 'agent.user.', compact('items'));
 
     }

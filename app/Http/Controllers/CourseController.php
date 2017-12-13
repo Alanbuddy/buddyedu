@@ -11,13 +11,10 @@ class CourseController extends Controller
 
     function __construct()
     {
-        $this->middleware(['auth', 'role:admin|operator'])
-            ->only(['index', 'create', 'store', 'destroy', 'update']);
-    }
-
-    public function isAdmin()
-    {
-        return auth()->user()->hasRole('admin');
+        $this->middleware('role:admin|operator')
+            ->only(['create', 'store', 'destroy', 'update']);
+        $this->middleware('role:admin|operator|merchant')
+            ->only(['index']);
     }
 
     /**
@@ -27,24 +24,28 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $isAdmin = $this->isAdmin();
-
-        if ($isAdmin) {
-            $items = Course::orderBy('id', 'desc')->withCount('merchants');
-        } else {
-            $merchant = auth()->user()->ownMerchant;
-            $items = $merchant ? $merchant->courses()->orderBy('id', 'desc')
-                : collect([]);
-        }
+        $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
         if ($request->key) {
             $items->where('name', 'like', '%' . $request->get('key') . '%');
         }
         $items = $items->paginate(10);
+        $isAdmin = $this->isAdmin();
+        if (!$isAdmin) {
+            $merchant = auth()->user()->ownMerchant;
+            foreach ($items as $item) {
+                if ($item->merchants->contains($merchant)) {
+                    $item->added = true;
+                }
+            }
+            $count = $merchant ? $merchant->courses()->orderBy('id', 'desc')->count() : 0;
+        }
         if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view($isAdmin ? 'admin.auth-course.index' : 'agent.course.index', compact('items'));
+        return view($isAdmin ? 'admin.auth-course.index'
+            : $request->has('my') ? 'agent.auth.self' : 'agent.auth.index', compact('items', 'count'));
     }
+
 
     /**
      * Show the form for creating a new resource.

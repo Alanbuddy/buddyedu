@@ -273,7 +273,8 @@ class OrderController extends Controller
             ->sum('amount');
         $income = Order::where('status', 'paid')
             ->sum('amount');
-
+//        return view('admin.statistic.index');
+        return view('admin.amount.index', compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'income'));
         dd($items, $incomeOfToday, $incomeOfThisWeek, $income);
 
 
@@ -290,6 +291,28 @@ class OrderController extends Controller
                 'right' => $request->get('right')
             ])));
         return view('admin.statistics.amount', compact('items'));
+    }
+
+    public function statGroupByMerchant()
+    {
+        $query = Merchant::orderBy('id', 'desc')
+            ->withCount(['schedules as ongoingSchedules_count' => function ($query) {
+                $query->where('end', '>', date('Y-m-d H:i:s'));
+            }])
+            ->withCount(['schedules' => function ($query) {
+                $query->where('end', '<', date('Y-m-d H:i:s'));
+            }])
+            ->select('*')
+            ->addSelect('merchants.id as mid')
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedules.end < date_format(now(),\'%Y-%m-%d %H:%i:%s\') and merchants.id=mid ) as ongoingStudentCount'))
+            ->get();
+        dd($query);
+
+    }
+
+    public function statGroupByCourse()
+    {
+
     }
 
     public function merchantTransactions(Request $request, Merchant $merchant)

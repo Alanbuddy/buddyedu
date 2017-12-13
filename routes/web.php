@@ -37,46 +37,51 @@ Route::middleware(['auth', 'role:admin'])
     );
 Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms-verify.send');
 Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
-Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
-Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
-Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
-Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
-Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
-Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
-Route::resource('schedules', 'ScheduleController');
+Route::middleware('auth')
+    ->group(function () {
+        Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
+        Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
+        Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
+        Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
-Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
-Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
-Route::resource('courses', 'CourseController');
+        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
+        Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
+        Route::resource('schedules', 'ScheduleController');
 
-Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
-Route::get('/admins/', 'UserController@adminIndex')->name('admins.index');
-Route::resource('users', 'UserController');
+        Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
+        Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
+        Route::resource('courses', 'CourseController');
 
-Route::resource('comments', 'CommentController');
+        Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
+        Route::get('/admins/', 'UserController@adminIndex')->name('admins.index');
+        Route::resource('users', 'UserController');
 
-Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
-Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
-Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');//开课授权
-Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
-Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
-Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');//课程授权
-Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
-Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
-Route::resource('merchants', 'MerchantController');
+        Route::resource('comments', 'CommentController');
 
-Route::get('/statistics/orders', 'OrderController@statistics')->name('orders.statistics');//相关统计信息
-Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
-Route::resource('order', 'OrderController');
+        Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
+        Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
+        Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');//开课授权
+        Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
+        Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
+        Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');//课程授权
+        Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
+        Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
+        Route::resource('merchants', 'MerchantController');
 
-Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//
-Route::resource('points', 'PointController');
+        Route::get('/statistics/money/group-by-merchant', 'OrderController@statGroupByMerchant')->name('orders.stat-group-by-merchant');//相关统计信息
+        Route::get('/statistics/money/group-by-course', 'OrderController@statGroupByCourse')->name('orders.stat-group-by-course');//相关统计信息
+        Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
+        Route::resource('order', 'OrderController');
 
-Route::resource('records', 'RecordController');
+        Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//
+        Route::resource('points', 'PointController');
 
-Route::resource('files', 'FileController');
+        Route::resource('records', 'RecordController');
 
+        Route::resource('files', 'FileController');
+
+    });
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/sms/send', 'SmsController@send')->name('sms.send');
