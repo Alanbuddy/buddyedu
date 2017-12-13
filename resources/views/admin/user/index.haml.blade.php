@@ -13,7 +13,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 工作人员(23)
+      %li.f14a.bg16b='工作人员('.$items->total().')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入手机号", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -32,25 +32,23 @@
             %th 账号状态
             %th 操作
         %tbody
-          %tr
-            %td 13211223344
-            %td 2017/12/14 14:23:32
-            %td 新申请
-            %td
-              %span.green.aprove 通过 
-              %span.red 驳回
-          %tr
-            %td 13211223344
-            %td 2017/12/14 14:23:32
-            %td 正常使用
-            %td.red.one-span 禁用
-          %tr
-            %td 13211223344
-            %td 2017/12/14 14:23:32
-            %td 已禁用
-            %td.green.one-span 开通
+          -foreach($items as $item)
+            %tr
+              %td=$item->phone
+              %td=$item->created_at
+              -if(empty($item->status)||$item->status=='applying')
+                %td 新申请
+                %td
+                  %span.green.aprove 通过
+                  %span.red 驳回
+              -if($item->status=='rejected')
+                %td 已禁用
+                %td.green.one-span 开通
+              -if($item->status=='approved')
+                %td 正常使用
+                %td.red.one-span 禁用
 
-    .select-page 
+    .select-page
       %span.choice-page
 
 @endsection

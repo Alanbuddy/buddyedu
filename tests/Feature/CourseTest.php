@@ -17,7 +17,7 @@ class CourseTest extends TestCase
     {
         $this->actingAs(User::find(1));
         $response = $this->post(route('courses.store'), [
-            'name' => 'course1',
+            'name' => 'course 3',
             'price' => 11
         ]);
         $response->assertStatus(200)

@@ -40,7 +40,7 @@ class UserController extends Controller
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
         return view(auth()->user()->hasRole('admin') ? 'admin.student.index'
-            : 'agent', compact('items'));
+            : 'agent.user.', compact('items'));
 
     }
 
@@ -50,8 +50,7 @@ class UserController extends Controller
             ->first()->users()
             ->orderBy('users.id', 'desc')
             ->paginate(10);
-        dd($items);
-        return view('', compact('items'));
+        return view('admin.user.index', compact('items'));
 
     }
 

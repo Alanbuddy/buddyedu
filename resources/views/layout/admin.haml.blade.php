@@ -50,11 +50,11 @@
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.f16c.sidebar-title 学生统计
               %li.apply
-                %a.a-item{href: "#"}
+                %a.a-item{href: route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.f16c.sidebar-title 申请处理
               %li.client
-                %a.a-item{href: "#"}
+                %a.a-item{href: route('admins.index')}
                   %img.mini-icon{src: "/icon/10A.png"}
                   %span.f16c.sidebar-title 人员管理
               %li.logout
