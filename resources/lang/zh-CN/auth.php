@@ -21,4 +21,7 @@ return [
     'course' => [
         'unauthorized' => '课程未授权',
     ],
+    'schedule' => [
+        'expired' => '开课过期',
+    ]
 ];

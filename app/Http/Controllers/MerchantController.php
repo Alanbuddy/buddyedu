@@ -90,7 +90,8 @@ class MerchantController extends Controller
             $admin->attachRole(Role::find(1));
             $item->fill([
                 'name' => $data['name'],
-                'admin_id' => $admin->id
+                'admin_id' => $admin->id,
+                'status' => 'authorized'
             ]);
 //        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
             $item->save();
@@ -240,7 +241,7 @@ class MerchantController extends Controller
         }
         $items = $items->paginate(10);
 //        dd($items);
-        return view($isAdmin?'admin.app-process.edu-point':'agent.notice.edu-point', compact('items'));
+        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
 
     /**
