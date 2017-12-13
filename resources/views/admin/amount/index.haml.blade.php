@@ -53,12 +53,13 @@
             %th 所选时段内收入
             %th 收入总额
         %tbody
+        -foreach($items as $item)
           %tr
-            %td 某一机构名称
-            %td 12/15
-            %td 12/15
-            %td ￥213,010
-            %td.f12a ￥213,000
+            %td=$item->name
+            %td=$item->ongoingSchedules_count.'/'.$item->schedules_count
+            %td=$item->ongoingStudentCount.'/'.$item->studentCount
+            %td='￥'.$item->incomeOfSelectedRange
+            %td.f12a='￥'.$item->income
 
     .select-page 
       %span.choice-page

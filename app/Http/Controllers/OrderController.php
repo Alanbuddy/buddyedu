@@ -238,16 +238,14 @@ class OrderController extends Controller
 
     public function statistics(Request $request)
     {
-        $left = $request->get('left');
-        $right = $request->get('right');
+        $left = $request->get('left', date('Y-m-d', strtotime('-1 week Monday')));
+        $right = $request->get('right', date('Y-m-d'));
         if (isset($left)) {
-            $left = is_numeric($left)
-                ? $left = date('Y-m-d H:i:s', strtotime("today -" . $left . " days"))
+            $left = is_numeric($left) ? $left = date('Y-m-d H:i:s', strtotime("today -" . $left . " days"))
                 : date('Y-m-d H:i:s', strtotime($left));
         }
         if ($right) {
-            $right = is_numeric($right)
-                ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
+            $right = is_numeric($right) ? date('Y-m-d H:i:s', strtotime("today +" . $right . " days"))
                 : date('Y-m-d H:i:s', strtotime($right));
         }
         $query = Order::orderBy('id', 'desc');
@@ -293,8 +291,17 @@ class OrderController extends Controller
         return view('admin.statistics.amount', compact('items'));
     }
 
-    public function statGroupByMerchant()
+    public function getRange(Request $request)
     {
+//        $left = $request->get('left', date('Y-m-d', strtotime('-1 week Monday')));
+        $left = $request->get('left', date('Y-m-d', strtotime('-700 days')));
+        $right = $request->get('right', date('Y-m-d'));
+        return [$left, $right];
+    }
+
+    public function statGroupByMerchant(Request $request)
+    {
+        list($left, $right) = $this->getRange($request);
         $query = Merchant::orderBy('id', 'desc')
             ->withCount(['schedules as ongoingSchedules_count' => function ($query) {
                 $query->where('end', '>', date('Y-m-d H:i:s'));
@@ -302,11 +309,15 @@ class OrderController extends Controller
             ->withCount(['schedules' => function ($query) {
                 $query->where('end', '<', date('Y-m-d H:i:s'));
             }])
-            ->select('*')
+//            ->select('*');
             ->addSelect('merchants.id as mid')
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedules.end < date_format(now(),\'%Y-%m-%d %H:%i:%s\') and merchants.id=mid ) as ongoingStudentCount'))
-            ->get();
-        dd($query);
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and merchants.id=mid ) as ongoingStudentCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid ) as studentCount'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid ) as income'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
+        $items = $query->paginate(10);
+//        dd($items);
+        return view('admin.amount.index', compact('items'));
 
     }
 
