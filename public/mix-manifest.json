@@ -12,5 +12,10 @@
     "/css/auth-course-add.css": "/css/auth-course-add.css",
     "/css/agent-edu-add.css": "/css/agent-edu-add.css",
     "/css/agent-teacher-add.css": "/css/agent-teacher-add.css",
+    "/css/info.css": "/css/info.css",
+    "/css/profile.css": "/css/profile.css",
+    "/css/student-product.css": "/css/student-product.css",
+    "/css/student-course.css": "/css/student-course.css",
+    "/css/student-course-review.css": "/css/student-course-review.css",
     "/css/class_info.css": "/css/class_info.css"
 }

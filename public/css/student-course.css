@@ -1,0 +1,93 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.32rem;
+  padding-top: 0.48rem;
+}
+
+.title {
+  color: #365ba9;
+}
+
+.mine {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.12rem;
+  width: 0.88rem;
+}
+
+.mb48 {
+  margin-bottom: 0.48rem;
+}
+
+.text-color {
+  color: #5d6578;
+}
+
+.text-blue {
+  color: #365ba9;
+}
+
+.item {
+  display: -o-flex;
+  display: -os-flex;
+  display: -moz-flex;
+  -webkit-justify-content: space-between;
+  -o-justify-content: space-between;
+  -os-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -webkit-align-items: center;
+  -o-align-items: center;
+  -os-align-items: center;
+  -moz-align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.title-div {
+  width: 4.4rem;
+}
+
+.click-div {
+  display: -o-flex;
+  display: -os-flex;
+  display: -moz-flex;
+  -webkit-align-items: center;
+  -o-align-items: center;
+  -os-align-items: center;
+  -moz-align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.course-icon {
+  width: 0.96rem;
+  height: 0.96rem;
+  margin-right: 0.24rem;
+  border-radius: 8px;
+}
+
+.arrow {
+  width: 0.1rem;
+  margin-left: 0.08rem;
+}
+
+.title-margin {
+  margin-top: 0.1rem;
+  margin-bottom: 0.12rem;
+}
+
+.mb48 {
+  margin-bottom: 0.48rem;
+}
+
