@@ -13,8 +13,8 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14c 课程类目(12)
-      %li.f14a.bg16b 我的课程(12)
+      %li.f14c='课程类目('.$items->total().')'
+      %li.f14a.bg16b="我的课程($count)"
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名称", value: "", :onfocus=>"this.style.color='#5d6578'"}

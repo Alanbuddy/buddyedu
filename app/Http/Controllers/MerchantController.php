@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Merchant;
+use App\Models\Point;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -77,16 +78,20 @@ class MerchantController extends Controller
         ]);
         $item = new Merchant();
         DB::transaction(function () use ($item, $data) {
-            $admin = User::create([
+            $admin = new User();
+            $admin->fill([
                 'name' => $data['adminName'],
                 'phone' => $data['phone'],
                 'password' => $data['password'],
+                'status' => 'applying',
                 'api_token' => Uuid::uuid(),
             ]);
+            $admin->save();
             $admin->attachRole(Role::find(1));
             $item->fill([
                 'name' => $data['name'],
-                'admin_id' => $admin->id
+                'admin_id' => $admin->id,
+                'status' => 'authorized'
             ]);
 //        $item->address = implode('', $request->only('province', 'city', 'county', 'street'));
             $item->save();
@@ -191,11 +196,26 @@ class MerchantController extends Controller
 
     public function courseApplications()
     {
-        $merchant = $this->getMerchant();
-        $items = $merchant->courses()
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-        return view('agent.notice.add-course', compact('items'));
+        $isAdmin = $this->isAdmin();
+        if ($isAdmin) {
+            $items = Course::orderBy('courses.id', 'desc')
+                ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
+                ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
+                ->select('*')
+                ->addSelect('courses.id as course_id')
+                ->addSelect('courses.name as course_name')
+                ->addSelect('merchants.id as merchant_id')
+                ->addSelect('merchants.name as merchant_name')
+                ->addSelect('course_merchant.status as status')
+                ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
+                ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
+        } else {
+            $merchant = $this->getMerchant();
+            $items = $merchant->courses()
+                ->orderBy('id', 'desc');
+        }
+        $items = $items->paginate(10);
+        return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course', compact('items'));
     }
 
     public function scheduleApplications()
@@ -210,12 +230,18 @@ class MerchantController extends Controller
 
     public function pointApplications()
     {
-        $merchant = $this->getMerchant();
-        $items = $merchant->points()
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+        $isAdmin = $this->isAdmin();
+        if ($isAdmin) {
+            $items = Point::orderBy('id', 'desc')
+                ->with('merchant');
+        } else {
+            $merchant = $this->getMerchant();
+            $items = $merchant->points()
+                ->orderBy('id', 'desc');
+        }
+        $items = $items->paginate(10);
 //        dd($items);
-        return view('agent.notice.edu-point', compact('items'));
+        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
 
     /**
@@ -227,4 +253,5 @@ class MerchantController extends Controller
     {
         return $merchant->points()->get();
     }
+
 }

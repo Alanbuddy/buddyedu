@@ -14,7 +14,7 @@
   .tab-title
     %ul.clearfix
       %li.f14c 添加课程(23)
-      %li.f14a.bg16b 添加教学点(15)
+      %li.f14a.bg16b='添加教学点('.$items->total().')'
       %li.f14c 开课申请(15)
     .user-search-box
       .search#search-btn
@@ -38,23 +38,29 @@
             %th 所在地
             %th{colspan: 2} 操作
         %tbody
+        -foreach($items as $item)
           %tr
-            %td 某一机构名称
-            %td 这是一门课的名称
-            %td 200m²
-            %td 负责人名字
-            %td 13211122334
+            %td=$item->merchant->name
+            %td=$item->name
+            %td=$item->area.'m²'
+            %td=$item->admin
+            %td=$item->contact
             %td.tip-parent
               %img{src: "/icon/location.png"}
               .tooltip-div.f14d
                 .triangle
                 %img.close{src: "/icon/smallclose.png"}
                 %p 地址信息:
-                %p 北京市海淀区xxxxxxxxxxxxx
+                %p=$item->address
                 #container
 
-            %td#green 通过
-            %td.f12e 驳回
+            -if($item->status=='approved')
+              %td.f12e 驳回
+            -if($item->status=='rejected')
+              %td#green 通过
+            -else if(empty($item->status))
+              %td#green 通过
+              %td.f12e 驳回
 
     .select-page 
       %span.choice-page

@@ -268,9 +268,10 @@ class ScheduleController extends Controller
     {
         $schedule = Schedule::findOrFail($request->schedule_id);
         if ($request->has('ordinal_no')) {
-            $items = $schedule->attendances()
-                ->where('ordinal_no', $request->oridanl_no)
-                ->with('student')
+            $items = $schedule->students()
+                ->withCount(['attendances' => function ($query) use ($request) {
+                    $query->where('ordinal_no', $request->ordinal_no);
+                }])
                 ->get();
         } else {
             $course = $schedule->course;
@@ -286,7 +287,7 @@ class ScheduleController extends Controller
             $arr2 = range(1, $course->lessons_count);
             $diff = collect($arr2)->diff(collect($arr))->values();
             foreach ($diff as $item) {
-                $items->push(new Attendance(['count' => 0,'ordinal_no' => $item ]));
+                $items->push(new Attendance(['count' => 0, 'ordinal_no' => $item]));
             }
         }
         return ['success' => true, 'data' => $items];

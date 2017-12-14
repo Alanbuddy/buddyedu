@@ -12,4 +12,9 @@ class Point extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
 }
