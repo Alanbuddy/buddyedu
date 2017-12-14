@@ -46,7 +46,7 @@
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.f16c.sidebar-title 学生管理
               %li
-                %a.a-item{:href => route('orders.statistics')}
+                %a.a-item{:href => route('orders.stat-group-by-merchant')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.f16c.sidebar-title 金额统计
               %li
