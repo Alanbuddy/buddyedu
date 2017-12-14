@@ -2,7 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
 :javascript
-  window.course_search = "#{route('schedule.search')}"
+  window.course_search = "#{route('schedule.index')}"
 @endsection
 
 @section('content')
