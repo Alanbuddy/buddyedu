@@ -159,7 +159,8 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $item = $schedule;
-        return view('admin.course.course-info', compact('item'));
+        $progress=$schedule->attendances()->max('ordinal_no');
+        return view('admin.course.course-info', compact('item','progress'));
     }
 
     /**
