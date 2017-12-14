@@ -44,7 +44,7 @@
         %span= $item->point->name
       .p-div
         %span.left-span 课程介绍：
-        %span.right-span 精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材精品课程是具有一流的教师队伍、一流教学内容、一流教学方法、一流教材
+        %span.right-span= $item->course->description
     
 
   
