@@ -184,8 +184,51 @@ class UserController extends Controller
         return view('', compact('items'));
     }
 
+    public function queryStudent()
+    {
+        return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
+            ->whereNull('role_id');
+    }
+
     public function statistics(Request $request)
     {
-        return view('admin.statistic.index');
+        list($left, $right) = $this->getRange($request);
+        $countOfToday = $this->queryStudent()
+            ->where('created_at', '>', date('Y-m-d'))
+            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')))
+            ->count();
+        $countOfThisWeek = $this->queryStudent()
+            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
+            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
+            ->count();
+        $countOfSelectedRange = $this->queryStudent()
+            ->where('created_at', '>', $left)
+            ->where('created_at', '<', $right)
+            ->count();
+        $count = $this->queryStudent()
+            ->count();
+        $genderDistribution=$this->queryStudent()
+            ->select(DB::raw('count(\'gender\') as count'))
+            ->addSelect('gender')
+            ->groupBy('gender')
+            ->get();
+//        dd($genderDistribution->all());
+        $ageDistribution=$this->queryStudent()
+            ->select(DB::raw('count(\'gender\') as count'))
+            ->addSelect('birthday')
+            ->groupBy('birthday')
+            ->get();
+        dd($ageDistribution->all());
+
+
+        return view('admin.statistic.index', compact('count', 'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right'));
+    }
+
+    public function getRange(Request $request)
+    {
+//        $left = $request->get('left', date('Y-m-d', strtotime('-1 week Monday')));
+        $left = $request->get('left', date('Y-m-d', strtotime('-700 days')));
+        $right = $request->get('right', date('Y-m-d'));
+        return [$left, $right];
     }
 }

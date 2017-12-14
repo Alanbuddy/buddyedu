@@ -254,9 +254,9 @@ class OrderController extends Controller
         $income = Order::where('status', 'paid')
             ->sum('amount');
 
-        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
 //        dd($items, $incomeOfToday, $incomeOfThisWeek, $income);
-        return view('admin.statistics.amount', compact('items'));
+//        return view('admin.statistics.amount', compact('items'));
+        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
     }
 
     public function getRange(Request $request)
@@ -289,7 +289,7 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-merchant') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.index', compact('items'));
+        return view('admin.amount.index', array_merge($this->statistics($request),compact('items')));
 
     }
 
@@ -303,7 +303,6 @@ class OrderController extends Controller
             }])
             ->withCount('schedules')
             ->addSelect('courses.id as cid')
-            ->addSelect(DB::raw('('.Schedule::join('courses','courses.id','schedules.course_id')->join('schedule','users.id','')->toSql()).' where courses.id=cid as bbb')
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and courses.id=cid ) as ongoingStudentCount'))
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and courses.id=cid ) as studentCount'))
             ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid ) as income'))
@@ -317,7 +316,7 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-course') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.course-amount', compact('items'));
+        return view('admin.amount.course-amount',array_merge($this->statistics($request),compact('items')));
     }
 
     public function merchantTransactions(Request $request, Merchant $merchant)
