@@ -16,9 +16,9 @@
     %ul.clearfix
       %li.f14a.bg16b 课程信息
       %li
-        %a.f14c{href: route('course.merchant')}='授权机构('.$course->merchants()->count().')'
+        %a.f14c{href: route('course.merchant', $course->id)}='授权机构('.$course->merchants()->count().')'
       %li
-        %a.f14c{href: route('course.comment')}='评论查看('.$course->comments()->count().')'
+        %a.f14c{href: route('course.comment', $course->id)}='评论查看('.$course->comments()->count().')'
 
   .desc-div
     .name-money

@@ -20,31 +20,33 @@
     .search-add
       .user-search-box
         .search#search-btn
-        %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+        %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名称/负责人", value: "", :onfocus=>"this.style.color='#5d6578'"}
       %img.add-icon{src: "/icon/add.png"}  
   
   .desc-div.clearfix
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 机构名称
-            %th 当前开课/历史开课
-            %th 负责人
-            %th 联系方式
-        %tbody
-          -foreach($items as $item)
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
             %tr
-              %td=$item->name
-              %td=$item->ongoingSchedules.'/'.$item->schedules_count
-              %td=$item->admin->name
-              %td.f12a=$item->admin->phone
+              %th 机构名称
+              %th 当前开课/历史开课
+              %th 负责人
+              %th 联系方式
+          %tbody
+            -foreach($items as $item)
+              %tr
+                %td
+                  %a{href: route('merchants.show', $item->id)}=$item->name
+                %td=$item->ongoingSchedules.'/'.$item->schedules_count
+                %td=$item->admin->name
+                %td.f12a=$item->admin->phone
     .select-page 
       %span.choice-page
+        != $items->links()
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog

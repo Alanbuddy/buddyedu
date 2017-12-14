@@ -13,8 +13,10 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14c 课程信息
-      %li.f14c 授权机构(4)
+      %li
+        %a.f14c{href: route('course.show', $course->id)} 课程信息
+      %li
+        %a.f14c{href: route('course.merchant', $course->id)} 授权机构(4)
       %li.f14a.bg16b 评论查看(16)
 
   .desc-div
@@ -41,6 +43,7 @@
 
     .select-page 
       %span.choice-page
+        != $items->links()
 
   
 @endsection
