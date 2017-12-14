@@ -105,14 +105,18 @@ class MerchantController extends Controller
      * @param  \App\Models\Merchant $merchant
      * @return \Illuminate\Http\Response
      */
-    public function show(Merchant $merchant)
+    public function show(Request $request, Merchant $merchant)
     {
-        $items=$merchant->ongoingSchedules()
-            ->with('point')
+        if ($finished = $request->type == 'finished') {
+            $items = $merchant->finishedSchedules();
+        } else {
+            $items = $merchant->ongoingSchedules();
+        }
+        $items = $items->with('point')
             ->with('teachers')
             ->with('students')
             ->paginate(10);
-        return  view('admin.org-manage.show',compact('merchant','items'));
+        return view('admin.org-manage.show', compact('merchant', 'items','finished'));
     }
 
     /**

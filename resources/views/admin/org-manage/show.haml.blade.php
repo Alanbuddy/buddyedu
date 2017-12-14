@@ -58,10 +58,13 @@
             %td 某一机构名称
             %td=$item->point->name
             %td
-            foreach($item->teachers as $teacher)
-            %td 12/15
-            %td.green 上课中
-            // %td.orange 报名中
+              -foreach($item->teachers as $teacher)
+                %span=$teacher->name
+            %td=$item->students()->count().'/'.$item->quota
+            -if($item->begin < date('Y-m-d H:i:s'))
+              %td.green 上课中
+            -else
+              %td.orange 报名中
 
     .select-page 
       %span.choice-page
