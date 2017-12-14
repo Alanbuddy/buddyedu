@@ -24,15 +24,16 @@
         %p.f24b= $item->course->name 
         %p.f12a.mt16= $item->point->name 
       .money-div
-        %span.f24c.mr8 ￥2400
+        %span.f24c.mr8= "￥".$item->course->price
         %span.f12a (75%分成)
     .info-div.f14d
       .p-div
         %span 授课老师：
-        %span 某老师、某某老师
+        - foreach ($item->teachers as $teacher)
+          %span.teacher= $teacher->name
       .p-div
         %span 报名人数：
-        // %span= $item->students_count."/".$item->quota
+        %span= $item->students_count."/".$item->quota
         %span.ml80 课程进度：
         %span 0/36
       .p-div

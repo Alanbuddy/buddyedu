@@ -1,7 +1,7 @@
 $(document).ready(function(){
   function search(){
     var value = $("#search-input").val();
-    location.href = window.course_search + "?key=" + value + "?type=finished";
+    location.href = window.course_search + "?key=" + value + "&type=finished";
   }
     
   $("#search-btn").click(function(){
