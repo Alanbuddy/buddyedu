@@ -35,7 +35,7 @@
         %span=$course->description
       .p-div
         %span.left-span 课程介绍：
-        %span.right-span =$course->detail
+        %span.right-span !=$course->detail
   
 @endsection
 
