@@ -27,16 +27,17 @@
         %thead.f14b.th-bg
           %tr
             %th 手机号
-            %th 学院姓名
-            %th 学院年龄
+            %th 学生姓名
+            %th 学生年龄
             %th 报名时间
             %th 报名状态
         %tbody
+        -foreach($items as $item)
           %tr
-            %td 13244556633
-            %td 某某
-            %td 7岁
-            %td 2017.12.01 14:13:12
+            %td=$item->phone
+            %td=$item->name
+            %td=(date('Y')-date('Y',strtotime($item->birthday))).'岁'
+            %td=$item->pivot->created_at
             %td.green 已支付
             // %td.orange 待付款
 
