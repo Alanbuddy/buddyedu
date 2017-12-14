@@ -29,5 +29,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.sass('resources/assets/sass/student-product.scss', 'public/css')
 	.sass('resources/assets/sass/student-course.scss', 'public/css')
 	.sass('resources/assets/sass/student-course-review.scss', 'public/css')
+	.sass('resources/assets/sass/mobile-course-show.scss', 'public/css')
 	.sass('resources/assets/sass/class_info.scss', 'public/css');
    // .sass('resources/assets/sass/app.scss', 'public/css');

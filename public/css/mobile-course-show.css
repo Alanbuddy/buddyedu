@@ -1,0 +1,130 @@
+.title-div {
+  position: relative;
+  background: #365ba9;
+  height: 2rem;
+  padding-top: 0.6rem;
+  padding-left: 0.32rem;
+}
+
+.color1 {
+  color: #fff;
+}
+
+.color2 {
+  color: #365ba9;
+}
+
+.color3 {
+  color: #5d6578;
+}
+
+.mt20 {
+  margin-top: 0.2rem;
+}
+
+.comment-icon {
+  position: absolute;
+  top: 0.56rem;
+  right: 0.12rem;
+  width: 0.88rem;
+}
+
+.content-div {
+  padding: 0.32rem;
+}
+
+.address-div {
+  margin-bottom: 0.8rem;
+}
+
+.address-div img {
+  width: 0.32rem;
+  margin-right: 0.08rem;
+}
+
+.address-div .time {
+  margin-bottom: 0.2rem;
+}
+
+.address-div span {
+  display: inline-block;
+  width: 90%;
+  vertical-align: top;
+}
+
+.teacher-icon {
+  width: 0.96rem;
+  margin-right: 0.24rem;
+  float: left;
+}
+
+.teacher-info {
+  margin-top: 0.32rem;
+}
+
+.teacher-introduction {
+  margin-top: 0.1rem;
+}
+
+.course-div {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.course-info {
+  margin-top: 0.32rem;
+}
+
+.location-div {
+  margin-bottom: 0.48rem;
+}
+
+.location-map {
+  margin-top: 0.32rem;
+  width: 6.84rem;
+  height: 3.91rem;
+}
+
+.footer-div {
+  display: -o-flex;
+  display: -os-flex;
+  display: -moz-flex;
+  -webkit-justify-content: space-between;
+  -o-justify-content: space-between;
+  -os-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -webkit-align-items: center;
+  -o-align-items: center;
+  -os-align-items: center;
+  -moz-align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1.2rem;
+  padding: 0 0.32rem;
+  -webkit-box-shadow: 0 -0.08rem 0 rgba(51, 58, 72, 0.08);
+          box-shadow: 0 -0.08rem 0 rgba(51, 58, 72, 0.08);
+}
+
+.click-btn,
+.gray-btn {
+  width: 3.2rem;
+  padding: 0;
+  background: #365ba9;
+  line-height: 0.8rem;
+}
+
+#end_btn {
+  color: #fff;
+}
+
+.gray-btn {
+  background: #8c929f;
+}
+

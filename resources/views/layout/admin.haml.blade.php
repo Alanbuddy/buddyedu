@@ -26,7 +26,7 @@
           .sidebar
             %ul
               %li
-                %a.active_li{href: route('schedules.index')}
+                %a.a-item{href: route('schedules.index')}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.f16c.sidebar-title 开课情况
               %li
