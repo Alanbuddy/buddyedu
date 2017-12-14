@@ -55,43 +55,47 @@ class ScheduleController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->get('type') == 'finished') {
-            return $this->finished($request);
-        }
         $user = auth()->user();
         $isAdmin = $user->hasRole('admin');
+        $finished = $request->get('type') == 'finished';
+        $key = $request->get('key');
         if ($isAdmin) {
-            $items = Schedule::where('schedules.end', '>', Carbon::now()->toDateString())
+            $items = Schedule::where('schedules.end', $finished ? '<' : '>', date('Y-m-d H:i:s'))
                 ->with(['course', 'point', 'merchant', 'teachers'])
                 ->withCount('students')
-                ->orderBy('id', 'desc')
-                ->paginate(10);
+                ->orderBy('id', 'desc');
         } else {
             $items = auth()->user()->ownMerchant
-                ->schedules()
-                ->paginate(10);
+                ->schedules();
         }
-        return view($isAdmin ? 'admin.course.course-list' : 'agent.course.index', compact('items'));
+        if ($key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($key) {
+            $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
+        }
+        return view($isAdmin ? ($finished ? 'admin.course.histroy-course' : 'admin.course.course-list') : 'agent.course.index', compact('items', 'key'));
     }
 
-    /**
-     * 历史开课
-     * /schedules?type=finished
-     */
-    public function finished()
-    {
-        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
-            ->paginate(10);
-        return view('admin.course.histroy-course', compact('items'));
-    }
-
-    public function search(Request $request)
-    {
-        $key = $request->get('key');
-        $isHistory = $request->get('type');
-        $items = [];
-        return view('admin.course.course-search', compact('items', 'key'));
-    }
+//    /**
+//     * 历史开课
+//     * /schedules?type=finished
+//     */
+//    public function finished()
+//    {
+//        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())
+//            ->paginate(10);
+//        return view('admin.course.histroy-course', compact('items'));
+//    }
+//
+//    public function search(Request $request)
+//    {
+//        $key = $request->get('key');
+//        $isHistory = $request->get('type');
+//        $items = [];
+//        return view('admin.course.course-search', compact('items', 'key'));
+//    }
 
     /**
      * Show the form for creating a new resource.
