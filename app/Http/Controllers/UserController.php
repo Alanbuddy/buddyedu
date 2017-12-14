@@ -214,11 +214,10 @@ class UserController extends Controller
             ->get();
 //        dd($genderDistribution->all());
         $ageDistribution=$this->queryStudent()
-            ->select(DB::raw('count(\'gender\') as count'))
-            ->addSelect('birthday')
-            ->groupBy('birthday')
+            ->select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'))
+            ->groupBy('age')
             ->get();
-        dd($ageDistribution->all());
+//        dd($ageDistribution->all());
 
 
         return view('admin.statistic.index', compact('count', 'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right'));
