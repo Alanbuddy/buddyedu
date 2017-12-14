@@ -303,13 +303,14 @@ class OrderController extends Controller
             }])
             ->withCount('schedules')
             ->addSelect('courses.id as cid')
+            ->addSelect(DB::raw('('.Schedule::join('courses','courses.id','schedules.course_id')->join('schedule','users.id','')->toSql()).' where courses.id=cid as bbb')
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and courses.id=cid ) as ongoingStudentCount'))
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and courses.id=cid ) as studentCount'))
             ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid ) as income'))
             ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
 
         if ($key) {
-            $query->where('merchants.name', 'like', "%$key%");
+            $query->where('courses.name', 'like', "%$key%");
         }
         $items = $query->paginate(10);
         $queryParameter = compact('left', 'right');
