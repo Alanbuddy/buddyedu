@@ -9,7 +9,7 @@
   .title-div
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 课程授权 >
-    %span.f16a.title Buddy动物园
+    %span.f16a.title=$course->name
 
   .tab-title
     %ul.clearfix

@@ -172,8 +172,9 @@ class CourseController extends Controller
     {
         $items = $course->comments()
             ->orderBy('id', 'desc')
+            ->with('user')
             ->paginate();
-        return view('admin.auth-course.review', compact('items'));
+        return view('admin.auth-course.review', compact('items','course'));
 
     }
 }
