@@ -43,6 +43,5 @@ class Schedule extends Model
         return $this->hasMany(Attendance::class);
     }
 
-
 }
 

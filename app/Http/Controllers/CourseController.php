@@ -43,7 +43,7 @@ class CourseController extends Controller
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
 
-        return view($isAdmin ? 'admin.auth-course.index' :($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'), compact('items', 'count'));
+        return view($isAdmin ? 'admin.auth-course.index' : ($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'), compact('items', 'count'));
     }
 
 
@@ -95,7 +95,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('admin.auth-course.auth-info',compact('course'));
+        return view('admin.auth-course.auth-info', compact('course'));
     }
 
     /**
@@ -154,6 +154,18 @@ class CourseController extends Controller
      */
     public function merchants(Course $course)
     {
-        return $course->merchants()->get();
+        $items = $course->merchants()
+            ->orderBy('id', 'desc')
+            ->paginate();
+        return view('admin.auth-course.show', compact('items'));
+    }
+
+    public function comments(Course $course)
+    {
+        $items = $course->comments()
+            ->orderBy('id', 'desc')
+            ->paginate();
+        return view('admin.auth-course.review', compact('items'));
+
     }
 }
