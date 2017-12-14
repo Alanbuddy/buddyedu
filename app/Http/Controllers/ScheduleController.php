@@ -156,9 +156,9 @@ class ScheduleController extends Controller
      * @param  \App\Models\Schedule $schedule
      * @return \Illuminate\Http\Response
      */
-    public function show($schedule)
+    public function show(Schedule $schedule)
     {
-        $item = Schedule::findOrFail($schedule)->with('course')->get();
+        $item = $schedule;
         return view('admin.course.course-info', compact('item'));
     }
 
