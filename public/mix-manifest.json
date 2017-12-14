@@ -17,5 +17,6 @@
     "/css/student-product.css": "/css/student-product.css",
     "/css/student-course.css": "/css/student-course.css",
     "/css/student-course-review.css": "/css/student-course-review.css",
+    "/css/mobile-course-show.css": "/css/mobile-course-show.css",
     "/css/class_info.css": "/css/class_info.css"
 }

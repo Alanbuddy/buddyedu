@@ -71,7 +71,7 @@ class ScheduleController extends Controller
                 ->schedules()
                 ->paginate(10);
         }
-        return view($isAdmin ? 'schedule.course-list' : 'agent.course.index', compact('items'));
+        return view($isAdmin ? 'admin.course.course-list' : 'agent.course.index', compact('items'));
     }
 
     /**
