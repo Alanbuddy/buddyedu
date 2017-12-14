@@ -10,7 +10,7 @@
   .title-div
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 课程授权 >
-    %span.f16a.title Buddy动物园
+    %span.f16a.title=$course->name
 
   .tab-title
     %ul.clearfix
@@ -22,7 +22,7 @@
     .name-money
       .name-div
         %img.icon{src: "/icon/bird.png"}
-        %span.f24b　Buddy动物园
+        %span.f24b=$course->name
       .money-div
         %span.f24c.mr8='￥'.$course->price
         %span.f12a=($course->proportion*100).'%分成'
