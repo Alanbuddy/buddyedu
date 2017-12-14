@@ -30,18 +30,27 @@ class AttendanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $attendance = new Attendance($request->only([
+            'schedule_id',
+            'merchant_id',
+            'ordinal_no',
+            'point_id',
+            'student_id',
+        ]));
+        $attendance->teacher_id = auth()->user()->id;
+        $attendance->save();
+        return ['success' => true];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function show(Attendance $attendance)
@@ -52,7 +61,7 @@ class AttendanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function edit(Attendance $attendance)
@@ -63,8 +72,8 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Attendance $attendance)
@@ -75,7 +84,7 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function destroy(Attendance $attendance)

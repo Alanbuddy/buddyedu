@@ -22,6 +22,7 @@ class signIn extends TestCase
             'schedule_id' => 1,
             'point_id' => 1,
             'merchant_id' => 1,
+            'ordinal_no'=>2,
             'api_token'=>auth()->user()->api_token
         ]);
         $response->assertStatus(200);
