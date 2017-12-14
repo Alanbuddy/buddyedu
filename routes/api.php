@@ -29,7 +29,7 @@ Route::middleware(['auth:api'])
             Route::resource('files', 'FileController');
             Route::get('/schedules', 'ScheduleController@latest')->name('api.merchants.schedules.latest4');
             Route::get('/schedules/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
-
+            Route::post('/schedules/sign-in', 'ScheduleController@signIn')->name('schedule.signIn');//签到
             Route::get('/schedules/attendances', 'ScheduleController@attendances')->name('schedule.attendances');
         });
 

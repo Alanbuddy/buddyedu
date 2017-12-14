@@ -9,7 +9,7 @@
   .title-div
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 课程授权 >
-    %span.f16a.title Buddy动物园
+    %span.f16a.title=$course->name
 
   .tab-title
     %ul.clearfix
@@ -33,10 +33,11 @@
             %th 评论内容
             %th{colspan: 2} 操作
         %tbody
+        -foreach($items as $item)
           %tr
-            %td 学生姓名
+            %td=$item->user->name
             %td 某一机构名称
-            %td 机构里面的环境很好，上课氛围非常好
+            %td=$item->content
             %td#green 展示
             %td.f12e 隐藏
             

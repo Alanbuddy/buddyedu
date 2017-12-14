@@ -107,7 +107,7 @@ class MerchantController extends Controller
      */
     public function show(Merchant $merchant)
     {
-        //
+        return  view('admin.org-manage.show',compact('merchant'));
     }
 
     /**

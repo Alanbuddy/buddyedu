@@ -33,11 +33,12 @@
             %th 当前报名人数/历史报名人数
             %th 操作
         %tbody
-          %tr
-            %td 某一机构名称
-            %td １/5
-            %td 12/75
-            %td.red 取消授权
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->ongoingSchedulesCount.'/'.$item->schedules_count
+              %td=$item->ongoingStudentsCount.'/'.$item->studentsCount
+              %td.red 取消授权
 
     .select-page 
       %span.choice-page
