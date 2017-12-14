@@ -45,7 +45,7 @@ Route::middleware('auth')
         Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
-        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
+//        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
         Route::resource('schedules', 'ScheduleController');
 

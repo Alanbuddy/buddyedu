@@ -69,7 +69,8 @@ class ScheduleController extends Controller
                 ->schedules();
         }
         if ($key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
+            $items->join('courses','courses.id','=','schedules.course_id')
+            ->where('courses.name', 'like', '%' . $request->get('key') . '%');
         }
         $items = $items->paginate(10);
         if ($key) {
