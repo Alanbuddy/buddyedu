@@ -15,7 +15,7 @@
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('schedule.search')} 当前开课(5)
+        %a.f14c{href: route('schedules.index')} 当前开课(5)
       %li.f14a.bg16b 历史开课(3)
 
   .desc-div

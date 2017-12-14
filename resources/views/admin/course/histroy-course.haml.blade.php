@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('css')
 :javascript
-  window.course_search = "#{route('schedule.index')}"
+  window.course_search = "#{route('schedules.index')}"
 @endsection
 
 @section('content')

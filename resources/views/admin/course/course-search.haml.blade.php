@@ -16,7 +16,7 @@
     %ul.clearfix
       %li.f14a.bg16b 当前开课(5)
       %li
-        %a.f14c{href: route('schedule.search')."?type=history"} 历史开课(3)
+        %a.f14c{href: route('schedules.index')."?type=history"} 历史开课(3)
 
   .desc-div
     - if(count($items) == 0) 
