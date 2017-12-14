@@ -23,16 +23,16 @@
       %img.add-icon{src: "/icon/add.png"}  
   
   .desc-div.clearfix
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    -foreach($items as $item)
-      .frame-div
-        %img.course-icon{src: $item->icon??'icon/bird.png'}
-        %p.course-name.f16b=$item->name
-        %p.f12b=$item->merchants_count.'机构已添加'
-        %p.mt24.f12b=$item->description??'没有简介'
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      -foreach($items as $item)
+        .frame-div
+          %img.course-icon{src: $item->icon??'icon/bird.png'}
+          %p.course-name.f16b=$item->name
+          %p.f12b=$item->merchants_count.'机构已添加'
+          %p.mt24.f12b=$item->description??'没有简介'
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
