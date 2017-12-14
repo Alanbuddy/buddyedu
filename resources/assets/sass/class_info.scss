@@ -43,8 +43,10 @@
 }
 .icon {
   width: 64px;
+  height: 64px;
   border: 1px solid #e4f3ff;
   border-radius: 8px;
+  margin-right: 16px;
 }
 .f24b {
   vertical-align: middle;
@@ -82,6 +84,10 @@
 .teacher {
   margin-right: 8px;
 }
-
+.course-desc {
+  display: inline-block;
+  width: 85%;
+  vertical-align: top;
+}
 
 

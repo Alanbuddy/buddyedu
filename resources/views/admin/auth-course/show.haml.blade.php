@@ -35,8 +35,7 @@
             %td 某一机构名称
             %td １/5
             %td 12/75
-            %td
-              %img{src:"/icon/delete.png"}
+            %td.red 取消授权
 
     .select-page 
       %span.choice-page

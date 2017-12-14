@@ -15,8 +15,10 @@
   .tab-title
     %ul.clearfix
       %li.f14a.bg16b 课程信息
-      %li.f14c='授权机构('.$course->merchants()->count().')'
-      %li.f14c='评论查看('.$course->comments()->count().')'
+      %li
+        %a.f14c{href: route('course.merchant')}='授权机构('.$course->merchants()->count().')'
+      %li
+        %a.f14c{href: route('course.comment')}='评论查看('.$course->comments()->count().')'
 
   .desc-div
     .name-money
@@ -25,18 +27,18 @@
         %span.f24b=$course->name
       .money-div
         %span.f24c.mr8='￥'.$course->price
-        %span.f12a=($course->proportion*100).'%分成'
+        %span.f12a= "(".($course->proportion*100).'%分成)'
     .info-div.f14d
       .p-div
         %span 课程网站：
         %span=$course->url
       .p-div
         %span 课程简介：
-        %span=$course->description
+        %span.course-desc=$course->description
       .p-div
         %span.left-span 课程介绍：
-        %span.right-span !=$course->detail
-  
+        %span.right-span!= $course->detail
+
 @endsection
 
 @section('script')
