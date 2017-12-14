@@ -306,24 +306,34 @@ class OrderController extends Controller
             ->withCount(['schedules as ongoingSchedules_count' => function ($query) {
                 $query->where('end', '>', date('Y-m-d H:i:s'));
             }])
-            ->withCount(['schedules' => function ($query) {
-                $query->where('end', '<', date('Y-m-d H:i:s'));
-            }])
-//            ->select('*');
+            ->withCount('schedules')
             ->addSelect('merchants.id as mid')
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and merchants.id=mid ) as ongoingStudentCount'))
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid ) as studentCount'))
-            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid ) as income'))
-            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedule_user.type=\'student\' and schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and merchants.id=mid ) as ongoingStudentCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join merchants on merchants.id=schedules.merchant_id where schedule_user.type=\'student\' and merchants.id=mid ) as studentCount'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid and orders.status=\'paid\') as income'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join merchants on merchants.id=schedules.merchant_id where merchants.id=mid and orders.status=\'paid\' and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
         $items = $query->paginate(10);
 //        dd($items);
         return view('admin.amount.index', compact('items'));
 
     }
 
-    public function statGroupByCourse()
+    public function statGroupByCourse(Request $request)
     {
+        list($left, $right) = $this->getRange($request);
+        $query=Course::orderBy('id','desc')
+            ->withCount(['schedules as ongoingSchedules_count' => function ($query) {
+                $query->where('end', '>', date('Y-m-d H:i:s'));
+            }])
+            ->withCount('schedules')
+            ->addSelect('courses.id as cid')
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and schedules.end > date_format(now(),\'%Y-%m-%d %H:%i:%s\') and courses.id=cid ) as ongoingStudentCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id join courses on courses.id=schedules.course_id where schedule_user.type=\'student\' and courses.id=cid ) as studentCount'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid ) as income'))
+            ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
 
+        $items=$query->paginate(10);
+        return view('admin.amount.course-amount', compact('items'));
     }
 
     public function merchantTransactions(Request $request, Merchant $merchant)

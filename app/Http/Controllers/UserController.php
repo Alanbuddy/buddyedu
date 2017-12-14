@@ -44,14 +44,20 @@ class UserController extends Controller
 
     }
 
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
         $items = Role::where('name', 'merchant')
             ->first()->users()
-            ->orderBy('users.id', 'desc')
-            ->paginate(10);
+            ->orderBy('users.id', 'desc');
+        if ($request->has('key')) {
+            $items->where('name', 'like', '%' . $request->key . '%')
+                ->orWhere('phone', 'like', '%' . $request->key . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->has('key')) {
+            $items->withPath(route('admins.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
         return view('admin.user.index', compact('items'));
-
     }
 
     public function teacherIndex(Request $request)
@@ -176,5 +182,10 @@ class UserController extends Controller
             ->get();
         return $items;
         return view('', compact('items'));
+    }
+
+    public function statistics(Request $request)
+    {
+        return view('admin.statistic.index');
     }
 }

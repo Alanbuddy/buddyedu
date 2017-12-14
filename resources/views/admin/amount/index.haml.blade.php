@@ -58,8 +58,8 @@
             %td=$item->name
             %td=$item->ongoingSchedules_count.'/'.$item->schedules_count
             %td=$item->ongoingStudentCount.'/'.$item->studentCount
-            %td='￥'.$item->incomeOfSelectedRange
-            %td.f12a='￥'.$item->income
+            %td='￥'.($item->incomeOfSelectedRange??'0')
+            %td.f12a='￥'.($item->income??'0')
 
     .select-page 
       %span.choice-page
