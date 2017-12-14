@@ -105,7 +105,6 @@ a:hover {
 .f16c {
   font-size: 1.6em;
   color: #5d6578;
-  font-weight: bold;
 }
 .f16d {
   font-size: 1.6em;
@@ -278,6 +277,8 @@ a:hover {
   height: 40px;
   line-height: 40px;
   margin-left: 30px;
+  color: #5d6578;
+  font-size: 1.6em;
 }
 .active_li {
   display: inline-block;
@@ -289,6 +290,8 @@ a:hover {
   line-height: 40px;
   margin-left: 14px;
   text-align: center;
+  color: #365ba9;
+  font-size: 1.6em;
 }
 .sidebar-title {
   vertical-align: middle;
