@@ -158,7 +158,7 @@ class ScheduleController extends Controller
      */
     public function show($schedule)
     {
-        $item = Schedule::find($schedule)->with('course')->get();
+        $item = Schedule::findOrFail($schedule)->with('course')->get();
         return view('admin.course.course-info', compact('item'));
     }
 
