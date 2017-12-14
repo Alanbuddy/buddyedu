@@ -95,7 +95,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return $course;
+        return view('admin.auth-course.auth-info',compact('course'));
     }
 
     /**
