@@ -15,8 +15,8 @@
   .tab-title
     %ul.clearfix
       %li.f14a.bg16b 课程信息
-      %li.f14c 授权机构(4)
-      %li.f14c 评论查看(16)
+      %li.f14c='授权机构('.$course->merchants()->count().')'
+      %li.f14c='评论查看('.$course->comments()->count().')'
 
   .desc-div
     .name-money
