@@ -14,8 +14,8 @@
   .tab-title
     %ul.clearfix
       %li.f14c 课程信息
-      %li.f14a.bg16b 授权机构(4)
-      %li.f14c 评论查看(16)
+      %li.f14a.bg16b="授权机构(".$items->total().")"
+      %li.f14c='评论查看('.$course->comments()->count().')'
 
   .desc-div
     // - if(count($items) == 0) 
@@ -31,11 +31,12 @@
             %th 当前报名人数/历史报名人数
             %th 操作
         %tbody
-          %tr
-            %td 某一机构名称
-            %td １/5
-            %td 12/75
-            %td.red 取消授权
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->ongoingSchedulesCount.'/'.$item->schedules_count
+              %td=$item->ongoingStudentsCount.'/'.$item->studentsCount
+              %td.red 取消授权
 
     .select-page 
       %span.choice-page

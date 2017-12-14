@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -155,9 +156,16 @@ class CourseController extends Controller
     public function merchants(Course $course)
     {
         $items = $course->merchants()
+            ->withCount(['schedules as ongoingSchedulesCount' => function ($query) {
+                $query->where('end', '>', date('Y-m-d H:i:s'));
+            }])
+            ->withCount('schedules')
+            ->addSelect('merchants.id as mid')
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\' and end > date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as ongoingStudentsCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\') as studentsCount'))
             ->orderBy('id', 'desc')
-            ->paginate();
-        return view('admin.auth-course.show', compact('items'));
+            ->paginate(10);
+        return view('admin.auth-course.show', compact('items','course'));
     }
 
     public function comments(Course $course)
