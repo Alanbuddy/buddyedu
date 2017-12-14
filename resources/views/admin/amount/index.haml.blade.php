@@ -19,16 +19,16 @@
   .items-div
     .item-div
       %p.f16c 所选时段内收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfSelectedRange/100,2)
     .item-div
       %p.f16c 本日收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfToday/100,2)
     .item-div
       %p.f16c 本周收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfThisWeek/100,2)
     .item-div
       %p.f16c 收入总额
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($income/100,2)
   
   .tab-title
     %ul.clearfix

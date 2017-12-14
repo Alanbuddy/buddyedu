@@ -254,9 +254,9 @@ class OrderController extends Controller
         $income = Order::where('status', 'paid')
             ->sum('amount');
 
-        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
 //        dd($items, $incomeOfToday, $incomeOfThisWeek, $income);
-        return view('admin.statistics.amount', compact('items'));
+//        return view('admin.statistics.amount', compact('items'));
+        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
     }
 
     public function getRange(Request $request)
@@ -289,7 +289,7 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-merchant') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.index', compact('items'));
+        return view('admin.amount.index', array_merge($this->statistics($request),compact('items')));
 
     }
 
@@ -309,14 +309,14 @@ class OrderController extends Controller
             ->addSelect(DB::raw('(select sum(round(amount/100,2)) from orders join schedules on schedules.id=product_id join courses on courses.id=schedules.course_id where courses.id=cid and orders.created_at > \'' . $left . '\' and orders.created_at <\'' . $right . '\') as incomeOfSelectedRange'));
 
         if ($key) {
-            $query->where('merchants.name', 'like', "%$key%");
+            $query->where('courses.name', 'like', "%$key%");
         }
         $items = $query->paginate(10);
         $queryParameter = compact('left', 'right');
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-course') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.course-amount', compact('items'));
+        return view('admin.amount.course-amount',array_merge($this->statistics($request),compact('items')));
     }
 
     public function merchantTransactions(Request $request, Merchant $merchant)

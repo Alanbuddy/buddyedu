@@ -19,16 +19,16 @@
   .items-div
     .item-div
       %p.f16c 所选时段内新增学员
-      %p.f24b.mt16 3,000
+      %p.f24b.mt16=$countOfSelectedRange
     .item-div
       %p.f16c 本日新增学员
-      %p.f24b.mt16 30
+      %p.f24b.mt16=$countOfToday
     .item-div
       %p.f16c 本周新增学员
-      %p.f24b.mt16 300
+      %p.f24b.mt16=$countOfThisWeek
     .item-div
       %p.f16c 学员总数
-      %p.f24b.mt16 13,000
+      %p.f24b.mt16=$count
   .desc-div
     .kids-nums
       %p.column-title.f14a 所选时段内学员总数变化

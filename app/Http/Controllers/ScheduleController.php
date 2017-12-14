@@ -69,13 +69,12 @@ class ScheduleController extends Controller
                 ->schedules();
         }
         if ($key) {
-            $items->join('courses','courses.id','=','schedules.course_id')
-            ->where('courses.name', 'like', '%' . $request->get('key') . '%');
+            $items->join('courses', 'courses.id', '=', 'schedules.course_id')
+                ->where('courses.name', 'like', "%$key%");
         }
         $items = $items->paginate(10);
-        if ($key) {
+        if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
-        }
         return view($isAdmin ? ($finished ? 'admin.course.histroy-course' : 'admin.course.course-list') : 'agent.course.index', compact('items', 'key'));
     }
 
