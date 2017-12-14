@@ -37,6 +37,19 @@ class Merchant extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    public function ongoingSchedules()
+    {
+        return $this->hasMany(Schedule::class)
+            ->where('end','>',date('Y-m-d H:i:s'));
+    }
+
+    public function finishedSchedules()
+    {
+        return $this->hasMany(Schedule::class)
+            ->where('end','<',date('Y-m-d H:i:s'));
+    }
+
+
     public function points()
     {
         return $this->hasMany(Point::class);

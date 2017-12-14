@@ -107,7 +107,12 @@ class MerchantController extends Controller
      */
     public function show(Merchant $merchant)
     {
-        return  view('admin.org-manage.show',compact('merchant'));
+        $items=$merchant->ongoingSchedules()
+            ->with('point')
+            ->with('teachers')
+            ->with('students')
+            ->paginate(10);
+        return  view('admin.org-manage.show',compact('merchant','items'));
     }
 
     /**
