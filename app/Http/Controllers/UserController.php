@@ -85,7 +85,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.student.show',compact('user'));
+        $items = $user->schedules()
+            ->with('point', 'merchant', 'course', 'teachers');
+
+        $items = $items->paginate(10);
+        return view('admin.student.show', compact('items', 'user'));
     }
 
     public function notifications()
