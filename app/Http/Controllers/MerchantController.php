@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Merchant;
 use App\Models\Point;
 use App\Models\Role;
+use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Provider\Uuid;
@@ -293,12 +294,17 @@ class MerchantController extends Controller
 
     public function scheduleApplications()
     {
-        $merchant = $this->getMerchant();
-        $items = $merchant->schedules()
+        $isAdmin = $this->isAdmin();
+        if ($isAdmin) {
+            $items = Schedule::orderBy('id', 'desc');
+        } else {
+            $merchant = $this->getMerchant();
+            $items = $merchant->schedules();
+        }
+        $items = $items->orderBy('id', 'desc')
             ->with('course')
-            ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('agent.notice.course-apply', compact('items'));
+        return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply', compact('items'));
     }
 
     public function pointApplications()
@@ -316,6 +322,5 @@ class MerchantController extends Controller
 //        dd($items);
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
-
 
 }
