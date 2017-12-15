@@ -207,20 +207,46 @@ class UserController extends Controller
             ->count();
         $count = $this->queryStudent()
             ->count();
-        $genderDistribution=$this->queryStudent()
+        $genderDistribution = $this->queryStudent()
             ->select(DB::raw('count(\'gender\') as count'))
             ->addSelect('gender')
             ->groupBy('gender')
             ->get();
 //        dd($genderDistribution->all());
-        $ageDistribution=$this->queryStudent()
+        $ageDistribution = $this->queryStudent()
             ->select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'))
             ->groupBy('age')
+            ->addSelect(DB::raw('count(*) as count'))
             ->get();
-//        dd($ageDistribution->all());
+        $arr = [];
+        foreach (range($ageDistribution->min('age'), $ageDistribution->max('age')) as $item) {
+            $arr[$item] = 0;
+        }
+        foreach ($ageDistribution as $item) {
+            $arr[$item->age] = $item->count;
+        }
+        $ageDistribution = $arr;
+
+        $growingDistribution = $this->queryStudent()
+            ->select(DB::raw('weekofyear(created_at) as week'))
+            ->addSelect(DB::raw('count(*) as count'))
+            ->groupBy('week')
+            ->get();
+        $firstWeek = date('W', strtotime($left));
+        $lastWeek = date('W', strtotime($right));
+        $arr = [];
+        foreach (range($firstWeek, $lastWeek) as $number) {
+            $arr[$number] = 0;
+        }
+        foreach ($growingDistribution as $item) {
+            $arr[$item->week] = $item->count;
+        }
+//        dd($growingDistribution, $firstWeek, $lastWeek, $arr);
+        $growingDistribution = $arr;
 
 
-        return view('admin.statistic.index', compact('count', 'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right'));
+        return view('admin.statistic.index', compact('count',
+            'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right', 'ageDistribution', 'genderDistribution', 'growingDistribution'));
     }
 
     public function getRange(Request $request)

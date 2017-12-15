@@ -116,7 +116,7 @@ class MerchantController extends Controller
             ->with('teachers')
             ->with('students')
             ->paginate(10);
-        return view('admin.org-manage.show', compact('merchant', 'items','finished'));
+        return view('admin.org-manage.show', compact('merchant', 'items', 'finished'));
     }
 
     /**
@@ -193,9 +193,10 @@ class MerchantController extends Controller
      */
     public function courses(Merchant $merchant)
     {
-        return $merchant->courses()
+        $items = $merchant->courses()
             ->wherePivot('status', 'approved')
-            ->get();
+            ->paginate(10);
+        return view('admin.org-manage.course-auth', compact('items'));
     }
 
     public function getMerchant()
