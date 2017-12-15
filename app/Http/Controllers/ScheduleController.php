@@ -252,6 +252,12 @@ class ScheduleController extends Controller
         Log::debug(json_encode($arr));
         $items = User::whereIn('id', $arr)
             ->get();
+        $attendances=Schedule::findOrFail($request->schedule_id)
+            ->attendances()->where('ordinal_no',$request->ordinal_no)
+            ->select('student_id')
+            ->get();
+        dd($attendances->whereNotIn('student_id',$request->students));
+//        dd($attendances);
         foreach ($items as $item) {
             $attendance = new Attendance();
             $attendance->fill(array_merge($request->only([
