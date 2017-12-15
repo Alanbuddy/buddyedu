@@ -281,7 +281,8 @@ class ScheduleController extends Controller
         if ($request->has('ordinal_no')) {
             $items = $schedule->students()
                 ->withCount(['attendances' => function ($query) use ($request) {
-                    $query->where('ordinal_no', $request->ordinal_no);
+                    $query->where('ordinal_no', $request->ordinal_no)
+                        ->where('schedule_id', $request->schedule_id);
                 }])
                 ->get();
         } else {
