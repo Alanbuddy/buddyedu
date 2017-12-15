@@ -301,10 +301,10 @@ class MerchantController extends Controller
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Schedule::orderBy('schedules.status', 'desc');
+            $items = Schedule::with('merchant');
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->schedules();
+            $items = $merchant->schedules()->with('merchant');
         }
         $items = $items->orderBy('schedules.id', 'desc')
             ->join('merchants', 'schedules.merchant_id', 'merchants.id');
@@ -321,15 +321,16 @@ class MerchantController extends Controller
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Point::orderBy('id', 'desc')
-                ->with('merchant');
+            $items = Point::with('merchant');
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->points()
+                ->with('merchant')
                 ->orderBy('id', 'desc');
         }
+        $items->join('merchants', 'merchants.id', 'points.merchant_id');
         if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
+            $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
         }
         $items = $items->paginate(10);
         if ($request->key)
