@@ -323,12 +323,13 @@ class OrderController extends Controller
     {
         $items=$this->ordersOfMerchant(auth()->user()->ownMerchant)
             ->paginate(10);
-        return view('',compact('items'));
+        return view('agent.amount.index',compact('items'));
     }
 
     private function ordersOfMerchant(Merchant $merchant)
     {
-        return $merchant ->orderBy('id', 'desc')
+        return $merchant ->orders()
+            ->orderBy('id', 'desc')
             ->where('orders.status', 'paid')
             ->with('schedule.course')
             ->with('schedule.point')

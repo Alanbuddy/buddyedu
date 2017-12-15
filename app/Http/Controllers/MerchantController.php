@@ -251,6 +251,17 @@ class MerchantController extends Controller
         return view('admin.org-manage.teacher', compact('items', 'merchant'));
     }
 
+    public function teacher(Request $request, Merchant $merchant, User $teacher)
+    {
+        $item=$teacher
+
+        return view('admin.org-mangage.teacher-show', $item);
+    }
+
+    public function user(Request $request, Merchant $merchant, User $user)
+    {
+        return view('');
+    }
 
     public function getMerchant()
     {

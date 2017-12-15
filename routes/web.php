@@ -65,6 +65,8 @@ Route::middleware('auth')
         Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');//开课授权
         Route::get('/merchants/{merchant}/points', 'MerchantController@points')->name('merchant.points');
         Route::get('/merchants/{merchant}/teachers', 'MerchantController@teachers')->name('merchant.teachers');
+        Route::get('/merchants/{merchant}/teachers/{teacher}', 'MerchantController@teacher')->name('merchant.teacher.show');
+        Route::get('/merchants/{merchant}/users/{user}', 'MerchantController@user')->name('merchant.user.show');
         Route::get('/merchants/{merchant}/orders', 'MerchantController@orders')->name('merchant.orders');
         Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
         Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
