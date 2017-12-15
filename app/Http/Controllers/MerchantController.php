@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Provider\Uuid;
+use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -194,10 +195,36 @@ class MerchantController extends Controller
     public function courses(Merchant $merchant)
     {
         $items = $merchant->courses()
+            ->orderBy('id','desc')
             ->wherePivot('status', 'approved')
             ->paginate(10);
-        return view('admin.org-manage.course-auth', compact('items'));
+        return view('admin.org-manage.course-auth', compact('items','merchant'));
     }
+
+    public function points(Merchant $merchant)
+    {
+        $items=$merchant->points()
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return view('admin.org-manage.edu-location', compact('items','merchant'));
+    }
+
+    public function orders(Merchant $merchant)
+    {
+        $items=$merchant->orders()
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return view('admin.org-manage.amount', compact('items','merchant'));
+    }
+
+    public function teachers(Merchant $merchant)
+    {
+        $items=$merchant->teachers()
+            ->orderBy('id','desc')
+            ->paginate(10);
+        return view('admin.org-manage.course-auth', compact('items','merchant'));
+    }
+
 
     public function getMerchant()
     {
@@ -254,14 +281,5 @@ class MerchantController extends Controller
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
 
-    /**
-     * get 教学点
-     * @param Merchant $merchant
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function points(Merchant $merchant)
-    {
-        return $merchant->points()->get();
-    }
 
 }
