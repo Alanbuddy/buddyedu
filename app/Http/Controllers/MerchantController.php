@@ -268,7 +268,7 @@ class MerchantController extends Controller
         return auth()->user()->ownMerchant;
     }
 
-    public function courseApplications()
+    public function courseApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
@@ -288,26 +288,36 @@ class MerchantController extends Controller
             $items = $merchant->courses()
                 ->orderBy('id', 'desc');
         }
+        if ($request->key) {
+            $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
+        }
         $items = $items->paginate(10);
+        if ($request->key)
+            $items->withPath(route('merchant.course.application') . '?' . http_build_query(['key' => $request->key,]));
         return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course', compact('items'));
     }
 
-    public function scheduleApplications()
+    public function scheduleApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Schedule::orderBy('id', 'desc');
+            $items = Schedule::orderBy('schedules.status', 'desc');
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->schedules();
         }
-        $items = $items->orderBy('id', 'desc')
-            ->with('course')
-            ->paginate(10);
+        $items = $items->orderBy('schedules.id', 'desc')
+            ->join('merchants', 'schedules.merchant_id', 'merchants.id');
+        if ($request->key) {
+            $items->where('merchants.name', 'like', '%' . $request->key . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key)
+            $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
         return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply', compact('items'));
     }
 
-    public function pointApplications()
+    public function pointApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
@@ -318,8 +328,12 @@ class MerchantController extends Controller
             $items = $merchant->points()
                 ->orderBy('id', 'desc');
         }
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
         $items = $items->paginate(10);
-//        dd($items);
+        if ($request->key)
+            $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
 
