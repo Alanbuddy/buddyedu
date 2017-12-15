@@ -12,19 +12,19 @@
     %span.f16a.title 合作机构 >
     %span.f16a.title=$merchant->name
   .items-div
-    .item-div
+    %a.item-div{href:  route('merchant.courses')}
       %p.f16c 授权课程
       %p.f24b.mt16=$merchant->courses()->wherePivot('status','approved')->count().'门'
       %img{src: "/icon/more.png"} 
-    .item-div
+    %a.item-div{href:  route('merchant.courses')}
       %p.f16c 教学点
       %p.f24b.mt16=$merchant->points()->count().'个'
       %img{src: "/icon/more.png"}
-    .item-div
+    %a.item-div{href:  route('merchant.courses')}
       %p.f16c 授权老师
       %p.f24b.mt16=$merchant->teachers()->count().'位'
       %img{src: "/icon/more.png"}
-    .item-div
+    %a.item-div{href:  route('merchant.courses')}
       %p.f16c 收入总额
       %p.f24b.mt16='￥'.round($merchant->orders()->sum('amount')/100,2)
       %img{src: "/icon/more.png"}
@@ -33,7 +33,7 @@
       %ul.clearfix
         %li.f14a.bg16b='当前开课('.$merchant->ongoingSchedules()->count().')'
         %li
-          %a.f14c{href: route('merchants.show', $merchant)}='历史开课('.$merchant->finishedSchedules()->count().')'
+          %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
     -else
       %ul.clearfix
         %li
@@ -83,6 +83,5 @@
 @endsection
 
 @section('script')
-
 
 @endsection
