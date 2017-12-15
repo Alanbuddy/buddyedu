@@ -222,7 +222,7 @@ class MerchantController extends Controller
         $items=$merchant->teachers()
             ->orderBy('id','desc')
             ->paginate(10);
-        return view('admin.org-manage.course-auth', compact('items','merchant'));
+        return view('admin.org-manage.teachers', compact('items','merchant'));
     }
 
 
