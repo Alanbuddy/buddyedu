@@ -13,39 +13,42 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14c 添加课程(23)
-      %li.f14c 添加教学点(15)
-      %li.f14a.bg16b 开课申请(15)
+      %li
+        %a.f14c{href: route('merchant.course.application')} 添加课程
+      %li
+        %a.f14c{href: route('merchant.point.application')} 添加教学点
+      %li.f14a.bg16b='开课申请('.$items->total().')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}
       
   
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 申请机构
-            %th 申请课程
-            %th 负责人
-            %th 联系方式
-            %th{colspan: 2} 操作
-        %tbody
-          %tr
-            %td 某一机构名称
-            %td 这是一门课的名称
-            %td 负责人名字
-            %td 13211122334
-            %td#green 通过
-            %td.f12e 驳回
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 申请机构
+              %th 申请课程
+              %th 负责人
+              %th 联系方式
+              %th{colspan: 2} 操作
+          %tbody
+            %tr
+              %td 某一机构名称
+              %td 这是一门课的名称
+              %td 负责人名字
+              %td 13211122334
+              %td#green 通过
+              %td.f12e 驳回
 
-    .select-page 
-      %span.choice-page
+      .select-page 
+        %span.choice-page
+          != $items->links()
 
   
 @endsection
