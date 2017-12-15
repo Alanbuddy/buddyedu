@@ -15,7 +15,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 课程类目(12)
+      %li.f14a.bg16b='课程类目('.$items->count().')'
   
   .desc-div.clearfix
     - if(count($items) == 0) 
@@ -26,8 +26,8 @@
         .frame-div
           %img.course-icon{src: "icon/bird.png"}
           %p.course-name.f16b= $item->name
-          %p.f12b=$item->merchants_count.'机构已添加'
-          %p.mt24.f12b=$item->description??'没有简介'
+          %p.f12b= $item->merchants_count.'机构已添加'
+          %p.mt24.f12b= $item->description??'没有简介'
           .add-div
             %span.f14b 取消
 

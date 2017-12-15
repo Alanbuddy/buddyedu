@@ -16,15 +16,15 @@
       %p.f16c 授权课程
       %p.f24b.mt16=$merchant->courses()->wherePivot('status','approved')->count().'门'
       %img{src: "/icon/more.png"} 
-    %a.item-div{href:  route('merchant.courses', $merchant->id)}
+    %a.item-div{href:  route('merchant.points', $merchant->id)}
       %p.f16c 教学点
       %p.f24b.mt16=$merchant->points()->count().'个'
       %img{src: "/icon/more.png"}
-    %a.item-div{href:  route('merchant.courses', $merchant->id)}
+    %a.item-div{href:  route('merchant.teachers', $merchant->id)}
       %p.f16c 授权老师
       %p.f24b.mt16=$merchant->teachers()->count().'位'
       %img{src: "/icon/more.png"}
-    %a.item-div{href:  route('merchant.courses', $merchant->id)}
+    %a.item-div{href:  route('merchant.orders', $merchant->id)}
       %p.f16c 收入总额
       %p.f24b.mt16='￥'.round($merchant->orders()->sum('amount')/100,2)
       %img{src: "/icon/more.png"}
