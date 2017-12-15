@@ -75,7 +75,7 @@
 
       .select-page 
         %span.choice-page
-          != $items->link()
+          != $items->links()
     
     
 
