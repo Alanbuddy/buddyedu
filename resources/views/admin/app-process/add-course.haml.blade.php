@@ -39,17 +39,17 @@
               %th 联系方式
               %th{colspan: 2} 操作
           %tbody
-          -foreach($items as $item)
-            %tr
-              %td=$item->merchant_name
-              %td=$item->course_name
-              %td=$item->admin_name
-              %td=$item->admin_phone
-              -if($item->status=='applying')
-                %td#green 通过
-                %td.f12e 驳回
-              -if($item->status=='approved')
-                %td.f12a 已处理
+            -foreach($items as $item)
+              %tr
+                %td=$item->merchant_name
+                %td=$item->course_name
+                %td=$item->admin_name
+                %td=$item->admin_phone
+                -if($item->status=='applying')
+                  %td#green 通过
+                  %td.f12e 驳回
+                -if($item->status=='approved')
+                  %td.f12a 已处理
       .select-page
         %span.choice-page
           != $items->links()
