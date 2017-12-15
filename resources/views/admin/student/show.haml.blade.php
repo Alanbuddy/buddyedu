@@ -33,23 +33,6 @@
             %th 课程状态
             %th 上课情况
         %tbody
-        -foreach($items as $item)
-          %tr
-            %td=$item->course->name
-            %td=$item->merchant->name
-            %td=$item->point->name
-            %td 老师名字
-            %td=$item->students()->count().'/'.$item->quota
-            -if(strtotime($item->end) < time())
-              %td 已结课
-            -else if(strtotime($item->begin)>time())
-              %td.orange 报名中
-            -else
-              %td.green 上课中
-
-            %td.tip-parent
-              %img.class-state{src: "/icon/class1.png"}
-              // %img.class-state{src: "/icon/class2.png"}
           %tr
             %td 这是一门课的名称
             %td 某一机构名称
@@ -82,13 +65,31 @@
                   %span.f14b 课程评论
                   %span.f12a (屏蔽)
                 .review.f12a 课程评论课程评论课程评论课程评论课程评论课程评论课程评论课程评论
+          -foreach($items as $item)
+            %tr
+              %td=$item->course->name
+              %td=$item->merchant->name
+              %td=$item->point->name
+              %td 老师名字
+              %td=$item->students()->count().'/'.$item->quota
+              -if(strtotime($item->end) < time())
+                %td 已结课
+              -else if(strtotime($item->begin)>time())
+                %td.orange 报名中
+              -else
+                %td.green 上课中
+
+              %td.tip-parent
+                %img.class-state{src: "/icon/class1.png"}
+         
     .select-page 
       %span.choice-page
+        != $items->links()
 
   
 @endsection
 
 @section('script')
-
+<script src= "/js/admin-student-show.js"></script>
 
 @endsection
