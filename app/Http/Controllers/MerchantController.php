@@ -195,34 +195,47 @@ class MerchantController extends Controller
     public function courses(Merchant $merchant)
     {
         $items = $merchant->courses()
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->wherePivot('status', 'approved')
             ->paginate(10);
-        return view('admin.org-manage.course-auth', compact('items','merchant'));
+        return view('admin.org-manage.course-auth', compact('items', 'merchant'));
     }
 
-    public function points(Merchant $merchant)
+    public function points(Request $request, Merchant $merchant)
     {
-        $items=$merchant->points()
-            ->orderBy('id','desc')
-            ->paginate(10);
-        return view('admin.org-manage.edu-location', compact('items','merchant'));
+        $items = $merchant->points()
+            ->withCount(['schedules as ongoingSchedules' => function ($query) {
+                $query->where('end', '>', date('Y-m-d H:i:s'));
+            }])
+            ->withCount(['schedules' => function ($query) {
+                $query->where('end', '<=', date('Y-m-d H:i:s'));
+            }])
+            ->orderBy('id', 'desc')
+            ->with('schedules');
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
+            $items->withPath(route('points.index') . '?' . http_build_query(['key' => $request->key,]));
+        }
+        return view('admin.org-manage.edu-location', compact('items', 'merchant'));
     }
 
     public function orders(Merchant $merchant)
     {
-        $items=$merchant->orders()
-            ->orderBy('id','desc')
+        $items = $merchant->orders()
+            ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('admin.org-manage.amount', compact('items','merchant'));
+        return view('admin.org-manage.amount', compact('items', 'merchant'));
     }
 
     public function teachers(Merchant $merchant)
     {
-        $items=$merchant->teachers()
-            ->orderBy('id','desc')
+        $items = $merchant->teachers()
+            ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('admin.org-manage.teachers', compact('items','merchant'));
+        return view('admin.org-manage.teachers', compact('items', 'merchant'));
     }
 
 
