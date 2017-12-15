@@ -85,7 +85,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        dd($user->notifications()->get());
+        return view('admin.student.show',compact('user'));
     }
 
     public function notifications()
