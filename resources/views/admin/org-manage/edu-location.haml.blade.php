@@ -1,6 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/merchant-edu-point.css') }}">
+:javascript
+  window.points_search = "#{route('merchant.points', $merchant->id)}"
 @endsection
 
 @section('content')
@@ -20,7 +22,7 @@
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入教学点名称", value: "", :onfocus=>"this.style.color='#5d6578'"}
 
   .desc-div
-    - if(!count($items) == 0) 
+    - if(count($items) == 0) 
       .undiscover.f14
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
@@ -51,7 +53,7 @@
 
       .select-page 
         %span.choice-page
-          != $items->link()
+          != $items->links()
 @endsection
 
 @section('script')
