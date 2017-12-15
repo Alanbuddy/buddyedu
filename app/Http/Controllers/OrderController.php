@@ -319,18 +319,22 @@ class OrderController extends Controller
         return view('admin.amount.course-amount',array_merge($this->statistics($request),compact('items')));
     }
 
-    public function merchantTransactions(Request $request, Merchant $merchant)
+    public function merchantTransactions(Request $request)
     {
-        $query = $merchant->orders()
-            ->orderBy('id', 'desc')
+        $items=$this->ordersOfMerchant(auth()->user()->ownMerchant)
+            ->paginate(10);
+        return view('',compact('items'));
+    }
+
+    private function ordersOfMerchant(Merchant $merchant)
+    {
+        return $merchant ->orderBy('id', 'desc')
             ->where('orders.status', 'paid')
             ->with('schedule.course')
             ->with('schedule.point')
-            ->with('user')
-            ->get();
-        dd($query);
-    }
+            ->with('user');
 
+    }
     public function merchantIncomeGroupByCourse(Request $request, Merchant $merchant)
     {
         $query = $merchant->courses()

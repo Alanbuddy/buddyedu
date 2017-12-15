@@ -159,8 +159,8 @@ class ScheduleController extends Controller
     public function show(Schedule $schedule)
     {
         $item = $schedule;
-        $progress=$schedule->attendances()->max('ordinal_no');
-        return view('admin.course.course-info', compact('item','progress'));
+        $progress = $schedule->attendances()->max('ordinal_no');
+        return view('admin.course.course-info', compact('item', 'progress'));
     }
 
     /**
@@ -240,6 +240,7 @@ class ScheduleController extends Controller
 
     }
 
+    // /api/v1/schedules/sign-in?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3&ordinal_no=1&merchant_id=1&point_id=1&students[]=1&students[]=2
     public function signIn(Request $request)
     {
         $this->validate($request, [
@@ -250,13 +251,12 @@ class ScheduleController extends Controller
         ]);
         $arr = $request->get('students');
         Log::debug(json_encode($arr));
-        $items = User::whereIn('id', $arr)
-            ->get();
-        $attendances=Schedule::findOrFail($request->schedule_id)
-            ->attendances()->where('ordinal_no',$request->ordinal_no)
-            ->select('student_id')
-            ->get();
-        dd($attendances->whereNotIn('student_id',$request->students));
+        $items = User::whereIn('id', $arr)->get();
+
+        $attendances = Schedule::findOrFail($request->schedule_id)
+            ->attendances()->where('ordinal_no', $request->ordinal_no)
+            ->delete();
+//        dd($attendances->whereNotIn('student_id',$request->students));
 //        dd($attendances);
         foreach ($items as $item) {
             $attendance = new Attendance();
