@@ -1,7 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/edu-point.css') }}">
-
+:javascript
+  window.points_search = "#{route('merchant.point.application')}"
 @endsection
 
 @section('content')
@@ -73,6 +74,6 @@
 
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
-<script src= "/js/edu-point.js"></script>
+<script src= "/js/process-edu-point.js"></script>
 
 @endsection

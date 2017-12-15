@@ -1,7 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/review.css') }}">
-
+:javascript
+  window.schedules_search = "#{route('merchant.schedule.application')}"
 @endsection
 
 @section('content')
@@ -38,14 +39,15 @@
               %th 联系方式
               %th{colspan: 2} 操作
           %tbody
+            - foreach($items as $item)
             %tr
-              %td 某一机构名称
-              %td 这是一门课的名称
-              %td 负责人名字
-              %td 13211122334
-              %td#green 通过
-              %td.f12e 驳回
-
+              %td=$item->merchant_name
+              %td=$item->course_name
+              %td=$item->admin_name
+              %td=$item->admin_phone
+              - if($item->status=='applying')
+                %td#green 通过
+                %td.f12e 驳回
       .select-page 
         %span.choice-page
           != $items->links()
@@ -54,6 +56,6 @@
 @endsection
 
 @section('script')
-
+<script src= "/js/process-schedule.js"></script>
 
 @endsection
