@@ -37,17 +37,18 @@
               %th 申请课程
               %th 负责人
               %th 联系方式
-              %th{colspan: 2} 操作
+              %th 操作
           %tbody
             - foreach($items as $item)
-            %tr
-              %td=$item->merchant_name
-              %td=$item->course_name
-              %td=$item->admin_name
-              %td=$item->admin_phone
-              - if($item->status=='applying')
-                %td#green 通过
-                %td.f12e 驳回
+              %tr
+                %td=$item->merchant_name
+                %td=$item->course_name
+                %td=$item->admin_name
+                %td=$item->admin_phone
+                %td
+                  - if($item->status=='applying')
+                    %span#green 通过
+                    %span.f12e 驳回
       .select-page 
         %span.choice-page
           != $items->links()

@@ -30,7 +30,7 @@
   width: 12px;
 }
 
-#container {
+.container {
   width: 272px;
   height: 140px;
   margin-top: 12px;
@@ -40,5 +40,9 @@
   padding: 0;
   margin: 0;
   text-align: left;
+}
+
+#green {
+  color: #75cc7d;
 }
 

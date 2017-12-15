@@ -2,3 +2,7 @@
   color: #75cc7d;
 }
 
+.table-box td span {
+  margin-right: 10px;
+}
+

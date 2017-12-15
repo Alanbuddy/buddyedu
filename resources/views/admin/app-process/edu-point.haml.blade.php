@@ -41,29 +41,29 @@
               %th 所在地
               %th{colspan: 2} 操作
           %tbody
-          -foreach($items as $item)
-            %tr
-              %td=$item->merchant->name
-              %td=$item->name
-              %td=$item->area.'m²'
-              %td=$item->admin
-              %td=$item->contact
-              %td.tip-parent
-                %img{src: "/icon/location.png"}
-                .tooltip-div.f14d
-                  .triangle
-                  %img.close{src: "/icon/smallclose.png"}
-                  %p 地址信息:
-                  %p=$item->address
-                  .container
+            -foreach($items as $item)
+              %tr
+                %td=$item->merchant->name
+                %td=$item->name
+                %td=$item->area.'m²'
+                %td=$item->admin
+                %td=$item->contact
+                %td.tip-parent{"data-geo" => $item->geolocation}
+                  %img{src: "/icon/location.png"}
+                  .tooltip-div.f14d
+                    .triangle
+                    %img.close{src: "/icon/smallclose.png"}
+                    %p 地址信息:
+                    %p=$item->address
+                    .container
 
-              -if($item->status=='approved')
-                %td.f12e 驳回
-              -if($item->status=='rejected')
-                %td#green 通过
-              -else if(empty($item->status))
-                %td#green 通过
-                %td.f12e 驳回
+                -if($item->status=='approved')
+                  %td.f12e 驳回
+                -if($item->status=='rejected')
+                  %td#green 通过
+                -else if(empty($item->status))
+                  %td#green 通过
+                  %td.f12e 驳回
 
       .select-page 
         %span.choice-page
@@ -75,5 +75,4 @@
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script src= "/js/process-edu-point.js"></script>
-
 @endsection
