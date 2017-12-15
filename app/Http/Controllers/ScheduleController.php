@@ -247,10 +247,10 @@ class ScheduleController extends Controller
             'merchant_id' => 'required',
             'point_id' => 'required',
             'schedule_id' => 'required',
-            'students' => 'required|array'
+            'students' => 'sometimes|array'
         ]);
-        $arr = $request->get('students');
-        Log::debug(json_encode($arr));
+        $arr = $request->get('students', []);
+        Log::debug('students: ' . json_encode($arr));
         $items = User::whereIn('id', $arr)->get();
 
         $attendances = Schedule::findOrFail($request->schedule_id)
