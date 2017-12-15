@@ -255,7 +255,7 @@ class MerchantController extends Controller
     {
         $item=$teacher
 
-        return view('admin.org-mangage.teacher-show', $item);
+        return view('admin.org-manage.teacher-show', $item);
     }
 
     public function user(Request $request, Merchant $merchant, User $user)
