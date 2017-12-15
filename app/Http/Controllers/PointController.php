@@ -26,10 +26,10 @@ class PointController extends Controller
         }
         $items = $merchant->points()
             ->withCount(['schedules as ongoingSchedules' => function ($query) {
-                $query->where('end', '>', Carbon::now()->toDateTimeString());
+                $query->where('end', '>', date('Y-m-d H:i:s'));
             }])
             ->withCount(['schedules' => function ($query) {
-                $query->where('end', '<=', Carbon::now()->toDateTimeString());
+                $query->where('end', '<=', date('Y-m-d H:i:s'));
             }])
             ->orderBy('id', 'desc')
             ->with('schedules');
