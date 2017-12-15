@@ -37,7 +37,7 @@
             -foreach($items as $item)
               %tr
                 %td
-                  %a{href: route('merchant.user.show', [$merchant,$user])}=$item->phone
+                  %a{href: route('users.show', $item->id)}=$item->phone
                 %td=$item->name
                 %td=$item->birthday??'未知'
                 %td=$item->enrolled_shedules_count
