@@ -14,7 +14,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b= "全部学生(".$items->count().")"
+      %li.f14a.bg16b= "全部学生(".$items->total().")"
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}

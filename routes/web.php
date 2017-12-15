@@ -56,6 +56,8 @@ Route::middleware('auth')
 
         Route::get('/teachers/', 'UserController@teacherIndex')->name('teachers.index');
         Route::get('/admins/', 'UserController@adminIndex')->name('admins.index');
+        Route::get('/users/{user}/enable', 'UserController@enable')->name('admin.user.enable');
+        Route::get('/users/{user}/disable', 'UserController@disable')->name('admin.user.disable');
         Route::resource('users', 'UserController');
 
         Route::resource('comments', 'CommentController');

@@ -260,4 +260,19 @@ class UserController extends Controller
         $right = $request->get('right', date('Y-m-d'));
         return [$left, $right];
     }
+    //后台人员管理-关闭
+    public function disable(Request $request, User $user)
+    {
+        $user->status = 'disabled';
+        $user->save();
+        return ['success' => true];
+    }
+
+    //后台人员管理-开通
+    public function enable(Request $request, User $user)
+    {
+        $user->status = 'enabled';
+        $user->save();
+        return ['success' => true];
+    }
 }
