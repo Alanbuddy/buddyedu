@@ -48,7 +48,7 @@
               %td=$item->area.'m²'
               %td=$item->admin
               %td=$item->contact
-              %td.tip-parent
+              %td.tip-parent{"data-geo" => $item->geolocation}
                 %img{src: "/icon/location.png"}
                 .tooltip-div.f14d
                   .triangle
