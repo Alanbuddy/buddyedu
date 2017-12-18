@@ -8,9 +8,15 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/7.png"}
-    %span.f24a.title 申请处理
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/7.png"}
+      %span.f24a.title 申请处理
+  - else
+    .title-div
+      %a{href: route('merchant.point.application')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
@@ -61,7 +67,7 @@
                 %td.f12e 驳回
               -else
                 %td.f12a 已处理
-              %td.f12a
+                %td.f12a
 
       .select-page 
         %span.choice-page

@@ -10,9 +10,15 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/7.png"}
-    %span.f24a.title 申请处理
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/7.png"}
+      %span.f24a.title 申请处理
+  - else
+    .title-div
+      %a{href: route('merchant.course.application')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix

@@ -8,9 +8,15 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/7.png"}
-    %span.f24a.title 申请处理
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/7.png"}
+      %span.f24a.title 申请处理
+  - else
+    .title-div
+      %a{href: route('merchant.schedule.application')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
@@ -45,10 +51,13 @@
                 %td=$item->course->name
                 %td=$item->merchant->admin->name
                 %td=$item->merchant->admin->phone
-                - if($item->schedule_status == 'applying' || $item->schedule_status == 'rejected')
+                -if(empty($item->status))
                   %td#green 通过
-                - else
                   %td.f12e 驳回
+                -else
+                  %td.f12a 已处理
+                  %td.f12a
+               
       .select-page
         %span.choice-page
           != $items->links()
