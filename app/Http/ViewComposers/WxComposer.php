@@ -25,7 +25,5 @@ class WxComposer
         $jsSdk = new JSSDK(config('wechat.mp.app_id'), config('wechat.mp.app_secret'));
         $signPackage = $jsSdk->getSignPackage();
         $view->with('signPackage', $signPackage);
-        $ip = Request::getClientIp();
-        $view->with('base_href', ($ip == '127.0.0.1' || strpos($ip, '168')) ? "/" : "/haomama/");
     }
 }

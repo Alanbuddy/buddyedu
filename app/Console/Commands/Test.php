@@ -271,7 +271,10 @@ class Test extends Command
         $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
         $post_data = array(
             'file' => $upload_file,
-            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
+            'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d',
+//            'merchant_id' => 1,
+            'schedule_id' => 1,
+
         );
         return Curl::request($url, $post_data, 'post');
     }

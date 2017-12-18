@@ -17,6 +17,7 @@ return [
     'throttle' => '登录次数过多 请 :seconds 秒后再试 .',
     'merchant' => [
         'unauthorized' => '机构未授权',
+        '404' => '机构不存在',
     ],
     'course' => [
         'unauthorized' => '课程未授权',

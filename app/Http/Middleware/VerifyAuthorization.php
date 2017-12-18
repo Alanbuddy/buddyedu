@@ -25,6 +25,7 @@ class VerifyAuthorization
 
         if ($user->hasRole('teacher')) {
             $merchant = $user->merchant()->first();
+            if (!$merchant) throw new \Exception(trans('auth.merchant.404'));
         } else {
             $merchant = Merchant::where('admin_id', $user->id)->first();
         }
