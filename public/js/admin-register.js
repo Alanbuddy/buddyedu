@@ -1,4 +1,38 @@
 $(document).ready(function() {
+  $("#signup_btn").attr("disabled", true);
+
+  check_signup_input = function(){
+    if ($("#mobile").val().trim() == "" ||
+        $("#mobilecode").val().trim() == "" ||
+        $("#password").val().trim() == ""){
+      $("#signup_btn").attr("disabled", true);
+    } else {
+      $("#signup_btn").attr("disabled", false);
+    }
+  };
+  
+  $("#mobile").keyup(function(){
+    check_signup_input();
+    $("#mobile_notice").css("visibility", "hidden");
+  });
+    
+  $("#mobilecode").keyup(function(){
+    check_signup_input();
+    $("#code_notice").css("visibility", "hidden");
+  });
+  
+  $("#password").keydown(function(event) {
+    var code = event.which;
+    if (code == 13) {
+      signup();
+    }
+  });
+
+  $("#to_signin").click(function(){
+    location.href = window.login;
+  });
+    
+
   var timer = null;
   var wait = 120;
   var time = function(o) {
@@ -91,7 +125,7 @@ $(document).ready(function() {
       success: function(data){
         console.log(data);
         if (data.success){
-          $("#password_notice").text("您已注册成功，请通知管理员开通账号").css("visibility", "visible");
+          showMsg("您已注册成功，请通知管理员开通账号", "center");
           setTimeout(function(){
             location.href = window.login;
           }, 2000);
