@@ -2,7 +2,6 @@ $(document).ready(function(){
   $(".tip-parent").each(function(){
     var mapContainer = $(this).find(".tooltip-div").find(".container")[0];
     var location = $(this).attr("data-geo");
-    console.log(location);
     function init() {
       var center = new qq.maps.LatLng(location[0], location[1]);
       var map = new qq.maps.Map(mapContainer,{

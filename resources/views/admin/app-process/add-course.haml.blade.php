@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/review.css') }}">
 :javascript
   window.process_search = "#{route('merchant.course.application')}"
+  window.approve = "#{route('point.approve', [-1, "approve"])}"
+  window.reject = "#{route('point.approve', [-1, "reject"])}"
 @endsection
 
 @section('content')
@@ -40,14 +42,14 @@
               %th{colspan: 2} 操作
           %tbody
             -foreach($items as $item)
-              %tr
+              %tr{"data-id" => $item->merchant_id}
                 %td=$item->merchant_name
                 %td=$item->course_name
                 %td=$item->admin_name
                 %td=$item->admin_phone
                 -if($item->status=='applying')
-                  %td#green 通过
-                  %td.f12e 驳回
+                  %td#green.operation 通过
+                  %td.f12e.operation 驳回
                 -if($item->status=='approved')
                   %td.f12a 已处理
       .select-page
