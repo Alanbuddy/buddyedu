@@ -14,4 +14,32 @@ $(document).ready(function(){
       search();
     }
   });
+
+  $(".operation").click(function(){
+    var str = $(this).text();
+    var data_id = $(this).closest('tr').attr("data-id");
+    if(str == "开通"){
+      $.ajax({
+        type: 'get',
+        url: window.enable.replace(/-1/, data_id),
+        success: function(data){
+          console.log(data);
+          if(data.success){
+            location.href = window.users_search;
+          }
+        }
+      });
+    }else if(str == "禁用"){
+      $.ajax({
+        type: 'get',
+        url: window.disable.replace(/-1/, data_id),
+        success: function(data){
+          console.log(data);
+          if(data.success){
+            location.href = window.users_search;
+          }
+        }
+      });
+    }
+  });
 });

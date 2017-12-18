@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 :javascript
   window.users_search = "#{route('admins.index')}"
+  window.enable = "#{route('admin.user.enable', -1)}"
+  window.disable = "#{route('admin.user.disable', -1)}"
 @endsection
 
 @section('content')
@@ -40,18 +42,18 @@
               %th 操作
           %tbody
             -foreach($items as $item)
-              %tr
+              %tr{"data-id" => $item->id}
                 %td=$item->phone
                 %td=$item->created_at
                 -if(empty($item->status)||$item->status=='applying')
                   %td 新申请
-                  %td.green.aproved.operation 开通
-                -if($item->status=='rejected')
+                  %td.green.aproved.operation.pointer 开通
+                -if($item->status=='disabled')
                   %td 已禁用
-                  %td.green.one-span.operation 开通
-                -if($item->status=='approved')
+                  %td.green.one-span.operation.pointer 开通
+                -if($item->status=='enabled')
                   %td 正常使用
-                  %td.red.one-span.operation 禁用
+                  %td.red.one-span.operation.pointer 禁用
 
       .select-page
         %span.choice-page

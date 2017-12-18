@@ -15,7 +15,7 @@ $(document).ready(function(){
     }
   });
 
-  $(".operation").each("click", function(){
+  $(".operation").click(function(){
     var str = $(this).text();
     var merchant_id = $(this).closest('tr').attr("data-id");
     if(str == "通过"){
