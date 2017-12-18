@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 class AiController extends Controller
 {
     use FileTrait;
+
     public function __construct()
     {
         $this->middleware('va');
@@ -42,7 +43,8 @@ class AiController extends Controller
 //        dd($file,$target);
         $merchant_id = 1;
         $student_id = 1;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $student_id, $result);
+        $schedule_id = 1;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
 
         return $result;
     }
@@ -59,13 +61,14 @@ class AiController extends Controller
         return $item;
     }
 
-    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $student_id = null, $result = null)
+    public function recordApiCall($api, $file, $time_cost = 0, $merchant_id = null, $schedule_id, $student_id = null, $result = null)
     {
         $record = new Record();
         $record->api = $api;
         $record->file = $file;
         $record->time_cost = $time_cost;
         $record->merchant_id = $merchant_id;
+        $record->schedule_id = $schedule_id;
         $record->user_id = 1;
 //        $record->user_id = auth()->user()->id;
         $record->student_id = $student_id;
@@ -92,7 +95,8 @@ class AiController extends Controller
         $entry->save();
         $merchant_id = 1;
         $student_id = 1;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $student_id, $result);
+        $schedule_id = 1;
+        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
         Log::debug($result);
         return $result;
     }

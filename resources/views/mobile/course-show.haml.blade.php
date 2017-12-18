@@ -75,5 +75,5 @@
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script src= "/js/mobile-course-show.js"></script>
-%script=$signPackage
+%script=json_encode($signPackage)
 @endsection
