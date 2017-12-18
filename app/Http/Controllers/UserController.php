@@ -32,15 +32,18 @@ class UserController extends Controller
             ->withCount('enrolledShedules')
             ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) as total'));
         if ($request->has('key')) {
-            $items->where('name', 'like', '%' . $request->key . '%')
-                ->orWhere('phone', 'like', '%' . $request->key . '%');
+            $items->where(function ($query) use ($request) {
+                $query->where('name' , 'like', '%' . $request->key . '%')
+                    ->orWhere('phone', 'like', '%' . $request->key . '%');
+            });
         }
         $items = $items->paginate(10);
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
+        $key=$request->key;
         return view($this->isAdmin() ? 'admin.student.index'
-            : 'agent.user.', compact('items'));
+            : 'agent.user.', compact('items','key'));
 
     }
 

@@ -294,14 +294,15 @@ class MerchantController extends Controller
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.course.application') . '?' . http_build_query(['key' => $request->key,]));
-        return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course', compact('items'));
+        $key = $request->key;
+        return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course', compact('items','key'));
     }
 
     public function scheduleApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Schedule::with('course','merchant','merchant.admin');
+            $items = Schedule::with('course', 'merchant', 'merchant.admin');
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->schedules()->with('merchant');
@@ -315,7 +316,8 @@ class MerchantController extends Controller
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
-        return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply', compact('items'));
+        $key = $request->key;
+        return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply', compact('items','key'));
     }
 
     public function pointApplications(Request $request)
@@ -338,7 +340,8 @@ class MerchantController extends Controller
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));
-        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
+        $key = $request->key;
+        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items','key'));
     }
 
 }
