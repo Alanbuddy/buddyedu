@@ -18,6 +18,8 @@
     :javascript
       window.token = "#{csrf_token()}"
       window.fileUpload = "#{route('files.store')}"
+      window.logout = "#{route('logout')}"
+      window.login = "#{route('login')}"
   %body
     .wrapper
       .layout-left
@@ -50,7 +52,7 @@
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.fb.sidebar-title 学生统计
               %li.apply
-                %a.a-item{href: route('merchant.course.application')}
+                %a.a-item#process_a{href: route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.fb.sidebar-title 申请处理
               %li.client
@@ -58,7 +60,7 @@
                   %img.mini-icon{src: "/icon/10A.png"}
                   %span.fb.sidebar-title 人员管理
               %li.logout
-                %a.a-item{:href => "#"}
+                %a.a-item#log-out{href: "javascript:void(0)"}
                   %img.mini-icon{src: "/icon/8A.png"}
                   %span.fb.sidebar-title 退出登录
           
