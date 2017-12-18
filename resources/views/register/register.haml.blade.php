@@ -9,7 +9,14 @@
     %title 云课系统
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
-    
+    :javascript
+      window.sms_send = "#{route('sms.send')}"
+      window.sms_verify = "#{route('sms.verify')}"
+      window.register = "#{route('register')}"
+      window.login = "#{route('login')}"
+      window.logout = "#{route('logout')}"
+      window.validmobile = "#{route('validate.phone')}"
+      window.home_page = "#{route('schedules.index')}"
   %body
     .wrapper
       .content-area
@@ -39,4 +46,5 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
+    <script src = "/js/admin-register.js"></script>
  
