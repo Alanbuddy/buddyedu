@@ -18,14 +18,16 @@ $(document).ready(function(){
     }
   });
 
-  $("#log-out").click(function(){
+  $(".logout").click(function(){
+    console.log(window.logout);
     $.ajax({
       type: 'post',
       url: window.logout,
       data: {_token: window.token},
-      async: false,
       success: function(data){
-        location.href = window.login;
+        if(data.success){
+          location.href = window.login;
+        }
       }
     });
   });
