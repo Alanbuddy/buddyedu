@@ -56,13 +56,12 @@
                   %p 地址信息:
                   %p=$item->address
                   .container
-              -if($item->approved)
-                %td.f12e 驳回
-              -else
-                %td#green 通过
               -if(empty($item->status))
                 %td#green 通过
                 %td.f12e 驳回
+              -else
+                %td.f12a 已处理
+              %td.f12a
 
       .select-page 
         %span.choice-page
