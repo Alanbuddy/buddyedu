@@ -305,4 +305,10 @@ class ScheduleController extends Controller
         return ['success' => true, 'data' => $items];
     }
 
+    public function approve(Schedule $schedule, $operation)
+    {
+        $status = $operation == 'approve' ? 'approved' : 'rejected';
+        $schedule->update(['status' => $status]);
+        return ['success' => true];
+    }
 }
