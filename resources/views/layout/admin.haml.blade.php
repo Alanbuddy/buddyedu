@@ -60,7 +60,7 @@
                   %img.mini-icon{src: "/icon/10A.png"}
                   %span.fb.sidebar-title 人员管理
               %li.logout
-                %a.a-item#log-out{href: "javascript:void(0)"}
+                %a.a-item#exit{href: "javascript:void(0)"}
                   %img.mini-icon{src: "/icon/8A.png"}
                   %span.fb.sidebar-title 退出登录
           
