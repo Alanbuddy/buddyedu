@@ -301,16 +301,17 @@ class MerchantController extends Controller
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Schedule::with('merchant');
+            $items = Schedule::with('course','merchant','merchant.admin');
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->schedules()->with('merchant');
         }
         $items = $items->orderBy('schedules.id', 'desc')
             ->join('merchants', 'schedules.merchant_id', 'merchants.id');
-        if ($request->key) {
+        $items->select('*')
+            ->addSelect('schedules.status as schedule_status');
+        if ($request->key)
             $items->where('merchants.name', 'like', '%' . $request->key . '%');
-        }
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
@@ -321,17 +322,18 @@ class MerchantController extends Controller
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Point::with('merchant');
+            $items = Point::query();
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->points()
-                ->with('merchant')
-                ->orderBy('id', 'desc');
+            $items = $merchant->points();
         }
-        $items->join('merchants', 'merchants.id', 'points.merchant_id');
-        if ($request->key) {
+        $items->join('merchants', 'merchants.id', 'points.merchant_id')
+            ->orderBy('points.id', 'desc');
+        if ($request->key)
             $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
-        }
+        $items->select('*');
+        $items->addSelect('points.name as point_name');
+        $items->addSelect('merchants.name as merchant_name');
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));

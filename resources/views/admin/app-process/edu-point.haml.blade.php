@@ -43,8 +43,8 @@
           %tbody
           -foreach($items as $item)
             %tr
-              %td=$item->merchant->name
-              %td=$item->name
+              %td=$item->merchant_name
+              %td=$item->point_name
               %td=$item->area.'m²'
               %td=$item->admin
               %td=$item->contact

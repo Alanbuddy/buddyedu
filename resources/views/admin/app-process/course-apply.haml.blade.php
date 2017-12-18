@@ -40,14 +40,15 @@
               %th{colspan: 2} 操作
           %tbody
             - foreach($items as $item)
-            %tr
-              %td=$item->merchant_name
-              %td=$item->course_name
-              %td=$item->admin_name
-              %td=$item->admin_phone
-              - if($item->status=='applying')
-                %td#green 通过
-                %td.f12e 驳回
+              %tr
+                %td=$item->merchant->name
+                %td=$item->course->name
+                %td=$item->merchant->admin->name
+                %td=$item->merchant->admin->phone
+                - if($item->schedule_status == 'applying' || $item->schedule_status == 'rejected')
+                  %td#green 通过
+                - else
+                  %td.f12e 驳回
       .select-page 
         %span.choice-page
           != $items->links()
