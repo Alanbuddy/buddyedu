@@ -8,9 +8,15 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/10.png"}
-    %span.f24a.title 人员处理
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/10.png"}
+      %span.f24a.title 人员处理
+  - else
+    .title-div
+      %a{href: route('admins.index')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
@@ -39,15 +45,13 @@
                 %td=$item->created_at
                 -if(empty($item->status)||$item->status=='applying')
                   %td 新申请
-                  %td
-                    %span.green.aprove 通过
-                    %span.red 驳回
+                  %td.green.aproved 开通
                 -if($item->status=='rejected')
                   %td 已禁用
-                  %td.green.one-span 开通
+                  %td.green.one-span.operation 开通
                 -if($item->status=='approved')
                   %td 正常使用
-                  %td.red.one-span 禁用
+                  %td.red.one-span.operation 禁用
 
       .select-page
         %span.choice-page

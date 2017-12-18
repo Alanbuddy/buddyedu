@@ -35,6 +35,7 @@
               %th 负责人
               %th 联系方式
               %th 所在地
+              %th 操作
           %tbody
             - foreach($items as $item)
               %tr
@@ -50,6 +51,7 @@
                     %p 地址信息:
                     %p= $item->address
                     .container
+                // %td.red.cancel-auth 取消授权
 
       .select-page 
         %span.choice-page
