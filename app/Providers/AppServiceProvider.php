@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(
 //            '*',
-            ['mobile.course-show',],
+            ['mobile.*'],
             'App\Http\ViewComposers\WxComposer'
         );
     }
