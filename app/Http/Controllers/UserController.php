@@ -60,7 +60,8 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('admins.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('admin.user.index', compact('items'));
+        $key=$request->key;
+        return view('admin.user.index', compact('items','key'));
     }
 
     public function teacherIndex(Request $request)
@@ -83,7 +84,8 @@ class UserController extends Controller
         if ($request->key) {
             $items->withPath(route('teachers.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('agent.teacher.index', compact('items'));
+        $key=$request->key;
+        return view('agent.teacher.index', compact('items','key'));
     }
 
     public function show(User $user)
