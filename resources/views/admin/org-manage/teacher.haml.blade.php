@@ -38,7 +38,7 @@
             - foreach($items as $item)
               %tr
                 %td
-                  %a{href: route('merchant.teacher.show,[$merchant,$user]')}=$item->name
+                  %a{href: route('merchant.teacher.show',[$merchant,$item])}=$item->name
                 %td=$item->gender=='female'?'女':'男'
                 %td=date('Y')-date('Y',strtotime($item->birthday))
                 %td=$item->ongoingSchedules.'/'.$item->coaching_schedules_count
