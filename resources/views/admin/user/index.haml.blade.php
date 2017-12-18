@@ -45,7 +45,7 @@
                 %td=$item->created_at
                 -if(empty($item->status)||$item->status=='applying')
                   %td 新申请
-                  %td.green.aproved 开通
+                  %td.green.aproved.operation 开通
                 -if($item->status=='rejected')
                   %td 已禁用
                   %td.green.one-span.operation 开通
