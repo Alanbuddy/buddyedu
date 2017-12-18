@@ -60,7 +60,8 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('admins.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('admin.user.index', compact('items'));
+        $key=$request->key;
+        return view('admin.user.index', compact('items','key'));
     }
 
     public function teacherIndex(Request $request)
