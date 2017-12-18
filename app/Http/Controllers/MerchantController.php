@@ -333,10 +333,11 @@ class MerchantController extends Controller
             $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
         $items->select('*');
         $items->addSelect('points.name as point_name');
+        $items->addSelect('points.id as point_id');
         $items->addSelect('merchants.name as merchant_name');
         $items = $items->paginate(10);
         if ($request->key)
-            $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
+            $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items'));
     }
 

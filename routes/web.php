@@ -18,13 +18,6 @@ Route::get('/', function () {
 });
 Route::auth();
 
-Route::middleware(['auth', 'role:admin'])
-    ->prefix('admin')
-    ->group(
-        function () {
-            Route::get('/test', 'TestController@index')->name('test');
-        });
-
 Route::get('/phpinfo', function () {
     phpinfo();
 });
@@ -33,10 +26,9 @@ Route::middleware(['auth', 'role:admin'])
         function () {
             Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
+            Route::get('/test', 'TestController@index')->name('test');
         }
     );
-Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms-verify.send');
-Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
 
 Route::middleware('auth')
     ->group(function () {
@@ -47,6 +39,7 @@ Route::middleware('auth')
 
 //        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
+        Route::get('/schedules/{schedule}/{operation}', 'ScheduleController@approve')->name('schedule.approve');
         Route::resource('schedules', 'ScheduleController');
 
         Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
@@ -91,10 +84,14 @@ Route::middleware('auth')
         Route::resource('files', 'FileController');
 
     });
+
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
+Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms-verify.send');
+Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
 Route::get('/sms/send', 'SmsController@send')->name('sms.send');
 Route::get('/sms/tpl/add', 'SmsController@addTpl')->name('sms.tpl.add');
 Route::get('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.reset.sms');
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
+
