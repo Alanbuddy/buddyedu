@@ -84,7 +84,8 @@ class UserController extends Controller
         if ($request->key) {
             $items->withPath(route('teachers.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('agent.teacher.index', compact('items'));
+        $key=$request->key;
+        return view('agent.teacher.index', compact('items','key'));
     }
 
     public function show(User $user)
