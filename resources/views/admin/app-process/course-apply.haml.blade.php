@@ -37,7 +37,7 @@
               %th 申请课程
               %th 负责人
               %th 联系方式
-              %th{colspan: 2} 操作
+              %th 操作
           %tbody
             - foreach($items as $item)
               %tr
@@ -49,7 +49,7 @@
                   %td#green 通过
                 - else
                   %td.f12e 驳回
-      .select-page 
+      .select-page
         %span.choice-page
           != $items->links()
 
