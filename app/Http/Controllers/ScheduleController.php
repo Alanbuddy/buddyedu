@@ -252,7 +252,7 @@ class ScheduleController extends Controller
     {
         $items = $schedule->students()
             ->paginate(10);
-        return view('admin.course.course-register', compact('items'));
+        return view('admin.course.course-register', compact('items', 'schedule'));
 
     }
 

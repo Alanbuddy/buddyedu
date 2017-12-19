@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PHPExcel;
+use PHPExcel_Writer_Excel2007;
 use Wechat\WxPayApi;
 use Wechat\WxPayOrderQuery;
 use Wechat\WxPayRefund;
@@ -382,6 +384,16 @@ class OrderController extends Controller
 //            ->header('Content-Type', "text/csv")
             ->header('Content-Type', "application/vnd.ms-excel")
             ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');
+    }
+
+    public function exportExcel()
+    {
+        $PHPExcel = new PHPExcel();
+        $currentSheet = $PHPExcel->getActiveSheet();
+
+        $currentSheet->setCellValue('A1', "A");
+        $objWriter = new PHPExcel_Writer_Excel2007($PHPExcel); // 用于 2007 格式
+        $objWriter->save("output.xls");
     }
 
     private function ordersOfMerchant(Merchant $merchant)
