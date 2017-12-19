@@ -25,6 +25,8 @@ $(document).ready(function() {
     var code = event.which;
     if (code == 13) {
       signup();
+    }else{
+      check_signup_input();
     }
   });
 
@@ -34,13 +36,13 @@ $(document).ready(function() {
     
 
   var timer = null;
-  var wait = 120;
+  var wait = 60;
   var time = function(o) {
     $(o).attr("disabled", true);
     if (wait == 0) {
       $(o).attr("disabled", false);
       $(o).text('获取验证码');
-      wait = 120;
+      wait = 60;
     } else {
       $(o).text('重发(' + wait + ')');
       wait--;
@@ -50,6 +52,10 @@ $(document).ready(function() {
     }
     return false;
   };
+
+  // $("#verifycode").click(function(){
+  //   time("#verifycode");
+  // });
 
   $("#verifycode").click(function(){
     var mobile = $("#mobile").val().trim();

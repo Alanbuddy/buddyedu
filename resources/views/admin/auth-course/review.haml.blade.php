@@ -16,8 +16,8 @@
       %li
         %a.f14c{href: route('courses.show', $course->id)} 课程信息
       %li
-        %a.f14c{href: route('course.merchant', $course->id)} 授权机构(4)
-      %li.f14a.bg16b 评论查看(16)
+        %a.f14c{href: route('course.merchant', $course->id)}='授权机构('.$course->merchants()->count().')'
+      %li.f14a.bg16b='评论查看('.$course->comments()->count().')'
 
   .desc-div
     - if(count($items) == 0) 

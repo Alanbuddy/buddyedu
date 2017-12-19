@@ -30,7 +30,7 @@
               %span.input-group-addon.miniphoto
               .input-inside-div
                 %input.form-box.form-verify-box.f16#mobile{placeholder: "请输入您的手机号", type: "text"}
-                %span.verify-code-span.f16.pointer#verifycode 获取验证码
+                %button.btn.verify-code-span.f16#verifycode{type: "button"} 获取验证码
             %p.notice.f14#mobile_notice 请输入正确的手机号
             .input-group.no-margin-bottom
               %span.input-group-addon.verify-photo

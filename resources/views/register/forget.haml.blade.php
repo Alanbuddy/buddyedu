@@ -9,6 +9,12 @@
     %title 云课系统
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
+    :javascript
+      window.sms_send = "#{route('password.reset.sms')}"
+      window.sms_verify = "#{route('sms.verify')}"
+      window.login = "#{route('login')}"
+      window.validmobile = "#{route('validate.phone')}"
+      window.forget = "#{route('password.request')}"
     
   %body
     .wrapper
@@ -24,7 +30,7 @@
               %span.input-group-addon.miniphoto
               .input-inside-div
                 %input.form-box.form-verify-box.f16#mobile{placeholder: "请输入您的手机号", type: "text"}
-                %span.verify-code-span.f16.pointer#verifycode 获取验证码
+                %button.btn.verify-code-span.f16.pointer#verifycode 获取验证码
             %p.notice.f14#mobile_notice 请输入正确的手机号
             .input-group.no-margin-bottom
               %span.input-group-addon.verify-photo
@@ -41,4 +47,5 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src = "/js/ajax.js"></script>
     <script src = "/js/regex.js"></script>
+    <script src = "/js/admin-forget.js"></script>
  
