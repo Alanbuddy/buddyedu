@@ -24,16 +24,16 @@
     %ul.clearfix
       %li.f14a.bg16b='添加课程('.$items->total().')'
       %li
-        %a.f14c{href: route('merchant.point.application')} 添加教学点
+        %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')} 开课申请
+        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$schedulesApplicationCount.')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}
-      
-  
+
+
   .desc-div
-    - if(count($items) == 0) 
+    - if(count($items) == 0)
       .undiscover.f14
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
@@ -62,7 +62,7 @@
         %span.choice-page
           != $items->links()
 
-  
+
 @endsection
 
 @section('script')

@@ -22,7 +22,7 @@
     %ul.clearfix
       %li.f14a.bg16b= "当前开课(".$items->total().")"
       %li
-        %a.f14c{href: route('schedules.index')."?type=finished"} 历史开课
+        %a.f14c{href: route('schedules.index')."?type=finished"}='历史开课('.$finishedSchedulesCount.')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}

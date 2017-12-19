@@ -283,10 +283,13 @@ class MerchantController extends Controller
                 ->addSelect('course_merchant.status as status')
                 ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
                 ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
+            $pointApplicationCount = Point::count();
+            $schedulesApplicationCount = Schedule::count();
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->courses()
-                ->orderBy('id', 'desc');
+            $items = $merchant->courses()->orderBy('id', 'desc');
+            $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
+            $schedulesApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
         }
         if ($request->key) {
             $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
@@ -295,7 +298,13 @@ class MerchantController extends Controller
         if ($request->key)
             $items->withPath(route('merchant.course.application') . '?' . http_build_query(['key' => $request->key,]));
         $key = $request->key;
-        return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course', compact('items','key'));
+        return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course',
+            compact('items', 'key', 'pointApplicationCount', 'schedulesApplicationCount'));
+    }
+
+    public function courseApplicationQuery()
+    {
+        return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
     }
 
     public function scheduleApplications(Request $request)
@@ -303,9 +312,13 @@ class MerchantController extends Controller
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
             $items = Schedule::with('course', 'merchant', 'merchant.admin');
+            $courseApplicationCount = $this->courseApplicationQuery()->count();
+            $pointApplicationCount = Point::count();
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->schedules()->with('merchant');
+            $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
         }
         $items = $items->orderBy('schedules.id', 'desc')
             ->join('merchants', 'schedules.merchant_id', 'merchants.id');
@@ -317,7 +330,8 @@ class MerchantController extends Controller
         if ($request->key)
             $items->withPath(route('merchant.schedule.application') . '?' . http_build_query(['key' => $request->key,]));
         $key = $request->key;
-        return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply', compact('items','key'));
+        return view($isAdmin ? 'admin.app-process.course-apply' : 'agent.notice.course-apply',
+            compact('items', 'key', 'courseApplicationCount', 'pointApplicationCount'));
     }
 
     public function pointApplications(Request $request)
@@ -325,9 +339,13 @@ class MerchantController extends Controller
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
             $items = Point::query();
+            $courseApplicationCount = $this->courseApplicationQuery()->count();
+            $scheduleApplicationCount = Schedule::count();
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->points();
+            $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $scheduleApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
         }
         $items->join('merchants', 'merchants.id', 'points.merchant_id')
             ->orderBy('points.id', 'desc');
@@ -341,7 +359,8 @@ class MerchantController extends Controller
         if ($request->key)
             $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));
         $key = $request->key;
-        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point', compact('items','key'));
+        return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point',
+            compact('items', 'key', 'courseApplicationCount', 'scheduleApplicationCount'));
     }
 
 }

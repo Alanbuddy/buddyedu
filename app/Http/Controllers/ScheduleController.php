@@ -53,6 +53,17 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function finishedSchedules()
+    {
+        return Schedule::where('schedules.end', '<', date('Y-m-d H:i:s'));
+    }
+
+    public function onGoingSchedules()
+    {
+        return Schedule::where('schedules.end', '>', date('Y-m-d H:i:s'));
+    }
+
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -64,6 +75,10 @@ class ScheduleController extends Controller
                 ->with(['course', 'point', 'merchant', 'teachers'])
                 ->withCount('students')
                 ->orderBy('id', 'desc');
+            if ($finished)
+                $onGoingSchedulesCount = $this->onGoingSchedules()->count();
+            else
+                $finishedSchedulesCount = $this->finishedSchedules()->count();
         } else {
             $items = auth()->user()->ownMerchant
                 ->schedules();
@@ -75,7 +90,8 @@ class ScheduleController extends Controller
         $items = $items->paginate(10);
         if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
-        return view($isAdmin ? ($finished ? 'admin.course.histroy-course' : 'admin.course.course-list') : 'agent.course.index', compact('items', 'key'));
+        return view($isAdmin ? ($finished ? 'admin.course.histroy-course' : 'admin.course.course-list') : 'agent.course.index',
+            compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount'));
     }
 
 //    /**

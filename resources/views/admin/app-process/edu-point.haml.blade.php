@@ -21,10 +21,10 @@
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('merchant.course.application')} 添加课程
+        %a.f14c{href: route('merchant.course.application')}='添加课程('.$courseApplicationCount.')'
       %li.f14a.bg16b='添加教学点('.$items->total().')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')} 开课申请
+        %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$scheduleApplicationCount.')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}

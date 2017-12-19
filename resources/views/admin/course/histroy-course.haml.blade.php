@@ -20,7 +20,7 @@
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('schedules.index')} 当前开课
+        %a.f14c{href: route('schedules.index')}='当前开课('.$onGoingSchedulesCount.')'
       %li.f14a.bg16b= "历史开课(".$items->total().")"
     .user-search-box
       .search#search-btn
