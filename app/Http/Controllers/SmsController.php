@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
 use App\Http\Util\Sms;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Yunpian\Sdk\YunpianClient;
 
@@ -29,6 +30,13 @@ class SmsController extends Controller
             'notify_type' => 0
         ]);
     }
-
+    //判断手机号有没有占用
+    //返回示例: {"isOccupied":false}
+    public function isOccupied(Request $request)
+    {
+        $phone = $request->phone;
+        $isOccupied = (bool)User::where('phone', $phone)->count();
+        return compact('isOccupied');
+    }
 
 }

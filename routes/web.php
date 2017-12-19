@@ -85,7 +85,8 @@ Route::middleware('auth')
 
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
-Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms-verify.send');
+Route::get('/validate-phone', 'SmsController@isOccupied')->name('validate.phone');
+Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms.verify');
 Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
 Route::get('/sms/send', 'SmsController@send')->name('sms.send');
 Route::get('/sms/tpl/add', 'SmsController@addTpl')->name('sms.tpl.add');
