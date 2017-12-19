@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Wechat\WxPayApi;
@@ -19,8 +20,6 @@ use Wechat\WxPayUnifiedOrder;
 
 class OrderController extends Controller
 {
-    use ErrorTrait, CourseEnrollTrait;
-
     public static function updatePaymentStatus(Request $request, $uuid)
     {
         $order = Order::where('uuid', $uuid)->firstOrFail();
@@ -236,28 +235,52 @@ class OrderController extends Controller
         return view('setting.show', compact('course'));
     }
 
-    public function statistics(Request $request)
+    public function incomeOfTodayQuery()
+    {
+        return Order::where('status', 'paid')
+            ->where('created_at', '>', date('Y-m-d'))
+            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')));
+    }
+
+    public function incomeOfThisWeekQuery()
+    {
+        return Order::where('status', 'paid')
+            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
+            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")));
+    }
+
+    public function incomeOfSelectedRangeQuery($left, $right)
+    {
+        return Order::where('status', 'paid')
+            ->where('created_at', '>', $left)
+            ->where('created_at', '<', $right);
+    }
+
+    public function incomeQuery()
+    {
+        return Order::where('status', 'paid');
+    }
+
+    public function statistics(Request $request, $merchant = null)
     {
         list($left, $right) = $this->getRange($request);
-        $incomeOfToday = Order::where('status', 'paid')
-            ->where('created_at', '>', date('Y-m-d'))
-            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')))
-            ->sum('amount');
-        $incomeOfThisWeek = Order::where('status', 'paid')
-            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
-            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
-            ->sum('amount');
-        $incomeOfSelectedRange = Order::where('status', 'paid')
-            ->where('created_at', '>', $left)
-            ->where('created_at', '<', $right)
-            ->sum('amount');
-        $income = Order::where('status', 'paid')
-            ->sum('amount');
-
-//        dd($items, $incomeOfToday, $incomeOfThisWeek, $income);
-//        return view('admin.statistics.amount', compact('items'));
+        $incomeOfToday = $this->incomeOfTodayQuery();
+        $incomeOfThisWeek = $this->incomeOfThisWeekQuery();
+        $incomeOfSelectedRange = $this->incomeOfSelectedRangeQuery($left, $right);
+        $income = $this->incomeQuery();
+        if ($merchant) {
+            $incomeOfToday->where('merchant_id', $merchant->id);
+            $incomeOfThisWeek->where('merchant_id', $merchant->id);
+            $incomeOfSelectedRange->where('merchant_id', $merchant->id);
+            $income->where('merchant_id', $merchant->id);
+        }
+        $incomeOfToday = $incomeOfToday->sum('amount');
+        $incomeOfThisWeek = $incomeOfThisWeek->sum('amount');
+        $incomeOfSelectedRange = $incomeOfSelectedRange->sum('amount');
+        $income = $income->sum('amount');
         return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
     }
+
 
     public function getRange(Request $request)
     {
@@ -289,7 +312,7 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-merchant') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.index', array_merge($this->statistics($request),compact('items')));
+        return view('admin.amount.index', array_merge($this->statistics($request), compact('items')));
 
     }
 
@@ -316,26 +339,62 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-course') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.course-amount',array_merge($this->statistics($request),compact('items')));
+        return view('admin.amount.course-amount', array_merge($this->statistics($request), compact('items')));
+    }
+
+    public function merchantTransactionsQuery(Request $request, $merchant)
+    {
+        $items = $this->ordersOfMerchant($merchant);
+        if ($request->left || $request->right) {
+            list($left, $right) = $this->getRange($request);
+            $items->where('orders.created_at', '>', date('Y-m-d H:i:s', strtotime($left)))
+                ->where('orders.created_at', '<', date('Y-m-d H:i:s', strtotime($right)));
+        }
+        return $items;
     }
 
     public function merchantTransactions(Request $request)
     {
-        $items=$this->ordersOfMerchant(auth()->user()->ownMerchant)
+        $merchant = auth()->user()->ownMerchant;
+        $items = $this->merchantTransactionsQuery($request, $merchant)
             ->paginate(10);
-        return view('agent.amount.index',compact('items'));
+        return view('agent.amount.index', array_merge($this->statistics($request, $merchant), compact('items')));
+    }
+
+    public function exportCsv(Request $request)
+    {
+        $fp = fopen('php://memory', 'w');
+        fputcsv($fp, array('课程名称', '开课日期', '教学点', '手机号', '学生姓名', '收支金额'), ',');
+        $merchant = auth()->user()->ownMerchant;
+        $items = $this->merchantTransactionsQuery($request, $merchant)->get();
+        foreach ($items as $item) {
+            fputcsv($fp, array($item->schedule->course->name, $item->schedule->begin, $item->schedule->point->name,
+                $item->user->phone, $item->user->name, $item->amount), ',');
+        }
+        rewind($fp);
+        $content = "";
+        while (!feof($fp)) {
+            $content .= fread($fp, 1024);
+        }
+        fclose($fp);
+//        $content = iconv('utf-8','gbk',$content);//转成gbk，否则excel打开乱码
+        return (new Response($content, 200))
+//            ->header('Content-Type', "text/csv")
+            ->header('Content-Type', "application/vnd.ms-excel")
+            ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');
     }
 
     private function ordersOfMerchant(Merchant $merchant)
     {
-        return $merchant ->orders()
-            ->orderBy('id', 'desc')
+        return $merchant->orders()
+            ->orderByDesc('id')
             ->where('orders.status', 'paid')
             ->with('schedule.course')
             ->with('schedule.point')
             ->with('user');
 
     }
+
     public function merchantIncomeGroupByCourse(Request $request, Merchant $merchant)
     {
         $query = $merchant->courses()

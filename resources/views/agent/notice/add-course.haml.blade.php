@@ -13,9 +13,9 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 添加课程(23)
-      %li.f14c 添加教学点(15)
-      %li.f14c 开课申请(15)
+      %li.f14a.bg16b='添加课程('.$items->count().')'
+      %li.f14c='添加教学点('.$pointApplicationCount.')'
+      %li.f14c='开课申请('.$schedulesApplicationCount.')'
   
   .desc-div
     // - if(count($items) == 0) 
