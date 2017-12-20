@@ -365,7 +365,6 @@ class MerchantController extends Controller
 
     public function files(Request $request, Merchant $merchant)
     {
-
         $items = $merchant->files()
             ->orderBy('id', 'desc')
             ->paginate(10);
