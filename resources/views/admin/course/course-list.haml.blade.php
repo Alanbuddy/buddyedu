@@ -53,9 +53,10 @@
                   - foreach ($item->teachers as $teacher)
                     %span= $teacher->name
                 %td= $item->students_count."/".$item->quota
-                - if ($item->status)
-                %td.green 上课中
-                // %td.orange 报名中
+                - if ($item->begin < date('Y-m-d H:i:s'))
+                  %td.green 上课中
+                - if ($item->begin > date('Y-m-d H:i:s'))
+                  %td.orange 报名中
 
       .select-page 
         %span.choice-page
