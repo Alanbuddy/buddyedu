@@ -49,7 +49,6 @@ class CourseController extends Controller
 //                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
 //            }, $items->items());
         }
-        dd($items);
 
         if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
