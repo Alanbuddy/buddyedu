@@ -1,7 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
-
+// :javascript
+//   window.file_download = "#{route('file.download', -1)}"
 @endsection
 
 @section('content')
@@ -29,21 +30,12 @@
       %p.f24b.mt16='￥'.round($merchant->orders()->sum('amount')/100,2)
       %img{src: "/icon/more.png"}
   .tab-title
-    -if(!$finished)
-      %ul.clearfix
-        %li
-          %a.f14c{href: route('merchants.show', $merchant)}='当前开课('.$merchant->ongoingSchedules()->count().')'
-        %li
-          %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
-        %li.f14a.bg16b 往来文件
-    -else
-      %ul.clearfix
-        %li
-          %a.f14c{href: route('merchants.show', $merchant)}='当前开课('.$merchant->ongoingSchedules()->count().')'
-        %li.f14a.bg16b='历史开课('.$merchant->finishedSchedules()->count().')'
-    .user-search-box
-      .search#search-btn
-      %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+    %ul.clearfix
+      %li
+        %a.f14c{href: route('merchants.show', $merchant)}='当前开课('.$merchant->ongoingSchedules()->count().')'
+      %li
+        %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
+      %li.f14a.bg16b= '往来文件('.$items->total().')'
 
   .desc-div
     - if(count($items) == 0) 
@@ -61,10 +53,10 @@
           -foreach($items as $item)
             %tr
               %td=$item->name
-              %td=$item->create
+              %td=$item->created_at
               %td
-                %span.green.mr10 下载
-                %span.red 删除 
+                %a.green.mr10.pointer 下载
+                %a.red.delete.pointer 删除 
 
       .select-page 
         %span.choice-page
@@ -73,5 +65,6 @@
 @endsection
 
 @section('script')
+<script src= "/js/admin-merchant-file.js"></script>
 
 @endsection

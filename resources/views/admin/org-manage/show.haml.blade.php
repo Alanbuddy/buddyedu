@@ -35,12 +35,14 @@
         %li
           %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
         %li
-          %a.f14c{href: route('merchant.files', $merchant)}= '往来文件('.$merchant->id.')'
+          %a.f14c{href: route('merchant.files', $merchant)}= '往来文件('.$merchant->files()->count().')'
     -else
       %ul.clearfix
         %li
           %a.f14c{href: route('merchants.show', $merchant)}='当前开课('.$merchant->ongoingSchedules()->count().')'
         %li.f14a.bg16b='历史开课('.$merchant->finishedSchedules()->count().')'
+        %li
+          %a.f14c{href: route('merchant.files', $merchant)}= '往来文件('.$merchant->files()->count().')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名/老师名", value: "", :onfocus=>"this.style.color='#5d6578'"}
