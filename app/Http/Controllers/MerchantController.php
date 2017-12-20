@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
+use Faker\Provider\File;
 use Faker\Provider\Uuid;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Http\Request;
@@ -360,6 +361,14 @@ class MerchantController extends Controller
         $key = $request->key;
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point',
             compact('items', 'key', 'courseApplicationCount', 'scheduleApplicationCount'));
+    }
+
+    public function files(Request $request, Merchant $merchant)
+    {
+        $items = $merchant->files()
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('admin.org-manage.agent-file', compact('items', 'merchant'));
     }
 
 }

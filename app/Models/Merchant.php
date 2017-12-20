@@ -40,13 +40,13 @@ class Merchant extends Model
     public function ongoingSchedules()
     {
         return $this->hasMany(Schedule::class)
-            ->where('end','>',date('Y-m-d H:i:s'));
+            ->where('end', '>', date('Y-m-d H:i:s'));
     }
 
     public function finishedSchedules()
     {
         return $this->hasMany(Schedule::class)
-            ->where('end','<',date('Y-m-d H:i:s'));
+            ->where('end', '<', date('Y-m-d H:i:s'));
     }
 
 
@@ -58,5 +58,10 @@ class Merchant extends Model
     public function orders()
     {
         return $this->hasManyThrough(Order::class, Schedule::class, 'merchant_id', 'product_id');
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class);
     }
 }
