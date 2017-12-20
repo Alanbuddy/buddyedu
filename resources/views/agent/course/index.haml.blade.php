@@ -33,7 +33,6 @@
         %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入课程名称", value: "", :onfocus=>"this.style.color='#5d6578'"}
       %img.add-icon{src: "/icon/add.png"}
       
-  
   .desc-div
     - if(count($items) == 0) 
       .undiscover.f14
