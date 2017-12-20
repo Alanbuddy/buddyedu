@@ -50,8 +50,9 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 课程名称:
           %input.form-control.input-width#name{:type => "text"}
-          %label.input-caption.f14d 课程定价:
-          %input.form-control.input-width#price{:type => "text"}
+          %label.input-caption.f14d 课程节数:
+          %input.form-control.input-width#length{:type => "text"}
+          
           %label.input-caption.f14d 机构分成:
           %select.form-control.input-width#auth-price
             %option 请选择
@@ -63,11 +64,11 @@
           %input.hidden{:onchange => "upload(this)", :type => "file"}
           %span.course-icon-path{style: "display:none;"}
           %btn.upload-btn.f14b{:type => "button"} 上传
-          %label.input-caption.f14d 课程节数:
-          %input.form-control.input-width#length{:type => "text"}
-        .controls.controls-row.mb24
           %label.f14d 课程网址:
-          %input.form-control.input-web-width.f12b#web{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
+          %input.form-control.input-web1-width.f12b#web{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 课程定价:
+          %input.form-control.input-web-width#price{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d.input-top 课程简介:
           %textarea.area-width.form-control#profile

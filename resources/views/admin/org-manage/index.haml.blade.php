@@ -54,7 +54,7 @@
       .modalheader
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body
-        %p.f24b.add-c 添加课程
+        %p.f24b.add-c 添加机构
         .controls.controls-row.mb24
           %label.input-caption.f14d 机构名称:
           %input.form-control.input-width#name{:type => "text"}

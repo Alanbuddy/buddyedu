@@ -2,15 +2,21 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-course-index.css') }}">
 :javascript
-  window.auth_self = "#{route('')}"
+  window.auth_self = "#{route('courses.index')}"
 @endsection
 
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/2.png"}
-    %span.f24a.title 课程授权
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/2.png"}
+      %span.f24a.title 课程授权
+  - else
+    .title-div
+      %a{href: route('courses.index')."?type=my"}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix

@@ -31,11 +31,11 @@
   .tab-title
     -if(!$finished)
       %ul.clearfix
-        %li.f14a.bg16b='当前开课('.$merchant->ongoingSchedules()->count().')'
+        %li
+          %a.f14c{href: route('merchants.show', $merchant)}='当前开课('.$merchant->ongoingSchedules()->count().')'
         %li
           %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
-        %li
-          %a.f14c{href: route('merchant.files', $merchant)}= '往来文件('.$merchant->id.')'
+        %li.f14a.bg16b 往来文件
     -else
       %ul.clearfix
         %li
@@ -54,24 +54,17 @@
         %table.table.table-hover.table-height
           %thead.f14b.th-bg
             %tr
-              %th 课程名称
-              %th 教学点
-              %th 上课老师
-              %th 报名人数/班级人数
-              %th 课程状态
+              %th 文件名称
+              %th 上传时间
+              %th 操作
           %tbody
           -foreach($items as $item)
             %tr
-              %td=$item->course->name
-              %td=$item->point->name
+              %td=$item->name
+              %td=$item->create
               %td
-                -foreach($item->teachers as $teacher)
-                  %span=$teacher->name
-              %td=$item->students()->count().'/'.$item->quota
-              -if($item->begin < date('Y-m-d H:i:s'))
-                %td.green 上课中
-              -else
-                %td.orange 报名中
+                %span.green.mr10 下载
+                %span.red 删除 
 
       .select-page 
         %span.choice-page

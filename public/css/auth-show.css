@@ -154,6 +154,10 @@ td span {
   cursor: pointer;
 }
 
+.mr10 {
+  margin-right: 10px;
+}
+
 #addModal .modal-dialog {
   position: absolute;
   left: 50%;

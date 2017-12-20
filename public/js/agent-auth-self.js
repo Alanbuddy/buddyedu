@@ -1,7 +1,7 @@
 $(document).ready(function(){
   function search(){
     var value = $("#search-input").val();
-    location.href = window.auth_self + "?key=" + value;
+    location.href = window.auth_self + "?type=my&key=" + value;
   }
     
   $("#search-btn").click(function(){

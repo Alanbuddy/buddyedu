@@ -18,6 +18,8 @@
     :javascript
       window.token = "#{csrf_token()}"
       window.fileUpload = "#{route('files.store')}"
+      window.logout = "#{route('logout')}"
+      window.login = "#{route('login')}"
   %body
     .wrapper
       .layout-left
