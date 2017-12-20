@@ -80,8 +80,10 @@ class ScheduleController extends Controller
             else
                 $finishedSchedulesCount = $this->finishedSchedules()->count();
         } else {
-            $items = auth()->user()->ownMerchant
-                ->schedules();
+            $merchant=auth()->user()->ownMerchant;
+            $items = $merchant ->schedules();
+            $onGoingSchedulesCount = $this->onGoingSchedules()->where('merchant_id',$merchant->id)->count();
+            $finishedSchedulesCount = $this->finishedSchedules()->where('merchant_id',$merchant->id)->count();
         }
         if ($key) {
             $items->join('courses', 'courses.id', '=', 'schedules.course_id')
@@ -243,17 +245,14 @@ class ScheduleController extends Controller
         ]);
         $schedule = Schedule::findOrFail($request->get('schedule_id'));
         $items = $schedule->students()->get();
-//        return $items;
         return ['success' => true, 'data' => $items];
     }
 
-    //
     public function enrolls(Schedule $schedule)
     {
         $items = $schedule->students()
             ->paginate(10);
         return view('admin.course.course-register', compact('items', 'schedule'));
-
     }
 
     // /api/v1/schedules/sign-in?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3&ordinal_no=1&merchant_id=1&point_id=1&students[]=1&students[]=2
