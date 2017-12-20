@@ -26,7 +26,7 @@
           .sidebar
             %ul
               %li
-                %a.active_li{href: route('schedules.index')}
+                %a.a-item{href: route('schedules.index')}
                   %img.mini-icon{src: "/icon/1A.png"}
                   %span.fb.sidebar-title 开课情况
               %li
@@ -58,7 +58,7 @@
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.fb.sidebar-title 通知查看
               %li.logout
-                %a.a-item{:href => "#"}
+                %a.a-item#exit{href: "javascript:void(0)"}
                   %img.mini-icon{src: "/icon/8A.png"}
                   %span.fb.sidebar-title 退出登录
           
@@ -70,7 +70,7 @@
     <script src = "/js/regex.js"></script>
     <script src = "/js/mobile-notification.js"></script>
     <script src="/js/jquery.pagination.js"></script>
-
+    <script src="/js/agent-layout.js"></script>
 
 
     @yield('script')
