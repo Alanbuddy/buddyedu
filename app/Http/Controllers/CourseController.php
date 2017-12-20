@@ -75,8 +75,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, $this->rules());
         $course = new Course();
@@ -92,8 +91,7 @@ class CourseController extends Controller
      * course store and update validation rules
      * @return  array
      */
-    public
-    function rules()
+    public function rules()
     {
         return [
             'name' => 'required',
@@ -120,8 +118,7 @@ class CourseController extends Controller
      * @param  \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public
-    function edit(Course $course)
+    public function edit(Course $course)
     {
         //
     }
@@ -133,8 +130,7 @@ class CourseController extends Controller
      * @param  \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(Request $request, Course $course)
+    public function update(Request $request, Course $course)
     {
         $course = $course->fill($request->only([
             'name', 'price', 'discount'
@@ -144,15 +140,13 @@ class CourseController extends Controller
         return ['success' => true, 'data' => $course];
     }
 
-    public
-    function destroy(Course $course)
+    public function destroy(Course $course)
     {
         $course->delete();
         return response()->json(['success' => true]);
     }
 
-    public
-    function enrollIn(Course $course)
+    public function enrollIn(Course $course)
     {
         $user = auth()->user();
         $order = $this->getEnrollOrder($course);
@@ -161,8 +155,7 @@ class CourseController extends Controller
             : ['success' => false, 'message' => 'no finished order found'];
     }
 
-    public
-    function toggle(Course $course)
+    public function toggle(Course $course)
     {
         $course->update([
             'status' => $course->status == 'draft' ? 'publish' : 'draft'
@@ -173,8 +166,7 @@ class CourseController extends Controller
     /**
      * 授权机构
      */
-    public
-    function merchants(Course $course)
+    public function merchants(Course $course)
     {
         $items = $course->merchants()
             ->withCount(['schedules as ongoingSchedulesCount' => function ($query) {
@@ -189,8 +181,7 @@ class CourseController extends Controller
         return view('admin.auth-course.show', compact('items', 'course'));
     }
 
-    public
-    function comments(Course $course)
+    public function comments(Course $course)
     {
         $items = $course->comments()
             ->orderBy('id', 'desc')

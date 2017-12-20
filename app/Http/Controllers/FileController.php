@@ -99,7 +99,8 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-//        $file->delete();
+        Storage::delete('public' . substr($file->path, 8));
+        $file->delete();
         return ['success' => true];
     }
 

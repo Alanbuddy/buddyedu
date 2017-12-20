@@ -40,7 +40,8 @@ class PointController extends Controller
         if ($request->key) {
             $items->withPath(route('points.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        return view('agent.edu-point.index', compact('items'));
+        $key = $request->key;
+        return view('agent.edu-point.index', compact('items', 'key'));
     }
 
     /**
