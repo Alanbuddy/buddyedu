@@ -99,7 +99,7 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        $file->delete();
+//        $file->delete();
         return ['success' => true];
     }
 
