@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -11,7 +13,8 @@ class FileController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('role:amdin')->only(['index']);
+        $this->middleware('role:amdin')->only(['index']);
+//        $this->middleware('role:amdin|merchant')->only(['download']);
     }
 
     /**
@@ -96,6 +99,12 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+    }
+
+    public function download(File $file)
+    {
+        $file = Storage::disk('local')->get($file->path);
+        return (new Response($file, 200))
+            ->header('Content-Type', $file->mime);
     }
 }
