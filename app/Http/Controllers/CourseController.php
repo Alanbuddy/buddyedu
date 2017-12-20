@@ -26,24 +26,26 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
+        if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+
         $isAdmin = $this->isAdmin();
         if (!$isAdmin) {
             $merchant = auth()->user()->ownMerchant;
             if ($request->type == 'my') {
                 $items = $merchant->courses();
-            } else {
-                foreach ($items as $item) {
-                    $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
-                }
             }
             $count = $merchant ? $merchant->courses()->count() : 0;
         }
-        if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
-        }
 
         $items = $items->paginate(10);
-        dd($items);
+        if (!$isAdmin && $request->type != 'my') {
+            foreach ($items as $item) {
+                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
+            }
+        }
+
         if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
