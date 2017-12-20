@@ -64,8 +64,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public
-    function create()
+    public function create()
     {
         //
     }
@@ -108,10 +107,11 @@ class CourseController extends Controller
      * @param  \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public
-    function show(Course $course)
+    public function show(Course $course)
     {
-        return view('admin.auth-course.auth-info', compact('course'));
+
+        $isAdmin = $this->isAdmin();
+        return view($isAdmin?'admin.auth-course.auth-info':'agent.auth.show', compact('course'));
     }
 
     /**
