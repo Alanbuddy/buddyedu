@@ -26,25 +26,28 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
-        if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
-        }
-        $items = $items->paginate(10);
         $isAdmin = $this->isAdmin();
         if (!$isAdmin) {
             $merchant = auth()->user()->ownMerchant;
-            foreach ($items as $item) {
-                if ($item->merchants->contains($merchant)) {
-                    $item->added = true;
+            if ($request->type = 'my') {
+                $items = $merchant->courses();
+            } else {
+                foreach ($items as $item) {
+                    $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
                 }
             }
             $count = $merchant ? $merchant->courses()->orderBy('id', 'desc')->count() : 0;
         }
         if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-
-        return view($isAdmin ? 'admin.auth-course.index' : ($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'), compact('items', 'count'));
+        $key = $request->key;
+        return view($isAdmin ? 'admin.auth-course.index' : ($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'),
+            compact('items', 'count', 'key'));
     }
 
 
@@ -165,7 +168,7 @@ class CourseController extends Controller
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\') as studentsCount'))
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return view('admin.auth-course.show', compact('items','course'));
+        return view('admin.auth-course.show', compact('items', 'course'));
     }
 
     public function comments(Course $course)
@@ -174,7 +177,7 @@ class CourseController extends Controller
             ->orderBy('id', 'desc')
             ->with('user')
             ->paginate();
-        return view('admin.auth-course.review', compact('items','course'));
+        return view('admin.auth-course.review', compact('items', 'course'));
 
     }
 }

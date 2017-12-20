@@ -70,4 +70,8 @@ class Course extends Model
         return $this->belongsToMany('App\Models\Merchant');
     }
 
+    public function containsC()
+    {
+        
+    }
 }
