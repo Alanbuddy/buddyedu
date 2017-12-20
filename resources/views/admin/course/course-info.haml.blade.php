@@ -45,12 +45,9 @@
       .p-div
         %span.left-span 课程介绍：
         %span.right-span= $item->course->description
-    
-
   
 @endsection
 
 @section('script')
-
 
 @endsection
