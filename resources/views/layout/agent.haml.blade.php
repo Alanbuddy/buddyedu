@@ -28,39 +28,39 @@
               %li
                 %a.active_li{href: route('schedules.index')}
                   %img.mini-icon{src: "/icon/1A.png"}
-                  %span.f16c.sidebar-title 开课情况
+                  %span.fb.sidebar-title 开课情况
               %li
                 %a.a-item{:href => route('courses.index')}
                   %img.mini-icon{src: "/icon/2A.png"}
-                  %span.f16c.sidebar-title 课程授权
+                  %span.fb.sidebar-title 课程授权
               %li
                 %a.a-item{:href => route('points.index')}
                   %img.mini-icon{src: "/icon/9A.png"}
-                  %span.f16c.sidebar-title 教学点
+                  %span.fb.sidebar-title 教学点
               %li
                 %a.a-item{:href => route('teachers.index')}
                   %img.mini-icon{src: "/icon/10A.png"}
-                  %span.f16c.sidebar-title 授课老师
+                  %span.fb.sidebar-title 授课老师
               %li
                 %a.a-item{:href => route('users.index')}
                   %img.mini-icon{src: "/icon/4A.png"}
-                  %span.f16c.sidebar-title 学生管理
+                  %span.fb.sidebar-title 学生管理
               %li
                 %a.a-item{:href => route('orders.breakdown')}
                   %img.mini-icon{src: "/icon/5A.png"}
-                  %span.f16c.sidebar-title 金额统计
+                  %span.fb.sidebar-title 金额统计
               %li
                 %a.a-item{:href => route('users.statistics')}
                   %img.mini-icon{src: "/icon/6A.png"}
-                  %span.f16c.sidebar-title 学生统计
+                  %span.fb.sidebar-title 学生统计
               %li.apply
                 %a.a-item{:href => route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}
-                  %span.f16c.sidebar-title 通知查看
+                  %span.fb.sidebar-title 通知查看
               %li.logout
                 %a.a-item{:href => "#"}
                   %img.mini-icon{src: "/icon/8A.png"}
-                  %span.f16c.sidebar-title 退出登录
+                  %span.fb.sidebar-title 退出登录
           
       .content-area
         @yield('content')
