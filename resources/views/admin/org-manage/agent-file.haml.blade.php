@@ -1,8 +1,8 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
-// :javascript
-//   window.file_download = "#{route('file.download', -1)}"
+:javascript
+  window.file_delete = "#{route('files.destroy', -1)}"
 @endsection
 
 @section('content')
@@ -55,8 +55,8 @@
               %td=$item->name
               %td=$item->created_at
               %td
-                %a.green.mr10.pointer 下载
-                %a.red.delete.pointer 删除 
+                %a.green.mr10.pointer{href: route('file.download', $item->id)} 下载
+                %a.red.delete.pointer{"data-id" => $item->id} 删除 
 
       .select-page 
         %span.choice-page
