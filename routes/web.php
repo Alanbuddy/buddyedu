@@ -81,8 +81,8 @@ Route::middleware('auth')
 
         Route::resource('records', 'RecordController');
 
+        Route::get('/files/{file}/download', 'FileController@download')->name('file.download');
         Route::resource('files', 'FileController');
-
     });
 
 Route::get('/form', 'AiController@form')->name('form');
