@@ -11,13 +11,19 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/10.png"}
-    %span.f24a.title#merchant-id{"data-merchant" => auth()->user()->ownMerchant->id} 授课老师
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/10.png"}
+      %span.f24a.title#merchant-id{"data-merchant" => auth()->user()->ownMerchant->id} 授课老师
+  - else
+    .title-div
+      %a{href: route('teachers.index')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 全部老师(23)
+      %li.f14a.bg16b= '全部老师('.$items->total().')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -26,30 +32,31 @@
 
 
   .desc-div
-    // - if(count($items) == 0)
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 老师姓名
-            %th 性别
-            %th 年龄
-            %th 当前开课/历史开课
-            %th 手机号
-        %tbody
-          -foreach($items as $item)
+    - if(count($items) == 0)
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
             %tr
-              %td=$item->name
-              %td=$item->gender=='female'?'女':'男'
-              %td=date('Y')-date('Y',strtotime($item->birthday))
-              %td=$item->ongoingSchedules.'/'.$item->coaching_schedules_count
-              %td.f12a=$item->phone
+              %th 老师姓名
+              %th 性别
+              %th 年龄
+              %th 当前开课/历史开课
+              %th 手机号
+          %tbody
+            -foreach($items as $item)
+              %tr
+                %td=$item->name
+                %td=$item->gender=='female'?'女':'男'
+                %td=date('Y')-date('Y',strtotime($item->birthday))
+                %td=$item->ongoingSchedules.'/'.$item->coaching_schedules_count
+                %td.f12a=$item->phone
 
-    .select-page
-      %span.choice-page
+      .select-page
+        %span.choice-page
+          != $items->links()
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog

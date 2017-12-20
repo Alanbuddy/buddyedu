@@ -10,9 +10,15 @@
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/9.png"}
-    %span.f24a.title#merchant-id{"data-merchant" => auth()->user()->ownMerchant->id} 教学点
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/9.png"}
+      %span.f24a.title#merchant-id{"data-merchant" => auth()->user()->ownMerchant->id} 教学点
+  - else
+    .title-div
+      %a{href: route('points.index')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
@@ -25,27 +31,28 @@
       
   
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 教学点名称
-            %th 当前开课/历史开课
-            %th 面积
-            %th 详细地址
-        %tbody
-        -foreach($items as $item)
-          %tr
-            %td=$item->name
-            %td=$item->ongoingSchedules.'/'.$item->schedules_count
-            %td=$item->area
-            %td.f12a=$item->address
-    .select-page 
-      %span.choice-page
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 教学点名称
+              %th 当前开课/历史开课
+              %th 面积
+              %th 详细地址
+          %tbody
+          -foreach($items as $item)
+            %tr
+              %td=$item->name
+              %td=$item->ongoingSchedules.'/'.$item->schedules_count
+              %td=$item->area
+              %td.f12a=$item->address
+      .select-page 
+        %span.choice-page
+          != $items->links()
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
