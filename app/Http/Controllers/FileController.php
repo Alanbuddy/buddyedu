@@ -99,12 +99,14 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
+        $file->delete();
+        return ['success' => true];
     }
 
     public function download(File $file)
     {
-        $file = Storage::disk('local')->get($file->path);
-        return (new Response($file, 200))
+        $content = Storage::disk('local')->get('public' . substr($file->path, 8));
+        return (new Response($content, 200))
             ->header('Content-Type', $file->mime);
     }
 }
