@@ -26,23 +26,28 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
-        if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
-        }
-        $items = $items->paginate(10);
         $isAdmin = $this->isAdmin();
         if (!$isAdmin) {
             $merchant = auth()->user()->ownMerchant;
-            foreach ($items as $item) {
-                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
+            if ($request->type = 'my') {
+                $items = $merchant->courses();
+            } else {
+                foreach ($items as $item) {
+                    $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
+                }
             }
             $count = $merchant ? $merchant->courses()->orderBy('id', 'desc')->count() : 0;
         }
         if ($request->key) {
+            $items->where('name', 'like', '%' . $request->get('key') . '%');
+        }
+        $items = $items->paginate(10);
+        if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-
-        return view($isAdmin ? 'admin.auth-course.index' : ($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'), compact('items', 'count'));
+        $key = $request->key;
+        return view($isAdmin ? 'admin.auth-course.index' : ($request->has('my') ? 'agent.auth.self' : 'agent.auth.index'),
+            compact('items', 'count', 'key'));
     }
 
 
