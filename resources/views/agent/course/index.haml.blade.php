@@ -6,19 +6,27 @@
 :javascript
   window.course_store = "#{route('schedules.store')}"
   window.schedule_create = "#{route('schedules.create')}"
+  window.course_search = "#{route('schedules.index')}"
 @endsection
 
 @section('content')
 
 .main-content
-  .title-div
-    %img.title-icon{src: "/icon/1.png"}
-    %span.f24a.title 开课情况
+  - if(!$key)
+    .title-div
+      %img.title-icon{src: "/icon/1.png"}
+      %span.f24a.title 开课情况
+  - else
+    .title-div
+      %a{href: route('schedules.index')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 当前开课(23)
-      %li.f14c 历史开课(15)
+      %li.f14a.bg16b= "当前开课(".$items->total().")"
+      %li
+        %a.f14c{href: route('schedules.index')."?type=finished"}='历史开课('.$finishedSchedulesCount.')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -49,15 +57,19 @@
                 %td
                   - foreach ($item->teachers as $teacher)
                     %span= $teacher->name
-                %td 12/15
-                - if ($item)
-                %td.green 上课中
-                // %td.red 审核中
-                // %td.red 审核驳回
-                // %td.orange 报名中
+                %td= $item->students_count."/".$item->quota
+                - if ($item->begin < date('Y-m-d H:i:s'))
+                  %td.green 上课中
+                - if ($item->status == "applying")
+                  %td.red 审核中
+                - if ($item->status == "rejected")
+                  %td.red 审核驳回
+                - if ($item->begin > date('Y-m-d H:i:s'))
+                  %td.orange 报名中
 
       .select-page 
         %span.choice-page
+          != $items->links()
 
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
