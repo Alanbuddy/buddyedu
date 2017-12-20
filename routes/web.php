@@ -61,6 +61,7 @@ Route::middleware('auth')
         Route::get('/merchants/{merchant}/teachers/{teacher}', 'MerchantController@teacher')->name('merchant.teacher.show');
         Route::get('/merchants/{merchant}/users/{user}', 'MerchantController@user')->name('merchant.user.show');
         Route::get('/merchants/{merchant}/orders', 'MerchantController@orders')->name('merchant.orders');
+        Route::get('/merchants/{merchant}/files', 'MerchantController@files')->name('merchant.files');
         Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
         Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
         Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');//课程授权
