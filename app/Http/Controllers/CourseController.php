@@ -41,10 +41,15 @@ class CourseController extends Controller
 
         $items = $items->paginate(10);
         if (!$isAdmin && $request->type != 'my') {
-            foreach ($items as $item) {
-                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
-            }
+//            foreach ($items as $item) {
+//                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
+//            }
+            $items->getCollection()->each->markHasAddedByMerchant($merchant);
+//            array_map(function ($item) use ($merchant) {
+//                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
+//            }, $items->items());
         }
+        dd($items);
 
         if ($request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
