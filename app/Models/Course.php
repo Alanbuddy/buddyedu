@@ -70,7 +70,7 @@ class Course extends Model
         return $this->belongsToMany('App\Models\Merchant');
     }
 
-    public function hasAddedBy($merchant)
+    public function markHasAddedByMerchant($merchant)
     {
         $this->added = $this->merchants->contains($merchant);
     }
