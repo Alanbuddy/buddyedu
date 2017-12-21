@@ -83,4 +83,5 @@ class User extends Authenticatable
         return $this->belongsToMany(Schedule::class)
             ->wherePivot('type', 'teacher');
     }
+
 }

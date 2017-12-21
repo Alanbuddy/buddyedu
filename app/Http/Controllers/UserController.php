@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
+use App\Models\Attendance;
 use App\Models\Merchant;
 use App\Models\Role;
+use App\Models\Schedule;
 use App\Models\User;
 use App\Notifications\OrderPaid;
 use Carbon\Carbon;
@@ -21,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['']);
+        $this->middleware('role:admin|merchant')->except([]);
     }
 
     public function index(Request $request)
@@ -151,10 +153,6 @@ class UserController extends Controller
         return ['success' => true, 'data' => $user];
     }
 
-    public function studentPainting(Request $request, User $user)
-    {
-
-    }
 
     public function bindPhone(Request $request)
     {
@@ -282,4 +280,19 @@ class UserController extends Controller
         $user->save();
         return ['success' => true];
     }
+
+    public function attendances(Request $request, User $user, Schedule $schedule)
+    {
+        $items = $user->attendances()
+            ->where('schedule_id', $schedule->id)
+            ->select('ordinal_no')
+            ->get()
+            ->toArray();
+        $arr = [];
+        foreach (range(1, $schedule->course->lessons_count) as $item) {
+            $arr[$item] = collect($items)->contains(['ordinal_no' => $item]);
+        }
+        return $arr;
+    }
+
 }

@@ -237,25 +237,31 @@ class OrderController extends Controller
         return view('setting.show', compact('course'));
     }
 
-    public function incomeOfTodayQuery()
+    public function incomeOfRangeQuery($left, $right)
     {
         return Order::where('status', 'paid')
-            ->where('created_at', '>', date('Y-m-d'))
-            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')));
+            ->where('created_at', '>', date('Y-m-d', $left ? strtotime($left) : time()))
+            ->where('created_at', '<', date('Y-m-d', strtotime($right)));
+    }
+
+    public function incomeOfTodayQuery()
+    {
+        return $this->incomeOfRangeQuery('', 'today +1 days');
     }
 
     public function incomeOfThisWeekQuery()
     {
-        return Order::where('status', 'paid')
-            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
-            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")));
+        return $this->incomeOfRangeQuery('-1 week Monday', '0 week Monday');
+    }
+
+    public function incomeOfThisMonthQuery()
+    {
+        return $this->incomeOfRangeQuery('-1 month Monday', '0 month Monday');
     }
 
     public function incomeOfSelectedRangeQuery($left, $right)
     {
-        return Order::where('status', 'paid')
-            ->where('created_at', '>', $left)
-            ->where('created_at', '<', $right);
+        return $this->incomeOfRangeQuery($left, $right);
     }
 
     public function incomeQuery()
@@ -268,11 +274,13 @@ class OrderController extends Controller
         list($left, $right) = $this->getRange($request);
         $incomeOfToday = $this->incomeOfTodayQuery();
         $incomeOfThisWeek = $this->incomeOfThisWeekQuery();
+        $incomeOfThisMonth = $this->incomeOfThisMonthQuery();
         $incomeOfSelectedRange = $this->incomeOfSelectedRangeQuery($left, $right);
         $income = $this->incomeQuery();
         if ($merchant) {
             $incomeOfToday->where('merchant_id', $merchant->id);
             $incomeOfThisWeek->where('merchant_id', $merchant->id);
+            $incomeOfThisMonth->where('merchant_id', $merchant->id);
             $incomeOfSelectedRange->where('merchant_id', $merchant->id);
             $income->where('merchant_id', $merchant->id);
         }
@@ -280,7 +288,7 @@ class OrderController extends Controller
         $incomeOfThisWeek = $incomeOfThisWeek->sum('amount');
         $incomeOfSelectedRange = $incomeOfSelectedRange->sum('amount');
         $income = $income->sum('amount');
-        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfSelectedRange', 'income');
+        return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfThisMonth', 'incomeOfSelectedRange', 'income');
     }
 
 
@@ -380,9 +388,8 @@ class OrderController extends Controller
         }
         fclose($fp);
 //        $content = iconv('utf-8','gbk',$content);//转成gbk，否则excel打开乱码
-        return (new Response($content, 200))
-//            ->header('Content-Type', "text/csv")
-            ->header('Content-Type', "application/vnd.ms-excel")
+        return (new Response($content, 200))//->header('Content-Type', "text/csv")
+        ->header('Content-Type', "application/vnd.ms-excel")
             ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');
     }
 
