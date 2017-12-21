@@ -286,6 +286,7 @@ class OrderController extends Controller
         }
         $incomeOfToday = $incomeOfToday->sum('amount');
         $incomeOfThisWeek = $incomeOfThisWeek->sum('amount');
+        $incomeOfThisMonth = $incomeOfThisMonth->sum('amount');
         $incomeOfSelectedRange = $incomeOfSelectedRange->sum('amount');
         $income = $income->sum('amount');
         return compact('items', 'incomeOfToday', 'incomeOfThisWeek', 'incomeOfThisMonth', 'incomeOfSelectedRange', 'income');

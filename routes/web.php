@@ -72,7 +72,7 @@ Route::middleware('auth')
         Route::resource('merchants', 'MerchantController');
 
         Route::get('/statistics/money/group-by-merchant', 'OrderController@statGroupByMerchant')->name('orders.stat-group-by-merchant');//相关统计信息
-        Route::get('/statistics/money/group-by-course', 'OrderController@statGroupByCourse')->name('orders.stat-group-by-course');//相关统计信息
+        Route::get('/statistics/money/group-by-course', 'OrderController@statGroupByCourse')->name('orders.stat-group-by-course');//金额统计 各课程收入
         Route::get('/statistics/money/breakdown', 'OrderController@merchantTransactions')->name('orders.breakdown');
         Route::get('/statistics/money/breakdown/export', 'OrderController@exportExcel')->name('orders.breakdown.export');
         Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
