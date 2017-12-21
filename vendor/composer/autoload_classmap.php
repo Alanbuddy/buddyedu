@@ -108,6 +108,7 @@ return array(
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
+    'CommentSeeder' => $baseDir . '/database/seeds/CommentSeeder.php',
     'CourseSeeder' => $baseDir . '/database/seeds/CourseSeeder.php',
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/mtdowling/cron-expression/src/Cron/CronExpression.php',

@@ -43,5 +43,10 @@ class Schedule extends Model
         return $this->hasMany(Attendance::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }
 
