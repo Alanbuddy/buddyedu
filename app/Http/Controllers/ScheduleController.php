@@ -80,10 +80,10 @@ class ScheduleController extends Controller
             else
                 $finishedSchedulesCount = $this->finishedSchedules()->count();
         } else {
-            $merchant=auth()->user()->ownMerchant;
-            $items = $merchant ->schedules();
-            $onGoingSchedulesCount = $this->onGoingSchedules()->where('merchant_id',$merchant->id)->count();
-            $finishedSchedulesCount = $this->finishedSchedules()->where('merchant_id',$merchant->id)->count();
+            $merchant = auth()->user()->ownMerchant;
+            $items = $merchant->schedules();
+            $onGoingSchedulesCount = $this->onGoingSchedules()->where('merchant_id', $merchant->id)->count();
+            $finishedSchedulesCount = $this->finishedSchedules()->where('merchant_id', $merchant->id)->count();
         }
         if ($key) {
             $items->join('courses', 'courses.id', '=', 'schedules.course_id')
@@ -92,7 +92,7 @@ class ScheduleController extends Controller
         $items = $items->paginate(10);
         if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
-        return view($isAdmin ? ($finished ? 'admin.course.history-course' : 'admin.course.course-list') :($finished?'agent.course.history-course': 'agent.course.index'),
+        return view($isAdmin ? ($finished ? 'admin.course.history-course' : 'admin.course.course-list') : ($finished ? 'agent.course.history-course' : 'agent.course.index'),
             compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount'));
     }
 
@@ -325,5 +325,13 @@ class ScheduleController extends Controller
         $status = $operation == 'approve' ? 'approved' : 'rejected';
         $schedule->update(['status' => $status]);
         return ['success' => true];
+    }
+
+    public function comments(Schedule $schedule)
+    {
+        $items = $schedule->comments()
+            ->orderBy('id', 'desc')
+            ->get();
+        return ['success' => true, compact('items')];
     }
 }

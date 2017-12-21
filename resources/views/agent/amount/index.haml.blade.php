@@ -48,13 +48,14 @@
             %th 学生姓名
             %th 收支金额
         %tbody
+        -foreach($items as $item)
           %tr
-            %td buddy动物园
-            %td 2017/12/15
-            %td 教学点名称
-            %td 13211223344
-            %td 李华
-            %td.green +￥3200
+            %td=$item->schedule->course->name
+            %td=$item->created_at
+            %td=$item->schedule->point->name
+            %td=$item->user->phone
+            %td=$item->user->name
+            %td.green='+￥'.round($item->amount/100,2)
             // %td.ren -￥3200
 
     .select-page.clearfix
