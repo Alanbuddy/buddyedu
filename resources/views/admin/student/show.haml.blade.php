@@ -80,8 +80,12 @@
               -else
                 %td.green 上课中
 
-              %td.tip-parent
+              %td.tip-parent{"data-id" => $item->id}
                 %img.class-state{src: "/icon/class1.png"}
+                .tooltip-div
+                  .triangle
+                  %img.close{src: "/icon/smallclose.png"}
+                  
          
     .select-page 
       %span.choice-page
