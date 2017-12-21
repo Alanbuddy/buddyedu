@@ -33,7 +33,7 @@ class UserController extends Controller
             ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) as total'));
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
-                $query->where('name' , 'like', '%' . $request->key . '%')
+                $query->where('name', 'like', '%' . $request->key . '%')
                     ->orWhere('phone', 'like', '%' . $request->key . '%');
             });
         }
@@ -41,9 +41,9 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
+        $key = $request->key;
         return view($this->isAdmin() ? 'admin.student.index'
-            : 'agent.student.index', compact('items','key'));
+            : 'agent.student.index', compact('items', 'key'));
 
     }
 
@@ -60,8 +60,8 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('admins.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
-        return view('admin.user.index', compact('items','key'));
+        $key = $request->key;
+        return view('admin.user.index', compact('items', 'key'));
     }
 
     public function teacherIndex(Request $request)
@@ -84,17 +84,18 @@ class UserController extends Controller
         if ($request->key) {
             $items->withPath(route('teachers.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
-        return view('agent.teacher.index', compact('items','key'));
+        $key = $request->key;
+        return view('agent.teacher.index', compact('items', 'key'));
     }
 
     public function show(User $user)
     {
+        $isAdmin = $this->isAdmin();
         $items = $user->schedules()
             ->with('point', 'merchant', 'course', 'teachers');
 
         $items = $items->paginate(10);
-        return view('admin.student.show', compact('items', 'user'));
+        return view($isAdmin ? 'admin.student.show' : 'agent.student.show', compact('items', 'user'));
     }
 
     public function notifications()
@@ -265,6 +266,7 @@ class UserController extends Controller
         $right = $request->get('right', date('Y-m-d'));
         return [$left, $right];
     }
+
     //后台人员管理-关闭
     public function disable(Request $request, User $user)
     {
