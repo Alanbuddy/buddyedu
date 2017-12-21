@@ -14,7 +14,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::auth();
-Route::get('/', 'HomeController@index')->name('landing');
+Route::get('/home', 'HomeController@home')->name('home');
+Route::get('/schedules/{schedule}/enroll', 'HomeController@index')->name('landing');
 
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -49,6 +50,7 @@ Route::middleware('auth')
         Route::get('/admins/', 'UserController@adminIndex')->name('admins.index');
         Route::get('/users/{user}/enable', 'UserController@enable')->name('admin.user.enable');
         Route::get('/users/{user}/disable', 'UserController@disable')->name('admin.user.disable');
+        Route::get('/users/{user}/schedules/{schedule}/attendances', 'UserController@attendances')->name('user.attendances');
         Route::resource('users', 'UserController');
 
         Route::resource('comments', 'CommentController');

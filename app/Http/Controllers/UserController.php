@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
+use App\Models\Attendance;
 use App\Models\Merchant;
 use App\Models\Role;
+use App\Models\Schedule;
 use App\Models\User;
 use App\Notifications\OrderPaid;
 use Carbon\Carbon;
@@ -21,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['']);
+        $this->middleware('role:admin|merchant')->except([]);
     }
 
     public function index(Request $request)
@@ -33,7 +35,7 @@ class UserController extends Controller
             ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) as total'));
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
-                $query->where('name' , 'like', '%' . $request->key . '%')
+                $query->where('name', 'like', '%' . $request->key . '%')
                     ->orWhere('phone', 'like', '%' . $request->key . '%');
             });
         }
@@ -41,9 +43,9 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
+        $key = $request->key;
         return view($this->isAdmin() ? 'admin.student.index'
-            : 'agent.student.index', compact('items','key'));
+            : 'agent.student.index', compact('items', 'key'));
 
     }
 
@@ -60,8 +62,8 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('admins.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
-        return view('admin.user.index', compact('items','key'));
+        $key = $request->key;
+        return view('admin.user.index', compact('items', 'key'));
     }
 
     public function teacherIndex(Request $request)
@@ -84,17 +86,18 @@ class UserController extends Controller
         if ($request->key) {
             $items->withPath(route('teachers.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key=$request->key;
-        return view('agent.teacher.index', compact('items','key'));
+        $key = $request->key;
+        return view('agent.teacher.index', compact('items', 'key'));
     }
 
     public function show(User $user)
     {
+        $isAdmin = $this->isAdmin();
         $items = $user->schedules()
             ->with('point', 'merchant', 'course', 'teachers');
 
         $items = $items->paginate(10);
-        return view('admin.student.show', compact('items', 'user'));
+        return view($isAdmin ? 'admin.student.show' : 'agent.student.show', compact('items', 'user'));
     }
 
     public function notifications()
@@ -150,10 +153,6 @@ class UserController extends Controller
         return ['success' => true, 'data' => $user];
     }
 
-    public function studentPainting(Request $request, User $user)
-    {
-
-    }
 
     public function bindPhone(Request $request)
     {
@@ -265,6 +264,7 @@ class UserController extends Controller
         $right = $request->get('right', date('Y-m-d'));
         return [$left, $right];
     }
+
     //后台人员管理-关闭
     public function disable(Request $request, User $user)
     {
@@ -280,4 +280,19 @@ class UserController extends Controller
         $user->save();
         return ['success' => true];
     }
+
+    public function attendances(Request $request, User $user, Schedule $schedule)
+    {
+        $items = $user->attendances()
+            ->where('schedule_id', $schedule->id)
+            ->select('ordinal_no')
+            ->get()
+            ->toArray();
+        $arr = [];
+        foreach (range(1, $schedule->course->lessons_count) as $item) {
+            $arr[$item] = collect($items)->contains(['ordinal_no' => $item]);
+        }
+        return $arr;
+    }
+
 }
