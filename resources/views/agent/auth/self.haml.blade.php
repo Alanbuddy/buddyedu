@@ -33,7 +33,7 @@
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
       - foreach($items as $item)
-        .frame-div{href: route('courses.show',$item->id)}
+        %a.frame-div{href: route('courses.show',$item->id)}
           %img.course-icon{src: "icon/bird.png"}
           %p.course-name.f16b=$item->name
           %p.f12b=$item->merchants_count.'机构已添加'

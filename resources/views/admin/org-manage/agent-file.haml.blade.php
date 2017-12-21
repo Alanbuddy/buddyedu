@@ -55,7 +55,7 @@
               %td=$item->name
               %td=$item->created_at
               %td
-                %a.green.mr10.pointer{href: route('file.download', $item->id)} 下载
+                %a.green.mr10.pointer{href: route('file.download', $item->id), download: $item->name} 下载
                 %a.red.delete.pointer{"data-id" => $item->id} 删除 
 
       .select-page 

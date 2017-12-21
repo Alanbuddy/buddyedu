@@ -5,4 +5,13 @@ $(document).ready(function(){
   $(".close").click(function(){
     $("#addModal").modal("hide");
   });
+
+  $("#cancel").click(function(){
+    $("#addModal").modal("hide");
+  });
+
+  $("#add").click(function(){
+  	
+  });
+
 });

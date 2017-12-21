@@ -30,7 +30,7 @@
     .info-div.f14d
       .p-div
         %span 课程网站：
-        %span=$course->url
+        %span=$course->url??"暂无"
       .p-div
         %span 课程简介：
         %span=$course->description
@@ -45,10 +45,10 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/smallclose.png"}
       .modal-body.clearfix
         %p.f16b.add-c 添加课程
-        %p.f14d= '确认申请添加"'.$course->name.'"'？
+        %p.f14d= '确认申请添加"'.$course->name.'"？'
         .btn-div
-          %btn.cancel-btn.f14e 取消
-          %btn.conform-btn 添加
+          %btn.cancel-btn.f14e#cancel 取消
+          %btn.conform-btn#add 添加
 
 @endsection
 
