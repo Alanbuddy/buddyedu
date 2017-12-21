@@ -2,7 +2,10 @@
 @section('css')
 <link rel="stylesheet" href="{{mix('/css/student-show.css')}}">
 :javascript
-  window.sign = "#{route('user.attendances',[$user->id,-1])}"
+  // window.sign = "#{route('user.attendances',[$user->id,-1])}"
+  window.sign = "#{route('user.attendances',[5,-1])}"
+  // window.comment = "#{route('course.comment',-1)."?user_id=".$user->id}"
+  window.comment = "#{route('course.comment',-1)."?user_id=1"}"
 @endsection
 
 @section('content')
@@ -41,27 +44,15 @@
             %td 老师名字
             %td 12/15
             %td.green 上课中
-            // %td.orange 报名中
-            // %td 已结课
+           
             %td.tip-parent
-              // %img.class-state{src: "/icon/class1.png"}
+             
               %img.class-state{src: "/icon/class2.png"}
               .tooltip-div
                 .triangle
                 %img.close{src: "/icon/smallclose.png"}
                 .box-div
-                  .box.green-box 1
-                  .box.green-box 2
-                  .box.green-box 3
-                  .box.red-box 4 
-                  .box.red-box 5
-                  .box.gray-box 6
-                  .box.green-box 1
-                  .box.green-box 2
-                  .box.green-box 3
-                  .box.red-box 4 
-                  .box.red-box 5
-                  .box.gray-box 6
+                  
                 .span-div
                   %span.f14b 课程评论
                   %span.f12a (屏蔽)
@@ -80,11 +71,16 @@
               -else
                 %td.green 上课中
 
-              %td.tip-parent{"data-id" => $item->id}
+              %td.tip-parent{"data-id" => $item->id, "data-cid" => $item->course->id}
                 %img.class-state{src: "/icon/class1.png"}
                 .tooltip-div
                   .triangle
                   %img.close{src: "/icon/smallclose.png"}
+                  .box-div
+                  .span-div
+                    %span.f14b 课程评论
+                    %span.f12a (屏蔽)
+                  .review.f12a
                   
          
     .select-page 
