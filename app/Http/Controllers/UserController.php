@@ -43,7 +43,7 @@ class UserController extends Controller
         }
         $key=$request->key;
         return view($this->isAdmin() ? 'admin.student.index'
-            : 'agent.user.', compact('items','key'));
+            : 'agent.student.index', compact('items','key'));
 
     }
 
