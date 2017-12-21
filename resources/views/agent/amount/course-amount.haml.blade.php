@@ -26,7 +26,8 @@
   
   .tab-title
     %ul.clearfix
-      %li.f14c 收支明细
+      %li
+        %a.f14c{href: route('orders.breakdown')} 收支明细
       %li.f14a.bg16b 各课程收入
 
   .desc-div

@@ -13,21 +13,24 @@
   .items-div
     .item-div
       %p.f16c 本日收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfToday/100,2)
     .item-div
       %p.f16c 本周收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfThisWeek/100,2)
     .item-div
       %p.f16c 本月收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfThisMonth/100,2) 
     .item-div
-      %p.f16c 收入总额
-      %p.f24b.mt16 ￥213,000
+      %p.total
+        %span.f16c.total-amount 收入总额
+        %span.cash 提现
+      %p.f24b.mt16='￥'.round($income/100,2)
   
   .tab-title
     %ul.clearfix
       %li.f14a.bg16b 收支明细
-      %li.f14c 各课程收入
+      %li
+        %a.f14c{href: route('orders.stat-group-by-course')} 各课程收入
 
   .desc-div
     // - if(count($items) == 0) 

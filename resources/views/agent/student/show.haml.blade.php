@@ -1,7 +1,8 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{mix('/css/student-show.css')}}">
-
+:javascript
+  window.sign = "#{route('user.attendances',[$user->id,-1])}"
 @endsection
 
 @section('content')
