@@ -239,3 +239,79 @@ td span {
   cursor: pointer;
 }
 
+#cashModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -280px;
+  margin-top: -145px;
+  width: 560px;
+  height: 291px;
+}
+
+#cashModal .modal-backdrop {
+  background-color: rgba(51, 58, 72, 0.16);
+}
+
+#cashModal .modal-body {
+  margin: 0;
+  padding-left: 40px;
+  padding-bottom: 40px;
+}
+
+#cashModal .close-cash {
+  position: absolute;
+  width: 64px;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 15;
+  cursor: pointer;
+}
+
+#cashModal .add-c {
+  margin-top: 30px;
+  margin-bottom: 24px;
+}
+
+#cashModal .add-btn-width {
+  display: block;
+  width: 240px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #365ba9;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+#cashModal .money {
+  margin-right: 10px;
+}
+
+#cashModal .notice {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 24px;
+}
+
+#cashModal #applying {
+  background: #8c929f;
+}
+
+.item-modal {
+  position: relative;
+  width: 50%;
+  padding-left: 40px;
+  padding-top: 20px;
+}
+
+.item-modal p {
+  margin-bottom: 18px;
+}
+
+.item-modal:not(:last-child) {
+  border-right: 1px solid #e4f3ff;
+}
+

@@ -21,4 +21,11 @@ $(document).ready(function(){
       });
   $( "#datepicker2" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
   $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+  $(".cash").click(function(){
+    $("#cashModal").modal("show");
+  });
+  $(".close-cash").click(function(){
+    $("#cashModal").modal("hide");
+  });
 });
