@@ -13,9 +13,11 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14c 添加课程(23)
-      %li.f14a.bg16b 添加教学点(15)
-      %li.f14c 开课申请(15)
+      %li
+        %a.f14c{href: route('merchant.course.application')}='添加课程('.$courseApplicationCount.')'
+      %li.f14a.bg16b='添加教学点('.$items->total().')'
+      %li
+        %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$scheduleApplicationCount.')'
   
   .desc-div
     - if(count($items) == 0) 
