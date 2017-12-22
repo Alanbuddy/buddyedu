@@ -7,7 +7,7 @@
   window.course_store = "#{route('schedules.store')}"
   window.schedule_create = "#{route('schedules.create')}"
   window.course_search = "#{route('schedules.index')}"
-  window.course_input = "#{route('courses.index')}"
+  window.course_select = "#{route('courses.index')}"
 @endsection
 
 @section('content')
@@ -80,19 +80,19 @@
         %p.f24b.add-c 添加开课
         .controls.controls-row.mb24
           %label.input-caption.f14d 开设课程:
-          %select.form-control.input-width.f14d#course{:type => "text"}
-            %option{value: 1} 课程名
+          %select.form-control.input-width.f14d#course
+            %option 请选择
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
-          %select.form-control.input-width.manager.f14d#point{:type => "text"}  
+          %select.form-control.input-width.manager.f14d#point{:type => "text"} 
             - foreach($merchant->points() as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row
           %label.input-caption.f14d 课程定价:
           %input.form-control.input-width.f14d#price{:type => "text"}
-        .controls.controls-row.mtb
+        .controls.controls-row#desc
           %label.input-caption.f14d.unvisible 课程定价:
-          %span.f14d.mark
+          %span.mark.mtb#course-desc
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
