@@ -323,7 +323,7 @@ class OrderController extends Controller
         if ($key)
             $queryParameter['key'] = $key;
         $items->withPath(route('orders.stat-group-by-merchant') . '?' . http_build_query($queryParameter));
-        return view('admin.amount.index', array_merge($this->statistics($request), compact('items')));
+        return view('admin.amount.index', array_merge($this->statistics($request), compact('items','key')));
 
     }
 

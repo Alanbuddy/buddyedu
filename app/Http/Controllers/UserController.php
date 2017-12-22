@@ -194,26 +194,35 @@ class UserController extends Controller
 
     public function queryStudent()
     {
-        return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-            ->whereNull('role_id');
+        $isAdmin = $this->isAdmin();
+        $query = User::join('schedule_user', 'schedule.user_id', 'users.id')
+            ->where('schedule_user.type', 'student');
+        if ($isAdmin) {
+            return $query;
+        } else {
+            return $query->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
+//            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
+//                ->whereNull('role_id')
+//                ->
+
+        }
     }
 
     public function statistics(Request $request)
     {
-        list($left, $right) = $this->getRange($request);
-        $key = $request->key;
         $isAdmin = $this->isAdmin();
+        list($left, $right) = $this->getRange($request);
         $countOfToday = $this->queryStudent()
-            ->where('created_at', '>', date('Y-m-d'))
-            ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')))
+            ->where('users.created_at', '>', date('Y-m-d'))
+            ->where('users.created_at', '<', date('Y-m-d', strtotime('today +1 days')))
             ->count();
         $countOfThisWeek = $this->queryStudent()
-            ->where('created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
-            ->where('created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
+            ->where('users.created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
+            ->where('users.created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
             ->count();
         $countOfSelectedRange = $this->queryStudent()
-            ->where('created_at', '>', $left)
-            ->where('created_at', '<', $right)
+            ->where('users.created_at', '>', $left)
+            ->where('users.created_at', '<', $right)
             ->count();
         $count = $this->queryStudent()
             ->count();
@@ -253,17 +262,9 @@ class UserController extends Controller
         }
 //        dd($growingDistribution, $firstWeek, $lastWeek, $arr);
         $growingDistribution = $arr;
-        if (!$isAdmin) {
-            $merchant = auth()->user()->ownMerchant;
-            $items = $merchant->schedules()
-                ->join('schedule_user', 'schedules.id', 'schedule_user.schedule_id')
-                ->join('users', 'users.id', 'schedule_user.user_id')
-                ->paginate(10);
-        }
-
-        return view($isAdmin ? 'admin.statistic.index' : 'agent.student.index', compact('count',
+        return view($isAdmin ? 'admin.statistic.index' : 'agent.statistic.index', compact('count',
             'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right',
-            'ageDistribution', 'genderDistribution', 'growingDistribution', 'key','items'));
+            'ageDistribution', 'genderDistribution', 'growingDistribution'));
     }
 
     public function getRange(Request $request)
