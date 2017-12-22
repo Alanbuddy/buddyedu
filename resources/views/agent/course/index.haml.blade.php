@@ -85,6 +85,12 @@
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"}  
             %option{value: 1} xxx教学点
+        .controls.controls-row
+          %label.input-caption.f14d 课程定价:
+          %input.form-control.input-width.f14d#price{:type => "text"}
+        .controls.controls-row.mtb
+          %label.input-caption.f14d.unvisible 课程定价:
+          %span.f14d.mark 一线城市价格3200，二线城市价格2000二线城市价格2000二线城市价格2000
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
@@ -94,11 +100,17 @@
           %label.input-caption.f14d 班级人数:
           %input.form-control.input-width.f14d#num{:type => "text"}
         .controls.controls-row.mb24
-          %label.input-caption.f14d 开始时间:
+          %label.input-caption.f14d 开课时间:
           %input.form-control.input-width#datepicker1{:type => "text"}
         .controls.controls-row.mb24
-          %label.input-caption.f14d 结束时间:
+          %label.input-caption.f14d 结课时间:
           %input.form-control.input-width#datepicker2{:type => "text"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d.time 详细时间:
+          %textarea.form-control.input-width.f14d#time{:type => "text"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 申请备注:
+          %input.form-control.input-width.f14d#mark{:type => "text", placeholder: "非必填"}
         .btn-div     
           %btn.f16d.add-btn-width#apply 提交申请
   

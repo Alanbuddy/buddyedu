@@ -31,6 +31,7 @@
               %th 教学点名称
               %th 申请时间
               %th 处理时间
+              %th 备注
               %th 课程状态
           %tbody
             -foreach($items as $item)
@@ -38,6 +39,7 @@
                 %td=$item->name
                 %td=$item->created_at
                 %td=$item->updated_at
+                %td 机构自己的备注(管理员的备注)
                 -if($item->approved)
                   %td.f12a 已通过
                 -else

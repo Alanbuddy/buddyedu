@@ -31,6 +31,7 @@
               %th 课程名称
               %th 申请时间
               %th 处理时间
+              %th 备注
               %th 课程状态
           %tbody
             -foreach($items as $item)
@@ -38,6 +39,7 @@
                 %td=$item->name
                 %td=$item->pivot->created_at
                 %td=$item->pivot->updated_at
+                %td 机构自己的备注(管理员的备注)
                 -if($item->pivot->status=='rejected')
                   %td.red 审核驳回
                 -if($item->pivot->status=='applying')

@@ -3,9 +3,9 @@
   left: 50%;
   top: 50%;
   margin-left: -240px;
-  margin-top: -252px;
+  margin-top: -368px;
   width: 480px;
-  height: 504px;
+  height: 736px;
 }
 
 #addModal .modal-backdrop {
@@ -66,5 +66,28 @@
 
 #addModal .teacher {
   margin-right: 8px;
+}
+
+#addModal .unvisible {
+  visibility: hidden;
+  vertical-align: top;
+}
+
+#addModal .mark {
+  display: inline-block;
+  width: 300px;
+  margin-left: 8px;
+}
+
+#addModal .mtb {
+  margin: 8px 0;
+}
+
+#addModal .time {
+  vertical-align: top;
+}
+
+#addModal #time {
+  height: 54px;
 }
 
