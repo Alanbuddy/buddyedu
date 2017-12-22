@@ -80,6 +80,7 @@ return array(
     'App\\Listeners\\LogRegisteredUser' => $baseDir . '/app/Listeners/LogRegisteredUser.php',
     'App\\Listeners\\LogSuccessfulLogin' => $baseDir . '/app/Listeners/LogSuccessfulLogin.php',
     'App\\Listeners\\LogSuccessfulLogout' => $baseDir . '/app/Listeners/LogSuccessfulLogout.php',
+    'App\\Models\\Application' => $baseDir . '/app/Models/Application.php',
     'App\\Models\\Attendance' => $baseDir . '/app/Models/Attendance.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
     'App\\Models\\Course' => $baseDir . '/app/Models/Course.php',

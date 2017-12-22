@@ -489,6 +489,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'App\\Listeners\\LogRegisteredUser' => __DIR__ . '/../..' . '/app/Listeners/LogRegisteredUser.php',
         'App\\Listeners\\LogSuccessfulLogin' => __DIR__ . '/../..' . '/app/Listeners/LogSuccessfulLogin.php',
         'App\\Listeners\\LogSuccessfulLogout' => __DIR__ . '/../..' . '/app/Listeners/LogSuccessfulLogout.php',
+        'App\\Models\\Application' => __DIR__ . '/../..' . '/app/Models/Application.php',
         'App\\Models\\Attendance' => __DIR__ . '/../..' . '/app/Models/Attendance.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',

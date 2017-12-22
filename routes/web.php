@@ -67,6 +67,7 @@ Route::middleware('auth')
         Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
         Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');
         Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');
+        Route::get('/withdraw-applications', 'MerchantController@withdrawApplications')->name('merchant.withdraw.application');
         Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
         Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
         Route::resource('merchants', 'MerchantController');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Course;
 use App\Models\Merchant;
 use App\Models\Point;
@@ -15,6 +16,7 @@ use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use function Sodium\crypto_box_publickey_from_secretkey;
 
 class MerchantController extends Controller
 {
@@ -369,6 +371,14 @@ class MerchantController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         return view('admin.org-manage.agent-file', compact('items', 'merchant'));
+    }
+
+    public function withdrawApplications(Request $request)
+    {
+        $key = $request->key;
+        $items = Application::orderBy('id', 'desc')
+            ->paginate(10);
+        return view('admin.app-process.cash', compact('items', 'key'));
     }
 
 }
