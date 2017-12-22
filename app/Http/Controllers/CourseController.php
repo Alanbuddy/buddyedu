@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class CourseController extends Controller
         $this->middleware('role:admin|operator')
             ->only(['create', 'store', 'destroy', 'update']);
         $this->middleware('role:admin|operator|merchant')
-            ->only(['index']);
+            ->only(['index', 'apply']);
     }
 
     /**
@@ -107,7 +108,6 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-
         $isAdmin = $this->isAdmin();
         return view($isAdmin ? 'admin.auth-course.auth-info' : 'agent.auth.show', compact('course'));
     }
@@ -199,5 +199,19 @@ class CourseController extends Controller
             ->where('user_id', $userId)
             ->first();
         return ['success' => true, 'data' => $items];
+    }
+
+    public function apply(Course $course, Request $request)
+    {
+        $merchant = $this->getMerchant();
+        $item = new Application(
+            $request->only('remark')
+        );
+        $item->fill([
+            'type' => 'course',
+            'merchant_id' => $merchant->id,
+        ]);
+        $item->save();
+        return ['success' => true];
     }
 }

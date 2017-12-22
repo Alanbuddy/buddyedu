@@ -135,6 +135,7 @@ class ScheduleController extends Controller
         $this->validate($request, [
             'course_id' => 'required',
             'point_id' => 'required',
+            'quota' => 'required|numeric',
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',

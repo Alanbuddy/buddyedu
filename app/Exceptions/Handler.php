@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
         }
 //        if ($request->route() && collect($request->route()->computedMiddleware)->contains('api')) {
-        if (Str::startsWith($request->getRequestUri(), '/api')) {
+        if (Str::startsWith($request->getRequestUri(), '/api')||$request->ajax()) {
             if ($exception instanceof HttpException) {
                 return response()->json(['success' => false, 'message' => class_basename($exception)], $exception->getStatusCode());
             } else if ($exception instanceof AuthenticationException) {

@@ -17,8 +17,9 @@ class ScheduleSeeder extends Seeder
                 'begin' => date('Y-m-d H:i:s', strtotime(($i - 1) . ' month')),
                 'end' => date('Y-m-d H:i:s', strtotime('+4 month')),
                 'status' => 'applying',
+                'quota' => 20,
                 'course_id' => 1,
-                'price'=>15,
+                'price' => 15,
                 'point_id' => 1,
                 'merchant_id' => 1
             ]);
