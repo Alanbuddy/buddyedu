@@ -33,34 +33,34 @@
         %a.f14c{href: route('orders.stat-group-by-course')} 各课程收入
 
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
-    .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 课程名称
-            %th 开课日期
-            %th 教学点
-            %th 手机号
-            %th 学生姓名
-            %th 收支金额
-        %tbody
-        -foreach($items as $item)
-          %tr
-            %td=$item->schedule->course->name
-            %td=$item->created_at
-            %td=$item->schedule->point->name
-            %td=$item->user->phone
-            %td=$item->user->name
-            %td.green='+￥'.round($item->amount/100,2)
-            // %td.ren -￥3200
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      .table-box
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 课程名称
+              %th 开课日期
+              %th 教学点
+              %th 手机号
+              %th 学生姓名
+              %th 收支金额
+          %tbody
+            -foreach($items as $item)
+              %tr
+                %td=$item->schedule->course->name
+                %td=$item->created_at
+                %td=$item->schedule->point->name
+                %td=$item->user->phone
+                %td=$item->user->name
+                %td.green='+￥'.round($item->amount/100,2)
 
-    .select-page.clearfix
-      %span.fl.f14b.pointer#export 导出明细 
-      %span.choice-page
+      .select-page.clearfix
+        %span.fl.f14b.pointer#export 导出明细 
+        %span.choice-page
+          != $items->links()
 #addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
     .modal-content
