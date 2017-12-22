@@ -25,7 +25,7 @@
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$schedulesApplicationCount.')'
+        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$scheduleApplicationCount.')'
       %li.f14a.bg16b= '提现申请('.$items->total().')'
     .user-search-box
       .search#search-btn
@@ -50,10 +50,10 @@
             - foreach($items as $item)
               %tr
                 %td=$item->merchant->name
-                %td ￥2360
+                %td='￥'.round($item->amount/100,2)
                 %td=$item->merchant->admin->name
                 %td=$item->merchant->admin->phone
-                -if(empty($item->status))
+                -if($item->status=='applying')
                   %td#green 完成转账
                 -else
                   %td.f12a 已处理
