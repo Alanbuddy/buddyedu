@@ -40,7 +40,7 @@
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('orders.breakdown')} 各机构收入
+        %a.f14c{href: route('orders.stat-group-by-merchant')} 各机构收入
       %li.f14a.bg16b 各课程收入
     .user-search-box
       .search#search-btn
