@@ -26,7 +26,7 @@
       %li
         %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$scheduleApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.withdraw.application')}='提现申请('.$courseApplicationCount .')'
+        %a.f14c{href: route('merchant.withdraw.application')} 提现申请()
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -47,6 +47,7 @@
               %th 负责人
               %th 联系方式
               %th 所在地
+              %th 备注
               %th{colspan: 2} 操作
           %tbody
           -foreach($items as $item)
@@ -56,6 +57,7 @@
               %td=$item->area.'m²'
               %td=$item->admin
               %td=$item->contact
+              %td 管理的备注(机构的备注)无备注时为——
               %td.tip-parent{"data-geo" => $item->geolocation}
                 %img{src: "/icon/location.png"}
                 .tooltip-div.f14d

@@ -61,28 +61,31 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/close.png"}
       .modal-body
         %p.f24b.add-c 添加教学点
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d 名称设置
           %input.form-control.input-width#edu-name{:type => "text"}
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d 面积
           %input.form-control.input-width.area#edu-area{:type => "text"}  
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d 负责人
           %input.form-control.input-width.admin#edu-admin{:type => "text"}  
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d 联系方式
           %input.form-control.input-width#edu-phone{:type => "text"}  
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d.city-select 省市区
           %span.citys
             %select.form-control#province
             %select.form-control#city
             %select.form-control#county
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
           %label.input-caption.f14d.vt 详细地址
           %textarea.form-control.textarea-width#street{:type => "text"}
-        .controls.controls-row.mb24
+        .controls.controls-row.mb16
+          %label.input-caption.f14d 申请备注
+          %input.form-control.input-width.f14d#mark{:type => "text", placeholder: "非必填"}
+        .controls.controls-row.mb16
           %label.input-caption.f14d 地理位置
           %span.get-location.f14b 获取地址
           #container

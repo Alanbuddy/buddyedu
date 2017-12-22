@@ -42,8 +42,7 @@
           - if ($item->added)
             %span.f14e 已添加
           - else
-            %img.small-add{src:"/icon/smalladd.png"}
-            %span.f14b 添加
+            %span.f14b 未添加
 
 @endsection
 

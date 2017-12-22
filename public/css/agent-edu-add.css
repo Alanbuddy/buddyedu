@@ -3,9 +3,9 @@
   left: 50%;
   top: 50%;
   margin-left: -240px;
-  margin-top: -379px;
+  margin-top: -374px;
   width: 480px;
-  height: 758px;
+  height: 748px;
 }
 
 #addModal .modal-backdrop {
@@ -40,8 +40,8 @@
   margin-right: 40px;
 }
 
-#addModal .mb24 {
-  margin-bottom: 24px;
+#addModal .mb16 {
+  margin-bottom: 16px;
 }
 
 #addModal .add-btn-width {

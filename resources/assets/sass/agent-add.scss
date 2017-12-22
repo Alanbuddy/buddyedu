@@ -4,9 +4,9 @@
     left: 50%;
     top: 50%;
     margin-left: -240px;
-    margin-top: -252px;
+    margin-top: -368px;
     width: 480px;
-    height: 504px;
+    height: 736px;
   }
   .modal-backdrop {
     background-color: rgba(51, 58, 72, 0.16);
@@ -57,5 +57,23 @@
   }
   .teacher {
     margin-right: 8px;
+  }
+  .unvisible {
+    visibility: hidden;
+    vertical-align: top;
+  }
+  .mark {
+    display: inline-block;
+    width: 300px;
+    margin-left: 8px;
+  }
+  .mtb {
+    margin: 8px 0;
+  }
+  .time {
+    vertical-align: top;
+  }
+  #time {
+    height: 54px;
   }
 }

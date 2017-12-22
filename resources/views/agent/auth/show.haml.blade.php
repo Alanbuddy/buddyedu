@@ -1,7 +1,8 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-course-add.css') }}">
-
+:javascript
+  window.course_add = "#{route('course.apply',$course->id)}"
 @endsection
 
 @section('content')
@@ -23,11 +24,15 @@
         %span.f24b=$course->name
         %span.add-div
           %img.small-add{src:"/icon/smalladd.png"}
-          %span.f14b 添加
+          %span.f14b{"data-id" => $course->id} 添加
+      //在课程定价用完proportion后会取消
       .money-div
         %span.f24c.mr8='￥'.$course->price
         %span.f12a= "(".($course->proportion*100).'%分成)'
     .info-div.f14d
+      .p-div
+        %span 课程定价：
+        %span ￥1200
       .p-div
         %span 课程网站：
         %span=$course->url??"暂无"
@@ -42,13 +47,14 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/smallclose.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/smallclose.png"}
       .modal-body.clearfix
         %p.f16b.add-c 添加课程
-        %p.f14d= '确认申请添加"'.$course->name.'"？'
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 申请备注:
+          %input.form-control.input-width.f14d{:type => "text", :placeholder => "非必填"}
         .btn-div
-          %btn.cancel-btn.f14e#cancel 取消
-          %btn.conform-btn#add 添加
+          %btn.conform-btn#add 提交申请
 
 @endsection
 

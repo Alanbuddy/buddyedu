@@ -61,7 +61,18 @@
       .select-page
         %span.choice-page
           != $items->links()
-  
+
+#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/smallclose.png"}
+      .modal-body.clearfix
+        %p.f16b.add-c 添加课程
+        %p.f14d= '确认申请添加"'.$course->name.'"？'
+        .btn-div
+          %btn.cancel-btn.f14e#cancel 取消
+          %btn.conform-btn#add 添加
 @endsection
 
 @section('script')

@@ -26,7 +26,7 @@
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li.f14a.bg16b='开课申请('.$items->total().')'
       %li
-        %a.f14c{href: route('merchant.withdraw.application')}='提现申请('.$courseApplicationCount .')'
+        %a.f14c{href: route('merchant.withdraw.application')} 提现申请()
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}
@@ -41,18 +41,20 @@
         %table.table.table-hover.table-height
           %thead.f14b.th-bg
             %tr
-              %th 申请机构
-              %th 申请课程
-              %th 负责人
-              %th 联系方式
+              %th 课程名称
+              %th 开课机构
+              %th 教学点
+              %th 教师
+              %th 备注
               %th 操作
           %tbody
             - foreach($items as $item)
               %tr
-                %td=$item->merchant->name
                 %td=$item->course->name
-                %td=$item->merchant->admin->name
-                %td=$item->merchant->admin->phone
+                %td=$item->merchant->name
+                %td 教学点
+                %td 教师
+                %td 管理的备注(机构的备注)无备注时为——
                 -if(empty($item->status))
                   %td#green 通过
                   %td.f12e 驳回
