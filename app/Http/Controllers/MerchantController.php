@@ -265,11 +265,6 @@ class MerchantController extends Controller
         return view('', compact('merchant', 'user'));
     }
 
-    public function getMerchant()
-    {
-        return auth()->user()->ownMerchant;
-    }
-
     public function courseApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
@@ -307,6 +302,12 @@ class MerchantController extends Controller
     public function courseApplicationQuery()
     {
         return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
+    }
+
+    public function withdrawApplicationQuery()
+    {
+        return Application::orderBy('applications.id', 'desc')
+            ->with('merchant', 'merchant.admin');
     }
 
     public function scheduleApplications(Request $request)
@@ -376,9 +377,18 @@ class MerchantController extends Controller
     public function withdrawApplications(Request $request)
     {
         $key = $request->key;
-        $items = Application::orderBy('id', 'desc')
-            ->paginate(10);
-        return view('admin.app-process.cash', compact('items', 'key'));
+        $items = $this->withdrawApplicationQuery()
+            ->join('merchants', 'merchants.id', 'applications.merchant_id');
+        if ($request->key)
+            $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
+        $items = $items->paginate(10);
+        $courseApplicationCount = $this->courseApplicationQuery()->count();
+        $scheduleApplicationCount = Schedule::count();
+        $pointApplicationCount = Point::count();
+        if ($request->key)
+            $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));
+        return view('admin.app-process.cash', compact('items', 'key',
+            'courseApplicationCount', 'scheduleApplicationCount', 'pointApplicationCount'));
     }
 
 }

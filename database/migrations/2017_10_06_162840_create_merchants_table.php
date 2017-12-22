@@ -16,6 +16,7 @@ class CreateMerchantsTable extends Migration
         Schema::create('merchants', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('admin_id')->unsigned();
+            $table->integer('balance')->default(0);
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

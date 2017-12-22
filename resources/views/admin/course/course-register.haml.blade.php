@@ -37,7 +37,7 @@
             %tr
               %td=$item->phone
               %td=$item->name
-              %td=(date('Y')-date('Y',strtotime($item->birthday))).'岁'
+              %td=$item->birthday?(date('Y')-date('Y',strtotime($item->birthday))).'岁':'未知'
               %td=$item->pivot->created_at
               %td.green 已支付
               // %td.orange 待付款

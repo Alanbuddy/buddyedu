@@ -15,4 +15,9 @@ class Controller extends BaseController
     {
         return auth()->user()->hasRole('admin');
     }
+
+    public function getMerchant()
+    {
+        return auth()->user()->ownMerchant;
+    }
 }

@@ -75,8 +75,7 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, $this->rules());
         $course = new Course();
@@ -92,8 +91,7 @@ class CourseController extends Controller
      * course store and update validation rules
      * @return  array
      */
-    public
-    function rules()
+    public function rules()
     {
         return [
             'name' => 'required',
@@ -132,8 +130,7 @@ class CourseController extends Controller
      * @param  \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public
-    function update(Request $request, Course $course)
+    public function update(Request $request, Course $course)
     {
         $course = $course->fill($request->only([
             'name', 'price', 'discount'
@@ -143,8 +140,7 @@ class CourseController extends Controller
         return ['success' => true, 'data' => $course];
     }
 
-    public
-    function destroy(Course $course)
+    public function destroy(Course $course)
     {
         $course->delete();
         return response()->json(['success' => true]);
