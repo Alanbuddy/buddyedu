@@ -1,7 +1,7 @@
 $(document).ready(function(){
   function search(){
     var value = $("#search-input").val();
-    location.href = window.schedules_search + "?key=" + value;
+    location.href = window.search + "?key=" + value;
   }
     
   $("#search-btn").click(function(){
