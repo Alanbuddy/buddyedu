@@ -15,7 +15,7 @@
       %img.title-icon{src: "/icon/5.png"}
       %span.f24a.title 金额统计
     - else
-      %a{href: route('schedules.index')}
+      %a{href: route('orders.stat-group-by-merchant')}
         %img.title-icon{src: "/icon/back.png"}
       %span.f16a.title= '搜索"'.$key.'"'
     .ta_date#div_date1.date-box
@@ -80,5 +80,6 @@
 <script src="/js/dateRange.js"></script>
 <script src="/js/monthPicker.js"></script>
 <script src="/js/dateSelect.js"></script>
+<script src="/js/admin-amount-search.js"></script>
 
 @endsection

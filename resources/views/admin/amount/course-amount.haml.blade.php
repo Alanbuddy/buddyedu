@@ -3,14 +3,21 @@
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 <link rel="stylesheet" href="/css/dateRange.css">
 <link rel="stylesheet" href="/css/monthPicker.css">
+:javascript
+  window.amount_search = "#{route('orders.stat-group-by-course')}"
 @endsection
 
 @section('content')
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/5.png"}
-    %span.f24a.title 金额统计
+    - if(!$key)
+      %img.title-icon{src: "/icon/5.png"}
+      %span.f24a.title 金额统计
+    - else
+      %a{href: route('orders.stat-group-by-course')}
+        %img.title-icon{src: "/icon/back.png"}
+      %span.f16a.title= '搜索"'.$key.'"'
     .ta_date#div_date1.date-box
       %span.date_title#date1
       %a.optsel#input_trigger1
@@ -73,5 +80,6 @@
 <script src="/js/dateRange.js"></script>
 <script src="/js/monthPicker.js"></script>
 <script src="/js/dateSelect.js"></script>
+<script src="/js/admin-amount-search.js"></script>
 
 @endsection
