@@ -7,6 +7,7 @@
   window.course_store = "#{route('schedules.store')}"
   window.schedule_create = "#{route('schedules.create')}"
   window.course_search = "#{route('schedules.index')}"
+  window.course_input = "#{route('courses.index')}"
 @endsection
 
 @section('content')
@@ -84,18 +85,19 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"}  
-            %option{value: 1} xxx教学点
+            - foreach($merchant->points() as $item)
+              %option{value: $item->id}= $item->name
         .controls.controls-row
           %label.input-caption.f14d 课程定价:
           %input.form-control.input-width.f14d#price{:type => "text"}
         .controls.controls-row.mtb
           %label.input-caption.f14d.unvisible 课程定价:
-          %span.f14d.mark 一线城市价格3200，二线城市价格2000二线城市价格2000二线城市价格2000
+          %span.f14d.mark
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
-            %option{value: 1} 教师a
-            %option{value: 2} 教师b
+            - foreach($merchant->teachers() as $item)
+              %option{value: $item->id}= $item->name
         .controls.controls-row.mb24
           %label.input-caption.f14d 班级人数:
           %input.form-control.input-width.f14d#num{:type => "text"}
@@ -110,7 +112,7 @@
           %textarea.form-control.input-width.f14d#time{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 申请备注:
-          %input.form-control.input-width.f14d#mark{:type => "text", placeholder: "非必填"}
+          %input.form-control.input-width.f14d#remark{:type => "text", placeholder: "非必填"}
         .btn-div     
           %btn.f16d.add-btn-width#apply 提交申请
   

@@ -17,6 +17,8 @@ $(document).ready(function(){
   	var num = $("#num").val().trim();
     var begin = $("#datepicker1").val();
     var end = $("#datepicker2").val();
+    var price = $("#price").val().trim();
+    var remark = $("#remark").val().trim();
   	$.ajax({
   	  url: window.course_store,
   	  type: 'post',
@@ -27,7 +29,9 @@ $(document).ready(function(){
   	    teachers: teacher,
   	    quota: num,
   	    begin: begin,
-  	    end: end
+  	    end: end,
+        price: price,
+        remark: remark
   	  },
   	  success: function( data ) {
   	    if(data.success){

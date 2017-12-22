@@ -72,6 +72,7 @@ $(document).ready(function(){
     var street = $("#street").val();
     var location = JSON.stringify([lat, lng]);
     var merchant_id = $("#merchant-id").attr("data-merchant");
+    var remark = $("#remark").val().trim();
     if(address == null){
       showMsg("没有选择省市区", "center");
     }
@@ -90,6 +91,7 @@ $(document).ready(function(){
         county: county,
         merchant_id: merchant_id,
         geolocation: location,
+        remark: remark,
         _token: window.token
       },
       success: function(data){
