@@ -391,4 +391,5 @@ class MerchantController extends Controller
             'courseApplicationCount', 'scheduleApplicationCount', 'pointApplicationCount'));
     }
 
+
 }

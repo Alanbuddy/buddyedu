@@ -47,7 +47,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($request->route()->getName() == 'api.login')
+        if ($request->route()->getName() == 'api.login' || $request->ajax())
             return [
                 'success' => true,
                 'data' => ['user' => $user]
