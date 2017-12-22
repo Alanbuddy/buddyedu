@@ -56,8 +56,8 @@ Route::middleware('auth')
         Route::resource('comments', 'CommentController');
 
         Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
-        Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');//课程授权
-        Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');//开课授权
+        Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');
+        Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');
         Route::get('/merchants/{merchant}/points', 'MerchantController@points')->name('merchant.points');
         Route::get('/merchants/{merchant}/teachers', 'MerchantController@teachers')->name('merchant.teachers');
         Route::get('/merchants/{merchant}/teachers/{teacher}', 'MerchantController@teacher')->name('merchant.teacher.show');
@@ -65,8 +65,8 @@ Route::middleware('auth')
         Route::get('/merchants/{merchant}/orders', 'MerchantController@orders')->name('merchant.orders');
         Route::get('/merchants/{merchant}/files', 'MerchantController@files')->name('merchant.files');
         Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
-        Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');//课程授权
-        Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');//课程授权
+        Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');
+        Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');
         Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
         Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
         Route::resource('merchants', 'MerchantController');

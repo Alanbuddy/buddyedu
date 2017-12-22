@@ -90,6 +90,10 @@ class Test extends Command
 
     public function handle()
     {
+        foreach (spl_autoload_functions() as $function) {
+            echo(json_encode($function));
+        }
+        return;
 //        $this->geo();
 
 //        $arr = [1, 2, 3];
