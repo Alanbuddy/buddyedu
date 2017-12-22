@@ -22,10 +22,14 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index(Request $request)
     {
+        if ($request->ajax()) {
+            return ['success' => true, 'data' => Course::orderBy('id')->get()];
+        }
+
         $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
         if ($request->key) {
             $items->where('name', 'like', '%' . $request->get('key') . '%');
