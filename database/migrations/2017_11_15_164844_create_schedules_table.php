@@ -19,6 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->timestamp('begin')->nullable();
             $table->timestamp('end')->nullable();
             $table->string('status')->nullable();
+            $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('course_id')->comment('课程ID');
             $table->unsignedInteger('merchant_id')->comment('机构ID');
             $table->unsignedInteger('point_id')->comment('教学点ID');
