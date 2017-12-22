@@ -26,7 +26,7 @@
         %img.icon{src: "/icon/bird.png"}
         %span.f24b=$course->name
       .money-div
-        %span.f24c.mr8='￥'.$course->price
+        %span.f24c.mr8=$course->guide_price
         %span.f12a= "(".($course->proportion*100).'%分成)'
     .info-div.f14d
       .p-div

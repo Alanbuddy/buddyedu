@@ -17,6 +17,7 @@ class CourseSeeder extends Seeder
             'guide_price'=>'guide price 10',
             'lessons_count'=>12,
             'status'=>'draft',
+            'proportion'=>0.2,
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),
         ]);

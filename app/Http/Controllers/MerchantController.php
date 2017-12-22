@@ -87,12 +87,12 @@ class MerchantController extends Controller
             $admin->fill([
                 'name' => $data['adminName'],
                 'phone' => $data['phone'],
-                'password' => $data['password'],
-                'status' => 'applying',
+                'password' => bcrypt($data['password']),
+                'status' => 'approved',
                 'api_token' => Uuid::uuid(),
             ]);
             $admin->save();
-            $admin->attachRole(Role::find(1));
+            $admin->attachRole(Role::find(2));
             $item->fill([
                 'name' => $data['name'],
                 'admin_id' => $admin->id,
