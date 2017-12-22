@@ -67,7 +67,7 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $isAdmin = $user->hasRole('admin');
+        $isAdmin = $this->isAdmin();
         $finished = $request->get('type') == 'finished';
         $key = $request->get('key');
         if ($isAdmin) {
