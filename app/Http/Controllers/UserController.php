@@ -201,6 +201,8 @@ class UserController extends Controller
     public function statistics(Request $request)
     {
         list($left, $right) = $this->getRange($request);
+        $key = $request->key;
+        $isAdmin = $this->isAdmin();
         $countOfToday = $this->queryStudent()
             ->where('created_at', '>', date('Y-m-d'))
             ->where('created_at', '<', date('Y-m-d', strtotime('today +1 days')))
@@ -251,10 +253,17 @@ class UserController extends Controller
         }
 //        dd($growingDistribution, $firstWeek, $lastWeek, $arr);
         $growingDistribution = $arr;
+        if (!$isAdmin) {
+            $merchant = auth()->user()->ownMerchant;
+            $items = $merchant->schedules()
+                ->join('schedule_user', 'schedules.id', 'schedule_user.schedule_id')
+                ->join('users', 'users.id', 'schedule_user.user_id')
+                ->paginate(10);
+        }
 
-
-        return view('admin.statistic.index', compact('count',
-            'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right', 'ageDistribution', 'genderDistribution', 'growingDistribution'));
+        return view($isAdmin ? 'admin.statistic.index' : 'agent.student.index', compact('count',
+            'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right',
+            'ageDistribution', 'genderDistribution', 'growingDistribution', 'key','items'));
     }
 
     public function getRange(Request $request)
