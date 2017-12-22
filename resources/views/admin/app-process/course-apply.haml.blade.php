@@ -2,7 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/review.css') }}">
 :javascript
-  window.schedules_search = "#{route('merchant.schedule.application')}"
+  window.search = "#{route('merchant.schedule.application')}"
 @endsection
 
 @section('content')
@@ -25,6 +25,8 @@
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li.f14a.bg16b='开课申请('.$items->total().')'
+      %li
+        %a.f14c{href: route('merchant.withdraw.application')}='提现申请('.$courseApplicationCount .')'
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}

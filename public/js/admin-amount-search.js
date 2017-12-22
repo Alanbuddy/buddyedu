@@ -1,7 +1,7 @@
 $(document).ready(function(){
   function search(){
     var value = $("#search-input").val();
-    location.href = window.search + "?key=" + value;
+    location.href = window.amount_search + "?key=" + value;
   }
     
   $("#search-btn").click(function(){
