@@ -13,16 +13,16 @@
   .items-div
     .item-div
       %p.f16c 本日收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfToday/100,2)
     .item-div
       %p.f16c 本周收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfThisWeek/100,2)
     .item-div
       %p.f16c 本月收入
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($incomeOfThisMonth/100,2) 
     .item-div
       %p.f16c 收入总额
-      %p.f24b.mt16 ￥213,000
+      %p.f24b.mt16='￥'.round($income/100,2)
   
   .tab-title
     %ul.clearfix
@@ -35,7 +35,7 @@
       .undiscover.f14
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
-    .table-box
+      .table-box
         %table.table.table-hover.table-height
           %thead.f14b.th-bg
             %tr
@@ -51,10 +51,10 @@
                 %td=$item->ongoingStudentCount.'/'.$item->studentCount
                 %td.f12a='￥'.($item->income??'0')
 
-      .select-page
-        %span.choice-page
-          != $items->links()
-    
+        .select-page
+          %span.choice-page
+            != $items->links()
+  
 @endsection
 
 @section('script')

@@ -12,10 +12,16 @@ $(document).ready(function(){
       $(this).find("img").attr("src", src);
     }
     if(cur_url.indexOf("point-applications") != -1 || cur_url.indexOf("schedule-applications") != -1){
-      $("#process_a").removeClass('a-item').addClass('active_li');
-      var src1 = $("#process_a").find('img').attr("src").replace(/A/, "B");
-      $("#process_a").find("img").attr("src", src1);
+      $("#notice-a").removeClass('a-item').addClass('active_li');
+      var src1 = $("#notice-a").find('img').attr("src").replace(/A/, "B");
+      $("#notice-a").find("img").attr("src", src1);
     }
+    if(cur_url.indexOf("group-by-course") != -1 ){
+      $("#amount-a").removeClass('a-item').addClass('active_li');
+      var src2 = $("#amount-a").find('img').attr("src").replace(/A/, "B");
+      $("#amount-a").find("img").attr("src", src2);
+    }
+    
   });
 
   $(".logout").click(function(){

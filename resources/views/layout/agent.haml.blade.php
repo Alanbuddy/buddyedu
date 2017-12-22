@@ -48,7 +48,7 @@
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.fb.sidebar-title 学生管理
               %li
-                %a.a-item{:href => route('orders.breakdown')}
+                %a.a-item#amount-a{:href => route('orders.breakdown')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.fb.sidebar-title 金额统计
               %li
@@ -56,7 +56,7 @@
                   %img.mini-icon{src: "/icon/6A.png"}
                   %span.fb.sidebar-title 学生统计
               %li.apply
-                %a.a-item{:href => route('merchant.course.application')}
+                %a.a-item#notice-a{:href => route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}
                   %span.fb.sidebar-title 通知查看
               %li.logout

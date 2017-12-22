@@ -12,6 +12,23 @@ $(document).ready(function(){
       $("#dCon2").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);
     }
   });
+
+
+  function search(){
+    var value = $("#search-input").val();
+    location.href = window.amount_search + "?key=" + value;
+  }
+    
+  $("#search-btn").click(function(){
+    search();
+  });
+
+  $("#search-input").keydown(function(event){
+    var code = event.which;
+    if (code == 13){
+      search();
+    }
+  });
 });
 
 
