@@ -93,7 +93,7 @@ class ScheduleController extends Controller
         if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
         return view($isAdmin ? ($finished ? 'admin.course.history-course' : 'admin.course.course-list') : ($finished ? 'agent.course.history-course' : 'agent.course.index'),
-            compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount'));
+            compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount','merchant'));
     }
 
 //    /**
