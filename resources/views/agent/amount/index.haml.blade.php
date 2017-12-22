@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 <link rel="stylesheet" href="/css/jquery-ui.min.css">
@@ -74,7 +74,28 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 结束时间
           %input.form-control.input-width#datepicker2{:type => "text"}
-        %btn.f16d.add-btn-width#submit 导出文件    
+        %btn.f16d.add-btn-width#submit 导出文件  
+#cashModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close-cash{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body.clearfix
+        %p.f24b.add-c 余额提现
+        .items-div
+          .item-modal
+            %p
+              %span.f16c.money 可提现余额
+              %span.f12b (即7日前收入)
+            %p.f24b.mt16 ￥4250
+          .item-modal
+            %p.f16c 总余额
+            %p.f24b.mt16 ￥4250
+        .div
+          %span.f14e.notice 您有一笔提现正在处理中
+          %btn.fr.f16d.add-btn-width#applying{disabled: true} 申请提现   
+          // %btn.fr.f16d.add-btn-width#apply 申请提现      
+
 @endsection
 
 @section('script')

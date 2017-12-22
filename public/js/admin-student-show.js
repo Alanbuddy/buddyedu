@@ -19,31 +19,30 @@ $(document).ready(function(){
     var _this = $(this);
     var sid = $(this).attr("data-id");
     var cid = $(this).attr("data-cid");
-    console.log(sid);
+    $(this).find('.class-state').attr('src', "/icon/class2.png");
     if(!request){
       $.ajax({
         type: 'get',
-        // url: window.sign.replace(/-1/, sid),
-        url: window.sign.replace(/-1/, 1),
+        url: window.sign.replace(/-1/, sid),
         success: function(data){
-          console.log(data);
           for(var i in data){
             var node = render(data[i]);
             node.text(i);
-            console.log(node);
             var box = _this.find('.box-div');
             _this.find('.box-div').append(node);
-            $.ajax({
-              type: 'get',
-              // url: window.comment.replace(/-1/, cid),
-              url: window.comment.replace(/-1/, 1),
-              success: function(data){
-                if(data.success){
-                  console.log(data.data.content);
-                  _this.find(".review").text(data.data.content);
-                }
-              }
-            });
+          }
+        }
+      });
+      $.ajax({
+        type: 'get',
+        url: window.comment.replace(/-1/, cid),
+        success: function(data){
+          if(data.success){
+            if(data.data){
+              _this.find(".review").text(data.data.content);
+            }else{
+              _this.find(".review").text("暂无评论");
+            }
           }
         }
       });
@@ -51,6 +50,7 @@ $(document).ready(function(){
     }
     $(this).find(".tooltip-div").show();
   },function(){
+    $(this).find('.class-state').attr('src', "/icon/class1.png");
     $(this).find(".tooltip-div").hide();
   });
 
