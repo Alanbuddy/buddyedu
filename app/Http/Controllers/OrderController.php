@@ -359,7 +359,7 @@ class OrderController extends Controller
             $queryParameter['key'] = $key;
 
         $items->withPath(route('orders.stat-group-by-course') . '?' . http_build_query($queryParameter));
-        return view(($isAdmin ? 'admin' : 'agent') . '.amount.course-amount', array_merge($this->statistics($request), compact('items')));
+        return view(($isAdmin ? 'admin' : 'agent') . '.amount.course-amount', array_merge($this->statistics($request), compact('items','key')));
     }
 
     public function merchantTransactionsQuery(Request $request, $merchant)

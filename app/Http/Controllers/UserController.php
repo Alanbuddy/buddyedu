@@ -192,15 +192,15 @@ class UserController extends Controller
         return view('', compact('items'));
     }
 
-    public function queryStudent()
+    public function queryStudent($isAdmin)
     {
-        $isAdmin = $this->isAdmin();
-        $query = User::join('schedule_user', 'schedule.user_id', 'users.id')
+        $query = User::join('schedule_user', 'schedule_user.user_id', 'users.id')
             ->where('schedule_user.type', 'student');
         if ($isAdmin) {
             return $query;
         } else {
-            return $query->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
+            return $query->join('schedules', 'schedules.id', 'schedule_user.schedule_id')
+                ->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
 //            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
 //                ->whereNull('role_id')
 //                ->
@@ -212,27 +212,27 @@ class UserController extends Controller
     {
         $isAdmin = $this->isAdmin();
         list($left, $right) = $this->getRange($request);
-        $countOfToday = $this->queryStudent()
+        $countOfToday = $this->queryStudent($isAdmin)
             ->where('users.created_at', '>', date('Y-m-d'))
             ->where('users.created_at', '<', date('Y-m-d', strtotime('today +1 days')))
             ->count();
-        $countOfThisWeek = $this->queryStudent()
+        $countOfThisWeek = $this->queryStudent($isAdmin)
             ->where('users.created_at', '>', date("Y-m-d", strtotime("-1 week Monday")))
             ->where('users.created_at', '<', date('Y-m-d', strtotime("0 week Monday")))
             ->count();
-        $countOfSelectedRange = $this->queryStudent()
+        $countOfSelectedRange = $this->queryStudent($isAdmin)
             ->where('users.created_at', '>', $left)
             ->where('users.created_at', '<', $right)
             ->count();
-        $count = $this->queryStudent()
+        $count = $this->queryStudent($isAdmin)
             ->count();
-        $genderDistribution = $this->queryStudent()
+        $genderDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('count(\'gender\') as count'))
             ->addSelect('gender')
             ->groupBy('gender')
             ->get();
 //        dd($genderDistribution->all());
-        $ageDistribution = $this->queryStudent()
+        $ageDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'))
             ->groupBy('age')
             ->addSelect(DB::raw('count(*) as count'))
@@ -246,8 +246,8 @@ class UserController extends Controller
         }
         $ageDistribution = $arr;
 
-        $growingDistribution = $this->queryStudent()
-            ->select(DB::raw('weekofyear(created_at) as week'))
+        $growingDistribution = $this->queryStudent($isAdmin)
+            ->select(DB::raw('weekofyear(users.created_at) as week'))
             ->addSelect(DB::raw('count(*) as count'))
             ->groupBy('week')
             ->get();
