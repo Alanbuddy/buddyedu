@@ -49,7 +49,7 @@
                 -else
                   %td.green 上课中
 
-                %td.tip-parent{"data-id" => $item->id, "data-cid" => $item->course->id}
+                %td.tip-parent{"data-id" => $item->id, "data-cid" => $item->course->id, "data-request" => "false"}
                   %img.class-state{src: "/icon/class1.png"}
                   .tooltip-div
                     .triangle

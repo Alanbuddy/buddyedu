@@ -14,13 +14,15 @@ $(document).ready(function(){
     return template.clone(true);
   }
 
-  var request = false;
+  
   $(".tip-parent").hover(function(){
+    var request = $(this).attr("data-request");
+    console.log(request);
     var _this = $(this);
     var sid = $(this).attr("data-id");
     var cid = $(this).attr("data-cid");
     $(this).find('.class-state').attr('src', "/icon/class2.png");
-    if(!request){
+    if(request == "false"){
       $.ajax({
         type: 'get',
         url: window.sign.replace(/-1/, sid),
@@ -46,10 +48,10 @@ $(document).ready(function(){
           }
         }
       });
-      request = true;
     }
     $(this).find(".tooltip-div").show();
   },function(){
+    $(this).attr("data-request", "true");
     $(this).find('.class-state').attr('src', "/icon/class1.png");
     $(this).find(".tooltip-div").hide();
   });

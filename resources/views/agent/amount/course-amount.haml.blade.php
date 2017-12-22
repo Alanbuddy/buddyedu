@@ -31,27 +31,29 @@
       %li.f14a.bg16b 各课程收入
 
   .desc-div
-    // - if(count($items) == 0) 
-    //   .undiscover.f14
-    //     %img.undiscover-icon{src: "/icon/undiscover.png"}
-    // - else
+    - if(count($items) == 0) 
+      .undiscover.f14
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
     .table-box
-      %table.table.table-hover.table-height
-        %thead.f14b.th-bg
-          %tr
-            %th 课程名称
-            %th 当前开课/所有开课
-            %th 当前报名/所有报名
-            %th 收入总额
-        %tbody
-          %tr
-            %td buddy动物园
-            %td 12/15
-            %td 100/352
-            %td.f12a ￥3200
+        %table.table.table-hover.table-height
+          %thead.f14b.th-bg
+            %tr
+              %th 课程名称
+              %th 当前开课/所有开课
+              %th 当前报名/所有报名
+              %th 收入总额
+          %tbody
+            - foreach($items as $item)
+              %tr
+                %td=$item->name
+                %td=$item->ongoingSchedules_count.'/'.$item->schedules_count
+                %td=$item->ongoingStudentCount.'/'.$item->studentCount
+                %td.f12a='￥'.($item->income??'0')
 
-    .select-page
-      %span.choice-page
+      .select-page
+        %span.choice-page
+          != $items->links()
     
 @endsection
 
