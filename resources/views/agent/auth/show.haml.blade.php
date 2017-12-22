@@ -24,7 +24,7 @@
         %span.f24b=$course->name
         %span.add-div
           %img.small-add{src:"/icon/smalladd.png"}
-          %span.f14b{"data-id" => $course->id} 添加
+          %span.f14b 添加
       //在课程定价用完proportion后会取消
       .money-div
         %span.f24c.mr8='￥'.$course->price
@@ -52,9 +52,9 @@
         %p.f16b.add-c 添加课程
         .controls.controls-row.mb24
           %label.input-caption.f14d 申请备注:
-          %input.form-control.input-width.f14d{:type => "text", :placeholder => "非必填"}
+          %input.form-control.input-width.f14d#remark{:type => "text", :placeholder => "非必填"}
         .btn-div
-          %btn.conform-btn#add 提交申请
+          %btn.conform-btn#add{"data-id" => $course->id} 提交申请
 
 @endsection
 
