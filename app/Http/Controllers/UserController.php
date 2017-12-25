@@ -258,8 +258,6 @@ class UserController extends Controller
         foreach ($growingDistribution as $item) {
             $arr[$item->week] = $item->count;
         }
-//        dd($growingDistribution, $firstWeek, $lastWeek, $arr);
-        dd($ageDistribution);
         $growingDistribution = $arr;
         return view($isAdmin ? 'admin.statistic.index' : 'agent.statistic.index', compact('count',
             'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right',

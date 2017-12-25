@@ -282,10 +282,12 @@ class MerchantController extends Controller
                 ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
             $pointApplicationCount = Point::count();
             $schedulesApplicationCount = Schedule::count();
+            $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->courses()->orderBy('id', 'desc');
             $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
+            $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $schedulesApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
         }
         if ($request->key) {
@@ -296,7 +298,7 @@ class MerchantController extends Controller
             $items->withPath(route('merchant.course.application') . '?' . http_build_query(['key' => $request->key,]));
         $key = $request->key;
         return view($isAdmin ? 'admin.app-process.add-course' : 'agent.notice.add-course',
-            compact('items', 'key', 'pointApplicationCount', 'schedulesApplicationCount'));
+            compact('items', 'key', 'pointApplicationCount', 'schedulesApplicationCount', 'withdrawApplicationCount'));
     }
 
     public function courseApplicationQuery()
@@ -322,7 +324,7 @@ class MerchantController extends Controller
             $merchant = $this->getMerchant();
             $items = $merchant->schedules()->with('merchant');
             $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
-            $withdrawApplicationCount = $$this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
+            $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
         }
         $items = $items->orderBy('schedules.id', 'desc')
@@ -346,10 +348,12 @@ class MerchantController extends Controller
             $items = Point::query();
             $courseApplicationCount = $this->courseApplicationQuery()->count();
             $scheduleApplicationCount = Schedule::count();
+            $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->points();
             $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $scheduleApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
         }
         $items->join('merchants', 'merchants.id', 'points.merchant_id')
@@ -365,7 +369,7 @@ class MerchantController extends Controller
             $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));
         $key = $request->key;
         return view($isAdmin ? 'admin.app-process.edu-point' : 'agent.notice.edu-point',
-            compact('items', 'key', 'courseApplicationCount', 'scheduleApplicationCount'));
+            compact('items', 'key', 'courseApplicationCount', 'scheduleApplicationCount', 'withdrawApplicationCount'));
     }
 
     public function files(Request $request, Merchant $merchant)
