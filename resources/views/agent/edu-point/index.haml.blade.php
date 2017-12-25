@@ -84,7 +84,7 @@
           %textarea.form-control.textarea-width#street{:type => "text"}
         .controls.controls-row.mb16
           %label.input-caption.f14d 申请备注
-          %input.form-control.input-width.f14d#mark{:type => "text", placeholder: "非必填"}
+          %input.form-control.input-width.f14d#remark{:type => "text", placeholder: "非必填"}
         .controls.controls-row.mb16
           %label.input-caption.f14d 地理位置
           %span.get-location.f14b 获取地址

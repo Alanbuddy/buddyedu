@@ -25,11 +25,12 @@
         %span.add-div
           %img.small-add{src:"/icon/smalladd.png"}
           %span.f14b 添加
-      //在课程定价用完proportion后会取消
+      //在课程批准后显示,批准前不显示
       .money-div
         %span.f24c.mr8='￥'.$course->price
         %span.f12a= "(".($course->proportion*100).'%分成)'
     .info-div.f14d
+      //课程没批准前在这里显示定价，批准后不显示
       .p-div
         %span 课程定价：
         %span ￥1200
