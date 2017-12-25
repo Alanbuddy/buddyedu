@@ -228,7 +228,7 @@ class UserController extends Controller
             ->select(DB::raw('count(\'gender\') as count'))
             ->addSelect('gender')
             ->groupBy('gender')
-            ->get();
+            ->get()->toArray();
 //        dd($genderDistribution->all());
         $ageDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'))
@@ -242,15 +242,15 @@ class UserController extends Controller
         foreach ($ageDistribution as $item) {
             $arr[$item->age] = $item->count;
         }
-//        $ageDistribution = $arr;
-        $ageDistribution = [];
-        foreach ($arr as $k => $v) {
-            $ageDistribution[] = [
-                'age' => $k,
-                'count' => $v,
-            ];
-        }
-        dd(json_encode($ageDistribution));
+        $ageDistribution = $arr;
+//        $ageDistribution = [];
+//        foreach ($arr as $k => $v) {
+//            $ageDistribution[] = [
+//                'age' => $k,
+//                'count' => $v,
+//            ];
+//        }
+//        dd(json_encode($ageDistribution));
 
 
         $growingDistribution = $this->queryStudent($isAdmin)
