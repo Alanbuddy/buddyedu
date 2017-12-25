@@ -235,13 +235,16 @@ class UserController extends Controller
             ->groupBy('age')
             ->addSelect(DB::raw('count(*) as count'))
             ->get();
+
         $arr = [];
         foreach (range($ageDistribution->min('age'), $ageDistribution->max('age')) as $item) {
             $arr[$item] = 0;
         }
+
         foreach ($ageDistribution as $item) {
             $arr[$item->age] = $item->count;
         }
+
         $ageDistribution = $arr;
 //        $ageDistribution = [];
 //        foreach ($arr as $k => $v) {

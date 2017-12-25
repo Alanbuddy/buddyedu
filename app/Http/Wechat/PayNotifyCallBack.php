@@ -4,6 +4,7 @@ namespace App\Http\Wechat;
 
 use App\Facades\MessageFacade;
 use App\Http\Controllers\CourseEnrollTrait;
+use App\Http\Controllers\ErrorTrait;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\Schedule;
@@ -69,7 +70,9 @@ class PayNotifyCallBack extends WxPayNotify
             Log::debug('paid successfully');
             return true;
         } else {
-            Log::debug('失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!');
+            $message = '失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!';
+            Log::debug($message);
+            ErrorTrait::logError('order', $message, json_encode($order));
             return false;
         }
     }
