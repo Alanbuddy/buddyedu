@@ -92,6 +92,7 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
+
     }
 
     /**

@@ -242,7 +242,16 @@ class UserController extends Controller
         foreach ($ageDistribution as $item) {
             $arr[$item->age] = $item->count;
         }
-        $ageDistribution = $arr;
+//        $ageDistribution = $arr;
+        $ageDistribution = [];
+        foreach ($arr as $k => $v) {
+            $ageDistribution[] = [
+                'age' => $k,
+                'count' => $v,
+            ];
+        }
+        dd(json_encode($ageDistribution));
+
 
         $growingDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('weekofyear(users.created_at) as week'))
