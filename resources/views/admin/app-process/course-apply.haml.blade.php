@@ -50,14 +50,14 @@
           %tbody
             - foreach($items as $item)
               %tr
-                %td=$item->course->name
-                %td=$item->merchant->name
+                %td.course-name=$item->course->name
+                %td.merchant-name=$item->merchant->name
                 %td 教学点
                 %td 教师
                 %td 管理的备注(机构的备注)无备注时为——
                 -if(empty($item->status))
-                  %td#green 通过
-                  %td.f12e 驳回
+                  %td#green.pointer.approve 通过
+                  %td.f12e.pointer.reject 驳回
                 -else
                   %td.f12a 已处理
                   %td.f12a
@@ -66,6 +66,30 @@
         %span.choice-page
           != $items->links()
 
+#approveModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close-approve{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body.clearfix
+        %p.f24b.add-c 申请处理
+        %p.f14d.approve-title
+        .controls.controls-row.mg24
+          %label.input-caption.f14d.fn 处理说明
+          %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
+        %btn.f16d.add-btn-width.approve-btn 通过申请
+#rejectModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close-reject{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body.clearfix
+        %p.f24b.add-c 申请处理
+        %p.f14d.reject-title
+        .controls.controls-row.mg24
+          %label.input-caption.f14d.fn 处理说明
+          %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
+        %btn.f16d.add-btn-width.reject-btn 驳回申请
   
 @endsection
 

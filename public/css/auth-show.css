@@ -90,6 +90,10 @@ td span {
   cursor: pointer;
 }
 
+.no-padding-top {
+  padding-top: 0;
+}
+
 .pie-box {
   display: -webkit-box;
   display: flex;

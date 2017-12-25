@@ -10,6 +10,10 @@ $(document).ready(function(){
     theme : 'ta',
     success : function(obj) {
       $("#dCon2").html('开始时间 : ' + obj.startDate + '<br/>结束时间 : ' + obj.endDate);
+      var str = $("#date1").val().split(" 至 ");
+      var begin = str[0];
+      var end = str[1];
+      location.href = window.amount_search + "?left=" + begin + "&right=" + end;
     }
   });
 
