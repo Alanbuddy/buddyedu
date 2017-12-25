@@ -19,4 +19,19 @@ class Application extends Model
     {
         return $query->where('type', 'withdraw');
     }
+
+    public function scopeCourseType($query)
+    {
+        return $query->where('type', 'course');
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('type', 'approved');
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('type', 'rejected');
+    }
 }

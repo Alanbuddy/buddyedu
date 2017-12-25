@@ -53,7 +53,7 @@
                 %td='￥'.round($item->amount/100,2)
                 %td=$item->merchant->admin->name
                 %td=$item->merchant->admin->phone
-                -if($item->status=='applying')
+                -if($item->application_status=='applying')
                   %td#green 完成转账
                 -else
                   %td.f12a 已处理
@@ -69,7 +69,7 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/smallclose.png"}
       .modal-body.clearfix
         %p.f16b.add-c 添加课程
-        %p.f14d= '确认申请添加"'.$course->name.'"？'
+        %p.f14d= '确认申请添加？'
         .btn-div
           %btn.cancel-btn.f14e#cancel 取消
           %btn.conform-btn#add 添加

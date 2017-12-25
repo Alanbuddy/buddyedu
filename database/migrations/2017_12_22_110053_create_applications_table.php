@@ -17,6 +17,7 @@ class CreateApplicationsTable extends Migration
             $table->increments('id');
             $table->string('type');
             $table->unsignedInteger('merchant_id');
+            $table->unsignedInteger('object_id');
             $table->unsignedInteger('amount')->nullable();
             $table->enum('status', ['applying', 'approved', 'rejected']);
             $table->json('data')->nullable();

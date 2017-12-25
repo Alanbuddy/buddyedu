@@ -99,7 +99,6 @@ class ScheduleController extends Controller
 //    /**
 //     * 历史开课
 //     * /schedules?type=finished
-//     */
 //    public function finished()
 //    {
 //        $items = Schedule::where('end', '<', Carbon::now()->toDateTimeString())

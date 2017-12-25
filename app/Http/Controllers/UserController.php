@@ -203,8 +203,6 @@ class UserController extends Controller
                 ->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
 //            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
 //                ->whereNull('role_id')
-//                ->
-
         }
     }
 
@@ -230,21 +228,33 @@ class UserController extends Controller
             ->select(DB::raw('count(\'gender\') as count'))
             ->addSelect('gender')
             ->groupBy('gender')
-            ->get();
+            ->get()->toArray();
 //        dd($genderDistribution->all());
         $ageDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('TIMESTAMPDIFF(YEAR, birthday, CURDATE()) as age'))
             ->groupBy('age')
             ->addSelect(DB::raw('count(*) as count'))
             ->get();
+
         $arr = [];
         foreach (range($ageDistribution->min('age'), $ageDistribution->max('age')) as $item) {
             $arr[$item] = 0;
         }
+
         foreach ($ageDistribution as $item) {
             $arr[$item->age] = $item->count;
         }
+
         $ageDistribution = $arr;
+//        $ageDistribution = [];
+//        foreach ($arr as $k => $v) {
+//            $ageDistribution[] = [
+//                'age' => $k,
+//                'count' => $v,
+//            ];
+//        }
+//        dd(json_encode($ageDistribution));
+
 
         $growingDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('weekofyear(users.created_at) as week'))
@@ -260,7 +270,6 @@ class UserController extends Controller
         foreach ($growingDistribution as $item) {
             $arr[$item->week] = $item->count;
         }
-       // dd($genderDistribution);
         $growingDistribution = $arr;
         return view($isAdmin ? 'admin.statistic.index' : 'agent.statistic.index', compact('count',
             'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right',

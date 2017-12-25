@@ -403,6 +403,7 @@ class OrderController extends Controller
             ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');
     }
 
+    //error
     public function exportExcel()
     {
         $PHPExcel = new PHPExcel();
@@ -429,7 +430,6 @@ class OrderController extends Controller
         $query = $merchant->courses()
             ->get();
         dd($query);
-
     }
 
 }

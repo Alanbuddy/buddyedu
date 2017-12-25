@@ -28,7 +28,7 @@
       %li
         %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$schedulesApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.withdraw.application')} 提现申请()
+        %a.f14c{href: route('merchant.withdraw.application')}="提现申请($withdrawApplicationCount)"
     .user-search-box
       .search#search-btn
       %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入机构名", value: "", :onfocus=>"this.style.color='#5d6578'"}

@@ -4,10 +4,12 @@ namespace App\Http\Wechat;
 
 use App\Facades\MessageFacade;
 use App\Http\Controllers\CourseEnrollTrait;
+use App\Http\Controllers\ErrorTrait;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\Schedule;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Wechat\WxPayApi;
 use Wechat\WxPayNotify;
@@ -55,17 +57,22 @@ class PayNotifyCallBack extends WxPayNotify
         $order = Order::where('uuid', $data["out_trade_no"])->first();
         Log::info(json_encode($order));
         if ($order) {
-            $order->wx_transaction_id = $data["transaction_id"];
-            $order->wx_total_fee = $data["total_fee"];
-            $order->status = 'paid';
-            $order->save();
-            Log::debug('paid successfully');
             $schedule = Schedule::find($order->product_id);
-            $this->enroll($schedule, $order->user_id);
+            DB::transaction(function () use ($data, $order, $schedule) {
+                $order->wx_transaction_id = $data["transaction_id"];
+                $order->wx_total_fee = $data["total_fee"];
+                $order->status = 'paid';
+                $order->save();
+                $this->enroll($schedule, $order->user_id);
+                $schedule->merchant->increment('balance', $order->amount);
+            });
             MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $schedule);
+            Log::debug('paid successfully');
             return true;
         } else {
-            Log::debug('失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!');
+            $message = '失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!';
+            Log::debug($message);
+            ErrorTrait::logError('order', $message, json_encode($order));
             return false;
         }
     }

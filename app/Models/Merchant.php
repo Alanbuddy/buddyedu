@@ -64,4 +64,9 @@ class Merchant extends Model
     {
         return $this->hasMany(File::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }
