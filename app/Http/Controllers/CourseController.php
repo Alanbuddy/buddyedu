@@ -124,7 +124,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+
     }
 
     /**
@@ -207,15 +207,23 @@ class CourseController extends Controller
 
     public function apply(Course $course, Request $request)
     {
-        $merchant = $this->getMerchant();
-        $item = new Application(
-            $request->only('remark')
-        );
-        $item->fill([
-            'type' => 'course',
-            'merchant_id' => $merchant->id,
-        ]);
-        $item->save();
+        $count = Application::courseType()
+            ->where('object_id', $course->id)
+            ->where('merchant_id', $this->getMerchant()->id)
+            ->where('status', '<>', 'rejected')
+            ->count();
+        if ($count === 0) {
+            $merchant = $this->getMerchant();
+            $item = new Application(
+                $request->only('remark')
+            );
+            $item->fill([
+                'type' => 'course',
+                'object_id' => $course->id,
+                'merchant_id' => $merchant->id,
+            ]);
+            $item->save();
+        }
         return ['success' => true];
     }
 }

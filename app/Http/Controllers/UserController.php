@@ -203,8 +203,6 @@ class UserController extends Controller
                 ->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
 //            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
 //                ->whereNull('role_id')
-//                ->
-
         }
     }
 
@@ -261,6 +259,7 @@ class UserController extends Controller
             $arr[$item->week] = $item->count;
         }
 //        dd($growingDistribution, $firstWeek, $lastWeek, $arr);
+        dd($ageDistribution);
         $growingDistribution = $arr;
         return view($isAdmin ? 'admin.statistic.index' : 'agent.statistic.index', compact('count',
             'countOfSelectedRange', 'countOfThisWeek', 'countOfToday', 'left', 'right',

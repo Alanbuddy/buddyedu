@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Merchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
@@ -90,7 +92,6 @@ class ApplicationController extends Controller
      */
     public function update(Request $request, Application $application)
     {
-        //
     }
 
     /**
@@ -101,7 +102,22 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-
     }
 
+    public function approve(Request $request, Application $application)
+    {
+        $method = 'approve' . ucfirst($application->type);
+        return $this->{$method}($request, $application);
+    }
+
+    public function approveWithdraw(Request $request, Application $application)
+    {
+        $merchant = $application->merchant;
+        if ($application->status == 'applying')
+            DB::transaction(function () use ($merchant, $application) {
+                $merchant->decrement('balance', $application->amount);
+                $application->update(['status' => 'approved']);
+            });
+        return ['success' => true];
+    }
 }
