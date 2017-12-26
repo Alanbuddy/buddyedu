@@ -26,7 +26,7 @@
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$schedulesApplicationCount.')'
+        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$scheduleApplicationCount.')'
       %li
         %a.f14c{href: route('merchant.withdraw.application')}="提现申请($withdrawApplicationCount)"
     .user-search-box

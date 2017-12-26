@@ -133,7 +133,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'course_id' => 'required',
+            'course_id' => 'required|numeric',
             'point_id' => 'required',
             'quota' => 'required|numeric',
             'begin' => 'required|date',

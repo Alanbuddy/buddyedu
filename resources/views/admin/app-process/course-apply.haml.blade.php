@@ -50,12 +50,12 @@
           %tbody
             - foreach($items as $item)
               %tr
-                %td.course-name=$item->course->name
-                %td.merchant-name=$item->merchant->name
-                %td 教学点
+                %td.course-name=$item->course_name
+                %td.merchant-name=$item->merchant_name
+                %td=$item->point_name
                 %td 教师
                 %td 管理的备注(机构的备注)无备注时为——
-                -if(empty($item->status))
+                -if($item->application_status=='applying')
                   %td#green.pointer.approve 通过
                   %td.f12e.pointer.reject 驳回
                 -else

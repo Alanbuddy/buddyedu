@@ -85,7 +85,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"} 
-            - foreach($merchant->points() as $item)
+            - foreach($merchant->points as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row
           %label.input-caption.f14d 课程定价:
@@ -96,7 +96,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
-            - foreach($merchant->teachers() as $item)
+            - foreach($merchant->teachers as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row.mb24
           %label.input-caption.f14d 班级人数:

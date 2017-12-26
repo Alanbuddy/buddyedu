@@ -17,7 +17,7 @@
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$schedulesApplicationCount.')'
+        %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$scheduleApplicationCount.')'
   
   .desc-div
     - if(count($items) == 0) 
