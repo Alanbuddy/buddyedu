@@ -51,7 +51,7 @@
                     %p 地址信息:
                     %p= $item->address
                     .container
-                // %td.red.cancel-auth 取消授权
+                // %td.red.cancel-auth 取消授权或者重新授权
 
       .select-page 
         %span.choice-page

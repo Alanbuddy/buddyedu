@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/review.css') }}">
 :javascript
   window.process_search = "#{route('merchant.course.application')}"
-  window.approve = "#{route('point.approve', [-1, "approve"])}"
-  window.reject = "#{route('point.approve', [-1, "reject"])}"
+  window.approve = "#{route('application.approve', -1)}"
+  window.reject = "#{route('application.reject', -1)}"
 @endsection
 
 @section('content')
@@ -51,11 +51,11 @@
               %th{colspan: 2} 操作
           %tbody
             -foreach($items as $item)
-              %tr{"data-id" => $item->merchant_id}
-                %td=$item->merchant->name
-                %td=$item->course->name
-                %td=$item->merchant->admin->name
-                %td=$item->merchant->admin->phone
+              %tr{"data-id" => $item->application_id}
+                %td.merchant-name=$item->merchant_name
+                %td.course-name=$item->course_name
+                %td=$item->admin_name
+                %td=$item->admin_phone
                 %td 管理的备注(机构的备注),无备注时为——
                 -if($item->status=='applying')
                   %td#green.operation 通过
@@ -75,6 +75,7 @@
       .modal-body.clearfix
         %p.f24b.add-c 申请处理
         %p.f14d.approve-title 通过"某一机构名称"申请添加"这是一门课程名称"课程的申请？
+        %p.application-id.hidden
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 处理说明
           %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
@@ -87,6 +88,7 @@
       .modal-body.clearfix
         %p.f24b.add-c 申请处理
         %p.f14d.reject-title 驳回"某一机构名称"申请添加"这是一门课程名称"课程的申请？
+        %p.application-id.hidden
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 处理说明
           %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
