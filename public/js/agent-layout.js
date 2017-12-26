@@ -11,7 +11,7 @@ $(document).ready(function(){
       var src = $(this).find('img').attr("src").replace(/A/, "B");
       $(this).find("img").attr("src", src);
     }
-    if(cur_url.indexOf("point") != -1 || cur_url.indexOf("applications/schedule") != -1){
+    if(cur_url.indexOf("applications/point") != -1 || cur_url.indexOf("applications/schedule") != -1){
       $("#notice-a").removeClass('a-item').addClass('active_li');
       var src1 = $("#notice-a").find('img').attr("src").replace(/A/, "B");
       $("#notice-a").find("img").attr("src", src1);

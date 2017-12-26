@@ -118,3 +118,41 @@
   margin-right: 22px;
 }
 
+.tooltip-div {
+  position: absolute;
+  top: 45px;
+  width: 320px;
+  padding: 20px;
+  -webkit-filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
+          filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
+  left: -305px;
+  background: #fff;
+  display: none;
+}
+
+.tip-parent {
+  position: relative;
+}
+
+.triangle {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-bottom: 20px solid #FFF;
+  border-left: 20px solid transparent;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  width: 12px;
+}
+
+.container {
+  width: 272px;
+  height: 140px;
+  margin-top: 12px;
+}
+

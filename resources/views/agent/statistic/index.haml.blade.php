@@ -33,16 +33,16 @@
     .kids-nums
       %p.column-title.f14a 所选时段内学生总数变化
       .figure-box
-        #nums-statistics
+        #nums-statistics{"data-num" => json_encode($growingDistribution)}
     .pie-box
       .age-pie
         %p.pie-title.f14a 全部学生年龄分布
         .figure-box
-          #age-statistics
+          #age-statistics{"data-age" => json_encode($ageDistribution)}
       .gender-pie
         %p.pie-title.f14a 全部学生性别分布
         .figure-box
-          #gender-statistics
+          #gender-statistics{"data-gender" => json_encode($genderDistribution)}
       
     
 @endsection
