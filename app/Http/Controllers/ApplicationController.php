@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Course;
 use App\Models\Merchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -111,6 +117,12 @@ class ApplicationController extends Controller
         return $this->{$method}($request, $application);
     }
 
+    public function reject(Request $request, Application $application)
+    {
+        $method = 'reject' . ucfirst($application->type);
+        return $this->{$method}($request, $application);
+    }
+
     public function approveWithdraw(Request $request, Application $application)
     {
         $merchant = $application->merchant;
@@ -120,5 +132,39 @@ class ApplicationController extends Controller
                 $application->update(['status' => 'approved']);
             });
         return ['success' => true];
+    }
+
+
+    public function approveCourse(Request $request, Application $application)
+    {
+        $course = Course::findOrFail($application->object_id);
+        DB::transaction(function () use ($course, $application) {
+            $application->merchant
+                ->courses()
+                ->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
+            $application->update(['status' => 'approved']);
+        });
+        return ['success' => true];
+    }
+
+    public function rejectCourse(Request $request, Application $application)
+    {
+        $course = Course::findOrFail($application->object_id);
+        DB::transaction(function () use ($course, $application) {
+            $application->merchant
+                ->courses()
+                ->detach($course->id);
+            $application->update(['status' => 'rejected']);
+        });
+        return ['success' => true];
+    }
+
+    public function approveSchedule(Request $request, Application $application)
+    {
+    }
+
+    public function approvePoint(Request $request, Application $application)
+    {
+
     }
 }

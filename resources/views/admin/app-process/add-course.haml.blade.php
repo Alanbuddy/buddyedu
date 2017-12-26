@@ -52,10 +52,10 @@
           %tbody
             -foreach($items as $item)
               %tr{"data-id" => $item->merchant_id}
-                %td=$item->merchant_name
-                %td=$item->course_name
-                %td=$item->admin_name
-                %td=$item->admin_phone
+                %td=$item->merchant->name
+                %td=$item->course->name
+                %td=$item->merchant->admin->name
+                %td=$item->merchant->admin->phone
                 %td 管理的备注(机构的备注),无备注时为——
                 -if($item->status=='applying')
                   %td#green.operation 通过

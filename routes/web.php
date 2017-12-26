@@ -56,7 +56,7 @@ Route::middleware('auth')
 
         Route::resource('comments', 'CommentController');
 
-        Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
+//        Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
         Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');
         Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');
         Route::get('/merchants/{merchant}/points', 'MerchantController@points')->name('merchant.points');
@@ -87,6 +87,7 @@ Route::middleware('auth')
 
         Route::get('/files/{file}/download', 'FileController@download')->name('file.download');
         Route::resource('files', 'FileController');
+        Route::get('/applications/{application}/reject', 'ApplicationController@reject')->name('application.reject');
         Route::get('/applications/{application}/approve', 'ApplicationController@approve')->name('application.approve');
         Route::resource('applications', 'ApplicationController');
     });

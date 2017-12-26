@@ -174,6 +174,7 @@ class MerchantController extends Controller
 
     /**
      * 课程授权
+     * Deprecated
      */
     public function authorizeCourse(Merchant $merchant, Course $course, $operation)
     {
@@ -181,12 +182,12 @@ class MerchantController extends Controller
             case 'apply':
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'applying']]);
                 break;
-            case 'approve':
-                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
-                break;
-            case 'reject':
-                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
-                break;
+//            case 'approve':
+//                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
+//                break;
+//            case 'reject':
+//                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
+//                break;
             default:
                 return ['success' => false, 'message' => trans('error . unsupported')];
         }
@@ -269,17 +270,19 @@ class MerchantController extends Controller
     {
         $isAdmin = $this->isAdmin();
         if ($isAdmin) {
-            $items = Course::orderBy('courses.id', 'desc')
-                ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
-                ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
-                ->select('*')
-                ->addSelect('courses.id as course_id')
-                ->addSelect('courses.name as course_name')
-                ->addSelect('merchants.id as merchant_id')
-                ->addSelect('merchants.name as merchant_name')
-                ->addSelect('course_merchant.status as status')
-                ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
-                ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
+            $items = Application::courseType()
+                ->with('course', 'merchant', 'merchant.admin');
+//            $items = Course::orderBy('courses.id', 'desc')
+//                ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
+//                ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
+//                ->select('*')
+//                ->addSelect('courses.id as course_id')
+//                ->addSelect('courses.name as course_name')
+//                ->addSelect('merchants.id as merchant_id')
+//                ->addSelect('merchants.name as merchant_name')
+//                ->addSelect('course_merchant.status as status')
+//                ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
+//                ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
             $pointApplicationCount = Point::count();
             $schedulesApplicationCount = Schedule::count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
@@ -303,7 +306,8 @@ class MerchantController extends Controller
 
     public function courseApplicationQuery()
     {
-        return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
+//        return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
+        return Application::courseType()->orderBy('id','desc');
     }
 
     public function withdrawApplicationQuery()
