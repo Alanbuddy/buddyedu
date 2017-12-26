@@ -13,7 +13,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b='添加课程('.$items->count().')'
+      %li.f14a.bg16b='添加课程('.$items->total().')'
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
@@ -37,14 +37,14 @@
             -foreach($items as $item)
               %tr
                 %td=$item->name
-                %td=$item->pivot->created_at
-                %td=$item->pivot->updated_at
+                %td=$item->created_at
+                %td=$item->updated_at
                 %td 机构自己的备注(管理员的备注)
-                -if($item->pivot->status=='rejected')
+                -if($item->status=='rejected')
                   %td.red 审核驳回
-                -if($item->pivot->status=='applying')
+                -if($item->status=='applying')
                   %td.red 审核中
-                -if($item->pivot->status=='approved')
+                -if($item->status=='approved')
                   %td.f12a 已通过
 
       .select-page

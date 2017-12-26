@@ -266,29 +266,37 @@ class MerchantController extends Controller
         return view('', compact('merchant', 'user'));
     }
 
+    public function courseApplicationQuery()
+    {
+//        return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
+        return Application::courseType()->orderBy('id', 'desc');
+    }
+
     public function courseApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
+        $items = Application::courseType()
+            ->join('courses', 'applications.object_id', '=', 'courses.id')
+            ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
+            ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
+            ->select('*')
+            ->addSelect('courses.id as course_id')
+            ->addSelect('courses.name as course_name')
+            ->addSelect('merchants.id as merchant_id')
+            ->addSelect('merchants.name as merchant_name')
+            ->addSelect('applications.status as status')
+            ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
+            ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
         if ($isAdmin) {
-            $items = Application::courseType()
-                ->with('course', 'merchant', 'merchant.admin');
-//            $items = Course::orderBy('courses.id', 'desc')
-//                ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
-//                ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
-//                ->select('*')
-//                ->addSelect('courses.id as course_id')
-//                ->addSelect('courses.name as course_name')
-//                ->addSelect('merchants.id as merchant_id')
-//                ->addSelect('merchants.name as merchant_name')
-//                ->addSelect('course_merchant.status as status')
-//                ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
-//                ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
+//            $items = Application::courseType()
+//                ->with('course', 'merchant', 'merchant.admin');
             $pointApplicationCount = Point::count();
             $schedulesApplicationCount = Schedule::count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->courses()->orderBy('id', 'desc');
+//            $items = $merchant->courses()->orderBy('id', 'desc');
+            $items->where('applications.merchant_id', $merchant->id)->orderBy('applications.id', 'desc');
             $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $schedulesApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
@@ -304,37 +312,41 @@ class MerchantController extends Controller
             compact('items', 'key', 'pointApplicationCount', 'schedulesApplicationCount', 'withdrawApplicationCount'));
     }
 
-    public function courseApplicationQuery()
-    {
-//        return Course::join('course_merchant', 'courses.id', '=', 'course_merchant.course_id');
-        return Application::courseType()->orderBy('id','desc');
-    }
 
     public function withdrawApplicationQuery()
     {
-        return Application::WithdrawType()->orderBy('applications.id', 'desc');
+        return Application::withdrawType()->orderBy('applications.id', 'desc');
 
+    }
+
+    public function scheduleApplicationsQuery()
+    {
+        return Application::scheduleType();
     }
 
     public function scheduleApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
+        $items = $this->scheduleApplicationsQuery()
+            ->join('schedules', 'schedules.id', 'applications.id')
+            ->join('merchants', 'schedules.merchant_id', 'merchants.id')
+            ->orderBy('schedules.id', 'desc')
+            ->select('*')
+            ->addSelect('applications.id as application_id')
+            ->addSelect('applications.status as application_status')
+            ->addSelect('merchants.name as merchant_name');
         if ($isAdmin) {
-            $items = Schedule::with('course', 'merchant', 'merchant.admin');
             $courseApplicationCount = $this->courseApplicationQuery()->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
             $pointApplicationCount = Point::count();
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->schedules()->with('merchant');
-            $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $items = $items->where('schedules.merchant_id', $merchant->id);
+//            $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $courseApplicationCount = $this->courseApplicationQuery()->where('applications.merchant_id', $merchant->id)->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $pointApplicationCount = Point::where('merchant_id', $merchant->id)->count();
         }
-        $items = $items->orderBy('schedules.id', 'desc')
-            ->join('merchants', 'schedules.merchant_id', 'merchants.id');
-        $items->select('*')
-            ->addSelect('schedules.status as schedule_status');
         if ($request->key)
             $items->where('merchants.name', 'like', '%' . $request->key . '%');
         $items = $items->paginate(10);
@@ -348,26 +360,30 @@ class MerchantController extends Controller
     public function pointApplications(Request $request)
     {
         $isAdmin = $this->isAdmin();
+        $items = Application::pointType()
+            ->join('points', 'points.id', '=', 'applications.object_id')
+            ->join('merchants', 'merchants.id', 'points.merchant_id')
+            ->select('*')
+            ->addSelect('applications.id as application_id')
+            ->addSelect('applications.status as status')
+            ->addSelect('points.name as point_name')
+            ->addSelect('points.id as point_id')
+            ->addSelect('merchants.name as merchant_name')
+            ->orderBy('points.id', 'desc');
         if ($isAdmin) {
-            $items = Point::query();
             $courseApplicationCount = $this->courseApplicationQuery()->count();
-            $scheduleApplicationCount = Schedule::count();
+//            $scheduleApplicationCount = Schedule::count();
+            $scheduleApplicationCount = $this->scheduleApplicationsQuery()->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
             $items = $merchant->points();
-            $courseApplicationCount = $this->courseApplicationQuery()->where('course_merchant.merchant_id', $merchant->id)->count();
+            $courseApplicationCount = $this->courseApplicationQuery()->where('applications.merchant_id', $merchant->id)->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
-            $scheduleApplicationCount = Schedule::where('merchant_id', $merchant->id)->count();
+            $scheduleApplicationCount = $this->scheduleApplicationsQuery()->where('merchant_id', $merchant->id)->count();
         }
-        $items->join('merchants', 'merchants.id', 'points.merchant_id')
-            ->orderBy('points.id', 'desc');
         if ($request->key)
             $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
-        $items->select('*');
-        $items->addSelect('points.name as point_name');
-        $items->addSelect('points.id as point_id');
-        $items->addSelect('merchants.name as merchant_name');
         $items = $items->paginate(10);
         if ($request->key)
             $items->withPath(route('merchant.point.application') . '?' . http_build_query(['key' => $request->key,]));

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Course;
 use App\Models\Merchant;
+use App\Models\Point;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -150,21 +152,52 @@ class ApplicationController extends Controller
     public function rejectCourse(Request $request, Application $application)
     {
         $course = Course::findOrFail($application->object_id);
-        DB::transaction(function () use ($course, $application) {
+        DB::transaction(function () use ($request, $course, $application) {
             $application->merchant
                 ->courses()
                 ->detach($course->id);
-            $application->update(['status' => 'rejected']);
+            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
         });
         return ['success' => true];
     }
 
     public function approveSchedule(Request $request, Application $application)
     {
+        $schedule = Schedule::findOrFail($application->object_id);
+        DB::transaction(function () use ($request, $schedule, $application) {
+            $schedule->update(['status' => 'approved']);
+            $application->update(['status' => 'approved', 'remark' => $request->remark]);
+        });
+        return ['success' => true];
+    }
+
+    public function rejectSchedule(Request $request, Application $application)
+    {
+        $schedule = Schedule::findOrFail($application->object_id);
+        DB::transaction(function () use ($request, $schedule, $application) {
+            $schedule->update(['status' => 'rejected']);
+            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
+        });
+        return ['success' => true];
     }
 
     public function approvePoint(Request $request, Application $application)
     {
+        $point = Point::findOrFail($application->object_id);
+        DB::transaction(function () use ($request, $point, $application) {
+            $point->update(['approved' => true]);
+            $application->update(['status' => 'approved', 'remark' => $request->remark]);
+        });
+        return ['success' => true];
+    }
 
+    public function rejectPoint(Request $request, Application $application)
+    {
+        $point = Course::findOrFail($application->object_id);
+        DB::transaction(function () use ($request, $point, $application) {
+            $point->update(['approved' => false]);
+            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
+        });
+        return ['success' => true];
     }
 }

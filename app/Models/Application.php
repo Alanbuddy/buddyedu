@@ -25,6 +25,16 @@ class Application extends Model
         return $query->where('type', 'course');
     }
 
+    public function scopePointType($query)
+    {
+        return $query->where('type', 'point');
+    }
+
+    public function scopeScheduleType($query)
+    {
+        return $query->where('type', 'schedule');
+    }
+
     public function scopeApplying($query)
     {
         return $query->where('type', 'applying');
@@ -42,6 +52,6 @@ class Application extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class,'object_id');
+        return $this->belongsTo(Course::class, 'object_id');
     }
 }
