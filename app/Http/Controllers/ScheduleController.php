@@ -142,7 +142,7 @@ class ScheduleController extends Controller
         ]);
 
         $application = new Application(
-            $request->only('schedule')
+            $request->only('remark')
         );
         DB::transaction(function () use ($application, $request) {
             $schedule = new Schedule();

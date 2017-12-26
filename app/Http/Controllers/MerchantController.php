@@ -423,7 +423,9 @@ class MerchantController extends Controller
         if ($request->key)
             $items->where('merchants.name', 'like', '%' . $request->get('key') . '%');
         $items = $items
-            ->select('*')->addSelect('applications.status as application_status')
+            ->select('*')
+            ->addSelect('applications.status as application_status')
+            ->addSelect('applications.id as application_id')
             ->paginate(10);
         $courseApplicationCount = $this->courseApplicationQuery()->count();
         $scheduleApplicationCount = $this->scheduleApplicationsQuery()->count();
