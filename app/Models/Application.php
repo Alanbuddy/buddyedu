@@ -37,17 +37,17 @@ class Application extends Model
 
     public function scopeApplying($query)
     {
-        return $query->where('type', 'applying');
+        return $query->where('status', 'applying');
     }
 
     public function scopeApproved($query)
     {
-        return $query->where('type', 'approved');
+        return $query->where('status', 'approved');
     }
 
     public function scopeRejected($query)
     {
-        return $query->where('type', 'rejected');
+        return $query->where('status', 'rejected');
     }
 
     public function course()
