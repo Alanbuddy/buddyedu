@@ -65,10 +65,10 @@ Route::middleware('auth')
         Route::get('/merchants/{merchant}/users/{user}', 'MerchantController@user')->name('merchant.user.show');
         Route::get('/merchants/{merchant}/orders', 'MerchantController@orders')->name('merchant.orders');
         Route::get('/merchants/{merchant}/files', 'MerchantController@files')->name('merchant.files');
-        Route::get('/course-applications', 'MerchantController@courseApplications')->name('merchant.course.application');
-        Route::get('/schedule-applications', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');
-        Route::get('/point-applications', 'MerchantController@pointApplications')->name('merchant.point.application');
-        Route::get('/withdraw-applications', 'MerchantController@withdrawApplications')->name('merchant.withdraw.application');
+        Route::get('/applications/course', 'MerchantController@courseApplications')->name('merchant.course.application');
+        Route::get('/applications/schedule', 'MerchantController@scheduleApplications')->name('merchant.schedule.application');
+        Route::get('/applications/point', 'MerchantController@pointApplications')->name('merchant.point.application');
+        Route::get('/applications/withdraw', 'MerchantController@withdrawApplications')->name('merchant.withdraw.application');
         Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
         Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
         Route::resource('merchants', 'MerchantController');
