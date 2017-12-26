@@ -31,4 +31,19 @@ $(document).ready(function(){
   $("#cancel").click(function(){
     $("#addModal").modal("hide");
   });
+
+  $("#confirm").click(function(){
+    var application_id = $(this).closest('.btn-div').siblings('.application-id').text();
+    console.log(application_id);
+    $.ajax({
+      type: 'get',
+      url: window.approve.replace(/-1/, application_id),
+      success: function(data){
+        console.log(data);
+        if (data.success){
+          location.href = window.search;
+        }
+      }
+    });
+  });
 });

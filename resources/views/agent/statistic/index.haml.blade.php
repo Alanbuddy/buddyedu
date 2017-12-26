@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 <link rel="stylesheet" href="/css/dateRange.css">

@@ -53,7 +53,8 @@
           %tbody
             - foreach($items as $item)
               %tr{"data-id" => $item->application_id}
-                %td.course-name=$item->course_name
+                %td
+                  %a.course-name{href: route('schedules.show',$item->id)}= $item->course_name
                 %td.merchant-name=$item->merchant_name
                 %td=$item->point_name
                 %td= $item->price

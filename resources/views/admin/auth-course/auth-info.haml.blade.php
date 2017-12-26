@@ -25,10 +25,10 @@
       .name-div
         %img.icon{src: "/icon/bird.png"}
         %span.f24b=$course->name
-      .money-div
-        %span.f24c.mr8=$course->guide_price
-        %span.f12a= "(".($course->proportion*100).'%分成)'
     .info-div.f14d
+      .p-div
+        %span 课程定价：
+        %span=$course->guide_price."(".($course->proportion*100).'%分成)'
       .p-div
         %span 课程网站：
         %span=$course->url
