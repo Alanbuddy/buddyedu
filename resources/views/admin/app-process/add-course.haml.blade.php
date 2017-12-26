@@ -58,8 +58,8 @@
                 %td=$item->admin_phone
                 %td 管理的备注(机构的备注),无备注时为——
                 -if($item->status=='applying')
-                  %td#green.operation 通过
-                  %td.f12e.operation 驳回
+                  %td#green.approve 通过
+                  %td.f12e.reject 驳回
                 -if($item->status=='approved')
                   %td.f12a 已处理
                   %td.f12a
