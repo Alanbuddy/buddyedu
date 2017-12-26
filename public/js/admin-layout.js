@@ -16,8 +16,14 @@ $(document).ready(function(){
       var src1 = $("#process_a").find('img').attr("src").replace(/A/, "B");
       $("#process_a").find("img").attr("src", src1);
     }
+    if(cur_url.indexOf("group-by-course") != -1){
+      $("#amount_a").removeClass('a-item').addClass('active_li');
+      var src2 = $("#amount_a").find('img').attr("src").replace(/A/, "B");
+      $("#amount_a").find("img").attr("src", src2);
+    }
   });
 
+  
   $(".logout").click(function(){
     console.log(window.logout);
     $.ajax({

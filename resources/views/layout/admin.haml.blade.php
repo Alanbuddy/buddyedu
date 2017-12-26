@@ -44,13 +44,13 @@
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.fb.sidebar-title 学生管理
               %li
-                %a.a-item{:href => route('orders.stat-group-by-merchant')}
+                %a.a-item#amount_a{:href => route('orders.stat-group-by-merchant')}
                   %img.mini-icon{src: "/icon/5A.png"}
                   %span.fb.sidebar-title 金额统计
               %li
                 %a.a-item{:href => route('users.statistics')}
                   %img.mini-icon{src: "/icon/6A.png"}
-                  %span.fb.sidebar-title 学生统计
+                  %span.fb.sidebar-title 信息统计
               %li.apply
                 %a.a-item#process_a{href: route('merchant.course.application')}
                   %img.mini-icon{src: "/icon/7A.png"}

@@ -1,4 +1,16 @@
 $(document).ready(function(){
+  var age = $("#age-statistics").attr("data-age");
+  var gender = $("#gender-statistics").attr("data-gender");
+  var num = $("#nums-statistics").attr("data-num");
+  console.log(age);
+  console.log(gender);
+  console.log(num);
+  var ageData = [];
+  var da = JSON.parse(age);
+  $.each(da, function(index, item){
+    ageData.push([index-1 + '~' + index + '岁', item]);
+  });
+  
   $('#gender-statistics').highcharts({
     chart: {
       plotBackgroundColor: null,
@@ -87,37 +99,7 @@ $(document).ready(function(){
     series: [ {
       type: 'column',
       name: '人数',
-      // data: data.stat.age
-      data: [
-        [
-          '0-1岁',
-          1000
-        ],
-        [
-          '1-2岁',
-          1500
-        ],
-        [
-          '2-3岁',
-          2000
-        ],
-        [
-          '3-4岁',
-          2500
-        ],
-        [
-          '4-5岁',
-          2000
-        ],
-        [
-          '5-6岁',
-          1000
-        ],
-        [
-          '>6岁',
-          500
-        ],
-      ]
+      data: ageData
     } ]
   });
     
