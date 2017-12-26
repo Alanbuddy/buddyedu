@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/edu-point.css') }}">
 :javascript
   window.points_search = "#{route('merchant.point.application')}"
+  window.approve = "#{route('application.approve', -1)}"
+  window.reject = "#{route('application.reject', -1)}"
 @endsection
 
 @section('content')
@@ -46,18 +48,20 @@
               %th 面积
               %th 负责人
               %th 联系方式
+              %th 管理备注
+              %th 申请备注
               %th 所在地
-              %th 备注
               %th{colspan: 2} 操作
           %tbody
           -foreach($items as $item)
-            %tr
+            %tr{"data-id" => $item->application_id}
               %td.merchant-name=$item->merchant_name
               %td.point-name=$item->point_name
               %td=$item->area.'m²'
               %td=$item->admin
               %td=$item->contact
-              %td 管理的备注(机构的备注)无备注时为——
+              %td= $item->advice ? $item->advice : '——'
+              %td= $item->remark ? $item->remark : '——'
               %td.tip-parent{"data-geo" => $item->geolocation}
                 %img{src: "/icon/location.png"}
                 .tooltip-div.f14d
@@ -84,6 +88,7 @@
       .modal-body.clearfix
         %p.f24b.add-c 申请处理
         %p.f14d.approve-title
+        %p.application-id.hidden
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 处理说明
           %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
@@ -96,6 +101,7 @@
       .modal-body.clearfix
         %p.f24b.add-c 申请处理
         %p.f14d.reject-title
+        %p.application-id.hidden
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 处理说明
           %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}

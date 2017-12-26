@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/review.css') }}">
 :javascript
   window.search = "#{route('merchant.withdraw.application')}"
+  window.approve = "#{route('application.approve', -1)}"
 @endsection
 
 @section('content')
@@ -48,13 +49,13 @@
               %th 操作
           %tbody
             - foreach($items as $item)
-              %tr
-                %td=$item->merchant->name
-                %td='￥'.round($item->amount/100,2)
+              %tr{"data-id" => $item->application_id}
+                %td.merchant-name=$item->merchant->name
+                %td.cash-num='￥'.round($item->amount/100,2)
                 %td=$item->merchant->admin->name
                 %td=$item->merchant->admin->phone
                 -if($item->application_status=='applying')
-                  %td#green 完成转账
+                  %td#green.cash-end.pointer 完成转账
                 -else
                   %td.f12a 已处理
                
@@ -66,16 +67,17 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/smallclose.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/smallclose.png"}
       .modal-body.clearfix
-        %p.f16b.add-c 添加课程
-        %p.f14d= '确认申请添加？'
+        %p.f16b.add-c 完成转账
+        %p.f14d.cash-title
+        %p.application-id.hidden
         .btn-div
           %btn.cancel-btn.f14e#cancel 取消
-          %btn.conform-btn#add 添加
+          %btn.conform-btn#confirm 确定
 @endsection
 
 @section('script')
-<script src= "/js/process-schedule.js"></script>
+<script src= "/js/admin-cash-process.js"></script>
 
 @endsection
