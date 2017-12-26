@@ -36,11 +36,11 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->name
+                %td=$item->point_name
                 %td=$item->created_at
                 %td=$item->updated_at
                 %td 机构自己的备注(管理员的备注)
-                -if($item->approved)
+                -if($item->application_status=='approved')
                   %td.f12a 已通过
                 -else
                   %td.red 审核驳回

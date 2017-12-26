@@ -339,6 +339,7 @@ class MerchantController extends Controller
             ->addSelect('applications.status as application_status')
             ->addSelect('merchants.name as merchant_name')
             ->addSelect('points.name as point_name')
+            ->addSelect('courses.status as course_status')
             ->addSelect('courses.name as course_name');
         if ($isAdmin) {
             $courseApplicationCount = $this->courseApplicationQuery()->count();
@@ -375,7 +376,9 @@ class MerchantController extends Controller
             ->join('merchants', 'merchants.id', 'points.merchant_id')
             ->select('*')
             ->addSelect('applications.id as application_id')
-            ->addSelect('applications.status as status')
+            ->addSelect('applications.status as application_status')
+            ->addSelect('applications.created_at as created_at')
+            ->addSelect('applications.updated_at as updated_at')
             ->addSelect('points.name as point_name')
             ->addSelect('points.id as point_id')
             ->addSelect('merchants.name as merchant_name')
@@ -387,7 +390,7 @@ class MerchantController extends Controller
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
-            $items = $merchant->points();
+            $items = $items->where('applications.merchant_id',$merchant->id);
             $courseApplicationCount = $this->courseApplicationQuery()->where('applications.merchant_id', $merchant->id)->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $scheduleApplicationCount = $this->scheduleApplicationsQuery()->where('merchant_id', $merchant->id)->count();
