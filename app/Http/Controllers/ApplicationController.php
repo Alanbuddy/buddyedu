@@ -193,7 +193,7 @@ class ApplicationController extends Controller
 
     public function rejectPoint(Request $request, Application $application)
     {
-        $point = Course::findOrFail($application->object_id);
+        $point = Point::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $point, $application) {
             $point->update(['approved' => false]);
             $application->update(['status' => 'rejected', 'remark' => $request->remark]);
