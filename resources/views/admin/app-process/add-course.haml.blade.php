@@ -57,8 +57,6 @@
                 %td=$item->merchant->admin->name
                 %td=$item->merchant->admin->phone
                 %td 管理的备注(机构的备注),无备注时为——
-                %td#green.pointer.approve 通过
-                %td.f12e.pointer.reject 驳回
                 -if($item->status=='applying')
                   %td#green.operation 通过
                   %td.f12e.operation 驳回
