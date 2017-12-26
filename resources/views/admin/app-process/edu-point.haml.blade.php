@@ -66,7 +66,7 @@
                   %p 地址信息:
                   %p=$item->address
                   .container
-              -if(empty($item->status))
+              -if($item->application_status=='applying')
                 %td#green.approve 通过
                 %td.f12e.reject 驳回
               -else

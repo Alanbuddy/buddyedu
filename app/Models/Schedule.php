@@ -48,5 +48,10 @@ class Schedule extends Model
         return $this->hasMany(Comment::class);
     }
 
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'object_id');
+    }
 }
 

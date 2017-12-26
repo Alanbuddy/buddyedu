@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Point;
 use Carbon\Carbon;
+use function foo\func;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PointController extends Controller
 {
@@ -79,7 +82,18 @@ class PointController extends Controller
             'merchant_id'
         ]));
 
-        $item->save();
+        $application = new Application(
+            $request->only('remark')
+        );
+        DB::transaction(function () use ($item, $application) {
+            $item->save();
+            $application->fill([
+                'type' => 'point',
+                'status' => 'applying',
+                'merchant_id'=>$this->getMerchant()->id
+            ]);
+            $item->applications()->save($application);
+        });
         return ['success' => true];
     }
 

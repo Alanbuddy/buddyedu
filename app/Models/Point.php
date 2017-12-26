@@ -17,4 +17,9 @@ class Point extends Model
     {
         return $this->belongsTo(Merchant::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'object_id');
+    }
 }

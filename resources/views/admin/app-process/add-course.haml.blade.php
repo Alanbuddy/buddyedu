@@ -26,7 +26,7 @@
       %li
         %a.f14c{href: route('merchant.point.application')}='添加教学点('.$pointApplicationCount.')'
       %li
-        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$schedulesApplicationCount.')'
+        %a.f14c{href: route('merchant.schedule.application')} ='开课申请('.$scheduleApplicationCount.')'
       %li
         %a.f14c{href: route('merchant.withdraw.application')}="提现申请($withdrawApplicationCount)"
     .user-search-box
@@ -57,8 +57,6 @@
                 %td=$item->admin_name
                 %td=$item->admin_phone
                 %td 管理的备注(机构的备注),无备注时为——
-                %td#green.pointer.approve 通过
-                %td.f12e.pointer.reject 驳回
                 -if($item->status=='applying')
                   %td#green.operation 通过
                   %td.f12e.operation 驳回

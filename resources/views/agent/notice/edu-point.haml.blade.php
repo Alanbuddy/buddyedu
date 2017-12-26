@@ -18,9 +18,9 @@
       %li.f14a.bg16b='添加教学点('.$items->total().')'
       %li
         %a.f14c{href: route('merchant.schedule.application')}='开课申请('.$scheduleApplicationCount.')'
-  
+
   .desc-div
-    - if(count($items) == 0) 
+    - if(count($items) == 0)
       .undiscover.f14
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
@@ -36,19 +36,21 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->name
+                %td=$item->point_name
                 %td=$item->created_at
                 %td=$item->updated_at
                 %td 机构自己的备注(管理员的备注)
-                -if($item->approved)
+                -if($item->application_status=='applying')
+                  %td.red 审核中
+                -if($item->application_status=='approved')
                   %td.f12a 已通过
-                -else
+                -if($item->application_status=='rejected')
                   %td.red 审核驳回
       .select-page
         %span.choice-page
           != $items->links()
 
-  
+
 @endsection
 
 @section('script')

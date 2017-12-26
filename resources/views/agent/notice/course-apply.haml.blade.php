@@ -36,17 +36,17 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->course->name
+                %td=$item->course_name
                 %td=$item->created_at
                 %td=$item->updated_at
                 %td 机构自己的备注(管理员的备注)
                 -if($item->status == 'rejected')
                   %td.red 审核驳回
-                -elseif($item->status == 'applying')
+                -elseif($item->application_status == 'applying')
                   %td.red 审核中
-                -if($item->status == 'approved' && ($item->begin < date('Y-m-d H:i:s')))
+                -if($item->application_status == 'approved' && ($item->begin < date('Y-m-d H:i:s')))
                   %td.f12f 报名中
-                -elseif($item->status == 'approved' && $item->begin > date('Y-m-d H:i:s'))
+                -elseif($item->application_status == 'approved' && $item->begin > date('Y-m-d H:i:s'))
                   %td.green 上课中
       .select-page
         %span.choice-page

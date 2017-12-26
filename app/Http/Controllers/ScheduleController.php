@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Merchant;
@@ -93,7 +94,7 @@ class ScheduleController extends Controller
         if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
         return view($isAdmin ? ($finished ? 'admin.course.history-course' : 'admin.course.course-list') : ($finished ? 'agent.course.history-course' : 'agent.course.index'),
-            compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount','merchant'));
+            compact('items', 'key', 'onGoingSchedulesCount', 'finishedSchedulesCount', 'merchant'));
     }
 
 //    /**
@@ -132,7 +133,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'course_id' => 'required',
+            'course_id' => 'required|numeric',
             'point_id' => 'required',
             'quota' => 'required|numeric',
             'begin' => 'required|date',
@@ -140,8 +141,10 @@ class ScheduleController extends Controller
             'teachers' => 'required|array',
         ]);
 
-        DB::transaction(function () use ($request) {
-
+        $application = new Application(
+            $request->only('schedule')
+        );
+        DB::transaction(function () use ($application, $request) {
             $schedule = new Schedule();
             $schedule->fill($request->only([
                 'begin',
@@ -155,6 +158,7 @@ class ScheduleController extends Controller
             $schedule->status = 'applying';
             $schedule->merchant_id = auth()->user()->ownMerchant->id;
             $schedule->save();
+            //save teachers
             $arr = [];
             foreach ($request->teachers as $k => $v) {
                 $arr[$v] = [
@@ -164,6 +168,14 @@ class ScheduleController extends Controller
                 ];
             }
             $schedule->teachers()->sync($arr);
+
+            //save application
+            $application->fill([
+                'type' => 'schedule',
+                'status' => 'applying',
+                'merchant_id' => $this->getMerchant()->id
+            ]);
+            $schedule->applications()->save($application);
         });
         return ['success' => true];
     }
