@@ -439,12 +439,10 @@ class MerchantController extends Controller
             'courseApplicationCount', 'scheduleApplicationCount', 'pointApplicationCount'));
     }
 
-    public function scheduleShow(Request $request, Application $application)
+    public function scheduleShow(Request $request, Schedule $schedule)
     {
-        $item = Schedule::findOrFail($application->object_id);
-        return view('admin.app-process.course-show', compact('item'));
+        return view('admin.app-process.course-show', compact('schedule'));
 
     }
-
 
 }
