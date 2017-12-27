@@ -139,6 +139,7 @@ class ScheduleController extends Controller
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',
+            'lessons_count' => 'required|numeric',
         ]);
 
         $application = new Application(
@@ -152,6 +153,7 @@ class ScheduleController extends Controller
                 'course_id',
                 'merchant_id',
                 'point_id',
+                'lessons_count',
                 'quota'
             ]));
 
@@ -313,7 +315,7 @@ class ScheduleController extends Controller
                 }])
                 ->get();
         } else {
-            $course = $schedule->course;
+//            $course = $schedule->course;
             $items = $schedule->attendances()
                 ->select(DB::raw('count("id") as count'))
                 ->addSelect('ordinal_no')
@@ -323,7 +325,7 @@ class ScheduleController extends Controller
             foreach ($items as $item) {
                 $arr[] = $item->ordinal_no;
             }
-            $arr2 = range(1, $course->lessons_count);
+            $arr2 = range(1, $schedule->lessons_count);
             $diff = collect($arr2)->diff(collect($arr))->values();
             foreach ($diff as $item) {
                 $items->push(new Attendance(['count' => 0, 'ordinal_no' => $item]));
