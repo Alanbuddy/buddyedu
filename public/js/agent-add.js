@@ -12,13 +12,11 @@ $(document).ready(function(){
   });
   
   function courseSelect(){
-
     $.ajax({
       type: 'get',
       url: window.course_select,
       success: function(data){
         if(data.success){
-          console.log(data.data);
           $.each(data.data, function (index, item) {  
             var id = item.id; 
             var text = item.name; 

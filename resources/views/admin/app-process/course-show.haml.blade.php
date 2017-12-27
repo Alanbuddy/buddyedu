@@ -14,9 +14,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b 基础信息
-      %li
-        %a.f14c{href: route('schedule.student',$item)} 报名情况
+      %li.f14a.bg16b 开课信息
 
   .desc-div
     .name-money
@@ -32,10 +30,10 @@
         - foreach ($item->teachers as $teacher)
           %span.teacher= $teacher->name
       .p-div
-        %span 报名人数：
-        %span= $item->students()->count()."/".$item->quota
-        %span.ml80 课程进度：
-        %span=$progress.'/'.$item->course->lessons_count
+        %span 班级人数：
+        %span= $item->quota
+        %span.ml80 课程次数：
+        %span= $item->course->lessons_count
       .p-div
         %span 上课时间：
         %span= $item->begin
