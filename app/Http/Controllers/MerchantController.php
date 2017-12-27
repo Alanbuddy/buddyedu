@@ -317,7 +317,9 @@ class MerchantController extends Controller
 
     public function withdrawApplicationQuery()
     {
-        return Application::withdrawType()->orderBy('applications.id', 'desc');
+        return Application::withdrawType()
+            ->orderBy('applications.status')
+            ->orderBy('applications.id', 'desc');
 
     }
 
@@ -391,7 +393,7 @@ class MerchantController extends Controller
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->count();
         } else {
             $merchant = $this->getMerchant();
-            $items = $items->where('applications.merchant_id',$merchant->id);
+            $items = $items->where('applications.merchant_id', $merchant->id);
             $courseApplicationCount = $this->courseApplicationQuery()->where('applications.merchant_id', $merchant->id)->count();
             $withdrawApplicationCount = $this->withdrawApplicationQuery()->where('merchant_id', $merchant)->count();
             $scheduleApplicationCount = $this->scheduleApplicationsQuery()->where('merchant_id', $merchant->id)->count();

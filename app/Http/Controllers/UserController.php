@@ -255,7 +255,6 @@ class UserController extends Controller
 //        }
 //        dd(json_encode($ageDistribution));
 
-
         $growingDistribution = $this->queryStudent($isAdmin)
             ->select(DB::raw('weekofyear(users.created_at) as week'))
             ->addSelect(DB::raw('count(*) as count'))
