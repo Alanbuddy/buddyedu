@@ -39,17 +39,26 @@
         %table.table.table-hover.table-height
           %thead.f14b.th-bg
             %tr
-              %th 教学点名称
-              %th 当前开课/历史开课
+              %th 教学点
               %th 面积
+              %th 负责人
+              %th 联系方式
               %th 详细地址
           %tbody
           -foreach($items as $item)
             %tr
               %td=$item->name
-              %td=$item->ongoingSchedules.'/'.$item->schedules_count
-              %td=$item->area
-              %td.f12a=$item->address
+              %td= $item->area.'m²'
+              %td= $item->admin
+              %td= $item->contact
+              %td.tip-parent{"data-geo" => $item->geolocation}
+                %img{src: "/icon/location.png"}
+                .tooltip-div.f14d
+                  .triangle
+                  %img.close{src: "/icon/smallclose.png"}
+                  %p 地址信息:
+                  %p= $item->address
+                  .container
       .select-page 
         %span.choice-page
           != $items->links()

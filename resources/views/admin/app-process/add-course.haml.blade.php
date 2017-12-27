@@ -47,7 +47,8 @@
               %th 申请课程
               %th 负责人
               %th 联系方式
-              %th 备注
+              %th 管理备注
+              %th 申请备注
               %th{colspan: 2} 操作
           %tbody
             -foreach($items as $item)
@@ -56,10 +57,11 @@
                 %td.course-name=$item->course_name
                 %td=$item->admin_name
                 %td=$item->admin_phone
-                %td 管理的备注(机构的备注),无备注时为——
+                %td= $item->advice ? $item->advice : '——'
+                %td= $item->remark ? $item->remark : '——'
                 -if($item->status=='applying')
-                  %td#green.approve 通过
-                  %td.f12e.reject 驳回
+                  %td#green.approve.pointer 通过
+                  %td.f12e.reject.pointer 驳回
                 -if($item->status=='approved')
                   %td.f12a 已处理
                   %td.f12a
