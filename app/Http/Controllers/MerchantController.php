@@ -14,6 +14,7 @@ use Faker\Provider\File;
 use Faker\Provider\Uuid;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use function Sodium\crypto_box_publickey_from_secretkey;
@@ -436,6 +437,13 @@ class MerchantController extends Controller
             $items->withPath(route('merchant.withdraw.application') . '?' . http_build_query(['key' => $request->key,]));
         return view('admin.app-process.cash', compact('items', 'key',
             'courseApplicationCount', 'scheduleApplicationCount', 'pointApplicationCount'));
+    }
+
+    public function scheduleShow(Request $request, Application $application)
+    {
+        $item = Schedule::findOrFail($application->object_id);
+        return view('admin.app-process.course-show', compact('item'));
+
     }
 
 
