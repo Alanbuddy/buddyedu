@@ -91,8 +91,11 @@
           %label.input-caption.f14d 课程定价:
           %input.form-control.input-width.f14d#price{:type => "text"}
         .controls.controls-row#desc
-          %label.input-caption.f14d.unvisible 课程定价:
-          %span.mark.mtb#course-desc
+          %label.input-caption.f14d.unvisible 故意隐藏:
+          %span.hide-notice.mtb#course-desc
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 课程次数:
+          %input.form-control.input-width.f14d#lessons-count{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}

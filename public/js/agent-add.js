@@ -55,6 +55,7 @@ $(document).ready(function(){
     var end = $("#datepicker2").val();
     var price = $("#price").val().trim();
     var remark = $("#remark").val().trim();
+    var lessons_count = $("#lessons-count").val().trim();
   	$.ajax({
   	  url: window.course_store,
   	  type: 'post',
@@ -67,7 +68,8 @@ $(document).ready(function(){
   	    begin: begin,
   	    end: end,
         price: price,
-        remark: remark
+        remark: remark,
+        lessons_count: lessons_count
   	  },
   	  success: function( data ) {
   	    if(data.success){

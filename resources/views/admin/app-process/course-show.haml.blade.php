@@ -10,7 +10,7 @@
   .title-div
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 开课申请 >
-    %span.f16a.title= $item->course->name
+    %span.f16a.title= $schedule->course->name
 
   .tab-title
     %ul.clearfix
@@ -19,30 +19,30 @@
   .desc-div
     .name-money
       .name-div
-        %p.f24b= $item->course->name 
-        %p.f12a.mt16= $item->point->name 
+        %p.f24b= $schedule->course->name 
+        %p.f12a.mt16= $schedule->point->name 
       .money-div
-        %span.f24c.mr8= $item->price ? "￥".round($item->price/100, 2) : "暂无价格"
-        %span.f12a="(".($item->course->proportion * 100)."%分成)"
+        %span.f24c.mr8= $schedule->price ? "￥".round($schedule->price/100, 2) : "暂无价格"
+        %span.f12a="(".($schedule->course->proportion * 100)."%分成)"
     .info-div.f14d
       .p-div
         %span 授课老师：
-        - foreach ($item->teachers as $teacher)
+        - foreach ($schedule->teachers as $teacher)
           %span.teacher= $teacher->name
       .p-div
         %span 班级人数：
-        %span= $item->quota
+        %span= $schedule->quota
         %span.ml80 课程次数：
-        %span= $item->course->lessons_count
+        %span= $schedule->course->lessons_count
       .p-div
         %span 上课时间：
-        %span= $item->begin
+        %span= $schedule->begin
       .p-div
         %span 上课地点：
-        %span= $item->point->name
+        %span= $schedule->point->name
       .p-div
         %span.left-span 课程介绍：
-        %span.right-span= $item->course->description
+        %span.right-span= $schedule->course->description
   
 @endsection
 

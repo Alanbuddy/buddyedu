@@ -3,9 +3,9 @@
   left: 50%;
   top: 50%;
   margin-left: -240px;
-  margin-top: -368px;
+  margin-top: -377px;
   width: 480px;
-  height: 736px;
+  height: 754px;
 }
 
 #addModal .modal-backdrop {
@@ -73,7 +73,7 @@
   vertical-align: top;
 }
 
-#addModal .mark {
+#addModal .hide-notice {
   display: inline-block;
   width: 300px;
   margin-left: 8px;
