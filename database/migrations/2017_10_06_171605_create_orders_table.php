@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('wx_total_fee')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('product_id')->unsigned();
-            $table->integer('amount')->unsigned();
+            $table->integer('amount');
             $table->integer('merchant_id')->unsigned();
             $table->enum('status', ['created', 'paid', 'canceled', 'refunded', 'refunding']);
             $table->softDeletes();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Course;
 use App\Models\Merchant;
+use App\Models\Order;
 use App\Models\Point;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -132,6 +133,16 @@ class ApplicationController extends Controller
             DB::transaction(function () use ($merchant, $application) {
                 $merchant->decrement('balance', $application->amount);
                 $application->update(['status' => 'approved']);
+                $order = new Order([
+                    'title' => 'withdraw',
+                    'user_id' => auth()->user()->id,
+                    'product_id' => 0,
+                    'status' => 'created',
+                    'amount' => -$application->amount,
+                    'merchant_id' => $merchant->id,
+                    'uuid' => 'test'
+                ]);
+                $order->save();
             });
         return ['success' => true];
     }
