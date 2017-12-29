@@ -58,13 +58,13 @@
                   - foreach ($item->teachers as $teacher)
                     %span= $teacher->name
                 %td= $item->students_count."/".$item->quota
-                - if ($item->begin < date('Y-m-d H:i:s'))
+                - if ($item->status == "approved" && $item->begin < date('Y-m-d H:i:s'))
                   %td.green 上课中
                 - if ($item->status == "applying")
                   %td.red 审核中
                 - if ($item->status == "rejected")
                   %td.red 审核驳回
-                - if ($item->begin > date('Y-m-d H:i:s'))
+                - if ($item->status == "approved" && $item->begin > date('Y-m-d H:i:s'))
                   %td.orange 报名中
 
       .select-page 
