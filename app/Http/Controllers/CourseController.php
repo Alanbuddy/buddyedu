@@ -40,8 +40,10 @@ class CourseController extends Controller
             $merchant = auth()->user()->ownMerchant;
             if ($request->type == 'my') {
                 $items = $merchant->courses();
+                $count = Course::count();
+            } else {
+                $count = $merchant->courses()->count();
             }
-            $count = $merchant ? $merchant->courses()->count() : 0;
         }
 
         $items = $items->paginate(10);

@@ -67,7 +67,6 @@ class ScheduleController extends Controller
 
     public function index(Request $request)
     {
-        $user = auth()->user();
         $isAdmin = $this->isAdmin();
         $finished = $request->get('type') == 'finished';
         $key = $request->get('key');
@@ -85,6 +84,8 @@ class ScheduleController extends Controller
             $items = $finished
                 ? $this->finishedSchedules()->where('merchant_id', $merchant->id)
                 : $merchant->schedules();
+            $items->withCount('students')
+                ->with(['course', 'point', 'merchant', 'teachers']);
             $onGoingSchedulesCount = $this->onGoingSchedules()->where('merchant_id', $merchant->id)->count();
             $finishedSchedulesCount = $this->finishedSchedules()->where('merchant_id', $merchant->id)->count();
         }
