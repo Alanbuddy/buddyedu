@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
+    use WithdrawTrait;
     public function __construct()
     {
         $this->middleware('role:admin');
@@ -43,7 +44,6 @@ class ApplicationController extends Controller
     }
 
     /**
-     *
      * merchant role
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -54,7 +54,8 @@ class ApplicationController extends Controller
             'type' => 'required',
         ]);
         $merchant = $this->getMerchant();
-        $item = new Application($request->only(['type', 'merchant_id']));
+        $item = new Application($request->only(['type']));
+        $item->merchant_id = $merchant->id;
         switch ($request->type) {
             case 'withdraw':
                 return $this->storeWithdrawApplication($request, $item);
@@ -64,6 +65,9 @@ class ApplicationController extends Controller
 
     private function storeWithdrawApplication(Request $request, $item)
     {
+        $this->validate($request, [
+            'amount' => 'required|numeric',
+        ]);
         $item->amount = $request->amount;
         $item->save();
         if ($request->ajax())

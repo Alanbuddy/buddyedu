@@ -82,7 +82,9 @@ class ScheduleController extends Controller
                 $finishedSchedulesCount = $this->finishedSchedules()->count();
         } else {
             $merchant = auth()->user()->ownMerchant;
-            $items = $merchant->schedules();
+            $items = $finished
+                ? $this->finishedSchedules()->where('merchant_id', $merchant->id)
+                : $merchant->schedules();
             $onGoingSchedulesCount = $this->onGoingSchedules()->where('merchant_id', $merchant->id)->count();
             $finishedSchedulesCount = $this->finishedSchedules()->where('merchant_id', $merchant->id)->count();
         }
@@ -327,6 +329,7 @@ class ScheduleController extends Controller
             }
             $arr2 = range(1, $schedule->lessons_count);
             $diff = collect($arr2)->diff(collect($arr))->values();
+            dd($arr2, $diff);
             foreach ($diff as $item) {
                 $items->push(new Attendance(['count' => 0, 'ordinal_no' => $item]));
             }

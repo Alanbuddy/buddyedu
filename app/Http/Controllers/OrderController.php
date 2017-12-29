@@ -22,6 +22,8 @@ use Wechat\WxPayUnifiedOrder;
 
 class OrderController extends Controller
 {
+    use WithdrawTrait;
+
     public static function updatePaymentStatus(Request $request, $uuid)
     {
         $order = Order::where('uuid', $uuid)->firstOrFail();
@@ -241,7 +243,7 @@ class OrderController extends Controller
     {
         return Order::where('status', 'paid')
             ->where('created_at', '>', date('Y-m-d', $left ? strtotime($left) : time()))
-            ->where('created_at', '<', date('Y-m-d', strtotime($right)));
+            ->where('created_at', '<', date('Y-m-d', strtotime($right . ' +1 day')));
     }
 
     public function incomeOfTodayQuery()
@@ -391,22 +393,13 @@ class OrderController extends Controller
             ->paginate(10);
         $existOngoingWithdrawApplications = (boolean)$this->ongoingWithdrawApplicationsQuery($merchant)->count();
         $balance = round($merchant->balance / 100, 2);
-        $withdrawableBalance = round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
+//        $withdrawableBalance = round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
+        $withdrawableBalance = $this->withdrawableBalance($merchant);
+//        dd($withdrawableBalance);
         return view('agent.amount.index', array_merge($this->statistics($request, $merchant),
             compact('items', 'merchant', 'existOngoingWithdrawApplications', 'withdrawableBalance', 'balance')));
     }
 
-    /**
-     * 可提现余额
-     * @param Merchant $merchant
-     * @return mixed
-     */
-    public function withdrawableBalanceQuery(Merchant $merchant)
-    {
-        return $merchant->orders()
-            ->where('schedules.begin', '<', date('Y-m-d'))
-            ->where('orders.status', 'paid');
-    }
 
     public function exportCsv(Request $request)
     {
