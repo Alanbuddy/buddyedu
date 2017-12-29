@@ -89,10 +89,10 @@
             %p
               %span.f16c.money 可提现余额
               %span.f12b (即7日前收入)
-            %p.f24b.mt16 ￥4250
+            %p.f24b.mt16="￥$withdrawableBalance"
           .item-modal
             %p.f16c 总余额
-            %p.f24b.mt16 ￥4250
+            %p.f24b.mt16="￥$balance"
         .div
           %span.f14e.notice 您有一笔提现正在处理中
           %btn.fr.f16d.add-btn-width#applying{disabled: true} 申请提现   

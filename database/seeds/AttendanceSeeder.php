@@ -17,7 +17,7 @@ class AttendanceSeeder extends Seeder
                 'teacher_id' => 3,
                 'merchant_id' => 1,
                 'point_id' => 1,
-                'ordinal_no' => $i,
+                'ordinal_no' => $i+1,
                 'schedule_id' => 1,
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),

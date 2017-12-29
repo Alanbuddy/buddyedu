@@ -131,7 +131,7 @@ class UserController extends Controller
     public function storeTeacher(Request $request)
     {
         $user = null;
-        DB::transaction(function () use ($request, $user, $request) {
+        DB::transaction(function () use ($request, $user) {
             $user = User::create([
                 'name' => $request->name,
                 'password' => bcrypt('secret'),

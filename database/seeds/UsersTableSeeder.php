@@ -25,7 +25,8 @@ class UsersTableSeeder extends Seeder
                 'email' => str_random(10) . '@gmail.com',
                 'phone' => '1' . rand(1000000000, 9999999999),
                 'password' => bcrypt('secret'),
-                'birthday'=>date('Y-m-d H:i:s'),
+                'gender' => $i % 2 == 0 ? 'male' : 'female',
+                'birthday' => date('Y-m-d H:i:s'),
                 'api_token' => \Faker\Provider\Uuid::uuid(),
             ]);
         }
@@ -56,7 +57,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'merchant_admin_demo',
             'email' => str_random(10) . '@gmail.com',
-            'phone' => '1' . rand(1000000000, 9999999999),
+            'phone' => '13470079150',
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);
