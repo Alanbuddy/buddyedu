@@ -329,7 +329,6 @@ class ScheduleController extends Controller
             }
             $arr2 = range(1, $schedule->lessons_count);
             $diff = collect($arr2)->diff(collect($arr))->values();
-            dd($arr2, $diff);
             foreach ($diff as $item) {
                 $items->push(new Attendance(['count' => 0, 'ordinal_no' => $item]));
             }
