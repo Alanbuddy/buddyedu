@@ -31,7 +31,8 @@ $(document).ready(function(){
 
   $("#apply").click(function(){
     var amount = $("#withdraw").val().trim();
-    if(amount > 0){
+    var cash_amount = parseFloat($("#cash-amount").text());
+    if(amount > 0 && amount <= cash_amount){
       $.ajax({
         url: window.with_draw,
         type: 'post',
@@ -47,7 +48,7 @@ $(document).ready(function(){
         }
       });
     }else{
-      showMsg("提现金额必须大于零", "center");
+      showMsg("提现金额必须小于等于可提现余额", "center");
     }
   });
 
@@ -55,19 +56,11 @@ $(document).ready(function(){
     var left = $("#datepicker1").val();
     var right = $("#datepicker2").val();
     if(left < right){
-      $.ajax({
-        type: 'get',
-        url: window.export_table,
-        data: {
-          left: left,
-          right: right
-        },
-        success: function(){
-          $("#addModal").modal("hide");
-        }
-      });
+      $("#addModal").modal("hide");
+      $("#addModal").find("input").val("");
+      location.href = window.export_table + "?left=" + left + "&right=" + right;
     }else{
-      showMsg("选择时间错误", "center");
+      showMsg("选择时间段错误", "center");
     }
   });
 });

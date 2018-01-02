@@ -16,12 +16,12 @@ $(document).ready(function(){
       var src1 = $("#notice-a").find('img').attr("src").replace(/A/, "B");
       $("#notice-a").find("img").attr("src", src1);
     }
-    if(cur_url.indexOf("group-by-course") != -1 ){
+    if(cur_url.indexOf("group-by-course") != -1 || cur_url.indexOf("withdraw/breakdown") != -1){
       $("#amount-a").removeClass('a-item').addClass('active_li');
       var src2 = $("#amount-a").find('img').attr("src").replace(/A/, "B");
       $("#amount-a").find("img").attr("src", src2);
     }
-    
+
   });
 
   $(".logout").click(function(){

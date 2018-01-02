@@ -92,7 +92,7 @@
           .item-modal
             %p
               %span.f16c.money 可提现余额
-            %p.f24b.mt16="￥$withdrawableBalance"
+            %p.f24b.mt16#cash-amount="￥$withdrawableBalance"
           .item-modal
             %p.f16c 总余额
             %p.f24b.mt16="￥$balance"
