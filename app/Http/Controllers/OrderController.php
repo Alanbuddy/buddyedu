@@ -389,7 +389,6 @@ class OrderController extends Controller
         $balance = round($merchant->balance / 100, 2);
 //        $withdrawableBalance = round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
         $withdrawableBalance = $this->withdrawableBalance($merchant);
-//        dd($withdrawableBalance);
         return view('agent.amount.index', array_merge($this->statistics($request, $merchant),
             compact('items', 'merchant', 'existOngoingWithdrawApplications', 'withdrawableBalance', 'balance')));
     }
@@ -410,7 +409,7 @@ class OrderController extends Controller
         $items = $this->merchantTransactionsQuery($request, $merchant)->get();
         foreach ($items as $item) {
             fputcsv($fp, array($item->schedule->course->name, $item->schedule->begin, $item->schedule->point->name,
-                $item->user->phone, $item->user->name, $item->amount), ',');
+                $item->user->phone, $item->user->name, round($item->amount/100,2)), ',');
         }
         rewind($fp);
         $content = "";
