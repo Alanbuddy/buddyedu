@@ -397,7 +397,7 @@ class OrderController extends Controller
     public function withdrawBreakdown(Request $request)
     {
         $merchant = $this->getMerchant();
-        $items = $merchant->applications()->withdrawType()->get();
+        $items = $merchant->applications()->withdrawType()->paginate();
         return view('agent.amount.cash-record', array_merge($this->statistics($request, $merchant), compact('items')));
     }
 
