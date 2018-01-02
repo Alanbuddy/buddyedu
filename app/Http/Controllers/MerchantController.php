@@ -445,4 +445,11 @@ class MerchantController extends Controller
 
     }
 
+    public function withdrawBreakdown(Request $request)
+    {
+        $merchant = $this->getMerchant();
+        $items = $merchant->applications()->withdrawType()->get();
+        return view('agent.amount.cash-record', compact('items'));
+    }
+
 }

@@ -70,7 +70,7 @@ Route::middleware('auth')
         Route::get('/applications/schedules/{schedule}', 'MerchantController@scheduleShow')->name('application.schedule.show');
         Route::get('/applications/point', 'MerchantController@pointApplications')->name('merchant.point.application');
         Route::get('/applications/withdraw', 'MerchantController@withdrawApplications')->name('merchant.withdraw.application');
-        Route::get('/withdraw/breakdown', 'MerchantController@withDrawBreakdown')->name('withdraw.breakdown');
+        Route::get('/withdraw/breakdown', 'MerchantController@withdrawBreakdown')->name('withdraw.breakdown');
         Route::get('/merchants/{merchant}/orders/statistics', 'OrderController@merchantTransactions')->name('merchant.order.statistics');
         Route::get('/merchants/{merchant}/orders/statistics/group-by-course', 'OrderController@merchantIncomeGroupByCourse')->name('merchant.order.statistics');
         Route::resource('merchants', 'MerchantController');
