@@ -28,4 +28,21 @@ $(document).ready(function(){
   $(".close-cash").click(function(){
     $("#cashModal").modal("hide");
   });
+
+  $("#apply").click(function(){
+    var amount = $("#withdraw").val().trim();
+    $.ajax({
+      type: 'post',
+      url: window.withdraw,
+      data: {
+        amount: amount
+      },
+      success: function(){
+        if (data.success){
+          $("#cashModal").modal("hide");
+          showMsg("提现申请已提交", "center");
+        }
+      }
+    });
+  });
 });

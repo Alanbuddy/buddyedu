@@ -228,10 +228,6 @@ td span {
   margin-right: 40px;
 }
 
-#addModal .mb24 {
-  margin-bottom: 24px;
-}
-
 #addModal .add-btn-width {
   display: inline-block;
   width: 240px;
@@ -241,6 +237,14 @@ td span {
   background: #365ba9;
   margin-left: 80px;
   cursor: pointer;
+}
+
+.mb24 {
+  margin-bottom: 24px;
+}
+
+.mr24 {
+  margin-left: 24px;
 }
 
 #cashModal .modal-dialog {
@@ -302,6 +306,13 @@ td span {
 
 #cashModal #applying {
   background: #8c929f;
+}
+
+#cashModal .input-width {
+  width: 372px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 8px;
 }
 
 .item-modal {

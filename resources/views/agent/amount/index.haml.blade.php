@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/jquery-ui.min.css">
 :javascript
   window.amount_search = "#{route('users.statistics')}"
+  window.withdraw = "#{route('application.store').'?type=withdraw'}"
 @endsection
 
 @section('content')
@@ -94,11 +95,14 @@
           .item-modal
             %p.f16c 总余额
             %p.f24b.mt16="￥$balance"
+        .controls.controls-row.mb24.mr24
+          %label.input-caption.f14d 提现金额
+          %input.form-control.input-width#withdraw{:type => "text"}
         .div
           - if($existOngoingWithdrawApplications)
             %span.f14e.notice 您有一笔提现正在处理中
             %btn.fr.f16d.add-btn-width#applying{disabled: true} 申请提现
-          - else   
+          - else
             %btn.fr.f16d.add-btn-width#apply 申请提现      
 
 @endsection
