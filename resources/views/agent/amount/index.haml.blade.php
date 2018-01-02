@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/css/jquery-ui.min.css">
 :javascript
   window.amount_search = "#{route('users.statistics')}"
-  window.withdraw = "#{route('applications.store').'?type=withdraw'}"
+  window.with_draw = "#{route('applications.store').'?type=withdraw'}"
+  window.export_table = "#{route('orders.breakdown.export')}"
 @endsection
 
 @section('content')

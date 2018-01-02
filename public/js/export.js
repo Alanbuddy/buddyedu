@@ -31,19 +31,44 @@ $(document).ready(function(){
 
   $("#apply").click(function(){
     var amount = $("#withdraw").val().trim();
+    if(amount > 0){
+      $.ajax({
+        url: window.with_draw,
+        type: 'post',
+        data: {
+          amount: amount,
+          _token: window.token
+        },
+        success: function(data){
+          if(data.success) {
+            $("#cashModal").modal("hide");
+            showMsg("提现申请已提交", "center");
+          }
+        }
+      });
+    }else{
+      showMsg("提现金额必须大于零", "center");
+    }
+  });
+
+  $("#submit").click(function(){
+    var left = $("#datepicker1").val();
+    var right = $("#datepicker2").val();
     $.ajax({
-      type: 'post',
-      url: window.withdraw,
+      type: 'get',
+      url: window.export_table,
       data: {
-        amount: amount,
-        _token: window.token
+        left: left,
+        right: right
       },
-      success: function(){
-        if(data.success) {
-          $("#cashModal").modal("hide");
-          showMsg("提现申请已提交", "center");
+      success: function(data){
+        if(data.success){
+          $("#addModal").modal("hide");
+        }else{
+          showMsg("选择时间错误", "center");
         }
       }
     });
+
   });
 });
