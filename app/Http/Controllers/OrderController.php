@@ -329,6 +329,9 @@ class OrderController extends Controller
 
     }
 
+    /**
+     * 各课程收入
+     */
     public function statGroupByCourse(Request $request)
     {
         list($left, $right) = $this->getRange($request);
@@ -383,8 +386,6 @@ class OrderController extends Controller
 
     /**
      * 机构 金额统计
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function merchantTransactions(Request $request)
     {
@@ -395,11 +396,18 @@ class OrderController extends Controller
         $balance = round($merchant->balance / 100, 2);
 //        $withdrawableBalance = round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
         $withdrawableBalance = $this->withdrawableBalance($merchant);
-//        dd($withdrawableBalance);
+        dd($withdrawableBalance);
         return view('agent.amount.index', array_merge($this->statistics($request, $merchant),
             compact('items', 'merchant', 'existOngoingWithdrawApplications', 'withdrawableBalance', 'balance')));
     }
 
+    //提现明细
+    public function withdrawBreakdown(Request $request)
+    {
+        $merchant = $this->getMerchant();
+        $items = $merchant->applications()->withdrawType()->get();
+        return view('agent.amount.cash-record', array_merge($this->statistics($request, $merchant), compact('items')));
+    }
 
     public function exportCsv(Request $request)
     {
