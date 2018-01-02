@@ -16,7 +16,8 @@ class ApplicationController extends Controller
     use WithdrawTrait;
     public function __construct()
     {
-        $this->middleware('role:admin');
+        $this->middleware('role:admin')->except('store');
+        $this->middleware('role:merchant')->only('store');
     }
 
     /**
@@ -68,7 +69,8 @@ class ApplicationController extends Controller
         $this->validate($request, [
             'amount' => 'required|numeric',
         ]);
-        $item->amount = $request->amount;
+        $item->amount = $request->amount*100;
+        $item->object_id=0;
         $item->save();
         if ($request->ajax())
             return ['success' => true];
