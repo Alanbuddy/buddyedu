@@ -28,9 +28,9 @@
     %ul.clearfix
       %li
         %a.f14c{href: route('orders.breakdown')} 收支明细
-      %li.f14a.bg16b 各课程收入
       %li
-        %a.f14c{href: route('withdraw.breakdown')} 提现明细
+        %a.f14c{href: route('orders.stat-group-by-course')} 各课程收入
+      %li.f14a.bg16b 提现明细
 
   .desc-div
     - if(count($items) == 0) 
@@ -41,16 +41,14 @@
         %table.table.table-hover.table-height
           %thead.f14b.th-bg
             %tr
-              %th 课程名称
-              %th 当前开课/所有开课
-              %th 当前报名/所有报名
-              %th 收入总额
+              %th 申请时间
+              %th 处理时间
+              %th 提现金额
           %tbody
             - foreach($items as $item)
               %tr
                 %td=$item->name
                 %td=$item->ongoingSchedules_count.'/'.$item->schedules_count
-                %td=$item->ongoingStudentCount.'/'.$item->studentCount
                 %td.f12a='￥'.($item->income??'0')
 
         .select-page
