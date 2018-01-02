@@ -47,9 +47,9 @@
           %tbody
             - foreach($items as $item)
               %tr
-                %td=$item->name
-                %td=$item->ongoingSchedules_count.'/'.$item->schedules_count
-                %td.f12a='￥'.($item->income??'0')
+                %td=$item->created_at
+                %td=$item->updated_at
+                %td.f12a='￥'.($item->amount??'0')
 
         .select-page
           %span.choice-page
