@@ -57,7 +57,7 @@
             -foreach($items as $item)
               %tr
                 %td=$item->schedule->course->name
-                %td=$item->created_at
+                %td=$item->schedule->begin
                 %td=$item->schedule->point->name
                 %td=$item->user->phone
                 %td=$item->user->name
