@@ -9,6 +9,7 @@ use App\Models\Merchant;
 use App\Models\Order;
 use App\Models\Schedule;
 use App\Models\User;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -398,6 +399,9 @@ class OrderController extends Controller
     {
         $merchant = $this->getMerchant();
         $items = $merchant->applications()->withdrawType()->paginate();
+        $items->each(function ($i){
+            $i->amount=round($i->amount/100,2);
+        });
         return view('agent.amount.cash-record', array_merge($this->statistics($request, $merchant), compact('items')));
     }
 
