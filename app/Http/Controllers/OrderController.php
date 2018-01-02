@@ -366,7 +366,7 @@ class OrderController extends Controller
         if ($request->left || $request->right) {
             list($left, $right) = $this->getRange($request);
             $items->where('orders.created_at', '>', date('Y-m-d H:i:s', strtotime($left)))
-                ->where('orders.created_at', '<', date('Y-m-d H:i:s', strtotime($right)));
+                ->where('orders.created_at', '<', date('Y-m-d H:i:s', strtotime($right.' +1 day')));
         }
         return $items;
     }
