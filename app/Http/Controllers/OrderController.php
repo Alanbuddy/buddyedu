@@ -396,6 +396,7 @@ class OrderController extends Controller
         $balance = round($merchant->balance / 100, 2);
 //        $withdrawableBalance = round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
         $withdrawableBalance = $this->withdrawableBalance($merchant);
+//        dd($withdrawableBalance);
         return view('agent.amount.index', array_merge($this->statistics($request, $merchant),
             compact('items', 'merchant', 'existOngoingWithdrawApplications', 'withdrawableBalance', 'balance')));
     }
