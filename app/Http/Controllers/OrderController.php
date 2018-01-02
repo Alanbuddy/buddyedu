@@ -60,19 +60,12 @@ class OrderController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.order.create');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Order $order)
     {
         return view('admin.order.show', ['item' => $order]);
