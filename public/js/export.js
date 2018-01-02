@@ -35,10 +35,11 @@ $(document).ready(function(){
       type: 'post',
       url: window.withdraw,
       data: {
-        amount: amount
+        amount: amount,
+        _token: window.token
       },
       success: function(){
-        if (data.success){
+        if(data.success) {
           $("#cashModal").modal("hide");
           showMsg("提现申请已提交", "center");
         }
