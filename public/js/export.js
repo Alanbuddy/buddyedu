@@ -54,21 +54,20 @@ $(document).ready(function(){
   $("#submit").click(function(){
     var left = $("#datepicker1").val();
     var right = $("#datepicker2").val();
-    $.ajax({
-      type: 'get',
-      url: window.export_table,
-      data: {
-        left: left,
-        right: right
-      },
-      success: function(data){
-        if(data.success){
+    if(left < right){
+      $.ajax({
+        type: 'get',
+        url: window.export_table,
+        data: {
+          left: left,
+          right: right
+        },
+        success: function(){
           $("#addModal").modal("hide");
-        }else{
-          showMsg("选择时间错误", "center");
         }
-      }
-    });
-
+      });
+    }else{
+      showMsg("选择时间错误", "center");
+    }
   });
 });
