@@ -7,7 +7,7 @@
     %meta{"content:" => "telephone=no", :name => "format-detection"}
     %meta{"content:" => "email=no", :name => "format-detection"}
     %title
-      @yield('title') 管理员
+      @yield('title') 管理端
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/notification.css", :rel => "stylesheet" }
     %link{:href => "/css/admin-layout.css", :rel => "stylesheet"}
