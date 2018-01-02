@@ -57,6 +57,9 @@ class enroll extends Command
             'merchant_id' => $course->merchant->id,
             'uuid' => 'test'
         ]);
+        $merchant=$course->merchant;
+        $merchant->balance+=$course->price;
+        $merchant->save();
         $order->save();
     }
 }
