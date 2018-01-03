@@ -57,7 +57,7 @@ $(document).ready(function(){
 
   $("#submit").click(function(){
     var name = $("#name").val().trim();
-    var guide_price = $("#guide-price").val().trim();
+    var guide_price = $("#guide-price").val();
     var proportion = parseFloat($("#auth-price").val());
     var icon = $(".course-icon-path").text();
     var lessons_count = $("#length").val().trim();

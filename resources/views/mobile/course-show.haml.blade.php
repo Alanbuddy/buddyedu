@@ -27,7 +27,7 @@
         .desc-div
           %span.f14.fb.color3 老师姓名
           %span.f14.fb.color3 李老师
-          %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
+          %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
       .teacher-info.clearfix
         %img.teacher-icon{src: "/icon/teacher.png"}
         .desc-div
