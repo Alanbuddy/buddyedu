@@ -19,7 +19,6 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/{schedule}/enroll', 'HomeController@index')->name('landing');
-Route::get('/courses/{course}/comments/index', 'HomeController@commentIndex')->name('home.comments.index');
 
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -38,6 +37,7 @@ Route::middleware('auth')
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
         Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
+        Route::get('/profile', 'UserController@profile')->name('profile');
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
 //        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
