@@ -330,3 +330,10 @@ td span {
   border-right: 1px solid #e4f3ff;
 }
 
+.add-file-icon {
+  width: 48px;
+  height: 48px;
+  margin-top: -10px;
+  cursor: pointer;
+}
+
