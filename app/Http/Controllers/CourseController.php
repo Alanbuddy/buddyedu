@@ -87,7 +87,7 @@ class CourseController extends Controller
         $this->validate($request, $this->rules());
         $course = new Course();
         $course = $course->fill($request->only([
-            'name', 'price', 'proportion', 'icon', 'url', 'description', 'detail', 'lessons_count'
+            'name', 'guide_price', 'proportion', 'icon', 'url', 'description', 'detail', 'lessons_count'
         ]));
         $course->status = 'draft';
         $course->save();
