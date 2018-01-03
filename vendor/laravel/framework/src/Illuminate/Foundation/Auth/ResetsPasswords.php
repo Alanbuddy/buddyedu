@@ -67,7 +67,7 @@ trait ResetsPasswords
             'token' => 'required',
 //            'email' => 'required|email',
 //            'password' => 'required|confirmed|min:6',
-            'phone' => 'required|email',
+            'phone' => 'required',
             'password' => 'required|min:6',
         ];
     }
