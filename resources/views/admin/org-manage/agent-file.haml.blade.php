@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 :javascript
   window.file_delete = "#{route('files.destroy', -1)}"
+  window.file_upload = "#{route('files.store')}"
 @endsection
 
 @section('content')
@@ -36,6 +37,8 @@
       %li
         %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
       %li.f14a.bg16b= '往来文件('.$items->total().')'
+    %img.add-file-icon{src: "/icon/add.png"}
+    %input.hidden#file{:onchange => "upload()", :type => "file"}
 
   .desc-div
     - if(count($items) == 0) 
