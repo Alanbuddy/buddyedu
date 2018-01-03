@@ -48,6 +48,24 @@
 }
 .teacher-info {
   margin-top: 0.32rem;
+  display: -webkit-flex;
+  display: -o-flex;
+  display: -os-flex;
+  display: -moz-flex;
+  -webkit-justify-content: space-between;
+  -o-justify-content: space-between;
+  -os-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -webkit-align-items: flex-start;
+  -o-align-items: flex-start;
+  -os-align-items: flex-start;
+  -moz-align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.teacher-desc-div {
+  width: 5.6rem;
 }
 .teacher-introduction {
   margin-top: 0.1rem;
@@ -103,9 +121,13 @@
 
 .edu-point-name {
   display: inline-block;
-  width: 6.4rem;
+  width: 6rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
+
+
+
+
 
