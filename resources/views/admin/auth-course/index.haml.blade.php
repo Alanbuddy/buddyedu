@@ -68,7 +68,7 @@
           %input.form-control.input-web1-width.f12b#web{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 课程定价:
-          %input.form-control.input-web-width#price{:type => "text"}
+          %input.form-control.input-web-width#guide-price{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d.input-top 课程简介:
           %textarea.area-width.form-control#profile

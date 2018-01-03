@@ -128,3 +128,11 @@
   background: #8c929f;
 }
 
+.edu-point-name {
+  display: inline-block;
+  width: 6.4rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+

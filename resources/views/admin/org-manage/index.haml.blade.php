@@ -68,7 +68,7 @@
           %label.input-caption.f14d 初始密码:
           %input.form-control.input-width#password{:type => "text"}
         .btn-div     
-          %btn.f16d.add-btn-width#submit 提交申请
+          %btn.f16d.add-btn-width#submit 立即添加
 @endsection
 
 @section('script')

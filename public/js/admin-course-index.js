@@ -48,8 +48,8 @@ $(document).ready(function(){
   editor.customConfig.uploadImgTimeout = 3600000;
   editor.create();
 
-  function check_input(name, price, proportion, icon, lessons_count, description){
-    if(name == "" || price == "" || proportion == "" || icon == "" || lessons_count == "" || description == ""){
+  function check_input(name, guide_price, proportion, icon, lessons_count, description){
+    if(name == "" || guide_price == "" || proportion == "" || icon == "" || lessons_count == "" || description == ""){
       showMsg("有关键信息没有填写", "center");
       return false;
     }
@@ -57,14 +57,14 @@ $(document).ready(function(){
 
   $("#submit").click(function(){
     var name = $("#name").val().trim();
-    var price = $("#price").val().trim();
+    var guide_price = $("#guide-price").val().trim();
     var proportion = parseFloat($("#auth-price").val());
     var icon = $(".course-icon-path").text();
     var lessons_count = $("#length").val().trim();
     var url = $("#web").val().trim();
     var description = $("#profile").val().trim();
     var detail = editor.txt.html();
-    var ret = check_input(name,  price, proportion, icon, lessons_count, description);
+    var ret = check_input(name,  guide_price, proportion, icon, lessons_count, description);
     if(ret == false) {
       return false;
     }
@@ -85,7 +85,7 @@ $(document).ready(function(){
       url: window.courses_store,
       data: {
         name: name,
-        price: price,
+        guide_price: guide_price,
         proportion: proportion,
         icon: icon,
         lessons_count: lessons_count,

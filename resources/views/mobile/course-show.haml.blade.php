@@ -8,7 +8,8 @@
   .title-div
     %span.f20.fb.title.color1 Buddy动物园
     %span.f14.course-num.color1 (21)
-    %p.f14.color1.mt20 机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字
+    %p.f14.color1.mt20
+      %span.edu-point-name 机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字
     %img.comment-icon{src: "/icon/mobile/comment.png"}
   .content-div
     .address-div
@@ -26,7 +27,7 @@
         .desc-div
           %span.f14.fb.color3 老师姓名
           %span.f14.fb.color3 李老师
-          %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
+          %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
       .teacher-info.clearfix
         %img.teacher-icon{src: "/icon/teacher.png"}
         .desc-div
