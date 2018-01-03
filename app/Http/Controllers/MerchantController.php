@@ -278,8 +278,7 @@ class MerchantController extends Controller
         $isAdmin = $this->isAdmin();
         $items = Application::courseType()
             ->join('courses', 'applications.object_id', '=', 'courses.id')
-            ->join('course_merchant', 'courses.id', '=', 'course_merchant.course_id')
-            ->join('merchants', 'merchants.id', 'course_merchant.merchant_id')
+            ->join('merchants', 'merchants.id', 'applications.merchant_id')
             ->select('*')
             ->addSelect('courses.id as course_id')
             ->addSelect('courses.name as course_name')

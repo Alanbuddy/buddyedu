@@ -178,10 +178,14 @@ class CourseController extends Controller
             ->withCount(['schedules as ongoingSchedulesCount' => function ($query) {
                 $query->where('end', '>', date('Y-m-d H:i:s'));
             }])
-            ->withCount('schedules')
+            ->withCount(['schedules' => function ($query) {
+                $query->where('end', '<', date('Y-m-d H:i:s'));
+            }])
+//            ->withCount('schedules')
             ->addSelect('merchants.id as mid')
             ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\' and end > date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as ongoingStudentsCount'))
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\') as studentsCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\' and end < date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as studentsCount'))
+//            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\') as studentsCount'))
             ->orderBy('id', 'desc')
             ->paginate(10);
         return view('admin.auth-course.show', compact('items', 'course'));
