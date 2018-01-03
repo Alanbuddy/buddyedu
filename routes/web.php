@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/{schedule}/enroll', 'HomeController@index')->name('landing');
+Route::get('/courses/{course}/comments/index', 'HomeController@commentIndex')->name('home.comments.index');
 
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -59,7 +60,8 @@ Route::middleware('auth')
 
         Route::resource('comments', 'CommentController');
 
-//        Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
+        Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
+        Route::get('/merchants/{merchant}/points/{point}/{operation}', 'MerchantController@authorizePoint')->name('merchant.point.authorize');//课程授权
         Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');
         Route::get('/merchants/{merchant}/schedules', 'MerchantController@schedules')->name('merchant.schedules');
         Route::get('/merchants/{merchant}/points', 'MerchantController@points')->name('merchant.points');

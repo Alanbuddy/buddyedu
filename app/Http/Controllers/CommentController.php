@@ -12,10 +12,15 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->validate($request, [
+            'course_id' => 'required'
+        ]);
+        $courseId = $request->course_id;
         $items = Comment::where('id', '>', 0)
-            ->get();
+            ->where('course_id', $courseId)
+            ->paginate();
         return $items;
     }
 
