@@ -143,7 +143,7 @@ trait ResetsPasswords
     protected function sendResetFailedResponse(Request $request, $response)
     {
         if($request->ajax()){
-            return response()->json(['success'=>true,'redirect'=>$this->redirectPath(),'message'=>trans($response)]);
+            return response()->json(['success'=>false,'redirect'=>$this->redirectPath(),'message'=>trans($response)]);
         }
         return redirect()->back()
                     ->withInput($request->only('email'))
