@@ -8,7 +8,7 @@
   .title-div
     %span.f20.fb.title.color1 Buddy动物园
     %span.f14.course-num.color1 (21)
-    %p.f14.color1.mt20 机构教学点的很很长的名字
+    %p.f14.color1.mt20 机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字
     %img.comment-icon{src: "/icon/mobile/comment.png"}
   .content-div
     .address-div
