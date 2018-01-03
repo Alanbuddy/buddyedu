@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -54,7 +55,7 @@ trait ResetsPasswords
         // redirect them back to where they came from with their error message.
         Log::info('reset response: '. $response);
         return $response == Password::PASSWORD_RESET
-                    ? $this->sendResetResponse($response)
+                    ? $this->sendResetResponse($request,$response)
                     : $this->sendResetFailedResponse($request, $response);
     }
 
@@ -123,8 +124,11 @@ trait ResetsPasswords
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function sendResetResponse($response)
+    protected function sendResetResponse($request,$response)
     {
+        if($request->ajax()){
+            return response()->json(['success'=>true,'redirect'=>$this->redirectPath(),'message'=>trans($response)]);
+        }
         return redirect($this->redirectPath())
                             ->with('status', trans($response));
     }
@@ -138,6 +142,9 @@ trait ResetsPasswords
      */
     protected function sendResetFailedResponse(Request $request, $response)
     {
+        if($request->ajax()){
+            return response()->json(['success'=>true,'redirect'=>$this->redirectPath(),'message'=>trans($response)]);
+        }
         return redirect()->back()
                     ->withInput($request->only('email'))
                     ->withErrors(['email' => trans($response)]);
