@@ -180,15 +180,15 @@ class MerchantController extends Controller
     public function authorizeCourse(Merchant $merchant, Course $course, $operation)
     {
         switch ($operation) {
-            case 'apply':
-                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'applying']]);
+//            case 'apply':
+//                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'applying']]);
+//                break;
+            case 'approve':
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
                 break;
-//            case 'approve':
-//                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
-//                break;
-//            case 'reject':
-//                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
-//                break;
+            case 'reject':
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
+                break;
             default:
                 return ['success' => false, 'message' => trans('error . unsupported')];
         }

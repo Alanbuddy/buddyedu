@@ -182,9 +182,8 @@ class CourseController extends Controller
                 $query->where('end', '<', date('Y-m-d H:i:s'));
             }])
 //            ->withCount('schedules')
-            ->addSelect('merchants.id as mid')
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\' and end > date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as ongoingStudentsCount'))
-            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\' and end < date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as studentsCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id where schedules.merchant_id=merchants.id and schedule_user.type=\'student\' and end > date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as ongoingStudentsCount'))
+            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user on schedules.id=schedule_user.schedule_id where schedules.merchant_id=merchants.id and schedule_user.type=\'student\' and end < date_format(now(),\'%Y-%m-%d %H:%i:%s\')) as studentsCount'))
 //            ->addSelect(DB::raw('(select count(*) from schedules join schedule_user where schedules.merchant_id=mid and schedule_user.type=\'student\') as studentsCount'))
             ->orderBy('id', 'desc')
             ->paginate(10);
