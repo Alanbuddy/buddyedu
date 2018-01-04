@@ -70,6 +70,11 @@
 .mb48 {
   margin-bottom: 0.48rem;
 }
-
+.point-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 4rem;
+}
 
 
