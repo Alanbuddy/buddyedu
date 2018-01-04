@@ -9,26 +9,27 @@
     %span.f20.fb.title.color1 Buddy动物园
     %span.f14.course-num.color1 (21)
     %p.f14.color1.mt20
-      %span.edu-point-name 机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字
+      %span.edu-point-name=$schedule->merchant->name
     %a{href: route('comments.index')}
       %img.comment-icon{src: "/icon/mobile/comment.png"}
   .content-div
     .address-div
       .time
         %img.time-icon{src: "/icon/mobile/time.png"}
-        %span.f12.color3 2017/12/23~20178/3/15
+        %span.f12.color3=$schedule->begin.'~'.$schedule->end
       .address   
         %img.location-icon{src: "/icon/mobile/location_3.png"}
-        %span.f12.color3 构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字机构教学点的很很长的名字
+        %span.f12.color3=$schedule->point->name
     .teacher-div
       %span.f16.fb.color2 授课老师
-      %span.f14.fb.color2 (3)
+      %span.f14.fb.color2="($schedule->teachers_count)"
+      -foreach($schedule->teachers as $item)
       .teacher-info
-        %img.teacher-icon{src: "/icon/teacher.png"}
+        %img.teacher-icon{src: "$item->avatar"}
         .teacher-desc-div
           %span.f14.fb.color3 老师姓名
-          %span.f14.fb.color3 李老师
-          %p.f12.color3.teacher-introduction 本科学历
+          %span.f14.fb.color3=$item->name
+          %p.f12.color3.teacher-introduction=$item->title
       .teacher-info
         %img.teacher-icon{src: "/icon/teacher.png"}
         .teacher-desc-div
@@ -37,16 +38,14 @@
           %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
     .course-div
       %span.f16.fb.color2 课程介绍
-      .f14.color3.course-info 
-        精品课程精精精精精精精精精精精精精品课程品课程品课程品课程品课程品课程品课程品课程品
-        课程品课程品课程品课程品课程精精精精精精精精精精精品课程品课程品课程品课程品课程品课程品课程品课程品课程品课程品课程
+      .f14.color3.course-info=$schedule->course->description
     .location-div
       %span.f16.fb.color2 详细地址
       .location-map#container
   .footer-div
     .left-div
-      %span.f16.fb.color2 ￥2400
-      %span.f14.fb.color2 (仅剩15名额)
+      %span.f16.fb.color2="￥".round($schedule->price/100,2)
+      %span.f14.fb.color2='(仅剩'.$schedule->quota.'名额)'
     .right-div
       %button.btn.click-btn.f14#end_btn{type: "button"} 完成
   .footer-div

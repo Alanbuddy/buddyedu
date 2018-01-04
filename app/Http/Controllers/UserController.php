@@ -80,7 +80,10 @@ class UserController extends Controller
             ->orderBy('id', 'desc');
 
         if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
+            $items->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->get('key') . '%')
+                    ->orWhere('phone', 'like', '%' . $request->get('key') . '%');
+            });
         }
         $items = $items->paginate(10);
         if ($request->key) {
@@ -143,7 +146,7 @@ class UserController extends Controller
                 'type' => 'teacher',
                 'api_token' => Uuid::uuid(),
                 'extra' => json_encode($request->only([
-                    'title', 'certificate_id', 'id', 'school', 'intruction', 'cv'
+                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv'
                 ])),
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());

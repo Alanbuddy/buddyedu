@@ -26,7 +26,7 @@ Route::get('/phpinfo', function () {
 Route::middleware(['auth', 'role:admin'])
     ->group(
         function () {
-            Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
+            Route::get('/schedules/{schedule}/enroll/success', 'CourseController@enrolled')->name('schedules.enrolled');//加入课程
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
             Route::get('/test', 'TestController@index')->name('test');
         }
@@ -36,7 +36,8 @@ Route::middleware('auth')
     ->group(function () {
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
-        Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
+        Route::get('/user/drawings/{drawing}', 'UserController@drawing')->name('user.drawings.show');
+        Route::get('/user/schedules', 'UserController@schedules')->name('user.schedules');
         Route::get('/profile', 'UserController@profile')->name('profile');
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
@@ -87,7 +88,6 @@ Route::middleware('auth')
         Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
         Route::resource('order', 'OrderController');
 
-        Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//
         Route::resource('points', 'PointController');
 
         Route::resource('records', 'RecordController');

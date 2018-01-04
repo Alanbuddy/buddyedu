@@ -198,6 +198,22 @@ class MerchantController extends Controller
         return ['success' => true];
     }
 
+
+    public function authorizePoint(Merchant $merchant, Point $point, $operation)
+    {
+        switch ($operation) {
+            case 'approve':
+                $point->update(['approved' => true]);
+                break;
+            case 'revoke'://取消授权
+                $point->update(['approved' => false]);
+                break;
+            default:
+                return ['success' => false, 'message' => trans('error . unsupported')];
+        }
+        return ['success' => true];
+    }
+
     /**
      * get 开设课程
      */
@@ -262,7 +278,12 @@ class MerchantController extends Controller
 
     public function teacher(Request $request, Merchant $merchant, User $teacher)
     {
-        return view('admin.org-manage.teacher-show', compact('teacher', 'merchant'));
+        $isAdmin = $this->isAdmin();
+        if (!$isAdmin) {
+            $merchant = $this->getMerchant();
+        }
+        return view($isAdmin ? 'admin.org-manage.teacher-show' : 'agent.teacher.show', compact('teacher', 'merchant'));
+
     }
 
     public function user(Request $request, Merchant $merchant, User $user)

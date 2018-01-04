@@ -141,10 +141,4 @@ class PointController extends Controller
     {
         //
     }
-
-    public function approve(Point $point, $operation)
-    {
-        $point->approved = $operation == 'approve' ? true : false;
-        return ['success' => true];
-    }
 }

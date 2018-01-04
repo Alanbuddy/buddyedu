@@ -272,6 +272,15 @@ class ScheduleController extends Controller
         return view('admin.course.course-register', compact('items', 'schedule'));
     }
 
+    public function enrollIn(Schedule$schedule)
+    {
+        $user = auth()->user();
+        $order = $this->getEnrollOrder($schedule);
+        return $order
+            ? $this->enroll($schedule, $user->id)
+            : ['success' => false, 'message' => 'no finished order found'];
+    }
+
     // /api/v1/schedules/sign-in?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3&ordinal_no=1&merchant_id=1&point_id=1&students[]=1&students[]=2
     public function signIn(Request $request)
     {
