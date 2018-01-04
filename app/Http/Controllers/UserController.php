@@ -143,7 +143,7 @@ class UserController extends Controller
                 'type' => 'teacher',
                 'api_token' => Uuid::uuid(),
                 'extra' => json_encode($request->only([
-                    'title', 'certificate_id', 'id', 'school', 'intruction', 'cv'
+                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv'
                 ])),
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());

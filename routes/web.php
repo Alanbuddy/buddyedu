@@ -87,7 +87,6 @@ Route::middleware('auth')
         Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
         Route::resource('order', 'OrderController');
 
-        Route::get('/points/{point}/{operation}', 'PointController@approve')->name('point.approve');//
         Route::resource('points', 'PointController');
 
         Route::resource('records', 'RecordController');
