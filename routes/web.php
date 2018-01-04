@@ -37,7 +37,7 @@ Route::middleware('auth')
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
         Route::get('/user/drawings/{drawing}', 'UserController@drawing')->name('user.drawings.show');
-        Route::get('/user/schedules', 'UserController@schedules')->name('user.scheduels');
+        Route::get('/user/schedules', 'UserController@schedules')->name('user.schedules');
         Route::get('/profile', 'UserController@profile')->name('profile');
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
