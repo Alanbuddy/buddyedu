@@ -26,7 +26,7 @@ Route::get('/phpinfo', function () {
 Route::middleware(['auth', 'role:admin'])
     ->group(
         function () {
-            Route::get('/courses/{course}/enroll', 'CourseController@enrollIn')->name('courses.enroll');//加入课程
+            Route::get('/schedules/{schedule}/enroll/success', 'CourseController@enrolled')->name('schedules.enrolled');//加入课程
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
             Route::get('/test', 'TestController@index')->name('test');
         }

@@ -12,6 +12,8 @@ class HomeController extends Controller
         $schedule = Schedule::where('id', $schedule)
             ->with('course', 'course.teachers')
             ->with('point')
+            ->withCount('teachers')
+            ->withCount('students')
             ->first();
         return view('mobile.course-show', compact('schedule'));
     }
