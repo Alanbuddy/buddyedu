@@ -175,7 +175,10 @@ class MerchantController extends Controller
 
     /**
      * 课程授权
-     * Deprecated
+     * @param Merchant $merchant
+     * @param Course $course
+     * @param $operation => Value can be any of :approve revoke
+     * @return array
      */
     public function authorizeCourse(Merchant $merchant, Course $course, $operation)
     {
@@ -186,8 +189,8 @@ class MerchantController extends Controller
             case 'approve':
                 $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
                 break;
-            case 'reject':
-                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'rejected']]);
+            case 'revoke'://取消授权
+                $merchant->courses()->syncWithoutDetaching([$course->id => ['status' => 'revoked']]);
                 break;
             default:
                 return ['success' => false, 'message' => trans('error . unsupported')];
