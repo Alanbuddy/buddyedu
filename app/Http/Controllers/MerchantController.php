@@ -198,6 +198,22 @@ class MerchantController extends Controller
         return ['success' => true];
     }
 
+
+    public function authorizePoint(Merchant $merchant, Point $point, $operation)
+    {
+        switch ($operation) {
+            case 'approve':
+                $point->update([approved => true]);
+                break;
+            case 'revoke'://取消授权
+                $point->update([approved => false]);
+                break;
+            default:
+                return ['success' => false, 'message' => trans('error . unsupported')];
+        }
+        return ['success' => true];
+    }
+
     /**
      * get 开设课程
      */
