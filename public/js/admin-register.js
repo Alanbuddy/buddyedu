@@ -64,21 +64,21 @@ $(document).ready(function() {
       $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
       return false;
     } else {
-      $.getJSON(
-        window.validmobile,
-        {
+      $.ajax({
+        type: 'get',
+        url: window.validmobile,
+        data: {
           phone: mobile
         },
-        function(data){
-          console.log(data);
+        success: function(data){
           if(data.isOccupied == false){
-            $.getJSON(
-              window.sms_send,
-              {
+            $.ajax({
+              type: 'get',
+              url: window.sms_send,
+              data: {
                 phone: mobile
               },
-              function(data){
-                console.log(data);
+              success: function(data){
                 if (data.success){
                   $("#mobile_notice").css("visibility", "hidden");
                   if (timer !== null) {
@@ -89,13 +89,13 @@ $(document).ready(function() {
                   $("#mobile_notice").text("请稍后再重新获取").css("visibility", "visible");
                 }
               }
-            );
+            });
           } else {
             $("#mobile_notice").text("该号码已经注册!").css("visibility", "visible");
             return false;
           }
         }
-        );
+      });
     }
   });
   

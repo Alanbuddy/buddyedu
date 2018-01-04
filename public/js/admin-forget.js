@@ -25,21 +25,21 @@ $(document).ready(function(){
       $("#mobile_notice").text("请输入正确手机号").css("visibility", "visible");
       return false;
     } else {
-      $.getJSON(
-        window.validmobile,
-        {
+      $.ajax({
+        type: 'get',
+        url: window.validmobile,
+        data: {
           phone: mobile
         },
-        function(data){
-          console.log(data);
+        success: function(data){
           if(data.isOccupied == true){
-            $.getJSON(
-              window.sms_send,
-              {
+            $.ajax({
+              type: 'get',
+              url: window.sms_send,
+              data: {
                 phone: mobile
               },
-              function(data){
-                console.log(data);
+              success: function(data){
                 if (data.success){
                   $("#mobile_notice").css("visibility", "hidden");
                   if (timer !== null) {
@@ -50,13 +50,13 @@ $(document).ready(function(){
                   $("#mobile_notice").text("请稍后再重新获取").css("visibility", "visible");
                 }
               }
-            );
-          } else {
+            });
+          }else {
             $("#mobile_notice").text("该号码未注册!").css("visibility", "visible");
             return false;
           }
         }
-        );
+      });
     }
   });
 
@@ -67,20 +67,19 @@ $(document).ready(function(){
     var phone = $("#mobile").val().trim();
     var verify_code = $("#mobilecode").val().trim();
     var password = $("#password").val().trim();
-    $.postJSON(
-      window.forget,
-      {
+    $.ajax({
+      type: 'post',
+      url: window.forget,
+      data: {
         phone: phone,
         password: password,
         token: verify_code,
         _token: window.token
       },
-      function(data){
-        console.log(data);
+      success: function(data){
         if (data.success) {
           location.href = window.login;
-        }
-        else{
+        }else{
           if(data.code == 'passwords.token'){
             $("#code_notice").text("验证码无效").css("visibility", "visible");
           }
@@ -90,8 +89,9 @@ $(document).ready(function(){
           if(data.code == 'passwords.user'){
             $("#code_notice").text("用户不存在").css("visibility", "visible");
           }
-        }
-      }); 
+        } 
+      }
+    });
   }
 
   $("#end_btn").click(function(){
