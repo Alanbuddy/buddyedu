@@ -80,7 +80,10 @@ class UserController extends Controller
             ->orderBy('id', 'desc');
 
         if ($request->key) {
-            $items->where('name', 'like', '%' . $request->get('key') . '%');
+            $items->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->get('key') . '%')
+                    ->orWhere('phone', 'like', '%' . $request->get('key') . '%');
+            });
         }
         $items = $items->paginate(10);
         if ($request->key) {
