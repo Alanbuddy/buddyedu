@@ -49,4 +49,32 @@ $(document).ready(function(){
       search();
     }
   });
+
+  $(document).on('click', ".revoke", function(){
+    var point_id = $(this).attr("data-id");
+    var _this = $(this);
+    $.ajax({
+      type: 'get',
+      url: window.point_revoke.replace(/-1/, point_id),
+      success: function(data){
+        if(data.success){
+          _this.removeClass('revoke').addClass('approve').text("重新授权");
+        }
+      }
+    });
+  });
+
+  $(document).on('click',".approve",function(){
+    var point_id = $(this).attr("data-id");
+    var _this = $(this);
+    $.ajax({
+      type: 'get',
+      url: window.point_approve.replace(/-1/, point_id),
+      success: function(data){
+        if(data.success){
+          _this.removeClass('approve').addClass('revoke').text("取消授权");
+        }
+      }
+    });
+  });
 });

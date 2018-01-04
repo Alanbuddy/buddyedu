@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/mobile-notification.css">
 
     @yield('css')
+    
 </head>
 <body>
 <div>

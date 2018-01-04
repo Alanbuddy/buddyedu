@@ -10,8 +10,10 @@
     .item
       %p.f14.date.mb16 2017/12/21
       .img-div
-        %img{src: "/icon/mobile/product.jpg"}
-        %img{src: "/icon/mobile/product.jpg"}
+        %a{href: route('user.drawings.show',$file->id)}
+          %img{src: "/icon/mobile/product.jpg"}
+        %a{href: route('user.drawings.show',$file->id)}
+          %img{src: "/icon/mobile/product.jpg"}
     .item
       %p.f14.date.mb16 2017/12/22
       .img-div

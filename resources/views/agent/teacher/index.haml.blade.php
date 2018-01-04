@@ -48,7 +48,8 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->name
+                %td
+                  %a{href: route('merchant.teacher.show',[auth()->user()->ownMerchant->id,$item])}=$item->name
                 %td=$item->gender=='female'?'女':'男'
                 %td=date('Y')-date('Y',strtotime($item->birthday))
                 %td=$item->ongoingSchedules.'/'.$item->coaching_schedules_count

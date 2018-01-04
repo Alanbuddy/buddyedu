@@ -1,6 +1,10 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/profile.css') }}">
+:javascript
+  window.token = "#{csrf_token()}"
+  window.user_info = "#{route('users.update', $user)}"
+  window.register_end = "#{route('schedules.enrolled',$schedule)}"
 @endsection
 
 @section('content')
@@ -22,5 +26,5 @@
 @endsection
 
 @section('script')
-<script src= ""></script>
+<script src= "/js/user-student-info.js"></script>
 @endsection

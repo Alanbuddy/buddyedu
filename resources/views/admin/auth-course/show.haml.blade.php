@@ -1,6 +1,8 @@
 @extends('layout.admin')
 @section('css')
-
+:javascript
+  window.merchant_revoke = "#{route('merchant.course.authorize',[-1,$course,'revoke'])}"
+  window.merchant_approve = "#{route('merchant.course.authorize',[-1,$course,'approve'])}"
 @endsection
 
 @section('content')
@@ -38,7 +40,10 @@
                 %td=$item->name
                 %td=$item->ongoingSchedulesCount.'/'.$item->schedules_count
                 %td=$item->ongoingStudentsCount.'/'.$item->studentsCount
-                %td.red 取消授权
+                - if($item->status == 'revoked')
+                  %td.approve{"data-id" => $item->id } 重新授权
+                - else
+                  %td.revoke{"data-id" => $item->id } 取消授权
 
       .select-page 
         %span.choice-page
@@ -47,6 +52,6 @@
 @endsection
 
 @section('script')
-
+<script src= "/js/course-auth.js"></script>
 
 @endsection
