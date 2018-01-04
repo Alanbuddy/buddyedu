@@ -203,10 +203,10 @@ class MerchantController extends Controller
     {
         switch ($operation) {
             case 'approve':
-                $point->update([approved => true]);
+                $point->update(['approved' => true]);
                 break;
             case 'revoke'://取消授权
-                $point->update([approved => false]);
+                $point->update(['approved' => false]);
                 break;
             default:
                 return ['success' => false, 'message' => trans('error . unsupported')];
