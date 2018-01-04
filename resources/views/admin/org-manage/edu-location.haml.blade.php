@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/merchant-edu-point.css') }}">
 :javascript
   window.points_search = "#{route('merchant.points', $merchant->id)}"
+  window.point_authorize = "#{route('merchant.point.authorize',$merchant,-1,'revoke')}"
 @endsection
 
 @section('content')
@@ -51,7 +52,7 @@
                     %p 地址信息:
                     %p= $item->address
                     .container
-                %td.red.cancel-auth 取消授权
+                %td.operation{"data-id" => $item->id } 取消授权
 
       .select-page 
         %span.choice-page
