@@ -49,7 +49,7 @@
               %th 课程定价
               %th 管理备注
               %th 申请备注
-              %th 操作
+              %th{colspan: 2} 操作
           %tbody
             - foreach($items as $item)
               %tr{"data-id" => $item->application_id}

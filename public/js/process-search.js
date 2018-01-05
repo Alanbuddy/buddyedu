@@ -25,7 +25,6 @@ $(document).ready(function(){
         remark: remark
       },
       success: function(data){
-        console.log(data);
         if (data.success){
           location.href = window.process_search;
         }
@@ -43,7 +42,6 @@ $(document).ready(function(){
         remark: remark
       },
       success: function(data){
-        console.log(data);
         if (data.success){
           location.href = window.process_search;
         }

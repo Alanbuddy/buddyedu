@@ -88,7 +88,7 @@ $(document).ready(function(){
       success: function(data){
         console.log(data);
         if (data.success){
-          location.href = window.process_search;
+          location.href = window.points_search;
         }
       }
     });
@@ -106,7 +106,7 @@ $(document).ready(function(){
       success: function(data){
         console.log(data);
         if (data.success){
-          location.href = window.process_search;
+          location.href = window.points_search;
         }
       }
     });

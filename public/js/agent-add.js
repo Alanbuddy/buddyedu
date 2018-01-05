@@ -73,7 +73,7 @@ $(document).ready(function(){
   	  },
   	  success: function( data ) {
   	    if(data.success){
-          location.href = window.schedule_create;
+          location.href = window.course_search;
         }
   	  }
   	});
