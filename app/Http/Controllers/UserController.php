@@ -157,6 +157,10 @@ class UserController extends Controller
     }
 
 
+    public function showBindPhoneForm(Request $request)
+    {
+        return view('');
+    }
     public function bindPhone(Request $request)
     {
         $result = $this->validateCode($request);
