@@ -48,7 +48,7 @@
                 %td= $item->contact
                 %td.tip-parent{"data-geo" => $item->geolocation}
                   %img{src: "/icon/location.png"}
-                  .tooltip-div.f14d
+                  .tooltip-div
                     .triangle
                     %img.close{src: "/icon/smallclose.png"}
                     %p 地址信息:

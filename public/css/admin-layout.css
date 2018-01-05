@@ -286,6 +286,7 @@ a:hover {
 }
 .active_li {
   display: inline-block;
+  box-sizing: border-box;
   border: 2px solid #365ba9;
   width: 132px;
   border-radius: 25px;
@@ -296,6 +297,7 @@ a:hover {
   text-align: center;
   color: #365ba9;
   font-size: 1.6em;
+  padding: 0;
 }
 .sidebar-title {
   vertical-align: middle;

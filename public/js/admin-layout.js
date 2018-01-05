@@ -11,7 +11,7 @@ $(document).ready(function(){
       var src = $(this).find('img').attr("src").replace(/A/, "B");
       $(this).find("img").attr("src", src);
     }
-    if(cur_url.indexOf("point") != -1 || cur_url.indexOf("applications/schedule") != -1 || cur_url.indexOf("withdraw") != -1){
+    if(cur_url.indexOf("applications/point") != -1 || cur_url.indexOf("applications/schedule") != -1 || cur_url.indexOf("withdraw") != -1){
       $("#process_a").removeClass('a-item').addClass('active_li');
       var src1 = $("#process_a").find('img').attr("src").replace(/A/, "B");
       $("#process_a").find("img").attr("src", src1);

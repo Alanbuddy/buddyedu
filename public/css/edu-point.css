@@ -47,6 +47,10 @@
   font-size: 1.2em;
 }
 
+.reject {
+  cursor: pointer;
+}
+
 #approveModal .modal-dialog {
   position: absolute;
   left: 50%;
