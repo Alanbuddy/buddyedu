@@ -283,7 +283,6 @@ class MerchantController extends Controller
             $merchant = $this->getMerchant();
         }
         return view($isAdmin ? 'admin.org-manage.teacher-show' : 'agent.teacher.show', compact('teacher', 'merchant'));
-
     }
 
     public function user(Request $request, Merchant $merchant, User $user)
@@ -367,6 +366,7 @@ class MerchantController extends Controller
             ->addSelect('merchants.name as merchant_name')
             ->addSelect('points.name as point_name')
             ->addSelect('courses.status as course_status')
+            ->addSelect('applications.created_at as created_at')
             ->addSelect('courses.name as course_name');
         if ($isAdmin) {
             $courseApplicationCount = $this->courseApplicationQuery()->count();
