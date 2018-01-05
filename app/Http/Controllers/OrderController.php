@@ -154,7 +154,7 @@ class OrderController extends Controller
     {
         $order = new Order();
         $order->title = 'buy schedule ' . $schedule->name;
-        $order->merchant_id = $request->get('merchat_id');
+        $order->merchant_id = $schedule->merchant->id;
         $order->product_id = $schedule->id;
         $order->amount = $schedule->price;
         $order->uuid = $this->uuid();

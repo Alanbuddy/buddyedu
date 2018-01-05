@@ -26,7 +26,6 @@ Route::get('/phpinfo', function () {
 Route::middleware(['auth', 'role:admin'])
     ->group(
         function () {
-            Route::get('/schedules/{schedule}/enroll/success', 'CourseController@enrolled')->name('schedules.enrolled');//加入课程
             Route::get('/notifications/{notifications}', 'UserController@notificationShow')->name('users.notifications.show');//user's notifications
             Route::get('/test', 'TestController@index')->name('test');
         }
@@ -34,6 +33,7 @@ Route::middleware(['auth', 'role:admin'])
 
 Route::middleware('auth')
     ->group(function () {
+        Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
         Route::get('/user/drawings/{drawing}', 'UserController@drawing')->name('user.drawings.show');
@@ -42,6 +42,7 @@ Route::middleware('auth')
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
 //        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
+        Route::get('/schedules/{schedule}/enroll/success', 'CourseController@enrolled')->name('schedules.enrolled');//成功加入课程
         Route::post('/schedules/{schedule}/prepay', 'OrderController@prepay')->name('prepay');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
         Route::get('/schedules/{schedule}/{operation}', 'ScheduleController@approve')->name('schedule.approve');

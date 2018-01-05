@@ -272,7 +272,8 @@ class ScheduleController extends Controller
         return view('admin.course.course-register', compact('items', 'schedule'));
     }
 
-    public function enrollIn(Schedule$schedule)
+    //报名成功
+    public function enrolled(Schedule $schedule)
     {
         $user = auth()->user();
         $order = $this->getEnrollOrder($schedule);
