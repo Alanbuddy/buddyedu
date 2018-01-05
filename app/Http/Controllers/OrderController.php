@@ -107,9 +107,9 @@ class OrderController extends Controller
     }
 
 
-    public function pay(Request $request)
+    public function prepay(Request $request,Schedule $schedule)
     {
-        $course = Schedule::findOrFail($request->get('schedule_id'));
+        $course = $schedule;
         if ($this->hasEnrolled($course, auth()->user()->id)) {
             Log::debug(__METHOD__ . '已经加入课程');
             return ['success' => false, 'message' => '已经加入课程'];
@@ -120,7 +120,7 @@ class OrderController extends Controller
             return ['success' => false, 'message' => '课程学员已满'];
         }
 
-        $order = $this->store($request);
+        $order = $this->store($request,$schedule);
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
@@ -150,14 +150,13 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,Schedule $schedule)
     {
         $order = new Order();
-        $course = Schedule::findOrFail($request->get('schedule_id'));
-        $order->title = 'buy course ' . $course->name;
+        $order->title = 'buy schedule ' . $schedule->name;
         $order->merchant_id = $request->get('merchat_id');
-        $order->product_id = $course->id;
-        $order->amount = $course->price ?: $course->original_price;
+        $order->product_id = $schedule->id;
+        $order->amount = $schedule->price;
         $order->uuid = $this->uuid();
         auth()->user()->orders()->save($order);
         return $order;
