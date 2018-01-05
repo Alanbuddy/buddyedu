@@ -173,8 +173,7 @@ class OrderController extends Controller
         $input->SetBody('购买' . $order->title);
         $input->SetAttach("test");
         $input->SetOut_trade_no($order->uuid); //$input->SetOut_trade_no(WxPayConfig::MCHID . date("YmdHis"));
-        $input->SetTotal_fee($order->amount * 100);
-//        $input->SetTotal_fee(1);//dev set to 1 cent
+        $input->SetTotal_fee($order->amount); //$input->SetTotal_fee(1);//dev set to 1 cent
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("test");
