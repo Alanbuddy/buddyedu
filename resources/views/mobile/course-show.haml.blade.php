@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/mobile-course-show.css') }}">
 :javascript
   window.token = "#{csrf_token()}"
-  window.course_pay = "#{route('prepay')}"
+  window.course_pay = "#{route('prepay',$schedule)}"
   window.pay_finish = "#{route('schedules.enrolled',$schedule)}"
   window.user_phone = "#{route('user.phone.bind.form')}"
 @endsection
