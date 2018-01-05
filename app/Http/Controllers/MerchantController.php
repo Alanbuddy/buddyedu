@@ -363,6 +363,7 @@ class MerchantController extends Controller
             ->select('*')
             ->addSelect('applications.id as application_id')
             ->addSelect('applications.status as application_status')
+            ->addSelect('applications.remark as remark')
             ->addSelect('merchants.name as merchant_name')
             ->addSelect('points.name as point_name')
             ->addSelect('courses.status as course_status')
