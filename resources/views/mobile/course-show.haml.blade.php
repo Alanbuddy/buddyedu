@@ -1,6 +1,11 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mobile-course-show.css') }}">
+:javascript
+  window.token = "#{csrf_token()}"
+  window.course_pay = "#{route('prepay')}"
+  window.pay_finish = "#{route('schedules.enrolled',$schedule)}"
+  window.user_phone = "#{route('user.phone.bind.form')}"
 @endsection
 
 @section('content')
@@ -25,29 +30,24 @@
       %span.f14.fb.color2="($schedule->teachers_count)"
       -foreach($schedule->teachers as $item)
       .teacher-info
-        %img.teacher-icon{src: "$item->avatar"}
+        %img.teacher-icon{src: $item->avatar ? $item->avatar : "/icon/teacher.png"}
         .teacher-desc-div
           %span.f14.fb.color3 老师姓名
           %span.f14.fb.color3=$item->name
           %p.f12.color3.teacher-introduction=$item->title
-      .teacher-info
-        %img.teacher-icon{src: "/icon/teacher.png"}
-        .teacher-desc-div
-          %span.f14.fb.color3 老师姓名
-          %span.f14.fb.color3 李老师
-          %p.f12.color3.teacher-introduction 本科学历，学士学位，国家特级教师，优秀教师，头衔很多，一行写不下
     .course-div
       %span.f16.fb.color2 课程介绍
       .f14.color3.course-info=$schedule->course->description
     .location-div
       %span.f16.fb.color2 详细地址
+      %span.hidden.point-location= $schedule->point->geolocation
       .location-map#container
   .footer-div
     .left-div
       %span.f16.fb.color2="￥".round($schedule->price/100,2)
       %span.f14.fb.color2='(仅剩'.$schedule->quota.'名额)'
     .right-div
-      %button.btn.click-btn.f14#end_btn{type: "button"} 完成
+      %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
   .footer-div
     .left-div
       %span.f16.fb.color2 没公开课名额了
@@ -57,7 +57,7 @@
     .left-div
       %span.f16.fb.color2 交了钱没填资料
     .right-div
-      %button.btn.click-btn.f14#end_btn{type: "button"} 填写资料
+      %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
   .footer-div
     .left-div
       %span.f16.fb.color2 报名截止了
