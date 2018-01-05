@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="{{ mix('/css/merchant-edu-point.css') }}">
 :javascript
   window.points_search = "#{route('merchant.points', $merchant->id)}"
-  window.point_authorize = "#{route('merchant.point.authorize',$merchant,-1,'revoke')}"
+  window.point_revoke = "#{route('merchant.point.authorize',[$merchant,-1,'revoke'])}"
+  window.point_approve = "#{route('merchant.point.authorize',[$merchant,-1,'approve'])}"
+
 @endsection
 
 @section('content')
@@ -52,7 +54,10 @@
                     %p 地址信息:
                     %p= $item->address
                     .container
-                %td.operation{"data-id" => $item->id } 取消授权
+                - if($item->approved)
+                  %td.revoke{"data-id" => $item->id } 取消授权
+                - else
+                  %td.approve{"data-id" => $item->id } 重新授权
 
       .select-page 
         %span.choice-page

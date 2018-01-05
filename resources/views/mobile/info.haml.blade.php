@@ -1,6 +1,12 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/info.css') }}">
+:javascript
+  window.token = "#{csrf_token()}"
+  window.user_next = "#{route('user.phone.bind')}"
+  window.user_profile = "#{route('profile')}"
+  window.sms_send = "#{route('sms.send')}"
+  window.validmobile = "#{route('validate.phone')}"
 @endsection
 
 @section('content')
@@ -20,5 +26,5 @@
 @endsection
 
 @section('script')
-<script src= ""></script>
+<script src= "/js/user-info.js"></script>
 @endsection

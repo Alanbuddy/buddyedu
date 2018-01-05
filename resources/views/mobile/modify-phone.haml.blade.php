@@ -1,6 +1,10 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/info.css') }}">
+:javascript
+  window.sms_send = "#{route('sms.send')}"
+  window.validmobile = "#{route('validate.phone')}"
+  window.modify_end = "#{route('user.phone.bind')}"
 @endsection
 
 @section('content')
@@ -21,5 +25,5 @@
 @endsection
 
 @section('script')
-<script src= ""></script>
+<script src= "/js/user-modify-phone.js"></script>
 @endsection

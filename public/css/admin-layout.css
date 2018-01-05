@@ -443,7 +443,16 @@ a:hover {
   justify-content: space-between;
   align-items: center;
 }
-
+.revoke {
+  color: #f58799;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.approve {
+  color: #75cc7d;
+  font-size: 1.2em;
+  cursor: pointer;
+}
 
 /*.delete {
   display: inline-block;
