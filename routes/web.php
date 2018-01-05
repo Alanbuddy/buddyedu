@@ -18,7 +18,7 @@ Route::get('/', function () {
     return redirect('/schedules');
 });
 Route::get('/home', 'HomeController@home')->name('home');
-Route::get('/schedules/{schedule}/enroll', 'HomeController@index')->name('landing');
+Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landing');
 
 Route::get('/phpinfo', function () {
     phpinfo();
