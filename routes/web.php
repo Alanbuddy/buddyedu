@@ -111,4 +111,13 @@ Route::get('/sms/tpl/add', 'SmsController@addTpl')->name('sms.tpl.add');
 Route::get('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.reset.sms');
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
 Route::any('/wechat/payment/notify', 'WechatController@paymentNotify')->name('wechat.payment.notify');
+Route::get('/wechat/message/get-industry', 'WechatController@getIndustry')->name('wechat.getIndustry');
+Route::get('/wechat/message/get-template', 'WechatController@getTemplate')->name('wechat.getTemplate');
+Route::get('/wechat/message/template-id', 'WechatController@getTemplateID')->name('wechat.getTemplateID');
+Route::get('/wechat/access-token', 'WechatController@accessToken')->name('wechat.accessToken');
+Route::get('/wechat/login', 'WechatController@login')->name('wechat.login');
+Route::get('/wechat/openid', 'WechatController@openid')->name('wechat.openid');
+Route::get('/wechat/send', 'WechatController@send')->name('wechat.send');
+Route::get('/wechat/users/{user}/userinfo', 'WechatController@userInfo')->name('wechat.userinfo');
+
 
