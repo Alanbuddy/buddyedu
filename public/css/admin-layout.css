@@ -340,6 +340,7 @@ a:hover {
   justify-content: space-between;
   margin-left: 24px;
   margin-right: 40px;
+  height: 48px;
 }
 .tab-title ul {
   list-style: none;
