@@ -80,11 +80,11 @@
         + "&redirect_uri=http%3a%2f%2f"
         + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
 
-    @if(!Auth::check())
-    if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
-        location.href = app_url;
-    }
-    @endif
+    // @if(!Auth::check())
+    // if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+    //     location.href = app_url;
+    // }
+    // @endif
 </script>
 
 @yield('script')
