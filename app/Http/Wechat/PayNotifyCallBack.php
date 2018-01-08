@@ -66,13 +66,13 @@ class PayNotifyCallBack extends WxPayNotify
                 $this->enroll($schedule, $order->user_id);
                 $schedule->merchant->increment('balance', $order->amount);
             });
-            MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $schedule);
+//            MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $schedule);
             Log::debug('paid successfully');
             return true;
         } else {
             $message = '失败 ,No order which uuid is ' . $data['out_trade_no'] . ' found!';
             Log::debug($message);
-            ErrorTrait::logError('order', $message, json_encode($order));
+            $this->logError('order', $message, json_encode($order));
             return false;
         }
     }

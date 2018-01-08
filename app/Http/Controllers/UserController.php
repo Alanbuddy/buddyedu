@@ -23,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except([]);
+        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile']);
     }
 
     public function index(Request $request)
@@ -159,8 +159,9 @@ class UserController extends Controller
 
     public function showBindPhoneForm(Request $request)
     {
-        return view('');
+        return view('mobile.info');
     }
+
     public function bindPhone(Request $request)
     {
         $result = $this->validateCode($request);
@@ -318,6 +319,11 @@ class UserController extends Controller
             $arr[$item] = collect($items)->contains(['ordinal_no' => $item]);
         }
         return $arr;
+    }
+
+    public function profile(Request $request)
+    {
+        return view('mobile.student-info');
     }
 
 }
