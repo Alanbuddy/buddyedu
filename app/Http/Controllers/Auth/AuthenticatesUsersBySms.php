@@ -25,9 +25,7 @@ use Illuminate\Support\Facades\Password;
 trait AuthenticatesUsersBySms
 {
 
-
-    //send verify code for login
-    public function sendVerifySmsForLogin(Request $request)
+    public function sendVerificationCode(Request $request)
     {
         $this->validate($request, ['phone' => 'required|digits:11']);
         $user = $this->myBroker()->getUser($request->only('phone'));
@@ -43,21 +41,20 @@ trait AuthenticatesUsersBySms
         }
     }
 
-    public function sendVerifySms(Request $request)
-    {
-        $this->validate($request, ['phone' => 'required|digits:11']);
-        $phone = $request->get('phone');
-        $user = new User();
-        $user->fill(compact('phone'));
-        list($result, $code) = $this->sendVerifyCode($phone);
-        if ($result['success']) {
-            $this->storeToken($user, $code);
-            return ['success' => true];
-        } else {
-            return ['success' => false, 'message' => '发送失败', 'data' => $result];
-        }
-
-    }
+//    public function sendVerifySms(Request $request)
+//    {
+//        $this->validate($request, ['phone' => 'required|digits:11']);
+//        $phone = $request->get('phone');
+//        $user = new User();
+//        $user->fill(compact('phone'));
+//        list($result, $code) = $this->sendVerifyCode($phone);
+//        if ($result['success']) {
+//            $this->storeToken($user, $code);
+//            return ['success' => true];
+//        } else {
+//            return ['success' => false, 'message' => '发送失败', 'data' => $result];
+//        }
+//    }
 
     public function sendVerifyCode($phone)
     {
