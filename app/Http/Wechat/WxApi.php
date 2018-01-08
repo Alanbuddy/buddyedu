@@ -8,6 +8,7 @@
 
 namespace App\Http\Wechat;
 
+use App\Http\Util\Curl;
 use App\Models\Setting;
 use Closure;
 use Illuminate\Support\Facades\Log;
@@ -34,7 +35,7 @@ class WxApi
             . "&secret=" . $secret
             . "&code=" . $code
             . "&grant_type=authorization_code";
-        $response = self::request($url);
+        $response = Curl::request($url);
         return $response;
     }
 
