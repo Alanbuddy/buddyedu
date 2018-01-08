@@ -106,7 +106,7 @@ Route::post('/file', 'AiController@store')->name('file');
 Route::get('/validate-phone', 'SmsController@isOccupied')->name('validate.phone');
 Route::get('/sms/verify', 'SmsController@sendVerifySms')->name('sms.verify');
 Route::post('/sms/verify', 'SmsController@validateCode')->name('sms-verify.validate');
-Route::get('/sms/send', 'SmsController@sendVerificationCode')->name('sms.send');
+Route::get('/sms/send-code', 'SmsController@sendVerificationCode')->name('sms.send-code');
 Route::get('/sms/tpl/add', 'SmsController@addTpl')->name('sms.tpl.add');
 Route::get('/password/sms/send', 'Auth\ResetPasswordController@sendResetSms')->name('password.reset.sms');
 //用户支付完成后，微信服务器通知商启系统支付情况的回调地址
