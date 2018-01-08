@@ -28,6 +28,11 @@ trait CourseEnrollTrait
         return $schedule->students->contains($user);
     }
 
+    public function available($schedule)
+    {
+        return $schedule->quota - ($schedule->students()->count());
+    }
+
     public function getEnrollOrder($course)
     {
         $user = auth()->user();

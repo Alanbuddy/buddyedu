@@ -85,11 +85,9 @@
         + "&connect_redirect=1#wechat_redirect";
 
     @if(!Auth::check())
-        
-        location.href = app_url;
-        // if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
-        //     location.href = app_url;
-        // }
+         if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+             location.href = app_url;
+         }
     @endif
 </script>
 
