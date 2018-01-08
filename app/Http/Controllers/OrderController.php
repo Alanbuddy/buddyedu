@@ -23,7 +23,7 @@ use Wechat\WxPayUnifiedOrder;
 
 class OrderController extends Controller
 {
-    use WithdrawTrait;
+    use WithdrawTrait,CourseEnrollTrait;
 
     public static function updatePaymentStatus(Request $request, $uuid)
     {

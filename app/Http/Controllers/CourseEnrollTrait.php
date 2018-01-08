@@ -23,10 +23,9 @@ trait CourseEnrollTrait
         return ['success' => true, 'changed' => $changed];
     }
 
-    public function hasEnrolled($schedule)
+    public function hasEnrolled($schedule, $user)
     {
-        return $schedule->students()
-            ->count();
+        return $schedule->students->contains($user);
     }
 
     public function getEnrollOrder($course)
