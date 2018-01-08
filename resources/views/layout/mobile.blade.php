@@ -40,11 +40,13 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/ajax.js"></script>
 <script src="/js/regex.js"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src="/js/mobile-notification.js"></script>
+
 
 <script>
     wx.config({
+        beta: true,
         debug: false,
         appId: '{{ $signPackage["appId"]}}',
         timestamp: '{{ $signPackage["timestamp"]}}',
@@ -80,11 +82,13 @@
         + "&redirect_uri=http%3a%2f%2f"
         + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
 
-    // @if(!Auth::check())
-    // if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
-    //     location.href = app_url;
-    // }
-    // @endif
+    @if(!Auth::check())
+        
+        location.href = app_url;
+        // if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+        //     location.href = app_url;
+        // }
+    @endif
 </script>
 
 @yield('script')
