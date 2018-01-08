@@ -159,7 +159,7 @@ class UserController extends Controller
 
     public function showBindPhoneForm(Request $request)
     {
-        return view('');
+        return view('mobile.info');
     }
     public function bindPhone(Request $request)
     {
