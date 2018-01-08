@@ -11,7 +11,8 @@ $(document).ready(function(){
       icon = new qq.maps.MarkerImage('/icon/tick.png', size, origin, anchor);
 
   function init() {
-    var location = $(".point-location").text();
+    var geo = $(".point-location").text();
+    var location = geo.slice(1, geo.length -1).split(",");
     var center = new qq.maps.LatLng(location[0], location[1]);
     map = new qq.maps.Map(document.getElementById('container'),{
       center: center,
