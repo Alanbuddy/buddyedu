@@ -60,7 +60,7 @@ class WechatController extends Controller
                 }
                 //Login
                 Auth::loginUsingId($user->id);
-                return redirect('/');
+                return redirect($request->get('state'));
             }
         }
         return 'ERROR:' . $response["code"];

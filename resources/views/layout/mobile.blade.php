@@ -80,7 +80,9 @@
     var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
         + appId
         + "&redirect_uri=http%3a%2f%2f"
-        + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo&state=STATE&connect_redirect=1#wechat_redirect";
+        + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo"
+        + "&state="+location.href
+        + "&connect_redirect=1#wechat_redirect";
 
     @if(!Auth::check())
         
