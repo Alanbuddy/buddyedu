@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
 use App\Http\Util\Sms;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Yunpian\Sdk\YunpianClient;
 
 class SmsController extends Controller
@@ -18,7 +19,7 @@ class SmsController extends Controller
         $phoneNo = $request->get('phone', 18911209450);
         $content = $request->get('content', '【云片网】您的验证码是AJ');
         $r = Sms::sendSingleSms($phoneNo, $content);
-        var_dump($r);
+        Log::debug($content,$r);
     }
 
     public function addTpl(Request $request)
