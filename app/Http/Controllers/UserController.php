@@ -327,7 +327,8 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $user = auth()->user();
-        return view('mobile.student-info', compact('user'));
+        $schedule = session('order.product_id');
+        return view('mobile.student-info', compact('user', 'schedule'));
     }
 
     public function updateProfile(Request $request)
