@@ -193,12 +193,13 @@ class UserController extends Controller
 
     public function schedules(Request $request)
     {
-        $items = auth()->user()
+        $user= auth()->user();
+        $items =$user
             ->schedules()
             ->with('course')
             ->orderBy('id','desc')
             ->paginate();
-        return view('mobile.student-course', compact('items'));
+        return view('mobile.student-course', compact('items','user'));
     }
 
     public function queryStudent($isAdmin)
