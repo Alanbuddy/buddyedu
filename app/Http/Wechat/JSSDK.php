@@ -93,7 +93,7 @@ class JSSDK
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
             $res = json_decode($this->httpGet($url));
-            Log::error($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
+            Log::debug($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
             $access_token = @$res->access_token;
             if ($access_token) {
                 $data->expire_time = time() + 7000;

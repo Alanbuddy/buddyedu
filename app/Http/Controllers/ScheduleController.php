@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 class ScheduleController extends Controller
 {
     use CourseEnrollTrait;
+
     public function __construct()
     {
         $this->middleware(['auth', 'role:admin|merchant'])->only([
@@ -196,7 +197,8 @@ class ScheduleController extends Controller
     {
         $item = $schedule;
         $progress = $schedule->attendances()->max('ordinal_no');
-        return view('admin.course.course-info', compact('item', 'progress'));
+        $isAdmin = $this->isAdmin();
+        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('item', 'progress'));
     }
 
     /**
@@ -270,13 +272,14 @@ class ScheduleController extends Controller
     {
         $items = $schedule->students()
             ->paginate(10);
-        return view('admin.course.course-register', compact('items', 'schedule'));
+        $isAdmin = $this->isAdmin();
+        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule'));
     }
 
     //报名成功
     public function enrolled(Schedule $schedule)
     {
-        return redirect(route('landing',$schedule));
+        return redirect(route('landing', $schedule));
 //        $user = auth()->user();
 //        $order = $this->getEnrollOrder($schedule);
 //        return $order ? $this->enroll($schedule, $user->id) : ['success' => false, 'message' => 'no finished order found'];
