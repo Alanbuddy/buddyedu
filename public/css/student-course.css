@@ -98,3 +98,173 @@
   width: 4rem;
 }
 
+.undiscover {
+  margin: 0 auto;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.close,
+.phone-close {
+  position: absolute;
+  top: 0.48rem;
+  right: 0.48rem;
+  width: 0.88rem;
+}
+
+.input-group {
+  width: 100%;
+  padding-bottom: 0.16rem;
+  border-bottom: 2px solid #365ba9;
+  padding-left: 0.16rem;
+  height: 0.48rem;
+}
+
+.profile-title {
+  color: #365ba9;
+  margin-bottom: 1.08rem;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.input-inside-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.text-blue {
+  color: #365ba9;
+}
+
+.mr40 {
+  margin-right: 0.4rem;
+}
+
+.form-box {
+  width: 3.6rem;
+  border: 0;
+  color: #333a48;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
+}
+
+.text-span {
+  width: 3.6rem;
+}
+
+.click-btn {
+  width: 100%;
+  padding: 0;
+  background: #365ba9;
+  line-height: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+#next_btn,
+#phone_next_btn {
+  color: #fff;
+}
+
+.mb64 {
+  margin-bottom: 0.64rem;
+}
+
+#profileModal .modal-dialog,
+#profileModal .modal-body,
+#profileModal .modal-content,
+#phoneModal .modal-dialog,
+#phoneModal .modal-body,
+#phoneModal .modal-content {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  border-radius: 0;
+  height: 100%;
+}
+
+#profileModal .profile-div,
+#phoneModal .profile-div {
+  position: relative;
+  padding: 0 0.64rem;
+  padding-top: 1.6rem;
+  height: 100%;
+}
+
+#profileModal #gender,
+#profileModal #birthday,
+#phoneModal #gender,
+#phoneModal #birthday {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
+
+.miniphoto {
+  background: url("/icon/phonenumber.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.notice {
+  color: #365ba9;
+  text-align: left;
+  padding: 0.11rem 0;
+  visibility: hidden;
+  padding-left: 0.16rem;
+}
+
+.verify-photo {
+  background: url("/icon/number.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.form-verify-box {
+  width: 50%;
+  border: 0;
+  padding: 0.04rem 0;
+  padding-left: 4%;
+  color: #365ba9;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
+}
+
+.verify-code-span {
+  color: #365ba9;
+  margin-right: 0.1rem;
+}
+
+.phone-form-box {
+  width: 100%;
+  border: 0;
+  padding: 0.04rem 0;
+  padding-left: 4%;
+  color: #365ba9;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
+}
+
