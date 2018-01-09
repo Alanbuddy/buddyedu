@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
+    use CourseEnrollTrait;
     public function __construct()
     {
         $this->middleware(['auth', 'role:admin|merchant'])->only([
