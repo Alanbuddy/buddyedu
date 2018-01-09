@@ -19,7 +19,7 @@ class ScheduleSeeder extends Seeder
                 'status' => 'applying',
                 'quota' => 20,
                 'course_id' => 1,
-                'price' => 15,
+                'price' => 1,
                 'point_id' => 1,
                 'merchant_id' => 1,
                 'lessons_count'=>12,
