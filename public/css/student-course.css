@@ -104,7 +104,8 @@
   text-align: center;
 }
 
-.close {
+.close,
+.phone-close {
   position: absolute;
   top: 0.48rem;
   right: 0.48rem;
@@ -180,7 +181,8 @@
   margin-top: 1.2rem;
 }
 
-#next_btn {
+#next_btn,
+#phone_next_btn {
   color: #fff;
 }
 
@@ -190,7 +192,10 @@
 
 #profileModal .modal-dialog,
 #profileModal .modal-body,
-#profileModal .modal-content {
+#profileModal .modal-content,
+#phoneModal .modal-dialog,
+#phoneModal .modal-body,
+#phoneModal .modal-content {
   margin: 0;
   padding: 0;
   outline: none;
@@ -199,10 +204,67 @@
   height: 100%;
 }
 
-#profileModal .profile-div {
+#profileModal .profile-div,
+#phoneModal .profile-div {
   position: relative;
   padding: 0 0.64rem;
   padding-top: 1.6rem;
   height: 100%;
+}
+
+#profileModal #gender,
+#profileModal #birthday,
+#phoneModal #gender,
+#phoneModal #birthday {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+}
+
+.miniphoto {
+  background: url("/icon/phonenumber.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.notice {
+  color: #365ba9;
+  text-align: left;
+  padding: 0.11rem 0;
+  visibility: hidden;
+  padding-left: 0.16rem;
+}
+
+.verify-photo {
+  background: url("/icon/number.png") no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+}
+
+.form-verify-box {
+  width: 50%;
+  border: 0;
+  padding: 0.04rem 0;
+  padding-left: 4%;
+  color: #365ba9;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
+}
+
+.verify-code-span {
+  color: #365ba9;
+  margin-right: 0.1rem;
+}
+
+.phone-form-box {
+  width: 100%;
+  border: 0;
+  padding: 0.04rem 0;
+  padding-left: 4%;
+  color: #365ba9;
+  background: rgba(255, 255, 255, 0.1);
+  outline: 0;
+  background: transparent;
 }
 

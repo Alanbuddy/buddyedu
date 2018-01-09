@@ -1,6 +1,11 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/student-course.css') }}">
+:javascript
+  window.sms_send = "#{route('sms.send')}"
+  window.validmobile = "#{route('validate.phone')}"
+  window.modify_end = "#{route('user.phone.bind')}"
+  window.profile_update = "#{route('profile.update')}"
 @endsection
 
 @section('content')
@@ -36,11 +41,11 @@
               .input-inside-div
                 .left-div
                   %span.f16.text-blue.mr40 手机号码
-                  %span.text-span.f16#mobile= $user->phone
+                  %input.form-box.f16#mobile{placeholder: $user->phone, type: "text"}
                 %span.f12.text-blue.pointer#modify-phone 修改
             .input-group.mb64
               %span.f16.text-blue.mr40 学生姓名
-              %span.text-span.f16#name= $user->name
+              %input.form-box.f16#name{placeholder: $user->name, type: "text"}
             .input-group.mb64
               %span.f16.text-blue.mr40 学生性别
               %select.form-box.f16#gender
@@ -51,6 +56,25 @@
               %span.f16.text-blue.mr40 学生生日
               %input.form-box.f16#birthday{type: "date", placeholder: $user->birthday}
             %button.btn.click-btn.f14#next_btn{type: "button"} 完成
+
+#phoneModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .profile-div
+          %img.phone-close{src: "/icon/mobile/close.png"}
+          .input-div
+            %p.f20.fb.profile-title 修改手机号
+            .input-group.no-margin-bottom
+              %span.input-group-addon.miniphoto
+              %input.phone-form-box.f14#modify-mobile{placeholder: "请输入您的手机号", type: "text"}
+            %p.notice.f14#mobile_notice 请输入正确的手机号
+            .input-group.no-margin-bottom
+              %span.input-group-addon.verify-photo
+              .input-inside-div
+                %input.form-verify-box.f14#mobilecode{placeholder: "请输入验证码", type: "text"}
+                %span.verify-code-span.f12.pointer#verifycode 获取验证码
+            %button.btn.click-btn.f14#phone_next_btn{type: "button"} 完成修改
 @endsection
 @section('script')
 <script src= "/js/mobile-student-course.js"></script>

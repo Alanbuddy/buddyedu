@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  $("#next_btn").attr("disabled", true);
+  $("#phone_next_btn").attr("disabled", true);
 
   check_signup_input = function(){
     if ($("#mobile").val().trim() == "" ||
         $("#mobilecode").val().trim() == ""){
-      $("#next_btn").attr("disabled", true);
+      $("#phone_next_btn").attr("disabled", true);
     } else {
-      $("#next_btn").attr("disabled", false);
+      $("#phone_next_btn").attr("disabled", false);
     }
   };
   
@@ -80,7 +80,7 @@ $(document).ready(function(){
     }
   });
 
-  $("#next_btn").click(function(){
+  $("#phone_next_btn").click(function(){
     var phone = $("#mobile").val().trim();
     var verify_code = $("#mobilecode").val().trim();
     $.ajax({
