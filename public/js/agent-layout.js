@@ -22,6 +22,11 @@ $(document).ready(function(){
       $("#amount-a").find("img").attr("src", src2);
     }
 
+    if(cur_url.indexOf("teachers") != -1 ){
+      $("#teacher-a").removeClass('a-item').addClass('active_li');
+      var src3 = $("#teacher-a").find('img').attr("src").replace(/A/, "B");
+      $("#teacher-a").find("img").attr("src", src3);
+    }
   });
 
   $(".logout").click(function(){
