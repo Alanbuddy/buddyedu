@@ -23,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile']);
+        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile','schedules']);
     }
 
     public function index(Request $request)
@@ -323,7 +323,8 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        return view('mobile.student-info');
+        $user = auth()->user();
+        return view('mobile.student-info', compact('user'));
     }
 
 }
