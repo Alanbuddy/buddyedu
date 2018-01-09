@@ -2,6 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/student-course.css') }}">
 :javascript
+  window.token = "#{csrf_token()}"
   window.sms_send = "#{route('sms.send')}"
   window.validmobile = "#{route('validate.phone')}"
   window.modify_end = "#{route('user.phone.bind')}"
