@@ -188,7 +188,7 @@ class UserController extends Controller
             $items->where('schedule_id', $request->get('schedule_id'));
         }
         $items = $items->paginate(10);
-        return view('', compact('items'));
+        return view('mobile.product-list', compact('items'));
     }
 
     public function schedules(Request $request)
