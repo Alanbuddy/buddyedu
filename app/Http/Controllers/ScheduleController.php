@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
+    use CourseEnrollTrait;
+
     public function __construct()
     {
         $this->middleware(['auth', 'role:admin|merchant'])->only([
@@ -195,7 +197,8 @@ class ScheduleController extends Controller
     {
         $item = $schedule;
         $progress = $schedule->attendances()->max('ordinal_no');
-        return view('admin.course.course-info', compact('item', 'progress'));
+        $isAdmin = $this->isAdmin();
+        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('item', 'progress'));
     }
 
     /**
@@ -269,17 +272,17 @@ class ScheduleController extends Controller
     {
         $items = $schedule->students()
             ->paginate(10);
-        return view('admin.course.course-register', compact('items', 'schedule'));
+        $isAdmin = $this->isAdmin();
+        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule'));
     }
 
     //报名成功
     public function enrolled(Schedule $schedule)
     {
-        $user = auth()->user();
-        $order = $this->getEnrollOrder($schedule);
-        return $order
-            ? $this->enroll($schedule, $user->id)
-            : ['success' => false, 'message' => 'no finished order found'];
+        return redirect(route('landing', $schedule));
+//        $user = auth()->user();
+//        $order = $this->getEnrollOrder($schedule);
+//        return $order ? $this->enroll($schedule, $user->id) : ['success' => false, 'message' => 'no finished order found'];
     }
 
     // /api/v1/schedules/sign-in?schedule_id=1&api_token=da262427-88c6-356a-a431-8686856c81b3&ordinal_no=1&merchant_id=1&point_id=1&students[]=1&students[]=2

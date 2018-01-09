@@ -23,7 +23,7 @@ use Wechat\WxPayUnifiedOrder;
 
 class OrderController extends Controller
 {
-    use WithdrawTrait,CourseEnrollTrait,ErrorTrait;
+    use WithdrawTrait, CourseEnrollTrait, ErrorTrait;
 
     public static function updatePaymentStatus(Request $request, $uuid)
     {
@@ -107,7 +107,7 @@ class OrderController extends Controller
     }
 
 
-    public function prepay(Request $request,Schedule $schedule)
+    public function prepay(Request $request, Schedule $schedule)
     {
         $course = $schedule;
         if ($this->hasEnrolled($course, auth()->user()->id)) {
@@ -120,7 +120,7 @@ class OrderController extends Controller
             return ['success' => false, 'message' => '课程学员已满'];
         }
 
-        $order = $this->store($request,$schedule);
+        $order = $this->store($request, $schedule);
         try {
             //调用统一下单API
             $ret = $this->placeUnifiedOrder($order);
@@ -136,6 +136,7 @@ class OrderController extends Controller
             );
             $sign = WxApi::makeSign($values);
             $data = array_merge($values, compact('sign', 'prepayId', 'order'));
+            session(['order.product_id' => $schedule->id]);
             if ($request->ajax()) {
                 return ['success' => true, 'data' => $data];
             }
@@ -150,7 +151,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,Schedule $schedule)
+    public function store(Request $request, Schedule $schedule)
     {
         $order = new Order();
         $order->title = 'buy schedule ' . $schedule->name;
@@ -365,7 +366,7 @@ class OrderController extends Controller
         if ($request->left || $request->right) {
             list($left, $right) = $this->getRange($request);
             $items->where('orders.created_at', '>', date('Y-m-d H:i:s', strtotime($left)))
-                ->where('orders.created_at', '<', date('Y-m-d H:i:s', strtotime($right.' +1 day')));
+                ->where('orders.created_at', '<', date('Y-m-d H:i:s', strtotime($right . ' +1 day')));
         }
         return $items;
     }
@@ -397,8 +398,8 @@ class OrderController extends Controller
     {
         $merchant = $this->getMerchant();
         $items = $merchant->applications()->withdrawType()->paginate();
-        $items->each(function ($i){
-            $i->amount=round($i->amount/100,2);
+        $items->each(function ($i) {
+            $i->amount = round($i->amount / 100, 2);
         });
         return view('agent.amount.cash-record', array_merge($this->statistics($request, $merchant), compact('items')));
     }
@@ -411,7 +412,7 @@ class OrderController extends Controller
         $items = $this->merchantTransactionsQuery($request, $merchant)->get();
         foreach ($items as $item) {
             fputcsv($fp, array($item->schedule->course->name, $item->schedule->begin, $item->schedule->point->name,
-                $item->user->phone, $item->user->name, round($item->amount/100,2)), ',');
+                $item->user->phone, $item->user->name, round($item->amount / 100, 2)), ',');
         }
         rewind($fp);
         $content = "";

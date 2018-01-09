@@ -43,7 +43,7 @@ Route::middleware('auth')
         Route::get('/notifications', 'UserController@notifications')->name('users.notifications');//user's notifications
 
 //        Route::get('/schedules/search', 'ScheduleController@search')->name('schedule.search');
-        Route::get('/schedules/{schedule}/enroll/success', 'CourseController@enrolled')->name('schedules.enrolled');//成功加入课程
+        Route::get('/schedules/{schedule}/enroll/success', 'ScheduleController@enrolled')->name('schedules.enrolled');//成功加入课程
         Route::post('/schedules/{schedule}/prepay', 'OrderController@prepay')->name('prepay');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
         Route::get('/schedules/{schedule}/{operation}', 'ScheduleController@approve')->name('schedule.approve');

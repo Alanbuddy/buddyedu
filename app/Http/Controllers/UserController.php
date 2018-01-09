@@ -212,8 +212,7 @@ class UserController extends Controller
         } else {
             return $query->join('schedules', 'schedules.id', 'schedule_user.schedule_id')
                 ->where('schedules.merchant_id', auth()->user()->ownMerchant->id);
-//            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-//                ->whereNull('role_id')
+//            return User::leftJoin('role_user', 'role_user.user_id', '=', 'users.id')->whereNull('role_id')
         }
     }
 
@@ -327,7 +326,8 @@ class UserController extends Controller
     public function profile(Request $request)
     {
         $user = auth()->user();
-        return view('mobile.student-info', compact('user'));
+        $schedule = session('order.product_id');
+        return view('mobile.student-info', compact('user', 'schedule'));
     }
 
     public function updateProfile(Request $request)
