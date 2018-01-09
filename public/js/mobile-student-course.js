@@ -133,7 +133,8 @@ $(document).ready(function(){
       data: {
         name: name,
         gender: gender,
-        birthday: birthday
+        birthday: birthday,
+        _token: window.token
       },
       success: function(data){
         if(data.success){
