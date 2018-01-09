@@ -195,9 +195,9 @@ class UserController extends Controller
     {
         $items = auth()->user()
             ->schedules()
-            ->get();
-        return $items;
-        return view('', compact('items'));
+            ->orderBy('id','desc')
+            ->paginate();
+        return view('mobile.student-course', compact('items'));
     }
 
     public function queryStudent($isAdmin)
