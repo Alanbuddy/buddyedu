@@ -195,6 +195,7 @@ class UserController extends Controller
     {
         $items = auth()->user()
             ->schedules()
+            ->with('course')
             ->orderBy('id','desc')
             ->paginate();
         return view('mobile.student-course', compact('items'));
