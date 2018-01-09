@@ -23,7 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile','schedules']);
+        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules']);
     }
 
     public function index(Request $request)
@@ -187,19 +187,20 @@ class UserController extends Controller
         if ($request->has('schedule_id')) {
             $items->where('schedule_id', $request->get('schedule_id'));
         }
-        $items = $items->paginate(10);
+        $items = $items->orderBy('id', 'desc')
+            ->paginate(10);
         return view('mobile.product-list', compact('items'));
     }
 
     public function schedules(Request $request)
     {
-        $user= auth()->user();
-        $items =$user
+        $user = auth()->user();
+        $items = $user
             ->schedules()
             ->with('course')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate();
-        return view('mobile.student-course', compact('items','user'));
+        return view('mobile.student-course', compact('items', 'user'));
     }
 
     public function queryStudent($isAdmin)
@@ -327,6 +328,12 @@ class UserController extends Controller
     {
         $user = auth()->user();
         return view('mobile.student-info', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        auth()->user()->update($request->only('name', 'gender', 'birthday'));
+        return ['success' => true];
     }
 
 }
