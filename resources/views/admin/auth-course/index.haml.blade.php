@@ -62,7 +62,10 @@
         .controls.controls-row.mb24
           %label.f14d 课程图标:
           %input.hidden{:onchange => "upload(this)", :type => "file"}
-          %span.course-icon-path{style: "display:none;"}
+          %span.course-icon-path.hidden
+          %span.icon-name.input-width
+            %span.course-icon-name.f14b
+            %img.delete-icon{src: "/icon/smallclose.png"}
           %btn.upload-btn.f14b{:type => "button"} 上传
           %label.f14d 课程网址:
           %input.form-control.input-web1-width.f12b#web{:type => "text", :placeholder => "非必填", :onfocus=>"this.style.color='#5d6578'"}

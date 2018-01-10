@@ -31,7 +31,8 @@
               %th 申请课程
               %th 申请时间
               %th 处理时间
-              %th 备注
+              %th 管理备注
+              %th 申请备注
               %th 课程状态
           %tbody
             -foreach($items as $item)
@@ -39,7 +40,8 @@
                 %td=$item->course_name
                 %td=$item->created_at
                 %td=$item->updated_at
-                %td 机构自己的备注(管理员的备注)
+                %td= $item->advice ? $item->advice : '——'
+                %td= $item->remark ? $item->remark : '——'
                 -if($item->status == 'rejected')
                   %td.red 审核驳回
                 -elseif($item->application_status == 'applying')

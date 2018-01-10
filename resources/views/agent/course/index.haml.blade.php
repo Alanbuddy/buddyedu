@@ -48,6 +48,7 @@
               %th 上课老师
               %th 报名人数/班级人数
               %th 课程状态
+              %th 报名链接
           %tbody
             - foreach ($items as $item)
               %tr
@@ -66,7 +67,15 @@
                   %td.red 审核驳回
                 - if ($item->status == "approved" && $item->begin > date('Y-m-d H:i:s'))
                   %td.orange 报名中
-
+                %td.tip-parent{"data-id" => $item->id, "data-cid" => $item->course->id, "data-request" => "false"}
+                  - if ($item->status == "approved" && $item->begin > date('Y-m-d H:i:s'))
+                    %img.class-state.register-link{src: "/icon/class2.png"}
+                    .tooltip-div
+                      .triangle
+                      %img.close{src: "/icon/smallclose.png"}
+                  - else
+                    %img.class-state{src: "/icon/class1.png"}
+                    
       .select-page 
         %span.choice-page
           != $items->links()

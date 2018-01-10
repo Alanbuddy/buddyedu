@@ -38,8 +38,9 @@
             %p.notice.f14#code_notice 验证码错误 
             .input-group
               %span.input-group-addon.password-photo
-              %input.form-box.f16#password{placeholder: "请设置密码", type: "password"} 
-            %button.btn.click-btn.f24.margin-t48#signup_btn{type: "button"} 注册账号
+              %input.form-box.f16#password{placeholder: "请设置密码", type: "password"}
+            %p.notice.f14#password_notice 密码不能小于六位 
+            %button.btn.click-btn.f24#signup_btn{type: "button"} 注册账号
             %p.signup.f16.pointer#to_signin 已有账号？立即登录
           
     <script src="/js/jquery-3.2.1.min.js"></script>

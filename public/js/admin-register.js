@@ -27,6 +27,7 @@ $(document).ready(function() {
       signup();
     }else{
       check_signup_input();
+      $("#password_notice").css("visibility", "hidden");
     }
   });
 
@@ -115,7 +116,7 @@ $(document).ready(function() {
     var verify_code = $("#mobilecode").val().trim();
     var password = $("#password").val().trim();
     if(password.length < 6){
-      $("#code_notice").text("密码不能小于６位").css("visibility", "visible");
+      $("#password_notice").text("密码不能小于６位").css("visibility", "visible");
       return false;
     }
     $.ajax({

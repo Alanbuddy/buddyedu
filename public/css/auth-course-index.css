@@ -173,3 +173,27 @@ li a {
   height: 200px !important;
 }
 
+#addModal .delete-icon {
+  width: 12px;
+}
+
+#addModal .course-icon-name {
+  display: inline-block;
+  width: 144px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+#addModal .icon-name {
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  line-height: 30px;
+  display: none;
+  margin-left: 8px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+

@@ -11,7 +11,10 @@ function upload(obj){
 	  contentType: false
 	  }).done(function(res){
 	    if (res.success){
-	      $(".course-icon-path").text(res.data.path);
+        $(".course-icon-path").text(res.data.path);
+	      $(".course-icon-name").text(res.data.name);
+        $(".upload-btn").hide();
+        $(".icon-name").show();
         showMsg("图片上传成功", "center");
 	    }
 	  }).fail(function(res){
@@ -118,5 +121,15 @@ $(document).ready(function(){
     if (code == 13){
       search();
     }
+  });
+
+
+  $(".icon-name").click(function(){
+    $(".upload-btn").click();
+  });
+
+  $(".delete-icon").click(function(){
+    $(".upload-btn").show();
+    $(".icon-name").hide();
   });
 });

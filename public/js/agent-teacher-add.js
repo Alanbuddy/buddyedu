@@ -37,8 +37,8 @@ $(document).ready(function(){
   $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
-  function check_input(name, birthday, icon, gender, certificate_id, id, school, desc, profile){
-    if(name == "" || birthday == "" || icon == "" || gender == "" || certificate_id == "" || id == "" || school == "" || desc == "" || profile == ""){
+  function check_input(name, birthday, icon, gender, certificate_id, id, teaching_age, school, desc, profile){
+    if(name == "" || birthday == "" || icon == "" || gender == "" || certificate_id == "" || id == "" || teaching_age == "" || school == "" || desc == "" || profile == ""){
       showMsg("有关键信息没有填写", "center");
       return false;
     }
@@ -54,10 +54,11 @@ $(document).ready(function(){
     var gender = $("#gender").val();
     var certificate_id = $("#certificate").val().trim();
     var id = $("#id").val().trim();
+    var teaching_age = $("#teaching-age").val().trim();
     var school = $("#school").val().trim();
     var desc = $("#desc").val().trim();
     var profile = $("#profile").val().trim();
-    var ret = check_input(name, birthday, icon, gender, certificate_id, id, school, desc, profile);
+    var ret = check_input(name, birthday, icon, gender, certificate_id, id, teaching_age, school, desc, profile);
     if(ret == false){
       return false;
     }
@@ -79,6 +80,7 @@ $(document).ready(function(){
         birthday: birthday,
         certificate_id: certificate_id,
         id: id,
+        teaching_age: teaching_age,
         school: school,
         introduction: desc,
         cv: profile,

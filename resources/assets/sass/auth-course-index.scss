@@ -151,6 +151,27 @@ li a {
   .w-e-text-container {
     height: 200px !important;
   }
+  .delete-icon {
+    width: 12px;
+  }
+  .course-icon-name {
+    display: inline-block;
+    width: 144px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  .icon-name {
+    display: inline-block;
+    width: 160px;
+    height: 30px;
+    line-height: 30px;
+    display: none;
+    margin-left: 8px;
+    margin-right: 40px;
+    cursor: pointer;
+  }
 }
 
 

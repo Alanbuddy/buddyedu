@@ -325,8 +325,11 @@ abbr, acronym {
   padding: 0;
   background: #365ba9;
   line-height: 2.6em;
-  margin-top: 26px;
+  /*margin-top: 26px;*/
   margin-bottom: 24px;
+}
+.mt26 {
+  margin-top: 26px;
 }
 #signin_btn, #signup_btn, #end_btn {
   color: #fff;
@@ -346,7 +349,7 @@ abbr, acronym {
   margin-bottom: 0;
 }
 .notice {
-  color: #365ba9;
+  color: #f58799;
   text-align: left;
   margin-top: 3%;
   margin-bottom: 4%;

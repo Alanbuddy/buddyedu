@@ -39,7 +39,8 @@
             .input-group
               %span.input-group-addon.password-photo
               %input.form-box.f16#password{placeholder: "请设置密码", type: "password"} 
-            %button.btn.click-btn.f24.margin-t48#end_btn{type: "button"} 完成
+            %p.notice.f14#password_notice 密码不能少于六位
+            %button.btn.click-btn.f24#end_btn{type: "button"} 完成
             %p.signup.f16.pointer#to_signin 未忘密码？立即登录
             // %p.signup.f16.pointer#to_signin 不想修改？返回登录
           
