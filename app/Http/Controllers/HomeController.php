@@ -12,8 +12,6 @@ class HomeController extends Controller
 
     public function index(Request $request, $schedule)
     {
-        $user = Redis::get('user');
-        return $user;
         $schedule = Schedule::where('id', $schedule)
             ->with('course', 'course.teachers')
             ->with('point')
