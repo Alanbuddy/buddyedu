@@ -36,7 +36,7 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->name
+                %td=$item->course_name
                 %td=$item->created_at
                 %td=$item->updated_at
                 %td 机构自己的备注(管理员的备注)
