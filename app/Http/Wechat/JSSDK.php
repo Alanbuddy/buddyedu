@@ -101,6 +101,8 @@ class JSSDK
             return $ret;
         } else {
             usleep(10);
+            if (Carbon::parse($expire_at)->isPast())
+                Redis::del($lock_key);
             return $this->lock($key, $function);
         }
 
@@ -128,6 +130,7 @@ class JSSDK
 //                $this->set_php_file("access_token.php", json_encode($data));
                     Redis::set('access_token', json_encode($data));
                 }
+                return $data;
             });
         } else {
             $access_token = $data->access_token;
