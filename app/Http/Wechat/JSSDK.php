@@ -9,6 +9,7 @@
 namespace App\Http\Wechat;
 
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
@@ -65,29 +66,49 @@ class JSSDK
     {
         // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
 //        $data = json_decode($this->get_php_file("jsapi_ticket.php"));
-        $data =json_decode(Redis::get('jsapi_ticket'));
+        $data = json_decode(Redis::get('jsapi_ticket'));
         if ($data->expire_time < time()) {
             $accessToken = $this->getAccessToken();
-            // 如果是企业号用以下 URL 获取 ticket
-            // $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
-            $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
-            $res = json_decode($this->httpGet($url));
-            $ticket =@$res->ticket;
-            if ($ticket) {
-                $data->expire_time = time() + 7000;
-                $data->jsapi_ticket = $ticket;
+            $this->lock('access_token', function () use ($accessToken, $data) {
+                $data = json_decode(Redis::get('jsapi_ticket'));
+                if ($data->expire_time > time()) return;
+                // 如果是企业号用以下 URL 获取 ticket
+                // $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
+                $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
+                $res = json_decode($this->httpGet($url));
+                $ticket = @$res->ticket;
+                if ($ticket) {
+                    $data->expire_time = time() + 7000;
+                    $data->jsapi_ticket = $ticket;
 //                $this->set_php_file("jsapi_ticket.php", json_encode($data));
-                Redis::set('jsapi_ticket',json_encode($data));
-            }
+                    Redis::set('jsapi_ticket', json_encode($data));
+                }
+            });
         } else {
-            $ticket = $data->jsapi_ticket;
+//            $ticket = $data->jsapi_ticket;
         }
 
+            $ticket = $data->jsapi_ticket;
         return $ticket;
     }
 
-    public static function lock($key)
+    public function lock($key, $function)
     {
+        $lock_key = $key . '_lock';
+        $timeout = 1;
+        $expire_at = time() + $timeout;
+        $result = Redis::setnx($lock_key, $expire_at);
+        if ($result) {
+            $ret = $function();
+            Log::debug('lock return');
+            Redis::del($lock_key);
+            return $ret;
+        } else {
+            usleep(10);
+            if (Carbon::parse($expire_at)->isPast())
+                Redis::del($lock_key);
+            return $this->lock($key, $function);
+        }
 
     }
 
@@ -95,24 +116,32 @@ class JSSDK
     {
         // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
 //        $data = json_decode($this->get_php_file("/access_token.php"));
-        $data =json_decode(Redis::get('access_token'));
+        $data = json_decode(Redis::get('access_token'));
 
         if ($data->expire_time < time()) {
-            // 如果是企业号用以下URL获取access_token
-            // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
-            $res = json_decode($this->httpGet($url));
-            Log::debug($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
-            $access_token = @$res->access_token;
-            if ($access_token) {
-                $data->expire_time = time() + 7000;
-                $data->access_token = $access_token;
+            $this->lock('access_token', function () use ($data) {
+                $data = json_decode(Redis::get('access_token'));
+                if ($data->expire_time > time()) return;
+                // 如果是企业号用以下URL获取access_token
+                // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
+                $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
+                $res = json_decode($this->httpGet($url));
+                Log::debug('http get weixin api');
+                Log::debug($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
+                $access_token = @$res->access_token;
+                if ($access_token) {
+                    $data->expire_time = time() + 7000;
+                    $data->access_token = $access_token;
 //                $this->set_php_file("access_token.php", json_encode($data));
-                Redis::set('access_token',json_encode($data));
-            }
+                    Redis::set('access_token', json_encode($data));
+                }
+                return $data;
+            });
         } else {
-            $access_token = $data->access_token;
+//            $access_token = $data->access_token;
         }
+
+        $access_token = $data->access_token;
         return $access_token;
     }
 
