@@ -94,7 +94,7 @@ class JSSDK
         $expire_at = time() + $timeout;
         $result = Redis::setnx($lock_key, $expire_at);
         if ($result) {
-            $ret = call_user_func([$this, $function]);
+            $ret = $function();
             Redis::del($lock_key);
             return $ret;
         } else {
