@@ -9,6 +9,7 @@
 namespace App\Http\Wechat;
 
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
@@ -65,19 +66,19 @@ class JSSDK
     {
         // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
 //        $data = json_decode($this->get_php_file("jsapi_ticket.php"));
-        $data =json_decode(Redis::get('jsapi_ticket'));
+        $data = json_decode(Redis::get('jsapi_ticket'));
         if ($data->expire_time < time()) {
             $accessToken = $this->getAccessToken();
             // 如果是企业号用以下 URL 获取 ticket
             // $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
             $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
             $res = json_decode($this->httpGet($url));
-            $ticket =@$res->ticket;
+            $ticket = @$res->ticket;
             if ($ticket) {
                 $data->expire_time = time() + 7000;
                 $data->jsapi_ticket = $ticket;
 //                $this->set_php_file("jsapi_ticket.php", json_encode($data));
-                Redis::set('jsapi_ticket',json_encode($data));
+                Redis::set('jsapi_ticket', json_encode($data));
             }
         } else {
             $ticket = $data->jsapi_ticket;
@@ -88,6 +89,20 @@ class JSSDK
 
     public static function lock($key)
     {
+        $timeout = 1;
+        $expire_at = time() + $timeout;
+        $result = Redis::setnx($key, $expire_at);
+        if ($result) {
+
+        } else {
+            while (1) {
+                usleep(10);
+                $isPast = Carbon::parse(Redis::get($key))->isPast();
+                if($isPast){
+
+                }
+            }
+        }
 
     }
 
@@ -95,7 +110,7 @@ class JSSDK
     {
         // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
 //        $data = json_decode($this->get_php_file("/access_token.php"));
-        $data =json_decode(Redis::get('access_token'));
+        $data = json_decode(Redis::get('access_token'));
 
         if ($data->expire_time < time()) {
             // 如果是企业号用以下URL获取access_token
@@ -108,7 +123,7 @@ class JSSDK
                 $data->expire_time = time() + 7000;
                 $data->access_token = $access_token;
 //                $this->set_php_file("access_token.php", json_encode($data));
-                Redis::set('access_token',json_encode($data));
+                Redis::set('access_token', json_encode($data));
             }
         } else {
             $access_token = $data->access_token;
