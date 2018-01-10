@@ -95,6 +95,8 @@ class JSSDK
         $result = Redis::setnx($lock_key, $expire_at);
         if ($result) {
             $ret = $function();
+            Log::debug('lock ret:');
+            Log::debug($ret);
             Redis::del($lock_key);
             return $ret;
         } else {
