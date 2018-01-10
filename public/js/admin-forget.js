@@ -84,10 +84,10 @@ $(document).ready(function(){
             $("#code_notice").text("验证码无效").css("visibility", "visible");
           }
           if(data.code == 'passwords.password'){
-            $("#code_notice").text("密码无效").css("visibility", "visible");
+            $("#password_notice").text("密码无效").css("visibility", "visible");
           }
           if(data.code == 'passwords.user'){
-            $("#code_notice").text("用户不存在").css("visibility", "visible");
+            $("#password_notice").text("用户不存在").css("visibility", "visible");
           }
         } 
       }
@@ -132,6 +132,7 @@ $(document).ready(function(){
       forget();
     }else{
       check_forget_input();
+      $("#password_notice").css("visibility", "hidden");
     }
   });
  

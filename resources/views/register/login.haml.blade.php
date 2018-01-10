@@ -34,7 +34,7 @@
               %input.form-box.f16#password{placeholder: "请输入密码", type: "password"} 
             %span.forget.f16.fr.pointer#to_forget_password 忘记密码?
             // %span.forget.f16.fr.pointer#to_forget_password 修改密码?
-            %button.btn.click-btn.f24#signin_btn{type: "button"} 立即登录
+            %button.btn.click-btn.f24.mt26#signin_btn{type: "button"} 立即登录
             %p.signup.f16.pointer#to_signup 没有账号？立即注册
           
     <script src="/js/jquery-3.2.1.min.js"></script>

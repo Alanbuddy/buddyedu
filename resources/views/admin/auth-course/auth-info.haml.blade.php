@@ -23,7 +23,7 @@
   .desc-div
     .name-money
       .name-div
-        %img.icon{src: "/icon/bird.png"}
+        %img.icon{src: $course->icon}
         %span.f24b=$course->name
     .info-div.f14d
       .p-div

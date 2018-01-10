@@ -98,7 +98,9 @@
           %label.input-caption.f14d 资格证号
           %input.input-width.form-control#certificate
           %label.input-caption.f14d 身份证号
-          %input.input-web-width.form-control#id
+          %input.input-width.form-control#id
+          %label.input-caption.f14d 老师教龄
+          %input.input-width.form-control#teaching-age
         .controls.controls-row.mb24
           %label.input-caption.f14d 毕业院校
           %input.input-width.form-control#school

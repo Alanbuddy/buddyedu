@@ -13,10 +13,7 @@ $(document).ready(function(){
   $(".phone-close").click(function(){
     $("#phoneModal").modal("hide");
     $("#profileModal").modal("show");
-    var modify_phone = $("#modify-mobile").val().trim();
-    if(modify_phone != ""){
-      $("#mobile").val(modify_phone);
-    }
+    $("#modify-mobile").val("");
     $("#mobile_notice").css("visibility", "hidden");
   });
 
@@ -115,7 +112,9 @@ $(document).ready(function(){
       },
       success: function(data){
         if (data.success){
-          
+          $("#phoneModal").modal("hide");
+          $("#profileModal").modal("show");
+          $("#mobile").val(phone);
         }else{
           $("#mobile_notice").text("验证码错误").css("visibility", "visible");
         }

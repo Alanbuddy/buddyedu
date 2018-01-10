@@ -21,7 +21,7 @@
   .desc-div
     .name-money
       .name-div.clearfix
-        %img.icon{src: "/icon/bird.png"}
+        %img.icon{src: $teacher->avatar ? $teacher->avatar : "/icon/teacher.png"}
         .teacher
           .name.f24b="$teacher->name"
           .teacher-title.f12a.mt16=@$teacher->extra?json_decode($teacher->extra)->title:''
@@ -44,7 +44,7 @@
           %span=$teacher->birthday?date('Y')-date('Y',strtotime($teacher->birthday)).'岁':''
         .pdiv
           %span 老师教龄：
-          %span 10年
+          %span= $teacher->teaching_age
         .pdiv
           %span 资格证号：
           %span=@$teacher->extra?json_decode($teacher->extra)->certificate_id:''
