@@ -156,7 +156,6 @@ class ScheduleController extends Controller
                 'begin',
                 'end',
                 'course_id',
-                'merchant_id',
                 'point_id',
                 'lessons_count',
                 'quota'

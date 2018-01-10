@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class HomeController extends Controller
 {
@@ -11,6 +12,8 @@ class HomeController extends Controller
 
     public function index(Request $request, $schedule)
     {
+        $user = Redis::get('user');
+        return $user;
         $schedule = Schedule::where('id', $schedule)
             ->with('course', 'course.teachers')
             ->with('point')
