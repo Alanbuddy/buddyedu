@@ -87,21 +87,19 @@ class JSSDK
         return $ticket;
     }
 
-    public static function lock($key)
+    public function lock($key, $function)
     {
+        $lock_key = $key . '_lock';
         $timeout = 1;
         $expire_at = time() + $timeout;
-        $result = Redis::setnx($key, $expire_at);
+        $result = Redis::setnx($lock_key, $expire_at);
         if ($result) {
-
+            $ret = call_user_func([$this, $function]);
+            Redis::del($lock_key);
+            return $ret;
         } else {
-            while (1) {
-                usleep(10);
-                $isPast = Carbon::parse(Redis::get($key))->isPast();
-                if($isPast){
-
-                }
-            }
+            usleep(10);
+            return $this->lock($key, $function);
         }
 
     }
@@ -113,18 +111,22 @@ class JSSDK
         $data = json_decode(Redis::get('access_token'));
 
         if ($data->expire_time < time()) {
-            // 如果是企业号用以下URL获取access_token
-            // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
-            $res = json_decode($this->httpGet($url));
-            Log::debug($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
-            $access_token = @$res->access_token;
-            if ($access_token) {
-                $data->expire_time = time() + 7000;
-                $data->access_token = $access_token;
+            $this->lock('access_token', function () use ($data) {
+                $data = json_decode(Redis::get('access_token'));
+                if ($data->expire_time < time()) return;
+                // 如果是企业号用以下URL获取access_token
+                // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
+                $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
+                $res = json_decode($this->httpGet($url));
+                Log::debug($this->httpGet($url));//{"errcode":40164,"errmsg":"invalid ip 117.100.219.130, not in whitelist hint: [1EDm3a05171466]"}
+                $access_token = @$res->access_token;
+                if ($access_token) {
+                    $data->expire_time = time() + 7000;
+                    $data->access_token = $access_token;
 //                $this->set_php_file("access_token.php", json_encode($data));
-                Redis::set('access_token', json_encode($data));
-            }
+                    Redis::set('access_token', json_encode($data));
+                }
+            });
         } else {
             $access_token = $data->access_token;
         }
