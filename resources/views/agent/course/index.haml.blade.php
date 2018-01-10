@@ -73,6 +73,13 @@
                     .tooltip-div
                       .triangle
                       %img.close{src: "/icon/smallclose.png"}
+                      %span.f14d 课程链接
+                      %span.f12c.copy.ml16 复制
+                      %p.f14d.course-link{"data-link" => route('landing',$item->id)}  
+                      %span.f14d 课程二维码
+                      %span.f12c.download.ml16 下载
+                      .qrcode-box
+                        %img.qrcode{src: "/icon/bird.png"}
                   - else
                     %img.class-state{src: "/icon/class1.png"}
                     
