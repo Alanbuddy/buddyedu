@@ -33,16 +33,16 @@
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
       -foreach($items as $item)
-      %a.frame-div{href: route('courses.show',$item->id)}
-        %img.course-icon{src: "icon/bird.png"}
-        %p.course-name.f16b=$item->name
-        %p.f12b=$item->merchants_count.'机构已添加'
-        %p.mt24.f12b=$item->description??'没有简介'
-        .add-div
-          - if ($item->added)
-            %span.f14e 已添加
-          - else
-            %span.f14b 未添加
+        %a.frame-div{href: route('courses.show',$item->id)}
+          %img.course-icon{src: "icon/bird.png"}
+          %p.course-name.f16b=$item->name
+          %p.f12b=$item->merchants_count.'机构已添加'
+          %p.mt24.f12b=$item->description??'没有简介'
+          .add-div
+            - if ($item->added)
+              %span.f14e 已添加
+            - else
+              %span.f14b 未添加
 
 @endsection
 

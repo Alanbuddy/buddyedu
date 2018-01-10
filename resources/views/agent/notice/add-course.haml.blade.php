@@ -37,7 +37,7 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td=$item->name
+                %td=$item->course_name
                 %td=$item->created_at
                 %td=$item->updated_at
                 %td= $item->advice ? $item->advice : '——'
