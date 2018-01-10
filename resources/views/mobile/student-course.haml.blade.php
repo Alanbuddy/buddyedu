@@ -7,6 +7,7 @@
   window.validmobile = "#{route('validate.phone')}"
   window.modify_end = "#{route('user.phone.bind')}"
   window.profile_update = "#{route('profile.update')}"
+  window.product_list = "#{route('user.drawings')}"
 @endsection
 
 @section('content')
@@ -24,7 +25,8 @@
           .title-div
             %p.f14.text-color.title-margin= $item->course->name
             %p.f14.text-color.point-name= $item->point->name
-          %a.click-div{href: route('user.drawings', $item->schedule_id)}
+          %a.click-div
+            %span.hidden{"data-id" => $item->schedule_id}
             %span.f12.text-blue 我的作品
             %img.arrow{src: "/icon/mobile/more.png"}
 @endsection

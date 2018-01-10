@@ -125,11 +125,14 @@ $(document).ready(function(){
 
   $("#next_btn").click(function(){
     var name = $("#name").val();
+    if(name == ""){
+      name = $("#name").attr("placeholder");
+    }
     var gender = $("#gender").val();
     var birthday = $("#birthday").val();
     $.ajax({
       type: 'post',
-      url: window.phone_update,
+      url: window.profile_update,
       data: {
         name: name,
         gender: gender,
@@ -144,5 +147,11 @@ $(document).ready(function(){
         }
       }
     });
+  });
+
+
+  $(".click-div").click(function(){
+    var uid = $(this).find("hidden").attr("data-id");
+    location.href = window.product_list + "?schedule_id=" + uid;
   });
 });
