@@ -130,6 +130,7 @@ class JSSDK
         } else {
             $access_token = $data->access_token;
         }
+        $access_token = $data->access_token;
         return $access_token;
     }
 
