@@ -127,6 +127,7 @@ class JSSDK
                 if ($access_token) {
                     $data->expire_time = time() + 7000;
                     $data->access_token = $access_token;
+                    Log::debug($access_token);
 //                $this->set_php_file("access_token.php", json_encode($data));
                     Redis::set('access_token', json_encode($data));
                 }
