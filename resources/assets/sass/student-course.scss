@@ -129,10 +129,10 @@
 }
 .form-box {
   width: 3.6rem;
-  border: 0;
+  border: none;
   color: #333a48;
   background: rgba(255,255,255, .1);
-  outline: 0;
+  outline: none;
   background: transparent;
 }
 .text-span {
@@ -166,7 +166,7 @@
     padding-top: 1.6rem;
     height: 100%;
   }
-  #gender, #birthday {
+  #gender {
     -webkit-appearance: none;
     appearance: none;
   }
