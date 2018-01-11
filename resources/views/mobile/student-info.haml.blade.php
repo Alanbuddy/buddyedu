@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/profile.css') }}">
 :javascript
   window.token = "#{csrf_token()}"
-  window.user_info = "#{route('users.update', $user)}"
+  window.user_info = "#{route('profile.update')}"
   window.register_end = "#{route('schedules.enrolled',$schedule)}"
 @endsection
 

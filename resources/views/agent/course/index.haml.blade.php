@@ -75,7 +75,8 @@
                       %img.close{src: "/icon/smallclose.png"}
                       %span.f14d 课程链接
                       %span.f12c.copy.ml16 复制
-                      %p.f14d.course-link{"data-link" => route('landing',$item->id)}  
+                      .link-div
+                        %input.f14d.course-link{type: "text", "data-link" => route('landing',$item->id)}
                       %span.f14d 课程二维码
                       %span.f12c.download.ml16 下载
                       .qrcode-box

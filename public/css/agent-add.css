@@ -137,12 +137,14 @@
 
 .course-link {
   display: inline-block;
-  width: 260px;
+  width: 255px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   margin-top: 4px;
   margin-bottom: 14px;
+  border: 0;
+  outline: 0;
 }
 
 .qrcode-box {

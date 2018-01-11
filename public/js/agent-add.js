@@ -148,7 +148,7 @@ $(document).ready(function(){
     // }
     $(this).find(".tooltip-div").show();
     var link = $(this).find(".course-link").attr("data-link");
-    $(this).find(".course-link").text(link);
+    $(this).find(".course-link").val(link);
   },function(){
     // $(this).attr("data-request", "true");
     // $(this).find('.class-state').attr('src', "/icon/class1.png");
@@ -160,8 +160,7 @@ $(document).ready(function(){
   });
 
   $(".copy").click(function(){
-    var course_link = document.querySelector(".course-link");
-    course_link.select();
+    $('.course-link').select();
     document.execCommand("Copy");
   });
   
