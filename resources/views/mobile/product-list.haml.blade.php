@@ -5,23 +5,14 @@
 
 @section('content')
 .desc-div
-  %p.f16.fb.title.mb60 李晓明的作品
+  %p.f16.fb.title.mb60=auth()->user()->name.'的作品'
   .product-list
-    .item
-      %p.f14.date.mb16 2017/12/21
-      .img-div
-        %a{href: route('user.drawings.show',$file->id)}
-          %img{src: "/icon/mobile/product.jpg"}
-        %a{href: route('user.drawings.show',$file->id)}
-          %img{src: "/icon/mobile/product.jpg"}
-    .item
-      %p.f14.date.mb16 2017/12/22
-      .img-div
-        %img{src: "/icon/mobile/product.jpg"}
-    .item
-      %p.f14.date.mb16 2017/12/23
-      .img-div
-        %img{src: "/icon/mobile/product.jpg"}
+    -foreach($items as $item)
+      .item
+        %p.f14.date.mb16 2017/12/21
+        .img-div
+          %a{href: route('user.drawings.show',$item->id)}
+            %img{src: "/icon/mobile/product.jpg"}
 @endsection
 
 @section('script')
