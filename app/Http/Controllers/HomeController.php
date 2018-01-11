@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HomeController extends Controller
 {
@@ -34,4 +35,10 @@ class HomeController extends Controller
             ->paginate();
         dd($items);
     }
+
+    public function qr(Request $request)
+    {
+        return QrCode::generate('Hello,LaravelAcademy!');
+    }
+
 }

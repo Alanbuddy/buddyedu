@@ -102,6 +102,7 @@ Route::middleware('auth')
         Route::resource('applications', 'ApplicationController');
     });
 
+Route::get('/qr', 'HomeController@qr')->name('qr');
 Route::get('/form', 'AiController@form')->name('form');
 Route::post('/file', 'AiController@store')->name('file');
 Route::get('/validate-phone', 'SmsController@isOccupied')->name('validate.phone');
