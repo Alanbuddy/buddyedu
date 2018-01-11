@@ -136,7 +136,7 @@
   background: transparent;
 }
 .birthday-input {
-  width: 4rem;
+  width: 3.6rem;
   color: #333a48;
   border: none;
   outline: none;
@@ -177,6 +177,8 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    -webkit-tap-highlight-color: #fff;  
+    outline: 0;
   }
 }
 
