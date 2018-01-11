@@ -95,6 +95,8 @@ Route::middleware('auth')
 
         Route::resource('records', 'RecordController');
 
+	Route::get('/files/upload/init', 'FileController@initChunkUpload')->name('file.upload.init');
+	Route::post('/upload', 'FileController@upload')->name('file.upload');
         Route::get('/files/{file}/download', 'FileController@download')->name('file.download');
         Route::resource('files', 'FileController');
         Route::get('/applications/{application}/reject', 'ApplicationController@reject')->name('application.reject');
