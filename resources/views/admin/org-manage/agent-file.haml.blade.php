@@ -4,7 +4,7 @@
 :javascript
   window.file_delete = "#{route('files.destroy', -1)}"
   window.file_upload = "#{route('files.store')}"
-  window.file_list = "{route('merchant.files', $merchant)}"
+  window.file_list = "#{route('merchant.files', $merchant)}"
 @endsection
 
 @section('content')
