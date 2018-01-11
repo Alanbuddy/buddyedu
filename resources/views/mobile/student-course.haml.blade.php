@@ -57,7 +57,7 @@
                 %option{value: "female"} 女
             .input-group
               %span.f16.text-blue.mr40 学生生日
-              %input.form-box.f16#birthday{type: "date", placeholder: $user->birthday}
+              %input.form-box.f16#birthday{type: "date", value: $user->birthday}
             %button.btn.click-btn.f14#next_btn{type: "button"} 完成
 
 #phoneModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
