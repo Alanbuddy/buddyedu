@@ -1,25 +1,5 @@
-// function upload(obj){
-//   var formData = new FormData();
-//   formData.append('file', $(".hidden")[0].files[0]);
-//   formData.append('_token', window.token);
-//   $.ajax({
-//     url: window.file_upload,
-//     type: 'post',
-//     data: formData,
-//     cache: false,
-//     processData: false,
-//     contentType: false
-//     }).done(function(res){
-//       if (res.success){
-//         showMsg("文件上传成功", "center");
-//       }
-//     }).fail(function(res){
-//       showMsg("文件上传失败", "center");
-//     });
-// }
 
-
-var bytesPerPiece = 1024 * 1024; // 每个文件切片大小定为1MB .
+var bytesPerPiece = 1024 * 1024 / 2; // 每个文件切片大小定为1MB .
 var totalPieces;
 //发送请求
 function upload() {
@@ -57,6 +37,12 @@ function upload() {
     });
     start = end;
     index++;
+  }
+  if (index == totalPieces){
+    showMsg("文件上传成功", "center");
+    setTimeout(function(){location.href = window.file_list;}, 2000);
+  }else{
+    showMsg("文件上传失败", "center");
   }
 }
 

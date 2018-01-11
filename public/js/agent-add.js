@@ -113,45 +113,10 @@ $(document).ready(function(){
 
 
   $(".tip-parent").hover(function(){
-    // var request = $(this).attr("data-request");
-    // console.log(request);
-    // var _this = $(this);
-    // var sid = $(this).attr("data-id");
-    // var cid = $(this).attr("data-cid");
-    // $(this).find('.class-state').attr('src', "/icon/class2.png");
-    // if(request == "false"){
-    //   $.ajax({
-    //     type: 'get',
-    //     url: window.sign.replace(/-1/, sid),
-    //     success: function(data){
-    //       for(var i in data){
-    //         var node = render(data[i]);
-    //         node.text(i);
-    //         var box = _this.find('.box-div');
-    //         _this.find('.box-div').append(node);
-    //       }
-    //     }
-    //   });
-    //   $.ajax({
-    //     type: 'get',
-    //     url: window.comment.replace(/-1/, cid),
-    //     success: function(data){
-    //       if(data.success){
-    //         if(data.data){
-    //           _this.find(".review").text(data.data.content);
-    //         }else{
-    //           _this.find(".review").text("暂无评论");
-    //         }
-    //       }
-    //     }
-    //   });
-    // }
     $(this).find(".tooltip-div").show();
     var link = $(this).find(".course-link").attr("data-link");
     $(this).find(".course-link").val(link);
   },function(){
-    // $(this).attr("data-request", "true");
-    // $(this).find('.class-state').attr('src', "/icon/class1.png");
     $(this).find(".tooltip-div").hide();
   });
 
