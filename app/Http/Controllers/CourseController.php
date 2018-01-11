@@ -26,7 +26,7 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        if (!$request->ajax()) {
+        if ($request->ajax()) {
             if (!$this->isAdmin())
                 $items = $this->getMerchant()->courses();
             else
