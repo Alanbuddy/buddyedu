@@ -174,11 +174,9 @@
     height: 100%;
   }
   #gender {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -webkit-tap-highlight-color: #fff;  
-    outline: 0;
+    appearance: listitem;
+    -webkit-appearance: listitem;
+    -moz-appearance: listitem;
   }
 }
 
