@@ -42,8 +42,21 @@ class HomeController extends Controller
 //        QrCode::format('png')->size(100)->generate('Hello,LaravelAcademy!',public_path('qrcodes/qrcode.png'));
 //        return QrCode::size($size)->generate('Hello,LaravelAcademy!');
         $content = QrCode::format('png')->size($size)->generate($request->data);
+        return $request->has('download') ? $this->downloadImage($content, $request->data) : $this->image($content);
+    }
+
+    public function image($content)
+    {
         return (new Response($content, 200))
             ->header('Content-Type', 'image/png');
+    }
+
+    public function downloadImage($content, $data)
+    {
+        $filename = md5($data);
+        return (new Response($content, 200))
+            ->header('Content-Type', 'image/png')
+            ->header('Content-Disposition', 'attachment;filename=' . $filename);
     }
 
 }
