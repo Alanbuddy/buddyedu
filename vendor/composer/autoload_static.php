@@ -361,6 +361,13 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'SimpleSoftwareIO\\QrCode\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -411,6 +418,10 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
             array (
                 0 => __DIR__ . '/..' . '/bkwld/laravel-haml/src',
             ),
+            'BaconQrCode' => 
+            array (
+                0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
+            ),
         ),
     );
 
@@ -418,6 +429,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'App\\Console\\Commands\\Test' => __DIR__ . '/../..' . '/app/Console/Commands/Test.php',
         'App\\Console\\Commands\\enroll' => __DIR__ . '/../..' . '/app/Console/Commands/enroll.php',
         'App\\Console\\Commands\\refund' => __DIR__ . '/../..' . '/app/Console/Commands/refund.php',
+        'App\\Console\\Commands\\setup' => __DIR__ . '/../..' . '/app/Console/Commands/setup.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\Event' => __DIR__ . '/../..' . '/app/Events/Event.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -516,6 +528,45 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Services\\MessageService' => __DIR__ . '/../..' . '/app/Services/MessageService.php',
         'AttendanceSeeder' => __DIR__ . '/../..' . '/database/seeds/AttendanceSeeder.php',
+        'BaconQrCode\\Common\\AbstractEnum' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/AbstractEnum.php',
+        'BaconQrCode\\Common\\BitArray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitArray.php',
+        'BaconQrCode\\Common\\BitMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitMatrix.php',
+        'BaconQrCode\\Common\\BitUtils' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/BitUtils.php',
+        'BaconQrCode\\Common\\CharacterSetEci' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/CharacterSetEci.php',
+        'BaconQrCode\\Common\\EcBlock' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/EcBlock.php',
+        'BaconQrCode\\Common\\EcBlocks' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/EcBlocks.php',
+        'BaconQrCode\\Common\\ErrorCorrectionLevel' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/ErrorCorrectionLevel.php',
+        'BaconQrCode\\Common\\FormatInformation' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/FormatInformation.php',
+        'BaconQrCode\\Common\\Mode' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/Mode.php',
+        'BaconQrCode\\Common\\ReedSolomonCodec' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/ReedSolomonCodec.php',
+        'BaconQrCode\\Common\\Version' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Common/Version.php',
+        'BaconQrCode\\Encoder\\BlockPair' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/BlockPair.php',
+        'BaconQrCode\\Encoder\\ByteMatrix' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/ByteMatrix.php',
+        'BaconQrCode\\Encoder\\Encoder' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/Encoder.php',
+        'BaconQrCode\\Encoder\\MaskUtil' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/MaskUtil.php',
+        'BaconQrCode\\Encoder\\MatrixUtil' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/MatrixUtil.php',
+        'BaconQrCode\\Encoder\\QrCode' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Encoder/QrCode.php',
+        'BaconQrCode\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/ExceptionInterface.php',
+        'BaconQrCode\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/InvalidArgumentException.php',
+        'BaconQrCode\\Exception\\OutOfBoundsException' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/OutOfBoundsException.php',
+        'BaconQrCode\\Exception\\RuntimeException' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/RuntimeException.php',
+        'BaconQrCode\\Exception\\UnexpectedValueException' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/UnexpectedValueException.php',
+        'BaconQrCode\\Exception\\WriterException' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Exception/WriterException.php',
+        'BaconQrCode\\Renderer\\Color\\Cmyk' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Color/Cmyk.php',
+        'BaconQrCode\\Renderer\\Color\\ColorInterface' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Color/ColorInterface.php',
+        'BaconQrCode\\Renderer\\Color\\Gray' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Color/Gray.php',
+        'BaconQrCode\\Renderer\\Color\\Rgb' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Color/Rgb.php',
+        'BaconQrCode\\Renderer\\Image\\AbstractRenderer' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/AbstractRenderer.php',
+        'BaconQrCode\\Renderer\\Image\\Decorator\\DecoratorInterface' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/Decorator/DecoratorInterface.php',
+        'BaconQrCode\\Renderer\\Image\\Decorator\\FinderPattern' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/Decorator/FinderPattern.php',
+        'BaconQrCode\\Renderer\\Image\\Eps' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/Eps.php',
+        'BaconQrCode\\Renderer\\Image\\Png' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/Png.php',
+        'BaconQrCode\\Renderer\\Image\\RendererInterface' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/RendererInterface.php',
+        'BaconQrCode\\Renderer\\Image\\Svg' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Image/Svg.php',
+        'BaconQrCode\\Renderer\\RendererInterface' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/RendererInterface.php',
+        'BaconQrCode\\Renderer\\Text\\Html' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Text/Html.php',
+        'BaconQrCode\\Renderer\\Text\\Plain' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Renderer/Text/Plain.php',
+        'BaconQrCode\\Writer' => __DIR__ . '/..' . '/bacon/bacon-qr-code/src/BaconQrCode/Writer.php',
         'Bkwld\\LaravelHaml\\Exception' => __DIR__ . '/..' . '/bkwld/laravel-haml/src/Bkwld/LaravelHaml/Exception.php',
         'Bkwld\\LaravelHaml\\HamlBladeCompiler' => __DIR__ . '/..' . '/bkwld/laravel-haml/src/Bkwld/LaravelHaml/HamlBladeCompiler.php',
         'Bkwld\\LaravelHaml\\HamlCompiler' => __DIR__ . '/..' . '/bkwld/laravel-haml/src/Bkwld/LaravelHaml/HamlCompiler.php',
@@ -3920,6 +3971,20 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SettingSeeder' => __DIR__ . '/../..' . '/database/seeds/SettingSeeder.php',
+        'SimpleSoftwareIO\\QrCode\\BaconQrCodeGenerator' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/BaconQrCodeGenerator.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\DataTypeInterface' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/DataTypeInterface.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\Email' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/Email.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\Geo' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/Geo.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\PhoneNumber' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/PhoneNumber.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\SMS' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/SMS.php',
+        'SimpleSoftwareIO\\QrCode\\DataTypes\\WiFi' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/DataTypes/WiFi.php',
+        'SimpleSoftwareIO\\QrCode\\Facades\\QrCode' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/Facades/QrCode.php',
+        'SimpleSoftwareIO\\QrCode\\Image' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/Image.php',
+        'SimpleSoftwareIO\\QrCode\\ImageInterface' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/ImageInterface.php',
+        'SimpleSoftwareIO\\QrCode\\ImageMerge' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/ImageMerge.php',
+        'SimpleSoftwareIO\\QrCode\\ImageMergeInterface' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/ImageMergeInterface.php',
+        'SimpleSoftwareIO\\QrCode\\QrCodeInterface' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/QrCodeInterface.php',
+        'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider' => __DIR__ . '/..' . '/simplesoftwareio/simple-qrcode/src/SimpleSoftwareIO/QrCode/QrCodeServiceProvider.php',
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\DiactorosFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/DiactorosFactory.php',
         'Symfony\\Bridge\\PsrHttpMessage\\Factory\\HttpFoundationFactory' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/Factory/HttpFoundationFactory.php',
         'Symfony\\Bridge\\PsrHttpMessage\\HttpFoundationFactoryInterface' => __DIR__ . '/..' . '/symfony/psr-http-message-bridge/HttpFoundationFactoryInterface.php',
