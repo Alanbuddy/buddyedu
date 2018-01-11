@@ -14,6 +14,7 @@ use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use League\OAuth2\Server\RequestEvent;
 
 class UserController extends Controller
@@ -332,7 +333,9 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        auth()->user()->update($request->only('name', 'gender', 'birthday'));
+        $data=$request->only('name', 'gender', 'birthday');
+        Log::debug($data);
+        auth()->user()->update($data);
         return ['success' => true];
     }
 
