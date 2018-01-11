@@ -56,7 +56,7 @@ class HomeController extends Controller
         $filename = md5($data);
         return response($content, 200)
             ->header('Content-Type', 'image/png')
-            ->header('Content-Disposition', 'attachment;filename=' . $filename);
+            ->header('Content-Disposition', 'attachment;filename=' . $filename.'.png');
     }
 
 }
