@@ -8,6 +8,7 @@
   window.schedule_create = "#{route('schedules.create')}"
   window.course_search = "#{route('schedules.index')}"
   window.course_select = "#{route('courses.index')}"
+  window.qr_code = "#{route('qr')}"
 @endsection
 
 @section('content')
@@ -78,9 +79,9 @@
                       .link-div
                         %input.f14d.course-link{type: "text", "data-link" => route('landing',$item->id)}
                       %span.f14d 课程二维码
-                      %span.f12c.download.ml16 下载
+                      %a.f12c.download.ml16{download: route('qr')."?size=120&data=".route('landing',$item->id)."&download=1", href: route('qr')."?size=120&data=".route('landing',$item->id)} 下载
                       .qrcode-box
-                        %img.qrcode{src: "/icon/bird.png"}
+                        %img.qrcode{src: route('qr')."?size=120&data=".route('landing',$item->id)}
                   - else
                     %img.class-state{src: "/icon/class1.png"}
                     

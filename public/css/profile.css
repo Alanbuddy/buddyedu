@@ -54,12 +54,6 @@
   -moz-appearance: listitem;
 }
 
-.select-div {
-  display: inline-block;
-  width: 3.4rem;
-  overflow: hidden;
-}
-
 .form-verify-box {
   width: 50%;
 }
