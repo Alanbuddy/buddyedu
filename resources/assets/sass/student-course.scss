@@ -129,7 +129,7 @@
 }
 .form-box {
   width: 3.6rem;
-  border: none;
+  border: 0;
   color: #333a48;
   background: rgba(255,255,255, .1);
   outline: none;
@@ -175,8 +175,9 @@
     height: 100%;
   }
   #gender {
-    -webkit-appearance: none;
     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
 }
 

@@ -33,7 +33,7 @@
 
 .form-box {
   width: 3.6rem;
-  border: none;
+  border: 0;
   color: #333a48;
   background: rgba(255, 255, 255, 0.1);
   outline: none;
@@ -50,9 +50,9 @@
 }
 
 #gender {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
 }
 
 .form-verify-box {
