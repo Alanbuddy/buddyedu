@@ -1,10 +1,12 @@
 @extends('layout.admin')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
+<link href="/css/webuploader.css" rel="stylesheet" type="text/css">
 :javascript
   window.file_delete = "#{route('files.destroy', -1)}"
   window.file_upload = "#{route('files.store')}"
   window.file_list = "#{route('merchant.files', $merchant)}"
+  window.file_init = "#{route('file.upload.init')}"
 @endsection
 
 @section('content')
@@ -39,8 +41,6 @@
         %a.f14c{href: route('merchants.show', $merchant)."?type=finished"}='历史开课('.$merchant->finishedSchedules()->count().')'
       %li.f14a.bg16b= '往来文件('.$items->total().')'
     %img.add-file-icon{src: "/icon/add.png"}
-    %input.hidden#file{:onchange => "upload()", :type => "file"}
-
   .desc-div
     - if(count($items) == 0) 
       .undiscover.f14
@@ -65,10 +65,25 @@
       .select-page 
         %span.choice-page
           != $items->links()
-  
+
+#addFileModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close-file{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body
+        %span.hidden.file-id
+        .file-div
+          %span.f14d 上传文件:
+          #uploader.wu-example
+            #thelist.uploader-list
+            .btns
+              #picker 选择文件
+              %button#ctlBtn.btn.btn-default.f14d 开始上传
 @endsection
 
 @section('script')
+<script src="/js/webuploader.js"></script>
 <script src= "/js/admin-merchant-file.js"></script>
 
 @endsection

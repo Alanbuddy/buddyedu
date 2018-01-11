@@ -281,10 +281,102 @@ td span {
 .item-modal:not(:last-child) {
   border-right: 1px solid #e4f3ff;
 }
+
+//file-add
+#addFileModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -280px;
+    margin-top: -172px;
+    width: 560px;
+    height: 345px;
+  }
+  .modal-backdrop {
+    background-color: rgba(51, 58, 72, 0.16);
+  }
+  .modal-body {
+    margin: 0;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  .close-file {
+    position: absolute;
+    width: 64px;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 15;
+    cursor: pointer;
+  }
+  
+}
 .add-file-icon {
-  width: 48px;
-  height: 48px;
-  margin-top: -10px;
   cursor: pointer;
+}
+
+.wu-example {
+  width: 70%;
+  margin-left: 1.5%;
+  .item {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -os-flex;
+    display: -o-flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -os-align-items: center;
+    -o-align-items: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -os-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+  }
+  .btn-xs {
+    width: 60px;
+  }
+  .delete_btn {
+    padding: 1px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #333;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #ccc;
+  }
+}
+.webuploader-pick {
+  border: 1px solid #ccc;
+}
+#ctlBtn {
+  outline: none;
+  height: 34px;
+  line-height: 34px;
+  padding: 0 12px;
+  margin-left: 20px;
+}
+.btns {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+}
+.webuploader-pick {
+  font-size: 14px;
+}
+.file-div {
+  margin-top: 40px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
 }
 
