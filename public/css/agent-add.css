@@ -102,11 +102,13 @@
   position: absolute;
   top: 50px;
   width: 320px;
-  padding: 20px;
+  padding: 24px;
   -webkit-filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
           filter: drop-shadow(0 0 5px rgba(51, 58, 72, 0.16));
   left: -305px;
   background: #fff;
+  display: none;
+  z-index: 50;
 }
 
 .tip-parent {
@@ -127,5 +129,28 @@
   position: absolute;
   right: 20px;
   width: 12px;
+}
+
+.ml16 {
+  margin-left: 16px;
+}
+
+.course-link {
+  display: inline-block;
+  width: 260px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 4px;
+  margin-bottom: 14px;
+}
+
+.qrcode-box {
+  margin-top: 16px;
+}
+
+.copy,
+.download {
+  cursor: pointer;
 }
 
