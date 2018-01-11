@@ -16,12 +16,12 @@
       %input.form-box.f16#name{placeholder: "请输入您的姓名", type: "text"}
     .input-group.mb64
       %span.f16.text-blue.mr40 学生性别
-      %select.form-box.f16#gender{placeholder: "请输入您的性别"}
+      %select.form-box.f16#gender{placeholder: "请选择您的性别"}
         %option{value: "male"} 男
         %option{value: "female"} 女
     .input-group
       %span.f16.text-blue.mr40 学生生日
-      %input.form-box.f16#birthday{type: "date"}
+      %input.birthday-input.f16#birthday{type: "date"}
     %button.btn.click-btn.f14#next_btn{type: "button"} 完成报名
 @endsection
 

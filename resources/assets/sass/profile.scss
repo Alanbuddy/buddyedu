@@ -28,11 +28,17 @@
 
 .form-box {
   width: 3.6rem;
-  // border: none;
+  border: none;
   color: #333a48;
-  // background: rgba(255,255,255, .1);
-  // outline: none;
-  // background: transparent;
+  background: rgba(255,255,255, .1);
+  outline: none;
+  background: transparent;
+}
+.birthday-input {
+  width: 3.6rem;
+  border: none;
+  outline: none;
+  background: #fff;
 }
 #gender {
   -webkit-appearance: none;
