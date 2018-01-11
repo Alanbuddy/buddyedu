@@ -47,16 +47,16 @@ class HomeController extends Controller
 
     public function showImage($content)
     {
-        return (new Response($content, 200))
+        return response($content, 200)
             ->header('Content-Type', 'image/png');
     }
 
     public function downloadImage($content, $data)
     {
         $filename = md5($data);
-        return (new Response($content, 200))
+        return response($content, 200)
             ->header('Content-Type', 'image/png')
-            ->header('Content-Disposition', 'attachment;filename=' . $filename);
+            ->header('Content-Disposition', 'attachment;filename=' . $filename.'.png');
     }
 
 }

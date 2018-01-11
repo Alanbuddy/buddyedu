@@ -103,7 +103,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"} 
-            - foreach($merchant->points as $item)
+            - foreach($merchant->points()->where('approved',1)->get() as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row
           %label.input-caption.f14d 课程定价:

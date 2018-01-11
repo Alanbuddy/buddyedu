@@ -95,10 +95,11 @@ class FileController extends Controller
         $this->validate($request, [
             'file' => 'required',
             'chunk' => 'required',
-            'file_id' => 'required',
         ]);
         if ($request->chunk == 0) {
-            $file = File::find($request->file_id);
+//            $file = File::find($request->file_id);
+            $file = new File();
+            auth()->user()->files()->save($file);
             $file->description = $request->chunks;
             $attr = $this->getFileBaseInfo($request->file('file'));
             $file->fill($attr);
@@ -117,14 +118,8 @@ class FileController extends Controller
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $size = $file->getSize();
-//            $path = storage_path('app/' . md5(uniqid(rand(), true))); //$path = storage_path('/' . date('Ymd-His', time()));
-            $path = public_path('app/' . md5($name)); //$path = storage_path('/' . date('Ymd-His', time()));
-            if (!is_dir($path)) {
-                $result = mkdir($path, 0777, true);
-                if (!$result) return false;
-            }
             $filename = $name . $index;
-            $file->move($path, $filename);
+            $this->move($file,'',$filename);
             Log::info('chunk size' . $size);
             return ['success' => true];
         }
