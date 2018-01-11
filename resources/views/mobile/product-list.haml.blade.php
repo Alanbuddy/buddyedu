@@ -5,7 +5,7 @@
 
 @section('content')
 .desc-div
-  %p.f16.fb.title.mb60 李晓明的作品
+  %p.f16.fb.title.mb60=auth()->user()->name.'的作品'
   .product-list
     -foreach($items as $item)
       .item
