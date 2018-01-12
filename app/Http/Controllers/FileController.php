@@ -136,4 +136,28 @@ class FileController extends Controller
         $file->save();
         return $ret;
     }
+
+    public function merge(Request $request,$chunksCount)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $fileName = $request->get('name');
+        $dir = public_path('app/' . md5($fileName));
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        $targetPath = $dir . DIRECTORY_SEPARATOR . $fileName;
+        $dst = fopen($targetPath, 'wb');
+        Log::info('about to merge ' . $chunksCount . 'chunks');
+        for ($i = 0; $i < $chunksCount; $i++) {
+            $chunk = $dir . DIRECTORY_SEPARATOR . $fileName . $i;
+            $src = fopen($chunk, 'rb');
+            stream_copy_to_stream($src, $dst);
+            fclose($src);
+            unlink($chunk);
+            Log::info('merged chunk' . $chunk);
+        }
+        return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
+    }
 }
