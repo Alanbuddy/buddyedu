@@ -160,4 +160,13 @@ class FileController extends Controller
         }
         return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
     }
+
+    public function getFileBaseInfo($file)
+    {
+        $item['name'] = $file->getClientOriginalName();
+        $item['mime'] = $file->getClientMimeType();
+        $item['extension'] = $file->getClientOriginalExtension();
+        $item['size'] = $file->getClientSize();
+        return $item;
+    }
 }
