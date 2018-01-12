@@ -62,7 +62,7 @@
           %label.input-caption.f14d 负责人:
           %input.form-control.input-width.manager#admin{:type => "text"}  
         .controls.controls-row.mb24
-          %label.input-caption.f14d 联系方式:
+          %label.input-caption.f14d 手机号码:
           %input.form-control.input-width#phone{:type => "text"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 初始密码:
