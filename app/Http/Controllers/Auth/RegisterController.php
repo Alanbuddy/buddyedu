@@ -75,4 +75,10 @@ class RegisterController extends Controller
             'api_token' => Uuid::uuid()
         ]);
     }
+
+    protected function registered(Request $request, $user)
+    {
+        if ($request->ajax)
+            return ['success' => true];
+    }
 }
