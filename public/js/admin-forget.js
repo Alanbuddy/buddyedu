@@ -67,6 +67,10 @@ $(document).ready(function(){
     var phone = $("#mobile").val().trim();
     var verify_code = $("#mobilecode").val().trim();
     var password = $("#password").val().trim();
+    if(password.length < 6){
+      $("#password_notice").text("密码不能小于６位").css("visibility", "visible");
+      return false;
+    }
     $.ajax({
       type: 'post',
       url: window.forget,
@@ -78,13 +82,13 @@ $(document).ready(function(){
       },
       success: function(data){
         if (data.success) {
-          location.href = window.login;
+          showMsg("密码修改成功", "center");
+          setTimeout(function(){
+            location.href = window.login;
+          }, 2000);
         }else{
           if(data.message == '验证码无效'){
             $("#code_notice").text("验证码无效").css("visibility", "visible");
-          }
-          if(data.message == '密码错误'){
-            $("#password_notice").text("密码错误").css("visibility", "visible");
           }
           if(data.message == '用户不存在'){
             $("#password_notice").text("用户不存在").css("visibility", "visible");
