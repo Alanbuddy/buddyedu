@@ -120,6 +120,8 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $isAdmin = $this->isAdmin();
+        if (!$isAdmin)
+            $course->markHasAddedByMerchant($this->getMerchant());
         return view($isAdmin ? 'admin.auth-course.auth-info' : 'agent.auth.show', compact('course'));
     }
 
