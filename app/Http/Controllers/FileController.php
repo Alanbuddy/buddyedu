@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FileController extends Controller
 {
@@ -62,7 +63,8 @@ class FileController extends Controller
     {
 //        dd($file['id']);
 //        dd((new static));
-        dd(File::kk());
+//        dd(File::kk());
+        dd(Str::random(32));
     }
 
 
