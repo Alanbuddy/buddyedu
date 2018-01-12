@@ -11,7 +11,7 @@
   %p.f14.text-color.mb40 开课前一天我们将发送提醒到您的手机：13211223344,届时不要迟到哦！
   %p.f14.text-color.mb40 如有任何疑问，请致电客服热线010-1232324
   %a{href: route('courses.enroll')}
-  	%button.btn.click-btn.f14#next_btn{type: "button"} 完成
+    %button.btn.click-btn.f14#next_btn{type: "button"} 完成
 @endsection
 
 @section('script')
