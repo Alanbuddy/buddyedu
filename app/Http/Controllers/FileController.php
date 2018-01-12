@@ -59,7 +59,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        //
+//        dd($file['id']);
+//        dd((new static));
+        dd(File::kk());
     }
 
 
