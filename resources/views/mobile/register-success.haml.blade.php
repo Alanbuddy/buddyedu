@@ -1,7 +1,8 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/profile.css') }}">
-
+:javascript
+  window.register_end = "#{route('schedules.enrolled',-1)}"
 @endsection
 
 @section('content')

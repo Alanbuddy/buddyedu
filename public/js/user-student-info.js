@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  var storage = window.localStorage;
   $("#next_btn").click(function(){
     var name = $("#name").val().trim();
     var gender = $("#gender").val();

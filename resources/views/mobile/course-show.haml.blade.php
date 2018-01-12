@@ -46,17 +46,15 @@
   .footer-div
     -if($hasEnrolled)
       -if(empty($user->phone))
-        .footer-div
-          .left-div
-            %span.f16.fb.color2 交了钱没填资料
-          .right-div
-            %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
+        .left-div
+          %span.f16.fb.color2 交了钱没填资料
+        .right-div
+          %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
       -else
-        .footer-div
-          .left-div
-            %span.f16.fb.color2 已报名
-          .right-div
-            %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
+        .left-div
+          %span.f16.fb.color2 已报名
+        .right-div
+          %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
     -else
       -if($available)
         .left-div
@@ -65,18 +63,16 @@
         .right-div
           %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
       -else
-        .footer-div
-          -if($isFull)
-            .left-div
-              %span.f16.fb.color2 没公开课名额了
-            .right-div
-              %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
-          -else if($schedule->begin<date('Y-m-d H:i:s'))
-            .footer-div
-              .left-div
-                %span.f16.fb.color2 报名截止了
-              .right-div
-                %button.btn.gray-btn.f14#end_btn{type: "button"} 报名截止
+        -if($isFull)
+          .left-div
+            %span.f16.fb.color2 没公开课名额了
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
+        -else if($schedule->begin<date('Y-m-d H:i:s'))
+          .left-div
+            %span.f16.fb.color2 报名截止了
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 报名截止
 
 
 
