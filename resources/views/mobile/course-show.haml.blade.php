@@ -42,6 +42,7 @@
       %span.f16.fb.color2 详细地址
       %span.hidden.point-location= $schedule->point->geolocation
       .location-map#container
+    %span.hidden.schedule-id= $schedule->id
   .footer-div
     -if($hasEnrolled)
       -if(empty($user->phone))
