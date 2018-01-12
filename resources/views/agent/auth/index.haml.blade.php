@@ -34,7 +34,7 @@
     - else
       -foreach($items as $item)
         %a.frame-div{href: route('courses.show',$item->id)}
-          %img.course-icon{src: "icon/bird.png"}
+          %img.course-icon{src: $item->icon??'icon/bird.png'}
           %p.course-name.f16b=$item->name
           %p.f12b=$item->merchants_count.'机构已添加'
           %p.mt24.f12b=$item->description??'没有简介'

@@ -38,8 +38,8 @@ $(document).ready(function(){
           $.each(data.data, function (index, item) {  
             var id = item.id; 
             var text = item.name; 
-            var description = item.description;
-            $("#course-desc").text(description);
+            var guide_price = item.guide_price;
+            $("#course-desc").text(guide_price).css("margin-left", "8px");
         }); 
         }
       }
@@ -53,6 +53,7 @@ $(document).ready(function(){
   	var num = $("#num").val().trim();
     var begin = $("#datepicker1").val();
     var end = $("#datepicker2").val();
+    var time = $("#time").val().trim();
     var price = $("#price").val().trim();
     var remark = $("#remark").val().trim();
     var lessons_count = $("#lessons-count").val().trim();
@@ -67,6 +68,7 @@ $(document).ready(function(){
   	    quota: num,
   	    begin: begin,
   	    end: end,
+        time: time,
         price: price,
         remark: remark,
         lessons_count: lessons_count

@@ -175,3 +175,59 @@ li a {
 }
 
 
+#revokeModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -215px;
+    margin-top: -100px;
+    width: 430px;
+    height: 158px;
+  }
+  .modal-backdrop {
+    background-color: rgba(51, 58, 72, 0.16);
+  }
+  .modal-body {
+    margin: 0;
+    padding: 24px;
+  }
+  .close {
+    position: absolute;
+    width: 12px;
+    right: 10px;
+    top: 10px;
+    opacity: 1;
+    z-index: 15;
+  }
+  .conform-btn {
+    display: block;
+    width: 120px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #365ba9;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+  p {
+    margin-bottom: 18px;
+  }
+  .input-width {
+    width: 300px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .mb24 {
+    margin-bottom: 24px;
+  }
+  .ml24 {
+    margin-left: 24px;
+  }
+}
+
+
+

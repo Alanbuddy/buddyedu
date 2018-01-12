@@ -24,7 +24,7 @@
         %p.f24b= $item->course->name
         %p.f12a.mt16= $item->point->name
       .money-div
-        %span.f24c.mr8= "￥".$item->course->price
+        %span.f24c.mr8= $item->course->price ? "￥".$item->course->price : "暂无价格"
         %span.f12a="(".($item->course->proportion * 100)."%分成)"
     .info-div.f14d
       .p-div
@@ -37,11 +37,17 @@
         %span.ml80 课程进度：
         %span=$progress.'/'.$item->course->lessons_count
       .p-div
-        %span 上课时间：
+        %span 开课时间：
         %span= $item->begin
       .p-div
+        %span 结课时间：
+        %span= $item->end
+      .p-div
+        %span 详细时间：
+        %span= $item->time
+      .p-div
         %span 上课地点：
-        %span= $item->point->name
+        %span= $item->point->address
       .p-div
         %span.left-span 课程介绍：
         %span.right-span= $item->course->description
