@@ -139,7 +139,6 @@ class FileController extends Controller
 
     public function merge(Request $request, $chunksCount)
     {
-        return 0;
         $this->validate($request, [
             'name' => 'required',
         ]);
