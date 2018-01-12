@@ -19,7 +19,7 @@ class ScheduleController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant'])->only([
+        $this->middleware(['auth', 'role:admin|merchant|operator'])->only([
             'create',
             'index',
             'store'
