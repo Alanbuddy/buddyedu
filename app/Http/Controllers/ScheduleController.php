@@ -155,6 +155,7 @@ class ScheduleController extends Controller
             $schedule->fill($request->only([
                 'begin',
                 'end',
+                'time',
                 'course_id',
                 'point_id',
                 'price',

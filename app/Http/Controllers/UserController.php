@@ -144,10 +144,10 @@ class UserController extends Controller
                 'gender' => $request->gender,
                 'birthday' => $request->birthday,
                 'merchant_id' => auth()->user()->ownMerchant->id,
-                'type' => 'teacher',
+//                'type' => 'teacher',
                 'api_token' => Uuid::uuid(),
                 'extra' => json_encode($request->only([
-                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv'
+                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv','teaching_age'
                 ])),
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
