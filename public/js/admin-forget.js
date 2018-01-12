@@ -80,13 +80,13 @@ $(document).ready(function(){
         if (data.success) {
           location.href = window.login;
         }else{
-          if(data.code == 'passwords.token'){
+          if(data.message == '验证码无效'){
             $("#code_notice").text("验证码无效").css("visibility", "visible");
           }
-          if(data.code == 'passwords.password'){
-            $("#password_notice").text("密码无效").css("visibility", "visible");
+          if(data.message == '密码错误'){
+            $("#password_notice").text("密码错误").css("visibility", "visible");
           }
-          if(data.code == 'passwords.user'){
+          if(data.message == '用户不存在'){
             $("#password_notice").text("用户不存在").css("visibility", "visible");
           }
         } 

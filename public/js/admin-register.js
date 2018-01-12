@@ -128,9 +128,7 @@ $(document).ready(function() {
         code: verify_code,
         _token: window.token
       },
-      async: true,
       success: function(data){
-        console.log(data);
         if (data.success){
           showMsg("您已注册成功，请通知管理员开通账号", "center");
           setTimeout(function(){
