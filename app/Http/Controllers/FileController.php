@@ -108,8 +108,9 @@ class FileController extends Controller
             if ($request->has('mime')) $file->mime = $request->mime;
             $file->save();
             session(['file' . $file->id => $this->defaultDirectory()]);
-            Redis::set('file' . $file->id, $this->defaultDirectory());
-            Log::info(Redis::get('file' . $file->id));
+            Log::info(session('file' . $file->id));
+//            Redis::set('file' . $file->id, $this->defaultDirectory());
+//            Log::info(Redis::get('file' . $file->id));
         }
         return $this->moveChunk($request);
     }
@@ -121,7 +122,8 @@ class FileController extends Controller
         $file = $request->file('file');
         $size = $file->getSize();
         $filename = $name . $index;
-        $this->move($file, Redis::get('file' . $request->file_id), $filename);
+//        $this->move($file, Redis::get('file' . $request->file_id), $filename);
+        $this->move($file, session('file' . $request->file_id), $filename);
         Log::info('chunk size:' . $size);
         Log::info($request->file_id);
         Log::info(session('file' . $request->file_id));
