@@ -74,7 +74,8 @@
   padding-right: 0;
 }
 
-.add-div {
+.add-div,
+.added-div {
   display: inline-block;
   border-radius: 20px;
   height: 30px;
