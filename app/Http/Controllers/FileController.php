@@ -126,7 +126,7 @@ class FileController extends Controller
         $this->move($file, session('file' . $request->file_id), $filename);
         Log::info('chunk size:' . $size);
         Log::info($request->file_id);
-        Log::info(session('file' . $request->file_id));
+        Log::info('session'.session('file' . $request->file_id));
         return ['success' => true];
     }
 
