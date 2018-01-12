@@ -288,10 +288,10 @@ td span {
     position:absolute;
     left: 50%;
     top: 50%;
-    margin-left: -280px;
-    margin-top: -172px;
-    width: 560px;
-    height: 345px;
+    margin-left: -330px;
+    margin-top: -173px;
+    width: 660px;
+    height: 346px;
   }
   .modal-backdrop {
     background-color: rgba(51, 58, 72, 0.16);
@@ -317,7 +317,7 @@ td span {
 }
 
 .wu-example {
-  width: 70%;
+  width: 80%;
   margin-left: 1.5%;
   .item {
     display: -webkit-flex;
@@ -336,6 +336,7 @@ td span {
     -os-justify-content: space-between;
     -o-justify-content: space-between;
     justify-content: space-between;
+    margin-bottom: 10px;
   }
   .btn-xs {
     width: 60px;
@@ -372,11 +373,20 @@ td span {
   font-size: 14px;
 }
 .file-div {
-  margin-top: 40px;
+  margin-top: 46px;
   display: -webkit-flex;
   display: -moz-flex;
   display: -os-flex;
   display: -o-flex;
   display: flex;
 }
-
+.info {
+  display: inline-block;
+  width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#ctlBtn {
+  color: #fff;
+}

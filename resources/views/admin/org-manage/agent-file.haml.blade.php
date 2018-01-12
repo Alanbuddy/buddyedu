@@ -7,6 +7,7 @@
   window.file_upload = "#{route('files.store')}"
   window.file_list = "#{route('merchant.files', $merchant)}"
   window.file_init = "#{route('file.upload.init')}"
+  window.merge = "#{route('files.merge')}"
 @endsection
 
 @section('content')
