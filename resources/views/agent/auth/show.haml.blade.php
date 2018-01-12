@@ -22,10 +22,11 @@
       .name-div
         %img.icon{src: $course->icon}
         %span.f24b=$course->name
-        %span.add-div
-          - if ($course->added)
+        - if ($course->added)
+          %span.added-div
             %span.f14e 已添加
-          - else
+        - else
+          %span.add-div
             %img.small-add{src:"/icon/smalladd.png"}
             %span.f14b 添加
     .info-div.f14d
