@@ -289,9 +289,9 @@ td span {
     left: 50%;
     top: 50%;
     margin-left: -330px;
-    margin-top: -173px;
+    margin-top: -108px;
     width: 660px;
-    height: 346px;
+    height: 216px;
   }
   .modal-backdrop {
     background-color: rgba(51, 58, 72, 0.16);
@@ -382,11 +382,9 @@ td span {
 }
 .info {
   display: inline-block;
-  width: 300px;
+  width: 280px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-#ctlBtn {
-  color: #fff;
-}
+

@@ -335,9 +335,9 @@ td span {
   left: 50%;
   top: 50%;
   margin-left: -330px;
-  margin-top: -173px;
+  margin-top: -108px;
   width: 660px;
-  height: 346px;
+  height: 216px;
 }
 
 #addFileModal .modal-backdrop {
@@ -445,13 +445,9 @@ td span {
 
 .info {
   display: inline-block;
-  width: 300px;
+  width: 280px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}
-
-#ctlBtn {
-  color: #fff;
 }
 

@@ -193,4 +193,12 @@ $(document).ready(function(){
       }
     });
   });
+
+
+  $("#thelist").on("click", ".delete_btn", function(){  
+    uploader.removeFile($(this).closest(".item").attr("id"));    //从上传文件列表中删除  
+    $(".progress").remove();
+    $(this).closest(".item").remove();   //从上传列表dom中删除  
+  }); 
+
 });
