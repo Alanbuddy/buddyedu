@@ -17,11 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 //        监听查询事件
-        DB::listen(function ($query) {
-            Log::debug($query->sql);
-//            Log::info($query->time);
-            Log::debug($query->bindings);
-        });
+//        DB::listen(function ($query) {
+//            Log::debug($query->sql);
+////            Log::info($query->time);
+//            Log::debug($query->bindings);
+//        });
 
         View::composer(
 //            '*',
