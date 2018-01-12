@@ -13,7 +13,8 @@ class Controller extends BaseController
 
     public function isAdmin()
     {
-        return auth()->user()->hasRole('admin|operator');
+        return auth()->user()->hasRole('admin') ||
+            auth()->user()->hasRole('operator');
     }
 
     public function getMerchant()
