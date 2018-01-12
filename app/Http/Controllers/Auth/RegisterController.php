@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -78,6 +80,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+        $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax)
             return ['success' => true];
     }
