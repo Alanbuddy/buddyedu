@@ -108,7 +108,7 @@ class FileController extends Controller
             if ($request->has('mime')) $file->mime = $request->mime;
             $file->save();
             session(['file' . $file->id => $this->defaultDirectory()]);
-            Log::info(session('file' . $file->id));
+            Log::info(__FILE__.__LINE__.session('file' . $file->id));
 //            Redis::set('file' . $file->id, $this->defaultDirectory());
 //            Log::info(Redis::get('file' . $file->id));
         }
