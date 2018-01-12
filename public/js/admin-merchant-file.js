@@ -12,16 +12,7 @@
 
 //   //计算文件切片总数
 //   totalPieces = Math.ceil(filesize / bytesPerPiece);
-//   $.ajax({
-//     type: 'get',
-//     url: window.file_init,
-//     success: function(data){
-//       console.log(data);
-//       if(data.success){
-//         $(".file-id").text(data.data.user_id);
-//       }
-//     }
-//   });
+  
 //   while(start < filesize) {
 //     end = start + bytesPerPiece;
 //     if(end > filesize) {
@@ -88,6 +79,11 @@ $(document).ready(function(){
     $("#addFileModal").modal("hide");
   });
 
+  $("#addFileModal").on('shown.bs.modal', function (){
+    uploader.refresh();
+  });
+  
+
 
   var $list = $("#thelist");
   var $btn = $('#ctlBtn');
@@ -105,7 +101,7 @@ $(document).ready(function(){
 
     // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
     resize: false,
-    auto: true,
+    auto: false,
     dnd: "#thelist",
     disableGlobalDnd: true,
     percentages: {},
@@ -123,8 +119,8 @@ $(document).ready(function(){
 
   uploader.on( 'fileQueued', function( file ) {
     $list.append( '<div id="' + file.id + '" class="item">' +
-        '<span class="info">' + file.name + '</span>' +
-        '<p class="state">等待上传...</p>' +
+        '<span class="info f14d">' + file.name + '</span>' +
+        '<p class="state f14d">等待上传...</p>' +
         '<button class="delete_btn">删除</button>' +
     '</div>' );
     name = file.name;
@@ -152,23 +148,24 @@ $(document).ready(function(){
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;
     var chunks = Math.ceil(video_size / chunksize);
-    var video_id = $(".video-id").text();
+    var file_id = $(".file-id").text();
     console.log(chunks);
-    $.postJSON(
-      window.merge,
-      {
+    $.ajax({
+      type: 'post',
+      url: window.merge,
+      data: {
         _token: window.token,
         name: name,
         count: chunks,
-        video_id: video_id
+        file_id: file_id
       },
-      function(data){
+      success: function(data){
         console.log(data);
         if(data.success){
           // $(".video-id").text(data.data.id);
         }
       }
-      );
+      });
   });
 
   uploader.on( 'uploadError', function( file ) {
@@ -180,20 +177,20 @@ $(document).ready(function(){
   });
 
   $btn.click(function(){
-    $.getJSON(
-      window.init,
-      {},
-      function(data){
+    $.ajax({
+      type: 'get',
+      url: window.file_init,
+      success: function(data){
         console.log(data);
         if(data.success){
-          $(".video-id").text(data.data.id);
+          $(".file-id").text(data.data.user_id);
           uploader.options.formData = {
-              video_id: data.data.id,
+              file_id: data.data.user_id,
               _token: window.token
             };
           uploader.upload();
         }
       }
-      );
+    });
   });
 });
