@@ -3,6 +3,7 @@ $(document).ready(function(){
     var name = $("#name").val().trim();
     var gender = $("#gender").val();
     var birthday = $("#birthday").val();
+    var schedule_id = storage.schedule_id;
     $.ajax({
       type: 'post',
       url: window.user_info,
@@ -14,7 +15,7 @@ $(document).ready(function(){
       },
       success: function(data){
         if(data.success){
-          location.href = window.register_end;
+          location.href = window.register_end.replace(/-1/, schedule_id);
         }
       }
     });

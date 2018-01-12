@@ -90,4 +90,7 @@ $(document).ready(function(){
   $("#edit_btn").click(function(){
     location.href = window.user_phone;
   });
+
+  var storage = window.localStorage;
+  storage.schedule_id = $(".schedule-id").text();
 });
