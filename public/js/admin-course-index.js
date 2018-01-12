@@ -132,4 +132,5 @@ $(document).ready(function(){
     $(".upload-btn").show();
     $(".icon-name").hide();
   });
+
 });

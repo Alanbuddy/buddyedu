@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
   $(".delete").click(function(){
     var fid = $(this).attr("data-id");
