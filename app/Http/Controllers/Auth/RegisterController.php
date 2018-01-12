@@ -80,7 +80,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        $user->attach(Role::where('name', 'operator')->first());
+        $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax)
             return ['success' => true];
     }
