@@ -135,9 +135,9 @@ $(document).ready(function(){
       success: function(data){
         console.log(data);
         if(data.success){
-          $(".file-id").text(data.data.user_id);
+          $(".file-id").text(data.data.id);
           uploader.options.formData = {
-              file_id: data.data.user_id,
+              file_id: data.data.id,
               _token: window.token
             };
           uploader.upload();

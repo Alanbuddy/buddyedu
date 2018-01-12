@@ -20,11 +20,14 @@
   .desc-div
     .name-money
       .name-div
-        %img.icon{src: "/icon/bird.png"}
+        %img.icon{src: $course->icon}
         %span.f24b=$course->name
         %span.add-div
-          %img.small-add{src:"/icon/smalladd.png"}
-          %span.f14b 添加
+          - if ($course->added)
+            %span.f14e 已添加
+          - else
+            %img.small-add{src:"/icon/smalladd.png"}
+            %span.f14b 添加
     .info-div.f14d
       .p-div
         %span 课程定价：
