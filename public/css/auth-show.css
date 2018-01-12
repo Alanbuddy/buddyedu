@@ -402,7 +402,7 @@ td span {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
-  color: #333;
+  color: #5d6578;
   background-color: #fff;
   outline: none;
   border: 1px solid #ccc;
@@ -418,6 +418,10 @@ td span {
   line-height: 34px;
   padding: 0 12px;
   margin-left: 20px;
+}
+
+#ctlBtn {
+  color: #5d6578;
 }
 
 .btns {
