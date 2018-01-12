@@ -109,6 +109,7 @@ class FileController extends Controller
             $file->save();
             session(['file' . $file->id => $this->defaultDirectory()]);
             Redis::set('file' . $file->id, $this->defaultDirectory());
+            Log::info(Redis::get('file' . $file->id));
         }
         return $this->moveChunk($request);
     }
@@ -130,14 +131,15 @@ class FileController extends Controller
     {
         $this->validate($request, ['file_id' => 'required']);
         $file = File::find($request->file_id);
-        $ret = $this->merge($request, $file, $file->description);
+        $ret = $this->merge($request, $file->description);
         $file->path = substr($ret['path'], strlen(public_path()));
         $file->save();
         return $ret;
     }
 
-    public function merge(Request $request, $file, $chunksCount)
+    public function merge(Request $request, $chunksCount)
     {
+        return 0;
         $this->validate($request, [
             'name' => 'required',
         ]);
