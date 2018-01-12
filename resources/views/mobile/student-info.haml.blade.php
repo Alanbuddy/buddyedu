@@ -4,7 +4,7 @@
 :javascript
   window.token = "#{csrf_token()}"
   window.user_info = "#{route('profile.update')}"
-  window.register_end = "#{route('landing',-1)}"
+  window.register_end = "#{'user.schedules'}"
 @endsection
 
 @section('content')
