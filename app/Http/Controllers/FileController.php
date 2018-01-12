@@ -121,7 +121,7 @@ class FileController extends Controller
         $file = $request->file('file');
         $size = $file->getSize();
         $filename = $name . $index;
-        $this->move($file, session('file' . $request->file_id), $filename);
+        $this->move($file, Redis::get('file' . $request->file_id), $filename);
         Log::info('chunk size:' . $size);
         Log::info($request->file_id);
         Log::info(session('file' . $request->file_id));
@@ -144,15 +144,15 @@ class FileController extends Controller
             'name' => 'required',
         ]);
         $fileName = $request->get('name');
-        $targetPath = session('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName;
+        $targetPath = Redis::get('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName;
         $dst = fopen($targetPath, 'wb');
         Log::info('about to merge ' . $chunksCount . 'chunks');
         for ($i = 0; $i < $chunksCount; $i++) {
-            $chunk = session('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName . $i;
-            $src = fopen($chunk, 'rb');
-            stream_copy_to_stream($src, $dst);
-            fclose($src);
-            unlink($chunk);
+            $chunk = $targetPath. $i;
+            $src = @fopen($chunk, 'rb');
+            @stream_copy_to_stream($src, $dst);
+            @fclose($src);
+            @unlink($chunk);
             Log::info('merged chunk' . $chunk);
         }
         return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
