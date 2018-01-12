@@ -125,6 +125,7 @@ $(document).ready(function() {
       data: {
         phone: phone,
         password: password,
+        password_confirmation: password,
         code: verify_code,
         _token: window.token
       },
