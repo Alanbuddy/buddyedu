@@ -6,6 +6,7 @@ use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -95,63 +96,57 @@ class FileController extends Controller
     public function chunkUpload(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required',
+            'file' => 'required|file',
             'chunk' => 'required',
+            'file_id' => 'required',
         ]);
         if ($request->chunk == 0) {
-//            $file = File::find($request->file_id);
-            $file = new File();
-            auth()->user()->files()->save($file);
+            $file = File::find($request->file_id);
             $file->description = $request->chunks;
             $attr = $this->getFileBaseInfo($request->file('file'));
             $file->fill($attr);
-            if ($request->has('mime')) {
-                $file->mime = $request->mime;
-            }
+            if ($request->has('mime')) $file->mime = $request->mime;
             $file->save();
+            session(['file' . $file->id => $this->defaultDirectory()]);
+            Redis::set('file' . $file->id, $this->defaultDirectory());
         }
-        return $this->uploadChunkedFile($request);
+        return $this->moveChunk($request);
     }
 
-    public function uploadChunkedFile(Request $request)
+    public function moveChunk(Request $request)
     {
         $index = $request->get('chunk');
         $name = $request->get('name');
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $size = $file->getSize();
-            $filename = $name . $index;
-            $this->move($file,'',$filename);
-            Log::info('chunk size' . $size);
-            return ['success' => true];
-        }
+        $file = $request->file('file');
+        $size = $file->getSize();
+        $filename = $name . $index;
+        $this->move($file, session('file' . $request->file_id), $filename);
+        Log::info('chunk size:' . $size);
+        Log::info(session('file' . $request->file_id));
+        return ['success' => true];
     }
 
     public function mergeFile(Request $request)
     {
         $this->validate($request, ['file_id' => 'required']);
         $file = File::find($request->file_id);
-        $ret = $this->merge($request, $file->description);
+        $ret = $this->merge($request, $file, $file->description);
         $file->path = substr($ret['path'], strlen(public_path()));
         $file->save();
         return $ret;
     }
 
-    public function merge(Request $request,$chunksCount)
+    public function merge(Request $request, $file, $chunksCount)
     {
         $this->validate($request, [
             'name' => 'required',
         ]);
         $fileName = $request->get('name');
-        $dir = public_path('app/' . md5($fileName));
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-        $targetPath = $dir . DIRECTORY_SEPARATOR . $fileName;
+        $targetPath = session('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName;
         $dst = fopen($targetPath, 'wb');
         Log::info('about to merge ' . $chunksCount . 'chunks');
         for ($i = 0; $i < $chunksCount; $i++) {
-            $chunk = $dir . DIRECTORY_SEPARATOR . $fileName . $i;
+            $chunk = session('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName . $i;
             $src = fopen($chunk, 'rb');
             stream_copy_to_stream($src, $dst);
             fclose($src);

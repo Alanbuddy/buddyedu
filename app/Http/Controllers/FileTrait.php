@@ -18,6 +18,7 @@ trait FileTrait
 
     /**
      * example: public/storage/2017-10-06/58/03
+     * @param $key
      * @return string
      */
     public function defaultDirectory()
