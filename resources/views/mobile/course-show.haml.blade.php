@@ -29,12 +29,12 @@
       %span.f16.fb.color2 授课老师
       %span.f14.fb.color2="($schedule->teachers_count)"
       -foreach($schedule->teachers as $item)
-      .teacher-info
-        %img.teacher-icon{src: $item->avatar ? $item->avatar : "/icon/teacher.png"}
-        .teacher-desc-div
-          %span.f14.fb.color3 老师姓名
-          %span.f14.fb.color3=$item->name
-          %p.f12.color3.teacher-introduction=$item->title
+        .teacher-info
+          %img.teacher-icon{src: $item->avatar ? $item->avatar : "/icon/teacher.png"}
+          .teacher-desc-div
+            %span.f14.fb.color3 老师姓名
+            %span.f14.fb.color3=$item->name
+            %p.f12.color3.teacher-introduction=$item->title
     .course-div
       %span.f16.fb.color2 课程介绍
       .f14.color3.course-info=$schedule->course->description
