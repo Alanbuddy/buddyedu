@@ -67,8 +67,8 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-//        dd((new static));
-//        dd(File::kk());
+        session(['a'=>1234]);
+        dd(session('a'));
         dd(Str::random(32));
     }
 
