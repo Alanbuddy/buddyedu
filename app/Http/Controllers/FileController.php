@@ -90,7 +90,8 @@ class FileController extends Controller
 
     public function initChunkUpload(Request $request)
     {
-        $file = new File();
+        $this->validate($request,[]);
+        $file = new File(['merchant_id' => $request->merchant_id]);
         auth()->user()->files()->save($file);
         return ['success' => true, 'data' => $file];
     }
@@ -113,8 +114,6 @@ class FileController extends Controller
             if ($request->has('mime')) $file->mime = $request->mime;
             if ($request->has('merchant_id')) $file->merchant_id = $request->merchant_id;
             $file->save();
-//            session(['file' . $file->id => $this->defaultDirectory()]);
-//            Log::info(__FILE__.__LINE__.session('file' . $file->id));
         }
         return $this->moveChunk($request);
     }
@@ -164,6 +163,7 @@ class FileController extends Controller
         }
         Log::info('merged total size:' . $size);
         File::find($request->file_id)->update(compact('size'));
+        Redis::del('file' . $request->file_id);
         return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
     }
 
