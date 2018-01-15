@@ -420,7 +420,7 @@ class OrderController extends Controller
             $content .= fread($fp, 1024);
         }
         fclose($fp);
-//        $content = iconv('utf-8','gbk',$content);//转成gbk，否则excel打开乱码
+        $content = iconv('utf-8','gbk',$content);//转成gbk，否则excel打开乱码
         return (new Response($content, 200))//->header('Content-Type', "text/csv")
         ->header('Content-Type', "application/vnd.ms-excel")
             ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');
