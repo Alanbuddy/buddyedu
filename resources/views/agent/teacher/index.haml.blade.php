@@ -5,7 +5,7 @@
 :javascript
   window.teachers_index = "#{route('teachers.index')}"
   window.teachers_store = "#{route('users.store')}"
-
+  window.validmobile = "#{route('validate.phone')}"
 @endsection
 
 @section('content')

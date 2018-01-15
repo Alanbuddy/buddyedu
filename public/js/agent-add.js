@@ -39,7 +39,11 @@ $(document).ready(function(){
             var id = item.id; 
             var text = item.name; 
             var guide_price = item.guide_price;
-            $("#course-desc").text(guide_price).css("margin-left", "8px");
+            if(guide_price != ""){
+              $("#course-desc").text(guide_price).css("margin-left", "8px");
+              $("#course-price").removeClass('mb24');
+              $("#desc").show();
+            }
         }); 
         }
       }
@@ -54,7 +58,7 @@ $(document).ready(function(){
     var begin = $("#datepicker1").val();
     var end = $("#datepicker2").val();
     var time = $("#time").val().trim();
-    var price = $("#price").val().trim();
+    var price = $("#price").val().trim() * 100;
     var remark = $("#remark").val().trim();
     var lessons_count = $("#lessons-count").val().trim();
   	$.ajax({

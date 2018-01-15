@@ -1,7 +1,6 @@
 $(document).ready(function(){
   $(".delete").click(function(){
     var fid = $(this).attr("data-id");
-    console.log(fid);
     _this = $(this);
     var destroy = "DELETE";
     $.ajax({
@@ -98,7 +97,6 @@ $(document).ready(function(){
     var chunksize = 0.5*1024*1024;
     var chunks = Math.ceil(video_size / chunksize);
     var file_id = $(".file-id").text();
-    console.log(chunks);
     $.ajax({
       type: 'post',
       url: window.merge,
@@ -129,9 +127,13 @@ $(document).ready(function(){
   });
 
   $btn.click(function(){
+    var merchant_id = $(".merchant-id").text();
     $.ajax({
       type: 'get',
       url: window.file_init,
+      data: {
+        merchant_id: merchant_id
+      },
       success: function(data){
         console.log(data);
         if(data.success){

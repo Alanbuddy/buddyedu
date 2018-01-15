@@ -95,7 +95,7 @@
 }
 
 #addModal #desc {
-  height: 24px;
+  display: none;
 }
 
 .tooltip-div {

@@ -17,6 +17,7 @@
     %img.title-icon{src: "/icon/back.png"}
     %span.f16a.title 合作机构 >
     %span.f16a.title=$merchant->name
+    %span.hidden.merchant-id= $merchant->id
   .items-div
     %a.item-div{href:  route('merchant.courses', $merchant->id)}
       %p.f16c 授权课程
