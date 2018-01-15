@@ -102,17 +102,19 @@ class FileController extends Controller
             'chunk' => 'required',
             'file_id' => 'required',
         ]);
+//        Log::info('-----' . $request->chunk);
+        Redis::setnx('file' . $request->file_id, $this->defaultDirectory());
+//        Log::info(Redis::get('file' . $request->file_id));
         if ($request->chunk == 0) {
             $file = File::find($request->file_id);
             $file->description = $request->chunks;
             $attr = $this->getFileBaseInfo($request->file('file'));
             $file->fill($attr);
             if ($request->has('mime')) $file->mime = $request->mime;
+            if ($request->has('merchant_id')) $file->merchant_id = $request->merchant_id;
             $file->save();
-            session(['file' . $file->id => $this->defaultDirectory()]);
-            Log::info(__FILE__.__LINE__.session('file' . $file->id));
-//            Redis::set('file' . $file->id, $this->defaultDirectory());
-//            Log::info(Redis::get('file' . $file->id));
+//            session(['file' . $file->id => $this->defaultDirectory()]);
+//            Log::info(__FILE__.__LINE__.session('file' . $file->id));
         }
         return $this->moveChunk($request);
     }
@@ -124,11 +126,11 @@ class FileController extends Controller
         $file = $request->file('file');
         $size = $file->getSize();
         $filename = $name . $index;
-//        $this->move($file, Redis::get('file' . $request->file_id), $filename);
-        $this->move($file, session('file' . $request->file_id), $filename);
-        Log::info('chunk size:' . $size);
-        Log::info($request->file_id);
-        Log::info('session'.session('file' . $request->file_id));
+        $this->move($file, Redis::get('file' . $request->file_id), $filename);
+//        $this->move($file, session('file' . $request->file_id), $filename);
+        $pid = posix_getpid();
+        Log::info("process: $pid chunk-$index size:" . $size . ' file_id:' . $request->file_id);
+//        Log::info('session'.session('file' . $request->file_id));
         return ['success' => true];
     }
 
@@ -151,14 +153,17 @@ class FileController extends Controller
         $targetPath = Redis::get('file' . $request->file_id) . DIRECTORY_SEPARATOR . $fileName;
         $dst = fopen($targetPath, 'wb');
         Log::info('about to merge ' . $chunksCount . 'chunks');
+        $size = 0;
         for ($i = 0; $i < $chunksCount; $i++) {
-            $chunk = $targetPath. $i;
-            $src = @fopen($chunk, 'rb');
-            @stream_copy_to_stream($src, $dst);
-            @fclose($src);
-            @unlink($chunk);
+            $chunk = $targetPath . $i;
+            $src = fopen($chunk, 'rb');
+            $size += stream_copy_to_stream($src, $dst);
+            fclose($src);
+            unlink($chunk);
             Log::info('merged chunk' . $chunk);
         }
+        Log::info('merged total size:' . $size);
+        File::find($request->file_id)->update(compact('size'));
         return ['success' => true, 'path' => $targetPath, 'fileName' => $fileName];
     }
 
