@@ -91,6 +91,4 @@ $(document).ready(function(){
     location.href = window.user_phone;
   });
 
-  var storage = window.localStorage;
-  storage.schedule_id = $(".schedule-id").text();
 });
