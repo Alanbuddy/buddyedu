@@ -14,9 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::auth();
-Route::get('/', function () {
-    return redirect('/schedules');
-});
+//Route::get('/', function () { return redirect('/schedules'); });
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landing');
 

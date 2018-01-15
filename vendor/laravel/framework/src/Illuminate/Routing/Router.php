@@ -4,6 +4,7 @@ namespace Illuminate\Routing;
 
 use Closure;
 use ArrayObject;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use JsonSerializable;
 use Illuminate\Support\Str;
@@ -710,6 +711,9 @@ class Router implements RegistrarContract, BindingRegistrar
     {
         if ($response instanceof Responsable) {
             $response = $response->toResponse($request);
+        }
+        if ($request->ajax()||$response instanceof RedirectResponse) {
+           $response=new JsonResponse(['redirect'=>$response->getTargetUrl()]);
         }
 
         if ($response instanceof PsrResponseInterface) {
