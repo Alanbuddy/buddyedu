@@ -68,7 +68,7 @@
             %span.f16.fb.color2 没公开课名额了
           .right-div
             %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
-        -else if($schedule->begin<date('Y-m-d H:i:s'))
+        -else if($schedule->begin< date('Y-m-d H:i:s'))
           .left-div
             %span.f16.fb.color2 报名截止了
           .right-div
