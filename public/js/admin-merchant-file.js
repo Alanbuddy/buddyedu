@@ -95,27 +95,29 @@ $(document).ready(function(){
     var video_file = uploader.getFiles();
     var video_size = video_file[0].size;
     var chunksize = 0.5*1024*1024;
-    var chunks = Math.ceil(video_size / chunksize);
     var file_id = $(".file-id").text();
-    $.ajax({
-      type: 'post',
-      url: window.merge,
-      data: {
-        _token: window.token,
-        name: name,
-        count: chunks,
-        file_id: file_id
-      },
-      success: function(data){
-        console.log(data);
-        if(data.success){
-          $("#addFileModal").modal("hide");
-          setTimeout(function(){
-            location.href = window.file_list;
-          }, 2000);
+    if(video_size > chunkSize){
+      var chunks = Math.ceil(video_size / chunksize);
+      $.ajax({
+        type: 'post',
+        url: window.merge,
+        data: {
+          _token: window.token,
+          name: name,
+          count: chunks,
+          file_id: file_id
+        },
+        success: function(data){
+          console.log(data);
+          if(data.success){
+            $("#addFileModal").modal("hide");
+            setTimeout(function(){
+              location.href = window.file_list;
+            }, 2000);
+          }
         }
-      }
       });
+    }
   });
 
   uploader.on( 'uploadError', function( file ) {
