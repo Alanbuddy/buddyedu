@@ -73,9 +73,15 @@ trait FileTrait
     public function store2DB(UploadedFile $file, $target)
     {
         $item = new File();
-        $item->path = substr($target->getPathname(), strlen(public_path()));
+        $item->path =$this->getRelativePath($target);
         $item->user_id = auth()->user()->id;
         $item->fill($this->getFileMeta($file));
         return $item;
     }
+
+    public function getRelativePath($file)
+    {
+        return substr($file->getPathname(), strlen(public_path()));
+    }
+
 }

@@ -45,8 +45,14 @@ class FileController extends Controller
         }
         $file = $request->file('file');
         $target = $this->move($file);
-        $entry = $this->store2DB($file, $target);
-        $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id'));
+        if ($request->has('file_id')) {
+            $entry=File::find($request->file_id);
+            $entry->fill($this->getFileMeta($file));
+            $entry->path =$this->getRelativePath($target);
+        }else{
+            $entry = $this->store2DB($file, $target);
+            $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id'));
+        }
         $entry->save();
         if ($request->has('editor'))
             return ['errno' => 0, 'data' => [env('APP_URL') . $entry->path]];
@@ -61,7 +67,6 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-//        dd($file['id']);
 //        dd((new static));
 //        dd(File::kk());
         dd(Str::random(32));
@@ -90,7 +95,7 @@ class FileController extends Controller
 
     public function initChunkUpload(Request $request)
     {
-        $this->validate($request,[]);
+        $this->validate($request, []);
         $file = new File(['merchant_id' => $request->merchant_id]);
         auth()->user()->files()->save($file);
         return ['success' => true, 'data' => $file];
