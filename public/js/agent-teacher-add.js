@@ -66,33 +66,48 @@ $(document).ready(function(){
     if (mobile_retval == false) {
       showMsg("手机号错误", "center");
       return false;
-    }
-    $.ajax({
-      type: 'post',
-      url: window.teachers_store,
-      data: {
-        name: name,
-        phone: phone,
-        merchant_id: merchant_id,
-        title: title,
-        avatar: icon,
-        gender: gender,
-        birthday: birthday,
-        certificate_id: certificate_id,
-        id: id,
-        teaching_age: teaching_age,
-        school: school,
-        introduction: desc,
-        cv: profile,
-        _token: window.token
-      },
-      success: function(data){
-        if(data.success){
-          $("#addModal").modal("hide");
-          location.href = window.teachers_index;
+    }else{
+      $.ajax({
+        type: 'get',
+        url: window.validmobile,
+        data: {
+          phone: phone
+        },
+        success: function(data){
+          if(data.isOccupied == false){
+            $.ajax({
+              type: 'post',
+              url: window.teachers_store,
+              data: {
+                name: name,
+                phone: phone,
+                merchant_id: merchant_id,
+                title: title,
+                avatar: icon,
+                gender: gender,
+                birthday: birthday,
+                certificate_id: certificate_id,
+                id: id,
+                teaching_age: teaching_age,
+                school: school,
+                introduction: desc,
+                cv: profile,
+                _token: window.token
+              },
+              success: function(data){
+                if(data.success){
+                  $("#addModal").modal("hide");
+                  location.href = window.teachers_index;
+                }
+              }
+            });
+          }else{
+            showMsg("该手机号已经被占用无法注册", "center");
+            return false;
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   function search(){
