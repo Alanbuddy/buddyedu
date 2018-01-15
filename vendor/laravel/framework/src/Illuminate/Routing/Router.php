@@ -712,9 +712,9 @@ class Router implements RegistrarContract, BindingRegistrar
         if ($response instanceof Responsable) {
             $response = $response->toResponse($request);
         }
-        if ($request->ajax()||$response instanceof RedirectResponse) {
-           $response=new JsonResponse(['redirect'=>$response->getTargetUrl()]);
-        }
+//        if ($request->ajax()||$response instanceof RedirectResponse) {
+//           $response=new JsonResponse(['redirect'=>$response->getTargetUrl()]);
+//        }
 
         if ($response instanceof PsrResponseInterface) {
             $response = (new HttpFoundationFactory)->createResponse($response);
