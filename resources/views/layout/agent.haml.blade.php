@@ -38,7 +38,7 @@
               %li
                 %a.a-item{:href => route('points.index')}
                   %img.mini-icon{src: "/icon/9A.png"}
-                  %span.fb.sidebar-title 教学点
+                  %span.fb.sidebar-title 教学网点
               %li
                 %a.a-item#teacher-a{:href => route('teachers.index')}
                   %img.mini-icon{src: "/icon/10A.png"}

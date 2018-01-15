@@ -94,9 +94,10 @@ $(document).ready(function(){
     $(".progress").fadeOut(1000);
     var video_file = uploader.getFiles();
     var video_size = video_file[0].size;
+    console.log(video_size);
     var chunksize = 0.5*1024*1024;
     var file_id = $(".file-id").text();
-    if(video_size > chunkSize){
+    if(video_size > chunksize){
       var chunks = Math.ceil(video_size / chunksize);
       $.ajax({
         type: 'post',
@@ -110,13 +111,18 @@ $(document).ready(function(){
         success: function(data){
           console.log(data);
           if(data.success){
-            $("#addFileModal").modal("hide");
             setTimeout(function(){
+              $("#addFileModal").modal("hide");
               location.href = window.file_list;
-            }, 2000);
+            }, 1000);
           }
         }
       });
+    }else{
+      setTimeout(function(){
+        $("#addFileModal").modal("hide");
+        location.href = window.file_list;
+      }, 1000);
     }
   });
 
