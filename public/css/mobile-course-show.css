@@ -152,8 +152,7 @@
   color: #fff;
 }
 
-#review_btn,
-#submit {
+#review_btn {
   color: #fff;
 }
 
@@ -188,10 +187,12 @@
 }
 
 #reviewModal .review-div {
+  width: 100%;
   height: 3.2rem;
-  margin-top: 0.88rem;
-  margin-bottom: 0.72rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
   border: 2px solid #365ba9;
+  color: #5d6578;
 }
 
 #reviewModal .close {
@@ -199,5 +200,10 @@
   top: 0.48rem;
   right: 0.48rem;
   width: 0.88rem;
+}
+
+#reviewModal #submit {
+  color: #fff;
+  width: 100%;
 }
 
