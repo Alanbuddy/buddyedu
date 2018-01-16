@@ -13,7 +13,7 @@
 @section('content')
 .desc-div
   %img.mine{src: "/icon/mobile/mine.png"}
-  %p.f16.fb.title.mb48 李晓明的课程
+  %p.f16.fb.title.mb48= auth()->user()->name.'的课程'
   .items
     - if(count($items) == 0)
       .undiscover
