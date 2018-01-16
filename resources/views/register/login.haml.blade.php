@@ -18,8 +18,8 @@
     .wrapper
       .content-area
         .img-div
-          %img.logo{src: "/icon/bird.png"}
-          %p.desc-word 这是一些说明文字
+          %img.logo{src: "/icon/logo.png"}
+          %p.desc-word 玩伴科技是专注教育的人工智能企业，全球首创自主学习引擎，基于深度学习的AI算法、增强现实及大数据智能，研发BUDDY课程机器人，为全球教育市场提供课程研发和教学服务。
         .desc-div
           .input-div
             %p.log-title 登录

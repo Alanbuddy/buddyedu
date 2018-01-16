@@ -258,8 +258,15 @@ a:hover {
   min-height: 100%;
   background: #f4fafe;
 }
-.logo {
+.logo-div {
   height: 136px;
+  line-height: 136px;
+  text-align: center;
+}
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+  width: 140px;
 }
 .mini-icon {
   margin-right: 8px;
