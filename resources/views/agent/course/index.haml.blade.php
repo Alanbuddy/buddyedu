@@ -77,7 +77,7 @@
                       %span.f14d 课程链接
                       %span.f12c.copy.ml16 复制
                       .link-div
-                        %input.f14d.course-link{type: "text", "data-link" => route('landing',$item->id)}
+                        %input.f14d.course-link{type: "text", readonly: "readonly", "data-link" => route('landing',$item->id)}
                       %span.f14d 课程二维码
                       %a.f12c.download.ml16{ href: route('qr')."?size=120&data=".route('landing',$item->id)."&download=1"} 下载
                       .qrcode-box

@@ -31,7 +31,7 @@ $(document).ready(function(){
 
   $("#apply").click(function(){
     var amount = $("#withdraw").val().trim();
-    var cash_amount = parseFloat($("#cash-amount").text());
+    var cash_amount = parseFloat($("#cash-amount").text().slice(1));
     if(amount > 0 && amount <= cash_amount){
       $.ajax({
         url: window.with_draw,
