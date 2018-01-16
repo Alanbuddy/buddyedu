@@ -97,6 +97,7 @@ $(document).ready(function(){
 
   $(".close").click(function(){
     $("#reviewModal").modal("hide");
+    $(".review-div").val("");
   });
 
   $("#submit").click(function(){
