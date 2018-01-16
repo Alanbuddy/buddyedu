@@ -23,7 +23,8 @@
   %body
     .wrapper
       .layout-left
-        %img.logo{src: "/icon/bird.png"}
+        .logo-div
+          %img.logo{src: "/icon/logo.png"}
         .main
           .sidebar
             %ul
