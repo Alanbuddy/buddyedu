@@ -134,6 +134,11 @@
   padding: 0 0.32rem;
   -webkit-box-shadow: 0 -0.08rem 0 rgba(51, 58, 72, 0.08);
           box-shadow: 0 -0.08rem 0 rgba(51, 58, 72, 0.08);
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  background: #fff;
 }
 
 .click-btn,
@@ -205,5 +210,9 @@
 #reviewModal #submit {
   color: #fff;
   width: 100%;
+}
+
+.desc-div {
+  padding-bottom: 1rem;
 }
 
