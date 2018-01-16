@@ -92,8 +92,8 @@
         .content-div
           %img.close{src: "/icon/mobile/close.png"}
           .input-div
-            %p.f20.fb.profile-title= $schedule->course->name.'评价'
-            %textarea.review-div.f14c
+            %p.f18.color2= $schedule->course->name.'评价'
+            %textarea.review-div.f14
             %button.btn.click-btn.f14#submit{type: "button"} 提交评价
 
 @endsection
