@@ -14,7 +14,7 @@ class AlterSchedule4 extends Migration
     public function up()
     {
         Schema::table('schedules', function (Blueprint $table) {
-            $table->text('time');
+            $table->text('time')->nullable();
         });
     }
 
