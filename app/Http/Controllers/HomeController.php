@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
+        dd(2);
         $items = auth()->user()->enrolledShedules()
             ->with('point', 'course')
             ->paginate();

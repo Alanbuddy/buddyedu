@@ -67,11 +67,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-//        dd((new static));
-//        dd(File::kk());
-        dd(Str::random(32));
+        session(['a'=>3333]);
+        return (session('a'));
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -98,6 +96,8 @@ class FileController extends Controller
         $this->validate($request, []);
         $file = new File(['merchant_id' => $request->merchant_id]);
         auth()->user()->files()->save($file);
+        Redis::set('file' . $file->id, $this->defaultDirectory());
+//        Log::info(Redis::get('file' . $request->file_id));
         return ['success' => true, 'data' => $file];
     }
 
@@ -108,9 +108,6 @@ class FileController extends Controller
             'chunk' => 'required',
             'file_id' => 'required',
         ]);
-//        Log::info('-----' . $request->chunk);
-        Redis::setnx('file' . $request->file_id, $this->defaultDirectory());
-//        Log::info(Redis::get('file' . $request->file_id));
         if ($request->chunk == 0) {
             $file = File::find($request->file_id);
             $file->description = $request->chunks;
