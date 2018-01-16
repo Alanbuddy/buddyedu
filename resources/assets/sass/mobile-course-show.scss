@@ -117,6 +117,9 @@
 #edit_btn {
   color: #fff;
 }
+#review_btn, #submit {
+  color: #fff;
+}
 .gray-btn {
   @extend .click-btn;
   background: #8c929f;
@@ -128,6 +131,36 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+
+#reviewModal {
+  .modal-dialog, .modal-body, .modal-content {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: 0;
+    border-radius: 0;
+    height: 100%;
+  }
+  .content-div {
+    position: relative;
+    padding: 0 0.64rem;
+    padding-top: 1.6rem;
+    height: 100%;
+  }
+  .review-div {
+    height: 3.2rem;
+    margin-top: 0.88rem;
+    margin-bottom: 0.72rem;
+    border: 2px solid #365ba9;
+  }
+  .close {
+    position: absolute;
+    top: 0.48rem;
+    right: 0.48rem;
+    width: 0.88rem;
+  }
 }
 
 

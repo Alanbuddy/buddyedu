@@ -91,4 +91,31 @@ $(document).ready(function(){
     location.href = window.user_phone;
   });
 
+  $("#review_btn").click(function(){
+    $("#reviewModal").modal("show");
+  });
+
+  $(".close").click(function(){
+    $("#reviewModal").modal("hide");
+  });
+
+  $("#submit").click(function(){
+    var comment = $(".review-div").val();
+    var schedule_id = $(".schedule-id").text();
+    $.ajax({
+      type: 'post',
+      url: window.review,
+      data: {
+        content: comment,
+        schedule_id: schedule_id,
+        _token: window.token
+      },
+      success: function(data){
+        if(data.success){
+          $("#reviewModal").modal("hide");
+          showMsg("成功提交评价", "center");
+        }
+      }
+    });
+  });
 });

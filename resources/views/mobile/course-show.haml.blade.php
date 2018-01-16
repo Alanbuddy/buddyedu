@@ -6,12 +6,13 @@
   window.course_pay = "#{route('prepay',$schedule)}"
   window.pay_finish = "#{route('schedules.enrolled',$schedule)}"
   window.user_phone = "#{route('user.phone.bind.form')}"
+  window.review = "#{route('comments.store')}"
 @endsection
 
 @section('content')
 .desc-div
   .title-div
-    %span.f20.fb.title.color1 Buddy动物园
+    %span.f20.fb.title.color1= $schedule->course->name
     %span.f14.course-num.color1 (21)
     %p.f14.color1.mt20
       %span.edu-point-name=$schedule->merchant->name
@@ -51,10 +52,14 @@
         .right-div
           %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
       -else
+        // .left-div
+        //   %span.f16.fb.color2 已报名
+        // .right-div
+        //   %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
         .left-div
-          %span.f16.fb.color2 已报名
+          %span.f16.fb.color2 课程已结束
         .right-div
-          %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
+          %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
     -else
       -if($available)
         .left-div
@@ -77,7 +82,19 @@
 
 
 @endsection
+@section('modal-div')
+#reviewModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .content-div
+          %img.close{src: "/icon/mobile/close.png"}
+          .input-div
+            %p.f20.fb.profile-title= $schedule->course->name.'评价'
+            %textarea.review-div.f14c
+            %button.btn.click-btn.f14#submit{type: "button"} 提交评价
 
+@endsection
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
 <script src= "/js/mobile-course-show.js"></script>
