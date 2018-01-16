@@ -44,85 +44,47 @@
       %span.hidden.point-location= $schedule->point->geolocation
       .location-map#container
     %span.hidden.schedule-id= $schedule->id
-  // .footer-div
-  //   -if($hasEnrolled)
-  //     -if(empty($user->phone))
-  //       .left-div
-  //         %span.f16.fb.color2 交了钱没填资料
-  //       .right-div
-  //         %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
-  //     -else
-  //       -if(strtotime($schedule->end) < time())
-  //         .left-div
-  //           %span.f16.fb.color2 课程已结束
-  //         .right-div
-  //           %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
-  //       -else
-  //         .left-div
-  //           %span.f16.fb.color2 已报名
-  //         .right-div
-  //           %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
-  //   -else
-  //     -if($available)
-  //       .left-div
-  //         %span.f16.fb.color2="￥".round($schedule->price/100,2)
-  //         %span.f14.fb.color2='(仅剩'.$available.'名额)'
-  //       .right-div
-  //         %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
-  //     -else
-  //       -if($isFull)
-  //         .left-div
-  //           %span.f16.fb.color2 没公开课名额了
-  //         .right-div
-  //           %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
-  //       -else if($schedule->begin< date('Y-m-d H:i:s'))
-  //         .left-div
-  //           %span.f16.fb.color2 报名截止了
-  //         .right-div
-  //           %button.btn.gray-btn.f14#end_btn{type: "button"} 报名截止
-
-
-
-@endsection
-@section('foot-div')
-.footer-div
-  -if($hasEnrolled)
-    -if(empty($user->phone))
-      .left-div
-        %span.f16.fb.color2 交了钱没填资料
-      .right-div
-        %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
-    -else
-      -if(strtotime($schedule->end) < time())
+  .footer-div
+    -if($hasEnrolled)
+      -if(empty($user->phone))
         .left-div
-          %span.f16.fb.color2 课程已结束
+          %span.f16.fb.color2 交了钱没填资料
         .right-div
-          %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
+          %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
       -else
-        .left-div
-          %span.f16.fb.color2 已报名
-        .right-div
-          %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
-  -else
-    -if($available)
-      .left-div
-        %span.f16.fb.color2="￥".round($schedule->price/100,2)
-        %span.f14.fb.color2='(仅剩'.$available.'名额)'
-      .right-div
-        %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
+        -if(strtotime($schedule->end) < time())
+          .left-div
+            %span.f16.fb.color2 课程已结束
+          .right-div
+            %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
+        -else
+          .left-div
+            %span.f16.fb.color2 已报名
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
     -else
-      -if($isFull)
+      -if($available)
         .left-div
-          %span.f16.fb.color2 没公开课名额了
+          %span.f16.fb.color2="￥".round($schedule->price/100,2)
+          %span.f14.fb.color2='(仅剩'.$available.'名额)'
         .right-div
-          %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
-      -else if($schedule->begin< date('Y-m-d H:i:s'))
-        .left-div
-          %span.f16.fb.color2 报名截止了
-        .right-div
-          %button.btn.gray-btn.f14#end_btn{type: "button"} 报名截止
+          %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
+      -else
+        -if($isFull)
+          .left-div
+            %span.f16.fb.color2 没公开课名额了
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 暂无名额
+        -else if($schedule->begin< date('Y-m-d H:i:s'))
+          .left-div
+            %span.f16.fb.color2 报名截止了
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 报名截止
+
+
 
 @endsection
+
 @section('modal-div')
 #reviewModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog
