@@ -453,6 +453,7 @@ class MerchantController extends Controller
             ->select('*')
             ->addSelect('applications.status as application_status')
             ->addSelect('applications.id as application_id')
+            ->orderBy('application_id','desc')
             ->paginate(10);
         $courseApplicationCount = $this->courseApplicationQuery()->count();
         $scheduleApplicationCount = $this->scheduleApplicationsQuery()->count();

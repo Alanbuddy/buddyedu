@@ -65,8 +65,9 @@ class FileController extends Controller
      * @param  \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
-    public function show(File $file)
+    public function show(File $file,$f)
     {
+        dd(func_get_args());
         session(['a'=>3333]);
         return (session('a'));
     }

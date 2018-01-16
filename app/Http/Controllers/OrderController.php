@@ -235,7 +235,7 @@ class OrderController extends Controller
     public function incomeOfRangeQuery($left, $right)
     {
         return Order::where('status', 'paid')
-            ->where('created_at', '>', date('Y-m-d', $left ? strtotime($left) : time()))
+            ->where('created_at', '>=', date('Y-m-d', $left ? strtotime($left) : time()))
             ->where('created_at', '<', date('Y-m-d', strtotime($right . ' +1 day')));
     }
 

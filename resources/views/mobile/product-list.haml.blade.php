@@ -11,11 +11,12 @@
     //   .undiscover
     //     %img.undiscover-icon{src: "/icon/undiscover.png"}
     // - else
+    -foreach($items as $item)
       .item
-        %p.f14.date.mb16 2017/12/21
+        %p.f14.date.mb16=$item->created_at
         .img-div
           %a{href: route('user.drawings.show',$item->id)}
-            %img{src: "/icon/mobile/product.jpg"}
+            %img{src: $item->path}
             
 @endsection
 

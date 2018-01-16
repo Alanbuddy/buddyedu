@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function drawings()
     {
-        return $this->hasMany(File::class,'student_id')
+        return $this->hasMany(File::class, 'student_id')
             ->where('extension', 'png');
     }
 
@@ -80,6 +80,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Schedule::class)
             ->wherePivot('type', 'teacher');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }

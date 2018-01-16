@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\AuthenticatesUsersBySms;
 use App\Models\Attendance;
+use App\Models\File;
 use App\Models\Merchant;
 use App\Models\Role;
 use App\Models\Schedule;
@@ -24,7 +25,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules','drawings','updateProfile']);
+        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules', 'drawings', 'updateProfile']);
     }
 
     public function index(Request $request)
@@ -147,7 +148,7 @@ class UserController extends Controller
 //                'type' => 'teacher',
                 'api_token' => Uuid::uuid(),
                 'extra' => json_encode($request->only([
-                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv','teaching_age'
+                    'title', 'certificate_id', 'id', 'school', 'introduction', 'cv', 'teaching_age'
                 ])),
             ]);
             $user->attachRole(Role::where('name', 'teacher')->first());
@@ -191,6 +192,11 @@ class UserController extends Controller
         $items = $items->orderBy('id', 'desc')
             ->paginate(10);
         return view('mobile.product-list', compact('items'));
+    }
+
+    public function drawing(Request $request, File $drawing)
+    {
+        return view('mobile.student-product', compact('drawing'));
     }
 
     public function schedules(Request $request)
@@ -333,7 +339,7 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $data=$request->only('name', 'gender', 'birthday');
+        $data = $request->only('name', 'gender', 'birthday');
         Log::debug($data);
         auth()->user()->update($data);
         return ['success' => true];

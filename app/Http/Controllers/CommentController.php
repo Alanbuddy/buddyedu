@@ -42,7 +42,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment($request->only('content', 'schedule_id'));
     }
 
     /**
