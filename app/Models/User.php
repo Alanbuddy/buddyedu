@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function drawings()
     {
-        return $this->hasMany(File::class)
+        return $this->hasMany(File::class,'student_id')
             ->where('extension', 'png');
     }
 

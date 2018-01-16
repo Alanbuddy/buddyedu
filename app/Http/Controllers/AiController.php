@@ -39,6 +39,7 @@ class AiController extends Controller
         }
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
+        $entry->fill($request->only(['merchant_id', 'student_id', 'point_id', 'schedule_id']));
         $entry->save();
 //        dd($file,$target);
         $merchant_id = 1;
@@ -54,8 +55,8 @@ class AiController extends Controller
     {
         $item = new File();
         $item->path = substr($target->getPathname(), strlen(public_path()));
-        $item->user_id = 1;
-//        $item->user_id = auth()->user()->id;
+//        $item->user_id = 1;
+        $item->user_id = auth()->user()->id;
         $item->fill($this->getFileMeta($file));
         $item->save();
         return $item;

@@ -90,10 +90,10 @@ class Test extends Command
 
     public function handle()
     {
-        foreach (spl_autoload_functions() as $function) {
-            echo(json_encode($function));
-        }
-        return;
+//        foreach (spl_autoload_functions() as $function) {
+//            echo(json_encode($function));
+//        }
+//        return;
 //        $this->geo();
 
 //        $arr = [1, 2, 3];
@@ -276,8 +276,10 @@ class Test extends Command
         $post_data = array(
             'file' => $upload_file,
             'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d',
-//            'merchant_id' => 1,
+            'merchant_id' => 1,
+            'student_id' => 2,
             'schedule_id' => 1,
+            'point_id' => 1,
 
         );
         return Curl::request($url, $post_data, 'post');
@@ -297,7 +299,6 @@ class Test extends Command
 
     public function postVideo()
     {
-        $url = 'http://edu.com/api/files';
         $url = 'http://edu.com/api/v1/files';
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
