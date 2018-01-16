@@ -114,6 +114,9 @@ $(document).ready(function(){
         if(data.success){
           $("#reviewModal").modal("hide");
           showMsg("成功提交评价", "center");
+          setTimeout(function(){
+            location.href = window.landing;
+          }, 1000);
         }
       }
     });

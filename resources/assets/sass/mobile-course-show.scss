@@ -125,6 +125,9 @@
 #review_btn {
   color: #fff;
 }
+#unclick_btn {
+  color: #fff;
+}
 .gray-btn {
   @extend .click-btn;
   background: #8c929f;
@@ -175,7 +178,6 @@
 }
 
 .desc-div {
-  position: relative;
   padding-bottom: 1rem;
 }
 
