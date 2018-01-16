@@ -52,15 +52,16 @@
         .right-div
           %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
       -else
-        .left-div
-          %span.f16.fb.color2 已报名
-        .right-div
-          %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
         -if(strtotime($schedule->end) < time())
           .left-div
             %span.f16.fb.color2 课程已结束
           .right-div
             %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
+        -else
+          .left-div
+            %span.f16.fb.color2 已报名
+          .right-div
+            %button.btn.gray-btn.f14#end_btn{type: "button"} 您已报名
     -else
       -if($available)
         .left-div
