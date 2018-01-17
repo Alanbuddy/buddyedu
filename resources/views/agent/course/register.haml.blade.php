@@ -14,7 +14,7 @@
   .tab-title
     %ul.clearfix
       %li
-        %a.f14c{href: route('schedules.show', $schedule->course->id)} 基础信息
+        %a.f14c{href: route('schedules.show', $schedule)} 基础信息
       %li.f14a.bg16b 报名情况
 
   .desc-div
