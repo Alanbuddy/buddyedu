@@ -57,8 +57,6 @@ $(document).ready(function(){
   });
 
   var person_phone = $(".person-phone").text();
-  console.log(person_phone);
-  alert(person_phone);
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {
           if (document.addEventListener) {
