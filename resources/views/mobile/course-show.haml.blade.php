@@ -14,7 +14,7 @@
 .desc-div
   .title-div
     - if(empty(auth()->user()))
-      %p.person-phone.hidden
+      %p.person-phone.hidden 未注册
     - else
       %p.person-phone.hidden= auth()->user()->phone
     %span.f20.fb.title.color1= $schedule->course->name

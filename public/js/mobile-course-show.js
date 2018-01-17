@@ -81,7 +81,7 @@ $(document).ready(function(){
       }, function (res) {
           var person_phone = $(".person-phone").text();
           if (res.err_msg == 'get_brand_wcpay_request:ok') {
-              if(person_phone == ""){
+              if(person_phone == "未注册"){
                 location.href = window.user_phone;
               }else{
                 location.href = window.pay_finish;
