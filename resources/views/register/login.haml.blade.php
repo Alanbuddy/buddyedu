@@ -10,6 +10,19 @@
     %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
     %link{:href => "/css/sign-layout.css", :rel => "stylesheet"}
     :javascript
+      var appId = "{{config('wechat.mp.app_id')}}";
+      var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+          + appId
+          + "&redirect_uri=http%3a%2f%2f"
+          + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo"
+          + "&state="+location.href
+          + "&connect_redirect=1#wechat_redirect";
+
+      @if(!Auth::check())
+          if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
+              location.href = app_url;
+          }
+      @endif
       window.register = "#{route('register')}"
       window.forget = "#{route('password.request')}"
       window.login = "#{route('login')}"
