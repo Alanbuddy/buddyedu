@@ -362,6 +362,7 @@ class ScheduleController extends Controller
     public function comments(Request $request, Schedule $schedule)
     {
         $items = $schedule->comments()
+            ->with('user')
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));

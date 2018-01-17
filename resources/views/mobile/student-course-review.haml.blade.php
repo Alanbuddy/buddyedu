@@ -18,7 +18,7 @@
           .avatar-div
             %img.avatar{src: "/icon/mobile/avatar.png"}
             .caption-div
-              %p.f14.fb.text-color 用户微信名称
+              %p.f14.fb.text-color=$item->user->name
               %p.f12.date-color= $item->created_at
           %p.f14.text-color= $item->content
 
