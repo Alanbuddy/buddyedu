@@ -25,7 +25,6 @@ class HomeController extends Controller
             $isFull = $this->isFull($schedule);
             $available = $this->available($schedule);
         }
-        $hasCommented=
         return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user'));
     }
 
