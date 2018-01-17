@@ -54,8 +54,10 @@
 
 .icon {
   width: 64px;
+  height: 64px;
   border: 1px solid #e4f3ff;
   border-radius: 8px;
+  margin-right: 16px;
 }
 
 .f24b {
