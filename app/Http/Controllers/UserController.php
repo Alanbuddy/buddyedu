@@ -126,6 +126,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+//        $this->validate($request)
         if ($request->has('merchant_id')) {
             return $this->storeTeacher($request);
         }

@@ -51,7 +51,7 @@ class FileController extends Controller
             $entry->path = $this->getRelativePath($target);
         } else {
             $entry = $this->store2DB($file, $target);
-            $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id'));
+            $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id','ordinal_no'));
         }
         $entry->save();
         if ($request->has('editor'))
