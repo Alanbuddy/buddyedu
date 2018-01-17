@@ -61,14 +61,16 @@
         %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
     -else
       -if(strtotime($schedule->end) < time())
-        .left-div
-          %span.f16.fb.color2 课程已结束
-        .right-div
-          %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
-        // .left-div
-        //   %span.f16.fb.color2 您已成功评价该课程
-        // .right-div
-        //   %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 评价完成
+        -if($hasCommented)
+          .left-div
+            %span.f16.fb.color2 您已成功评价该课程
+          .right-div
+            %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 评价完成
+        -else
+          .left-div
+            %span.f16.fb.color2 课程已结束
+          .right-div
+            %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
       -else
         .left-div
           %span.f16.fb.color2 已报名
