@@ -368,6 +368,7 @@ class MerchantController extends Controller
             ->addSelect('points.name as point_name')
             ->addSelect('courses.status as course_status')
             ->addSelect('applications.created_at as created_at')
+            ->addSelect(DB::raw('round(price/100,2) as price'))
             ->addSelect('courses.name as course_name');
         if ($isAdmin) {
             $courseApplicationCount = $this->courseApplicationQuery()->count();
