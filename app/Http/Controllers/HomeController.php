@@ -26,8 +26,8 @@ class HomeController extends Controller
             $isFull = $this->isFull($schedule);
             $available = $this->available($schedule);
         }
-        $hasCommented = Comment::where('user_id', $user->id)->where('schedule_id', $schedule)->count();
-        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user','hasCommented'));
+        $hasCommented = auth()->check() ? Comment::where('user_id', $user->id)->where('schedule_id', $schedule)->count() : false;
+        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user', 'hasCommented'));
     }
 
     public function home(Request $request)
