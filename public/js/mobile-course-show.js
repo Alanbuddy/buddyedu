@@ -57,6 +57,8 @@ $(document).ready(function(){
   });
 
   var person_phone = $(".person-phone").text();
+  console.log(person_phone);
+  alert(person_phone);
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {
           if (document.addEventListener) {
@@ -81,8 +83,10 @@ $(document).ready(function(){
       }, function (res) {
           if (res.err_msg == 'get_brand_wcpay_request:ok') {
               if(person_phone == "未注册"){
+                alert("111");
                 location.href = window.user_phone;
               }else{
+                alert("aaa");
                 location.href = window.pay_finish;
               }
           } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
