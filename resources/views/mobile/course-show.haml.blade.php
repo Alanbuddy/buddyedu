@@ -13,10 +13,7 @@
 @section('content')
 .desc-div
   .title-div
-    - if(empty(auth()->user()))
-      %p.person-phone.hidden 未注册
-    - else
-      %p.person-phone.hidden= auth()->user()->phone
+    %p.person-phone= auth()->user()?auth()->user()->phone:''
     %span.f20.fb.title.color1= $schedule->course->name
     %span.f14.course-num.color1= '(共'.$schedule->course->lessons_count.'次课)'
     %p.f14.color1.mt20

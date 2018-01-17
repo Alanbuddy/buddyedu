@@ -80,9 +80,9 @@ $(document).ready(function(){
           'signType': 'MD5', //微信签名方式：
           'paySign': ''+signPackage.sign,
       }, function (res) {
-          if (res.err_msg == 'get_brand_wcpay_request:ok' && person_phone == "未注册") {
+          if (res.err_msg == 'get_brand_wcpay_request:ok' && person_phone == "") {
             location.href = window.user_phone;
-          }else if(res.err_msg == 'get_brand_wcpay_request:ok' && person_phone != "未注册") {
+          }else if(res.err_msg == 'get_brand_wcpay_request:ok' && person_phone != "") {
             location.href = window.pay_finish;
           }
       });
