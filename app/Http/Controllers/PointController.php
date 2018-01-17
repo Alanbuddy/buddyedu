@@ -90,7 +90,7 @@ class PointController extends Controller
             $application->fill([
                 'type' => 'point',
                 'status' => 'applying',
-                'merchant_id'=>$this->getMerchant()->id
+                'merchant_id' => $this->getMerchant()->id
             ]);
             $item->applications()->save($application);
         });
@@ -140,5 +140,10 @@ class PointController extends Controller
     public function destroy(Point $point)
     {
         //
+    }
+
+    public function nearby()
+    {
+        return view('mobile.edu-point');
     }
 }

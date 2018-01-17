@@ -16,7 +16,7 @@ class FileController extends Controller
 
     public function __construct()
     {
-        $this->middleware('role:amdin')->only(['index']);
+//        $this->middleware('role:amdin')->only(['index']);
 //        $this->middleware('role:amdin|merchant')->only(['download']);
     }
 
@@ -43,6 +43,7 @@ class FileController extends Controller
         if ($request->has('chunks')) {
             return $this->chunkUpload($request);
         }
+        Log::debug($request->all());
         $file = $request->file('file');
         $target = $this->move($file);
         if ($request->has('file_id')) {
@@ -51,7 +52,7 @@ class FileController extends Controller
             $entry->path = $this->getRelativePath($target);
         } else {
             $entry = $this->store2DB($file, $target);
-            $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id'));
+            $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id','ordinal_no'));
         }
         $entry->save();
         if ($request->has('editor'))

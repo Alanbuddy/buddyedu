@@ -23,7 +23,6 @@ class HomeController extends Controller
         $user = auth()->user();
         $hasEnrolled = $user ? $this->hasEnrolled($schedule, $user) : false;
         if (!$hasEnrolled) {
-            $isFull = $this->isFull($schedule);
             $available = $this->available($schedule);
         }
         $hasCommented = auth()->check() ? Comment::where('user_id', $user->id)->where('schedule_id', $schedule->id)->count() : false;
