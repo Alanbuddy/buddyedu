@@ -359,11 +359,11 @@ class ScheduleController extends Controller
         return ['success' => true];
     }
 
-    public function comments(Schedule $schedule)
+    public function comments(Request $request, Schedule $schedule)
     {
         $items = $schedule->comments()
             ->orderBy('id', 'desc')
             ->get();
-        return ['success' => true, compact('items')];
+        return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
     }
 }

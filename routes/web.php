@@ -44,12 +44,12 @@ Route::middleware('auth')
         Route::get('/schedules/{schedule}/enroll/success', 'ScheduleController@enrolled')->name('schedules.enrolled');//成功加入课程
         Route::post('/schedules/{schedule}/prepay', 'OrderController@prepay')->name('prepay');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
+        Route::get('/schedule/{schedule}/comments', 'ScheduleController@comments')->name('schedule.comment');
         Route::get('/schedules/{schedule}/{operation}', 'ScheduleController@approve')->name('schedule.approve');
         Route::resource('schedules', 'ScheduleController');
 
         Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
         Route::any('/courses/{course}/apply', 'CourseController@apply')->name('course.apply');//apply for course authorization
-        Route::get('/courses/{course}/comments', 'CourseController@comments')->name('course.comment');
         Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
         Route::resource('courses', 'CourseController');
 

@@ -18,7 +18,7 @@
     %span.f14.course-num.color1= '(共'.$schedule->course->lessons_count.'次课)'
     %p.f14.color1.mt20
       %span.edu-point-name=$schedule->merchant->name
-    %a{href: route('comments.index')}
+    %a{href: route('schedule.comments',$schedule)}
       %img.comment-icon{src: "/icon/mobile/comment.png"}
   .content-div
     .address-div
