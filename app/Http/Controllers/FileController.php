@@ -46,16 +46,16 @@ class FileController extends Controller
         $file = $request->file('file');
         $target = $this->move($file);
         if ($request->has('file_id')) {
-            $entry=File::find($request->file_id);
+            $entry = File::find($request->file_id);
             $entry->fill($this->getFileMeta($file));
-            $entry->path =$this->getRelativePath($target);
-        }else{
+            $entry->path = $this->getRelativePath($target);
+        } else {
             $entry = $this->store2DB($file, $target);
             $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id'));
         }
         $entry->save();
         if ($request->has('editor'))
-            return ['errno' => 0, 'data' => [env('APP_URL') . $entry->path]];
+            return ['errno' => 0, 'data' => [$entry->path]];
         return ['success' => true, 'data' => $entry];
     }
 
@@ -65,10 +65,10 @@ class FileController extends Controller
      * @param  \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
-    public function show(File $file,$f)
+    public function show(File $file, $f)
     {
         dd(func_get_args());
-        session(['a'=>3333]);
+        session(['a' => 3333]);
         return (session('a'));
     }
 
