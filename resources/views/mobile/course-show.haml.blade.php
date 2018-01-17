@@ -52,7 +52,7 @@
   -if($hasEnrolled)
     -if(empty($user->phone))
       .left-div
-        %span.f16.fb.color2 交了钱没填资料
+        %span.f16.fb.color2 交了钱未填个人资料
       .right-div
         %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
     -else

@@ -7,36 +7,20 @@
 .desc-div
   .title-div.mb48
     %span.f16.fb.title 课程评论
-    %span.f14.fb.title (51)
+    %span.f14.fb.title= '('.$items.total().')'
   .items
-    .item.mb48
-      .avatar-div
-        %img.avatar{src: "/icon/mobile/avatar.png"}
-        .caption-div
-          %p.f14.fb.text-color 用户微信名
-          %p.f12.date-color 2017/12/21 12:43
-      %p.f14.text-color 这是我们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷；后来，我们们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷。
-    .item.mb48
-      .avatar-div
-        %img.avatar{src: "/icon/mobile/avatar.png"}
-        .caption-div
-          %p.f14.fb.text-color 用户微信名
-          %p.f12.date-color 2017/12/21 12:43
-      %p.f14.text-color 这是我们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷；后来，我们们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷。
-    .item.mb48
-      .avatar-div
-        %img.avatar{src: "/icon/mobile/avatar.png"}
-        .caption-div
-          %p.f14.fb.text-color 用户微信名
-          %p.f12.date-color 2017/12/21 12:43
-      %p.f14.text-color 这是我们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷；后来，我们们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷。
-    .item.mb48
-      .avatar-div
-        %img.avatar{src: "/icon/mobile/avatar.png"}
-        .caption-div
-          %p.f14.fb.text-color 用户微信名
-          %p.f12.date-color 2017/12/21 12:43
-      %p.f14.text-color 这是我们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷；后来，我们们在测试某款手机的面部解锁时的情景，一开始，我们感叹这些安卓手机面部解锁的速度与便捷。
+    - if(count($items) == 0)
+      .undiscover
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      - foreach($items as $item)
+        .item.mb48
+          .avatar-div
+            %img.avatar{src: "/icon/mobile/avatar.png"}
+            .caption-div
+              %p.f14.fb.text-color 用户微信名称
+              %p.f12.date-color= $item->created_at
+          %p.f14.text-color= $item->content
 
    
 @endsection

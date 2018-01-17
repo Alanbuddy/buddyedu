@@ -133,7 +133,10 @@ $(document).ready(function(){
       success: function(data){
         if(data.success){
           $("#addModal").modal("hide");
-          location.href = window.points_index;
+          showMsg("成功创立教学点", "center");
+          $("#addModal").on('hidden.bs.modal', function () {
+            location.href = window.points_index;
+          });
         }
       }
     });
