@@ -16,7 +16,7 @@
       - foreach($items as $item)
         .item.mb48
           .avatar-div
-            %img.avatar{src: $item->user->icon?:"/icon/mobile/avatar.png"}
+            %img.avatar{src: $item->user->avatar?:"/icon/mobile/avatar.png"}
             .caption-div
               %p.f14.fb.text-color=$item->user->name
               %p.f12.date-color= $item->created_at
