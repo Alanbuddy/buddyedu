@@ -81,16 +81,16 @@
       .right-div
         %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
     -else
-      -if($isFull)
-        .left-div
-          %span.f16.fb.color2 没公开课名额了
-        .right-div
-          %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 暂无名额
-      -else if($schedule->begin< date('Y-m-d H:i:s'))
+      -if($schedule->begin< date('Y-m-d H:i:s'))
         .left-div
           %span.f16.fb.color2 报名截止了
         .right-div
           %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 报名截止
+      -else if($isFull)
+        .left-div
+          %span.f16.fb.color2 没公开课名额了
+        .right-div
+          %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 暂无名额
 @endsection
 @section('modal-div')
 #reviewModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
