@@ -2,21 +2,26 @@
   position: relative;
   padding: 0 0.64rem;
 }
+
 .title {
   color: #365ba9;
   margin-top: 0.48rem;
   margin-bottom: 0.48rem;
 }
+
 .location-map {
   width: 100%;
   height: 3.87rem;
 }
+
 .mb60 {
   margin-bottom: 0.6rem;
 }
+
 .text-color {
   color: #5d6578;
 }
+
 .point-caption {
   width: 5rem;
   margin-left: 0.28rem;
@@ -24,18 +29,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .content-span {
   margin-top: 0.12rem;
   margin-bottom: 0.12rem;
   margin-left: 0.28rem;
 }
+
 .point-div {
   position: relative;
 }
+
 .distance {
   position: absolute;
   top: 0.04rem;
   right: 0;
 }
-
 
