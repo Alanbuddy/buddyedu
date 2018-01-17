@@ -7,7 +7,7 @@
 .desc-div
   .title-div.mb48
     %span.f16.fb.title 课程评论
-    %span.f14.fb.title= '('.$items.total().')'
+    %span.f14.fb.title= '('.$items->total().')'
   .items
     - if(count($items) == 0)
       .undiscover
