@@ -89,7 +89,7 @@ Route::middleware('auth')
         Route::get('/statistics/users', 'UserController@statistics')->name('users.statistics');//相关统计信息
         Route::resource('order', 'OrderController');
 
-        Route::get('/points/nearby', 'PointController@nearby')->name('point.nearby');
+        Route::get('/point/nearby', 'PointController@nearby')->name('point.nearby');
         Route::resource('points', 'PointController');
 
         Route::resource('records', 'RecordController');
