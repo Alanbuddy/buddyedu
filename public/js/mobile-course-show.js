@@ -56,7 +56,7 @@ $(document).ready(function(){
     });
   });
 
-
+  var person_phone = $(".person-phone").text();
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {
           if (document.addEventListener) {
@@ -79,7 +79,6 @@ $(document).ready(function(){
           'signType': 'MD5', //微信签名方式：
           'paySign': ''+signPackage.sign,
       }, function (res) {
-          var person_phone = $(".person-phone").text();
           if (res.err_msg == 'get_brand_wcpay_request:ok') {
               if(person_phone == "未注册"){
                 location.href = window.user_phone;
