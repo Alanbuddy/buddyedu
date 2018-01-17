@@ -37,8 +37,8 @@
         %span 课程网站：
         %span=$course->url??"暂无"
       .p-div
-        %span 课程简介：
-        %span=$course->description
+        %span.left-span 课程简介：
+        %span.right-span=$course->description
       .p-div
         %span.left-span 课程介绍：
         %span.right-span!= $course->detail

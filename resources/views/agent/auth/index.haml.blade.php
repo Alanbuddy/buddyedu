@@ -37,7 +37,7 @@
           %img.course-icon{src: $item->icon??'icon/bird.png'}
           %p.course-name.f16b=$item->name
           %p.f12b=$item->merchants_count.'机构已添加'
-          %p.mt24.f12b=$item->description??'没有简介'
+          %p.mt24.f12b.course-description=$item->description??'没有简介'
           .add-div
             - if ($item->added)
               %span.f14e 已添加

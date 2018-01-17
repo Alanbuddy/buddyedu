@@ -155,3 +155,10 @@
   height: 2rem;
 }
 
+.notice {
+  color: #365ba9;
+  text-align: left;
+  padding: 0.11rem 0;
+  visibility: hidden;
+}
+

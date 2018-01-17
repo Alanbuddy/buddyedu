@@ -21,7 +21,7 @@
       %span.input-group-addon.verify-photo
       .input-inside-div
         %input.form-box.form-verify-box.f14#mobilecode{placeholder: "请输入验证码", type: "text"}
-        %span.verify-code-span.f12.pointer#verifycode 获取验证码
+        %span.verify-code-span.f12.pointer#verifycode 获取验证码 
     %button.btn.click-btn.f14#next_btn{type: "button"} 下一步
 @endsection
 

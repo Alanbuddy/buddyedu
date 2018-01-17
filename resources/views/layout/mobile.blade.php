@@ -9,7 +9,7 @@
     <meta name="format-detection" , content="email=no">
 
     <title>
-        @yield('title') 云课客户端
+        @yield('title') Buddy云课
     </title>
     <script>
         document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
