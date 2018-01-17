@@ -15,7 +15,7 @@
           + appId
           + "&redirect_uri=http%3a%2f%2f"
           + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo"
-          + "&state="+location.href
+          + "&state="+"{{route('user.schedules')}}"
           + "&connect_redirect=1#wechat_redirect";
 
       @if(!Auth::check())
