@@ -363,7 +363,7 @@ class ScheduleController extends Controller
     {
         $items = $schedule->comments()
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate();
         return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
     }
 }
