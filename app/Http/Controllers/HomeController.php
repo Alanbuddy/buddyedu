@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,7 +26,8 @@ class HomeController extends Controller
             $isFull = $this->isFull($schedule);
             $available = $this->available($schedule);
         }
-        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user'));
+        $hasCommented = Comment::where('user_id', $user->id)->where('schedule_id', $schedule->id)->count();
+        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user','hasCommented'));
     }
 
     public function home(Request $request)
@@ -57,7 +59,7 @@ class HomeController extends Controller
         $filename = md5($data);
         return response($content, 200)
             ->header('Content-Type', 'image/png')
-            ->header('Content-Disposition', 'attachment;filename=' . $filename.'.png');
+            ->header('Content-Disposition', 'attachment;filename=' . $filename . '.png');
     }
 
 }
