@@ -7,8 +7,8 @@ $(document).ready(function(){
   var ageX = [];
   var da = JSON.parse(age);
   $.each(da, function(index, item){
-    ageX.push([index + '~' + (index + 1) + '岁']);
-    ageData.push([index + '~' + (index + 1) + '岁', item]);
+    ageX.push([index + '~' + (parseInt(index) + 1) + '岁']);
+    ageData.push([index + '~' + (parseInt(index) + 1) + '岁', item]);
   });
 
   var genderData = [];

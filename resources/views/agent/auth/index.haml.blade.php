@@ -47,6 +47,7 @@
 @endsection
 
 @section('script')
+<script src="/js/clamp.js"></script>
 <script src= "/js/agent-auth-index.js"></script>
 
 @endsection
