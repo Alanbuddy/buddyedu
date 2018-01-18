@@ -50,6 +50,7 @@ Route::middleware('auth')
         Route::resource('schedules', 'ScheduleController');
 
         Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
+        Route::get('/courses/{course}/comments', 'CourseController@comments')->name('course.comment');
         Route::any('/courses/{course}/apply', 'CourseController@apply')->name('course.apply');//apply for course authorization
         Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
         Route::resource('courses', 'CourseController');

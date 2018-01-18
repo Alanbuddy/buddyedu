@@ -98,6 +98,7 @@ class Test extends Command
             $str = str_random(10);
             $pipe->rpush('pv.user', 'http://' . $str . '.com');
             $pipe->expire('pv.user', 'http://' . $str . '.com');
+            $pipe->ping();
             $pipe->exec();
         });
         $this->info(json_encode($r));
@@ -108,8 +109,8 @@ class Test extends Command
 //        foreach (spl_autoload_functions() as $function) {
 //            echo(json_encode($function));
 //        }
-        $this->testRedis();
-        return;
+//        $this->testRedis();
+//        return;
 //        $this->geo();
 
 //        $arr = [1, 2, 3];

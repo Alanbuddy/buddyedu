@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
 //        监听查询事件
         DB::listen(function ($query) {
             Log::debug($query->sql);
-            Log::info($query->time);
+            Log::debug($query->time);
             Log::debug($query->bindings);
         });
 
