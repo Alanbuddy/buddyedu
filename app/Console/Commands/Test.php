@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 class Test extends Command
@@ -87,12 +88,28 @@ class Test extends Command
         dd(cache("8"));
     }
 
+    public function testRedis()
+    {
+        $r=Redis::pipeline(function ($pipe) {
+//            for ($i = 0; $i < 1000; $i++) {
+//                $pipe->set("key:$i", $i);
+//            })
+            $pipe->multi();
+            $str = str_random(10);
+            $pipe->rpush('pv.user', 'http://' . $str . '.com');
+            $pipe->expire('pv.user', 'http://' . $str . '.com');
+            $pipe->ping();
+            $pipe->exec();
+        });
+        $this->info(json_encode($r));
+    }
 
     public function handle()
     {
 //        foreach (spl_autoload_functions() as $function) {
 //            echo(json_encode($function));
 //        }
+//        $this->testRedis();
 //        return;
 //        $this->geo();
 

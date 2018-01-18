@@ -195,6 +195,14 @@ class UserController extends Controller
         return view('mobile.product-list', compact('items'));
     }
 
+    public function videos(Request $request)
+    {
+        $items = auth()->user()->videos();
+        $items = $items->orderBy('id', 'desc')
+            ->paginate(10);
+        return view('mobile.product-list', compact('items'));
+    }
+    
     public function drawing(Request $request, File $drawing)
     {
         return view('mobile.student-product', compact('drawing'));

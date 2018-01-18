@@ -17,6 +17,8 @@ Route::auth();
 //Route::get('/', function () { return redirect('/schedules'); });
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landing');
+Route::get('/share/{share}', 'HomeController@share')->name('share');
+
 
 Route::get('/phpinfo', function () {
     phpinfo();
@@ -34,6 +36,7 @@ Route::middleware('auth')
         Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
+        Route::get('/user/videos', 'UserController@videos')->name('user.videos');
         Route::get('/user/drawings/{drawing}', 'UserController@drawing')->name('user.drawings.show');
         Route::get('/user/schedules', 'UserController@schedules')->name('user.schedules');
         Route::get('/profile', 'UserController@profile')->name('profile');
@@ -49,6 +52,7 @@ Route::middleware('auth')
         Route::resource('schedules', 'ScheduleController');
 
         Route::get('/courses/{course}/merchants', 'CourseController@merchants')->name('course.merchant');//已经获得课程授权的机构
+        Route::get('/courses/{course}/comments', 'CourseController@comments')->name('course.comment');
         Route::any('/courses/{course}/apply', 'CourseController@apply')->name('course.apply');//apply for course authorization
         Route::get('/courses/{course}/schedules/{schedule}/{operation}', 'CourseController@authorizeSchedule')->name('course.schedule.authorize');//课程授权
         Route::resource('courses', 'CourseController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -42,8 +43,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'schedule_id' => 'required|numeric',
+            'content'=>'string|between:1,200'
+        ]);
         $comment = new Comment($request->only('content', 'schedule_id'));
         $comment->user_id = auth()->user()->id;
+        $comment->course_id = Schedule::find($request->schedule_id)->course_id;
         $comment->save();
         return ['success' => true];
     }
