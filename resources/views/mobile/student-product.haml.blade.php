@@ -5,7 +5,7 @@
 
 @section('content')
 .desc-div
-  %p.f16.fb.title.mb40=auth()->user()->name.'的作品'
+  %p.f16.fb.title.mb40=$drawing->student->name.'的作品'
   %p.f12.date.mb40=$drawing->created_at
   %img.product.mb40{src: $drawing->path }
   %video.product.mb80{src: '' }

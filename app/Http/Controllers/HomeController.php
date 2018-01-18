@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\File;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -27,6 +28,15 @@ class HomeController extends Controller
         }
         $hasCommented = auth()->check() ? Comment::where('user_id', $user->id)->where('schedule_id', $schedule->id)->count() : false;
         return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user', 'hasCommented'));
+    }
+
+    public function share(Request $request, $share)
+    {
+        $drawing= File::where('uuid', $share)->where('extension', 'png')->where('uuid',$share)->first();
+        $video = File::where('uuid', $share)->where('extension', 'mp4')->find($share);
+//        dd($drawing,$video);
+
+        return view('mobile.student-product', compact('drawing', 'video'));
     }
 
     public function home(Request $request)
