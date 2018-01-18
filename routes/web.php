@@ -34,6 +34,7 @@ Route::middleware('auth')
         Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
+        Route::get('/user/videos', 'UserController@videos')->name('user.videos');
         Route::get('/user/drawings/{drawing}', 'UserController@drawing')->name('user.drawings.show');
         Route::get('/user/schedules', 'UserController@schedules')->name('user.schedules');
         Route::get('/profile', 'UserController@profile')->name('profile');

@@ -39,7 +39,7 @@ class AiController extends Controller
         }
         $target = $this->move($file);
         $entry = $this->store2DB($file, $target);
-        $entry->fill($request->only(['merchant_id', 'student_id', 'point_id', 'schedule_id']));
+        $entry->fill($request->only(['merchant_id', 'student_id', 'point_id', 'schedule_id','ordinal_no']));
         $entry->save();
 //        dd($file,$target);
         $merchant_id = 1;
