@@ -15,7 +15,7 @@
         .item
           %p.f14.date.mb16=$item->created_at
           .img-div
-            %a{href: route('user.drawings.show',$item->id)}
+            %a{href: route('share',$item->uuid)}
               %img{src: $item->path}
             
 @endsection
