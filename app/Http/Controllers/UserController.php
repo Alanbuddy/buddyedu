@@ -34,7 +34,7 @@ class UserController extends Controller
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->whereNull('role_id')
             ->withCount('enrolledShedules')
-            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) as total'));
+            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) and orders.status=\'paid\' as total'));
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->key . '%')
@@ -205,7 +205,7 @@ class UserController extends Controller
         $items = $items->paginate(10);
         foreach ($items as $item) {
             $ids = explode(',', $item->ids);
-            $item->files =File::whereIn('id',$ids)->orderBy('id','desc')->get();
+            $item->files = File::whereIn('id', $ids)->orderBy('id', 'desc')->get();
         }
 //        dd($items);
         return view('mobile.product-list', compact('items'));
