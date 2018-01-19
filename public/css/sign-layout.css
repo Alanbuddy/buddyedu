@@ -315,6 +315,7 @@ abbr, acronym {
   background: url("/icon/verify.png") no-repeat;
   background-size: 100% 100%;
   border: 0;
+  cursor: pointer;
 }
 #verifycode, #figurecode {
   color: #365ba9;
