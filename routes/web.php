@@ -18,6 +18,7 @@ Route::auth();
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landing');
 Route::get('/share/{share}', 'HomeController@share')->name('share');
+Route::get('/captcha', 'CaptchaController@generate')->name('captcha');
 
 
 Route::get('/phpinfo', function () {
