@@ -34,7 +34,7 @@ class UserController extends Controller
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->whereNull('role_id')
             ->withCount('enrolledShedules')
-            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id) and orders.status=\'paid\' as total'));
+            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id and orders.status=\'paid\') as total'));
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->key . '%')
