@@ -36,12 +36,6 @@
               %span.input-group-addon.verify-photo
               %input.form-box.f16#mobilecode{placeholder: "请输入验证码", type: "text"}
             %p.notice.f14#code_notice 验证码错误 
-            .input-group.no-margin-bottom
-              %span.input-group-addon.figure-photo
-              .input-inside-div
-                %input.form-box.form-verify-box.f16#figure{placeholder: "请输入图形验证码", type: "text"}
-                %button.btn.verify-code-span.f16#figurecode{type: "button"} 获取验证码
-            %p.notice.f14#mobile_notice 图形验证码错误
             .input-group
               %span.input-group-addon.password-photo
               %input.form-box.f16#password{placeholder: "请设置密码", type: "password"}
