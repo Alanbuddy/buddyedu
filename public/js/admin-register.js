@@ -4,7 +4,8 @@ $(document).ready(function() {
   check_signup_input = function(){
     if ($("#mobile").val().trim() == "" ||
         $("#mobilecode").val().trim() == "" ||
-        $("#password").val().trim() == ""){
+        $("#password").val().trim() == "" ||
+        $("#captcha").val().trim() == ""){
       $("#signup_btn").attr("disabled", true);
     } else {
       $("#signup_btn").attr("disabled", false);
@@ -112,6 +113,7 @@ $(document).ready(function() {
     if ($("#signup_btn").attr("disabled") == true) {
       return false;
     }
+
     var phone = $("#mobile").val().trim();
     var verify_code = $("#mobilecode").val().trim();
     var password = $("#password").val().trim();
@@ -150,6 +152,29 @@ $(document).ready(function() {
 
   $("#figurecode").click(function(){
     var mil_sec = new Date().getMilliseconds();
-    $(this).attr("src", "/verify/captcha?captcha=" + mil_sec);
+    $(this).attr("src", "/captcha?" + mil_sec);
+  });
+
+  $("#captcha").keyup(function(){
+    check_signup_input();
+    $("#captcha_notice").css("visibility", "hidden");
+    var captcha = $("#captcha").val().trim();
+    var len = captcha.length;
+    if(len == 5){
+      $.ajax({
+        type: 'get',
+        url: '/verify/captcha?captcha=' + captcha,
+        success: function(data){
+          console.log(data);
+          if(!data.success){
+            $("#captcha_notice").css("visibility", "visible");
+          }
+        }
+      });
+    }else{
+      $("#captcha_notice").css("visibility", "visible");
+      $("#signup_btn").attr("disabled", true);
+    }
+    
   });
 });

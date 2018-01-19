@@ -323,6 +323,9 @@ abbr, acronym {
   padding: 0;
   background: transparent;
 }
+#figurecode {
+  height: 24px;
+}
 .forget {
   margin: 16px 0;
   color: #365ba9;
