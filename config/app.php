@@ -179,7 +179,8 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Bkwld\LaravelHaml\ServiceProvider::class,
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
     ],
 
