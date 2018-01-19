@@ -133,4 +133,5 @@ $(document).ready(function(){
     $(".icon-name").hide();
   });
 
+  $clamp(document.querySelector('.course-description'), {clamp: 3});
 });

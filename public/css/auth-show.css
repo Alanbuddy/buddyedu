@@ -20,7 +20,7 @@
       -ms-flex-align: center;
           align-items: center;
   margin-left: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-right: 40px;
   border: 1px solid #e4f3ff;
 }
@@ -453,5 +453,9 @@ td span {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.desc-div {
+  padding-bottom: 40px;
 }
 

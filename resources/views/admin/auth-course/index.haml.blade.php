@@ -85,6 +85,7 @@
 @endsection
 
 @section('script')
+<script src="/js/clamp.js"></script>
 <script src="/js/wangEditor.min.js"></script>
 <script src= "/js/admin-course-index.js"></script>
 @endsection

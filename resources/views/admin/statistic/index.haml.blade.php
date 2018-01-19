@@ -31,7 +31,7 @@
     .item-div
       %p.f16c 学生总数
       %p.f24b.mt16=$count
-  .desc-div.no-padding-top
+  .desc-div
     .kids-nums
       %p.column-title.f14a 所选时段内学生总数变化
       .figure-box
