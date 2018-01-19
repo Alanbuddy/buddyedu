@@ -147,4 +147,9 @@ $(document).ready(function() {
     return false;
   });
     
+
+  $("#figurecode").click(function(){
+    var mil_sec = new Date().getMilliseconds();
+    $(this).attr("src", "/verify/captcha?captcha=" + mil_sec);
+  });
 });
