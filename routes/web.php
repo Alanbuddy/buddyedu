@@ -14,16 +14,14 @@
 use Illuminate\Support\Facades\Route;
 
 Route::auth();
+//Route::get('/phpinfo', function () { phpinfo(); });
 //Route::get('/', function () { return redirect('/schedules'); });
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landing');
 Route::get('/share/{share}', 'HomeController@share')->name('share');
-Route::get('/captcha', 'CaptchaController@generate')->name('captcha');
+Route::get('/verify/captcha', 'CaptchaController@verify')->name('captcha.verify');
 
 
-Route::get('/phpinfo', function () {
-    phpinfo();
-});
 Route::middleware(['auth', 'role:admin'])
     ->group(
         function () {
