@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/auth-show.css') }}">
 <link rel="stylesheet" href="/css/dateRange.css">
 <link rel="stylesheet" href="/css/monthPicker.css">
+:javascript
+  window.amount_search = "#{route('users.statistics')}"
 @endsection
 
 @section('content')

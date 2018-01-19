@@ -1,8 +1,8 @@
 $(document).ready(function(){
   var dateRange1 = new pickerDateRange('date1', {
     isTodayValid : true,
-    startDate : '2017-11-01',
-    endDate : '2017-11-07',
+    startDate : '2018-01-01',
+    endDate : '2018-01-07',
     needCompare : false,
     defaultText : ' 至 ',
     autoSubmit : true,
