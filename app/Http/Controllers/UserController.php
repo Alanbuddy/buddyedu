@@ -42,10 +42,10 @@ class UserController extends Controller
             });
         }
         $items = $items->paginate(10);
+        $key = $request->key;
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
-        $key = $request->key;
         return view($this->isAdmin() ? 'admin.student.index'
             : 'agent.student.index', compact('items', 'key'));
 
