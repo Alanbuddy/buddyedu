@@ -40,7 +40,8 @@
               %span.input-group-addon.figure-photo
               .input-inside-div
                 %input.form-box.form-verify-box.f16#figure{placeholder: "请输入图形验证码", type: "text"}
-                %img.verify-code-span.f16#figurecode{src: route('captcha')}
+                %a{href: '/captcha'}
+                  %img.verify-code-span.f16#figurecode{src: '/captcha'}
             %p.notice.f14#mobile_notice 图形验证码错误
             .input-group
               %span.input-group-addon.password-photo
