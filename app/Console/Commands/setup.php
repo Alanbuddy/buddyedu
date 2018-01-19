@@ -38,8 +38,10 @@ class setup extends Command
      */
     public function handle()
     {
-        Redis::set('access_token', '{"access_token":"5","expire_time":1513827011}');
-        Redis::set('jsapi_ticket', '{"jsapi_ticket":"b","expire_time":1513827012}');
+//        Redis::set('access_token', '{"access_token":"5","expire_time":1513827011}');
+//        Redis::set('jsapi_ticket', '{"jsapi_ticket":"b","expire_time":1513827012}');
+        $r=Redis::set('x', 2,'100','NX');
+        $this->info(json_encode($r));
 //        $b = time();
 //        $this->info(time());
 //        for ($i = 0; $i < 100000; $i++) {

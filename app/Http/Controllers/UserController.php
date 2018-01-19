@@ -184,14 +184,30 @@ class UserController extends Controller
         return ['success' => true];
     }
 
+    public function drawingsQuery()
+    {
+        return auth()->user()->drawings()
+            ->select(DB::raw('group_concat(files.name) as names'))
+            ->addSelect(DB::raw('group_concat(files.id) as ids'))
+            ->addSelect(DB::raw('date_format(files.created_at,\'%Y-%m-%d\') created_at'))
+            ->groupBy(DB::raw('date_format(files.created_at,\'%Y-%m-%d\')'))
+            ->orderBy('created_at', 'desc');
+//        dd($items,auth()->user()->id);
+    }
+
     public function drawings(Request $request)
     {
-        $items = auth()->user()->drawings();
+//        $items = auth()->user()->drawings();
+        $items = $this->drawingsQuery();
         if ($request->has('schedule_id')) {
             $items->where('schedule_id', $request->get('schedule_id'));
         }
-        $items = $items->orderBy('id', 'desc')
-            ->paginate(10);
+        $items = $items->paginate(10);
+        foreach ($items as $item) {
+            $ids = explode(',', $item->ids);
+            $item->files =File::whereIn('id',$ids)->orderBy('id','desc')->get();
+        }
+//        dd($items);
         return view('mobile.product-list', compact('items'));
     }
 
@@ -202,7 +218,7 @@ class UserController extends Controller
             ->paginate(10);
         return view('mobile.product-list', compact('items'));
     }
-    
+
     public function drawing(Request $request, File $drawing)
     {
         return view('mobile.student-product', compact('drawing'));

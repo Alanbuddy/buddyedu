@@ -14,10 +14,11 @@
       -foreach($items as $item)
         .item
           %p.f14.date.mb16=$item->created_at
-          .img-div
-            %a{href: route('share',$item->uuid)}
-              %img{src: $item->path}
-            
+          -foreach($item->files as $item)
+            .img-div
+              %a{href: route('share',$item['uuid'])}
+                %img{src: $item['path']}
+
 @endsection
 
 @section('script')
