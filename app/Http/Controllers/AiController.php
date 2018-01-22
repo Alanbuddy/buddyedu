@@ -98,7 +98,7 @@ class AiController extends Controller
         $student_id = 1;
         $schedule_id = 1;
         $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
-        Log::debug($result);
+        Log::debug(strlen($result));
         return $result;
     }
 

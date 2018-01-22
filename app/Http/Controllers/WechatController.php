@@ -69,6 +69,7 @@ class WechatController extends Controller
         return 'ERROR:' . $response["code"];
     }
 
+
     public function openid(Request $request)
     {
         $result = WxApi::oauthAccessToken($request->code);

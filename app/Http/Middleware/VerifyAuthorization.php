@@ -61,6 +61,9 @@ class VerifyAuthorization
 
     public function checkScheduleAuthorization($schedule)
     {
+        if(empty($schedule)){
+            throw new \Exception(trans('auth.schedule.expired'));
+        }
         if ($schedule->end < date('Y-m-d H:i:s')) {
             throw new \Exception(trans('auth.schedule.expired'));
         }
