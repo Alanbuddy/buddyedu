@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use League\OAuth2\Server\RequestEvent;
 
 class UserController extends Controller
@@ -30,17 +31,17 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $isAdmin=$this->isAdmin();
+        $isAdmin = $this->isAdmin();
         $items = User::orderBy('id', 'desc')
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->whereNull('role_id')
             ->withCount('enrolledShedules')
             ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id and orders.status=\'paid\') as total'));
-        if(!$isAdmin){
-            $merchant=$this->getMerchant();
-            $items=$merchant->schedules()->join('schedule_user','schedule_user.schedule_id','=','schedules.id')
-                ->join('users','users.id','=','schedule_user.user_id')
-                ->where('schedule_user.type','student')
+        if (!$isAdmin) {
+            $merchant = $this->getMerchant();
+            $items = $merchant->schedules()->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
+                ->join('users', 'users.id', '=', 'schedule_user.user_id')
+                ->where('schedule_user.type', 'student')
                 ->select('users.id');
 
         }
@@ -138,10 +139,37 @@ class UserController extends Controller
 //        $this->validate($request)
         if ($request->has('merchant_id')) {
             return $this->storeTeacher($request);
+        } else {
+            return $this->storeStudent($request);
         }
 
     }
 
+    public function storeStudent(Request $request)
+    {
+        $this->validate($request, [
+            'phone' => 'unique:users|max:20',
+            'name' => 'required|max:20',
+            'gender' => Rule::in(['male', 'female']),
+            'birthday' => 'required|date',
+        ]);
+        $user = null;
+        $result = null;
+        DB::transaction(function () use (&$user, $request, &$result) {
+            $user = User::create(array_merge(
+                [
+                    'password' => bcrypt('secret'),
+                ],
+                $request->only('phone', 'name', 'gender', 'birthday')
+            ));
+            if (!$this->isAdmin()) {
+                $this->getMerchant()->users()->syncWithoutDetaching([$user->id]);
+            }
+//            $result = $this->enroll($schedule, $user->id);
+        });
+//        dd(json_encode($result));
+        return ['success' => true, 'data' => $user];
+    }
 
     public function storeTeacher(Request $request)
     {
