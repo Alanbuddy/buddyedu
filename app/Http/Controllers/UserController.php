@@ -30,11 +30,21 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        $isAdmin=$this->isAdmin();
         $items = User::orderBy('id', 'desc')
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->whereNull('role_id')
             ->withCount('enrolledShedules')
             ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id and orders.status=\'paid\') as total'));
+        if(!$isAdmin){
+            $merchant=$this->getMerchant();
+            $items=$merchant->schedules()->join('schedule_user','schedule_user.schedule_id','=','schedules.id')
+                ->join('users','users.id','=','schedule_user.user_id')
+                ->where('schedule_user.type','student')
+                ->select('users.id')
+                ->groupBy('users.id');
+
+        }
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->key . '%')
@@ -45,6 +55,7 @@ class UserController extends Controller
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
+        $key = $request->key;
         return view($this->isAdmin() ? 'admin.student.index'
             : 'agent.student.index', compact('items', 'key'));
 
