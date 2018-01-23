@@ -24,9 +24,11 @@ $(document).ready(function(){
 
   $(".modify").click(function(){
     $("#modifyModal").modal("show");
-    var course_name = $(this).siblings('.course-name');
+    var num = $(this).siblings(".quantity").text();
+    var course_name = $(this).siblings('.course-name').text();
     var merchant_name = $(".merchant-name").text();
     $("#modifyModal").find(".modify-title").text(merchant_name + "的" + course_name);
+    $("#num").val(num);
   });
   $(".close").click(function(){
     $("#modifyModal").modal("hide");
@@ -37,7 +39,7 @@ $(document).ready(function(){
     var quantity = $("#num").val().trim();
     $.ajax({
       type: 'post',
-      url: window.quantity,
+      url: window.quantity.replace(/-1/, cid),
       data: {
         quantity: quantity
       },

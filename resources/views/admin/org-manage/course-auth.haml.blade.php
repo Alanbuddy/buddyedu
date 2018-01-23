@@ -30,10 +30,9 @@
         .frame-div
           %img.course-icon{src: "icon/bird.png"}
           %p.course-name.f16b{"data-id" => $item->id}= $item->name
-          %span.modify 修改
           - if($item->is_batch)
             %span.f12c 剩余名额:
-            %span.f12c 200
+            %span.f12c.quantity 200
             %span.modify 修改
           - else
             %p.f12b= $item->merchants_count.'机构已添加'
