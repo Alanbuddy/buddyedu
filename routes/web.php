@@ -66,6 +66,7 @@ Route::middleware('auth')
 
         Route::resource('comments', 'CommentController');
 
+        Route::post('/merchants/{merchant}/courses/{course}/quantity', 'MerchantController@updateQuantity')->name('merchant.course.quantity.update');//课程授权
         Route::get('/merchants/{merchant}/courses/{course}/{operation}', 'MerchantController@authorizeCourse')->name('merchant.course.authorize');//课程授权
         Route::get('/merchants/{merchant}/points/{point}/{operation}', 'MerchantController@authorizePoint')->name('merchant.point.authorize');
         Route::get('/merchants/{merchant}/courses', 'MerchantController@courses')->name('merchant.courses');
