@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ApplicationController extends Controller
 {
     use WithdrawTrait;
+
     public function __construct()
     {
         $this->middleware('role:admin')->except('store');
@@ -69,8 +70,8 @@ class ApplicationController extends Controller
         $this->validate($request, [
             'amount' => 'required|numeric',
         ]);
-        $item->amount = $request->amount*100;
-        $item->object_id=0;
+        $item->amount = $request->amount * 100;
+        $item->object_id = 0;
         $item->save();
         if ($request->ajax())
             return ['success' => true];
@@ -157,10 +158,15 @@ class ApplicationController extends Controller
     public function approveCourse(Request $request, Application $application)
     {
         $course = Course::findOrFail($application->object_id);
-        DB::transaction(function () use ($course, $application) {
+        DB::transaction(function () use ($request, $course, $application) {
             $application->merchant
                 ->courses()
-                ->syncWithoutDetaching([$course->id => ['status' => 'approved']]);
+                ->syncWithoutDetaching([
+                    $course->id => [
+                        'status' => 'approved',
+                        'is_batch' => $request->get(is_batch, false)
+                    ]
+                ]);
             $application->update(['status' => 'approved']);
         });
         return ['success' => true];

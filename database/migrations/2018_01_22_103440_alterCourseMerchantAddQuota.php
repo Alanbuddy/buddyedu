@@ -15,6 +15,7 @@ class AlterCourseMerchantAddQuota extends Migration
     {
         Schema::table('course_merchant', function (Blueprint $table) {
             $table->unsignedInteger('quantity')->nullable()->comment('学生账号预售数量');
+            $table->boolean('is_batch')->default(false)->comment('学生账号是否批量开通');
         });
     }
 
@@ -27,6 +28,7 @@ class AlterCourseMerchantAddQuota extends Migration
     {
         Schema::table('course_merchant', function (Blueprint $table) {
             $table->dropColumn('quantity');
+            $table->dropColumn('is_batch');
         });
     }
 }
