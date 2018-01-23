@@ -34,15 +34,26 @@ $(document).ready(function(){
       type: 'get',
       url: window.course_select,
       success: function(data){
+        console.log(data);
         if(data.success){
           $.each(data.data, function (index, item) {  
             var id = item.id; 
             var text = item.name; 
             var guide_price = item.guide_price;
-            if(guide_price != ""){
-              $("#course-desc").text(guide_price).css("margin-left", "8px");
-              $("#course-price").removeClass('mb24');
-              $("#desc").show();
+            var is_batch = item.pivot.is_batch;
+            console.log(is_batch);
+            if(is_batch){
+              $("#course-price").hide();
+              $("#desc").hide();
+              $("#course-num").hide();
+              $("#course-time").hide();
+              $("#addModal").find(".modal-dialog").css("margin-top", "-282px");
+            }else{
+              if(guide_price != ""){
+                $("#course-desc").text(guide_price).css("margin-left", "8px");
+                $("#course-price").removeClass('mb24');
+                $("#desc").show();
+              }
             }
         }); 
         }
