@@ -45,7 +45,7 @@ class CommentController extends Controller
     {
         $this->validate($request, [
             'schedule_id' => 'required|numeric',
-            'content'=>'string|between:1,200'
+            'content'=>'string|max:200'
         ]);
         $comment = new Comment($request->only('content', 'schedule_id'));
         $comment->user_id = auth()->user()->id;
