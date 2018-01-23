@@ -8,7 +8,7 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/back.png"}
+    %img.back-icon{src: "/icon/back.png"}
     %span.f16a.title 授课老师 >
     %span.f16a.title 老师名称 
 

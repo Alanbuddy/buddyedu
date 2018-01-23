@@ -18,7 +18,7 @@
   - else
     .title-div
       %a{href: route('teachers.index')}
-        %img.title-icon{src: "/icon/back.png"}
+        %img.back-icon{src: "/icon/back.png"}
       %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title

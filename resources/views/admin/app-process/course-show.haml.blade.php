@@ -8,7 +8,7 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/back.png"}
+    %img.back-icon{src: "/icon/back.png"}
     %span.f16a.title 开课申请 >
     %span.f16a.title= $schedule->course->name
 
