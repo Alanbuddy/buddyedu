@@ -59,10 +59,14 @@ class WechatController extends Controller
                     $user->password = '123';
                     $user->wx = $response["data"];
                     $user->save();
+                } else {
+                    if (empty($user->phone)) {
+                        return view('mobile.info');
+                    }
                 }
                 //Login
                 Auth::loginUsingId($user->id);
-                Log::debug('wechat login parameter state :'.$request->state);
+                Log::debug('wechat login parameter state :' . $request->state);
                 return redirect($request->get('state'));
             }
         }
