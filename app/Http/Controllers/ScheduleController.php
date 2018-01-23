@@ -368,24 +368,4 @@ class ScheduleController extends Controller
         return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
     }
 
-    public function storeStudent(Request $request, Schedule $schedule)
-    {
-        $this->validate($request, [
-            'phone' => 'unique:users|max:20',
-            'name' => 'required|max:20',
-            'gender' => Rule::in(['male', 'female']),
-            'birthday' => 'required|date',
-        ]);
-        $user = null;
-        $result = null;
-        DB::transaction(function () use (&$user, $schedule, $request, &$result) {
-            $user = User::create(array_merge(
-                ['password' => bcrypt('secret')],
-                $request->only('phone', 'name', 'gender', 'birthday')
-            ));
-            $result = $this->enroll($schedule, $user->id);
-        });
-//        dd(json_encode($result));
-        return ['success' => true];
-    }
 }
