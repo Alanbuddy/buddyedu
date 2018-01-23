@@ -119,7 +119,7 @@
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
             - foreach($merchant->teachers as $item)
               %option{value: $item->id}= $item->name
-        .controls.controls-row.mb24
+        .controls.controls-row.mb24#course-num
           %label.input-caption.f14d 班级人数:
           %input.form-control.input-width.f14d#num{:type => "text"}
         .controls.controls-row.mb24
@@ -128,7 +128,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 结课时间:
           %input.form-control.input-width#datepicker2{:type => "text"}
-        .controls.controls-row.mb24
+        .controls.controls-row.mb24#course-time
           %label.input-caption.f14d.time 详细时间:
           %textarea.form-control.input-width.f14d#time{:type => "text"}
         .controls.controls-row.mb24

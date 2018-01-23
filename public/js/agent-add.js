@@ -19,8 +19,10 @@ $(document).ready(function(){
         if(data.success){
           $.each(data.data, function (index, item) {  
             var id = item.id; 
-            var text = item.name; 
-            $("#course").append("<option value='"+id+"'>"+text+"</option>");
+            var text = item.name;
+            var guide_price = item.guide_price;
+            var is_batch = item.pivot.is_batch;
+            $("#course").append("<option value='"+id+ "'data-price='" + guide_price + "'data-batch='" + is_batch + "'>"+text+"</option>");
         }); 
         }
       }
@@ -29,36 +31,27 @@ $(document).ready(function(){
 
   courseSelect();
 
-  $("#course").change(function(){
-    $.ajax({
-      type: 'get',
-      url: window.course_select,
-      success: function(data){
-        console.log(data);
-        if(data.success){
-          $.each(data.data, function (index, item) {  
-            var id = item.id; 
-            var text = item.name; 
-            var guide_price = item.guide_price;
-            var is_batch = item.pivot.is_batch;
-            console.log(is_batch);
-            if(is_batch){
-              $("#course-price").hide();
-              $("#desc").hide();
-              $("#course-num").hide();
-              $("#course-time").hide();
-              $("#addModal").find(".modal-dialog").css("margin-top", "-282px");
-            }else{
-              if(guide_price != ""){
-                $("#course-desc").text(guide_price).css("margin-left", "8px");
-                $("#course-price").removeClass('mb24');
-                $("#desc").show();
-              }
-            }
-        }); 
-        }
+  $("#course").on('change', function(){
+    var guide_price = $(this).find('option:selected').attr("data-price");
+    var is_batch = $(this).find('option:selected').attr("data-batch");
+    if(is_batch == "1"){
+      $(this).closest('.controls').siblings("#course-price").hide();
+      $(this).closest('.controls').siblings("#desc").hide();
+      $(this).closest('.controls').siblings("#course-num").hide();
+      $(this).closest('.controls').siblings("#course-time").hide();
+      $("#addModal").find(".modal-dialog").css({"margin-top":"-282px","height": "564px"});
+    }else{
+      $(this).closest('.controls').siblings("#course-price").show();
+      $(this).closest('.controls').siblings("#desc").show();
+      $(this).closest('.controls').siblings("#course-num").show();
+      $(this).closest('.controls').siblings("#course-time").show();
+      $("#addModal").find(".modal-dialog").css({"margin-top":"-377px","height": "754px"});
+      if(guide_price != ""){
+        $("#course-desc").text(guide_price).css("margin-left", "8px");
+        $("#course-price").removeClass('mb24');
+        $("#desc").show();
       }
-    });
+    }
   });
 
   $("#apply").click(function(){
