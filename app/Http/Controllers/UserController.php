@@ -26,7 +26,8 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['']);
-        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules', 'drawings', 'updateProfile']);
+        $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules', 'drawings'
+            , 'updateProfile', 'storeStudent']);
     }
 
     public function index(Request $request)
@@ -43,7 +44,7 @@ class UserController extends Controller
                 ->join('users', 'users.id', '=', 'schedule_user.user_id')
                 ->where('schedule_user.type', 'student')
                 ->select('users.id');
-
+            $hasBatchCourse = $merchant->courses()->wherePivot('is_batch', true)->count();
         }
         if ($request->has('key')) {
             $items->where(function ($query) use ($request) {
@@ -57,7 +58,7 @@ class UserController extends Controller
         }
         $key = $request->key;
         return view($this->isAdmin() ? 'admin.student.index'
-            : 'agent.student.index', compact('items', 'key'));
+            : 'agent.student.index', compact('items', 'key', 'hasBatchCourse'));
 
     }
 
@@ -156,16 +157,14 @@ class UserController extends Controller
         $user = null;
         $result = null;
         DB::transaction(function () use (&$user, $request, &$result) {
-            $user = User::create(array_merge(
-                [
-                    'password' => bcrypt('secret'),
-                ],
-                $request->only('phone', 'name', 'gender', 'birthday')
-            ));
-            if (!$this->isAdmin()) {
+            $user = User::where('phone', $request->phone)->first();
+            if (!$user)
+                $user = User::create(array_merge(
+                    ['password' => bcrypt('secret')],
+                    $request->only('phone', 'name', 'gender', 'birthday')
+                ));
+            if (!$this->isAdmin())
                 $this->getMerchant()->users()->syncWithoutDetaching([$user->id]);
-            }
-//            $result = $this->enroll($schedule, $user->id);
         });
 //        dd(json_encode($result));
         return ['success' => true, 'data' => $user];
