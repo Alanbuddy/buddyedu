@@ -29,34 +29,37 @@ $(document).ready(function(){
 
   var order = null;
   var signPackage = null;
-
+  var person_phone = $(".person-phone").text();
   $("#end_btn").click(function(){
-    $.ajax({
-      type: 'post',
-      url: window.course_pay,
-      data: {
-        _token: window.token
-      },
-      success: function(resp){
-        if(resp.success){
-          signPackage = resp.data;
-          order=resp.data.order;
-          jsBrage();
-        }else{
-          if(resp.message == "已经加入课程"){
-            showMsg("您已经加入课程", "center");
-            return false;
-          }
-          if(resp.message == "课程学员已满"){
-            showMsg("课程学员已满", "center");
-            return false;
+    if(person_phone == ""){
+      location.href = window.user_phone;
+    }else{
+      $.ajax({
+        type: 'post',
+        url: window.course_pay,
+        data: {
+          _token: window.token
+        },
+        success: function(resp){
+          if(resp.success){
+            signPackage = resp.data;
+            order=resp.data.order;
+            jsBrage();
+          }else{
+            if(resp.message == "已经加入课程"){
+              showMsg("您已经加入课程", "center");
+              return false;
+            }
+            if(resp.message == "课程学员已满"){
+              showMsg("课程学员已满", "center");
+              return false;
+            }
           }
         }
-      }
-    });
+      });
+    }
   });
 
-  var person_phone = $(".person-phone").text();
   function jsBrage() {
       if (typeof WeixinJSBridge == 'undefined') {
           if (document.addEventListener) {
@@ -79,10 +82,8 @@ $(document).ready(function(){
           'signType': 'MD5', //微信签名方式：
           'paySign': ''+signPackage.sign,
       }, function (res) {
-          if (res.err_msg == 'get_brand_wcpay_request:ok' && person_phone == "") {
-            location.href = window.user_phone;
-          }else if(res.err_msg == 'get_brand_wcpay_request:ok' && person_phone != "") {
-            location.href = window.pay_finish;
+          if (res.err_msg == 'get_brand_wcpay_request:ok') {
+            location.href = window.user_profile;
           }
       });
   }

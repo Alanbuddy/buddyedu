@@ -63,3 +63,19 @@
   padding: 0 8px;
 }
 
+.unvisible {
+  visibility: hidden;
+  vertical-align: top;
+}
+
+.hide-notice {
+  display: inline-block;
+  width: 300px;
+  margin-left: 8px;
+  color: #f58799;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  visibility: hidden;
+}
+

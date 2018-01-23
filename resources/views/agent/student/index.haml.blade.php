@@ -68,9 +68,12 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 学生姓名:
           %input.form-control.input-width#name{:type => "text"}
-        .controls.controls-row.mb24
+        .controls.controls-row
           %label.input-caption.f14d 手机号码:
           %input.form-control.input-width#phone{:type => "text"}
+        .controls.controls-row
+          %label.input-caption.f14d.unvisible 故意隐藏:
+          %span.hide-notice.mtb#mobile-notice 手机号已经被占用
         .controls.controls-row.mb24
           %label.input-caption.f14d 学生性别:
           %select.form-control.input-width#gender
