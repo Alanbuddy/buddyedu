@@ -4582,6 +4582,7 @@ return array(
     'Tests\\Feature\\UserTest' => $baseDir . '/tests/Feature/UserTest.php',
     'Tests\\Feature\\WithdrawApplicatonTest' => $baseDir . '/tests/Feature/WithdrawApplicatonTest.php',
     'Tests\\Feature\\signIn' => $baseDir . '/tests/Feature/signIn.php',
+    'Tests\\Feature\\storeStudentTest' => $baseDir . '/tests/Feature/storeStudentTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'Tests\\Unit\\ExampleTest' => $baseDir . '/tests/Unit/ExampleTest.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',

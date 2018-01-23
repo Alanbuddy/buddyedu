@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Merchant;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,6 +18,9 @@ class Controller extends BaseController
             auth()->user()->hasRole('operator');
     }
 
+    /**
+     * @return Merchant
+     */
     public function getMerchant()
     {
         return auth()->user()->ownMerchant;

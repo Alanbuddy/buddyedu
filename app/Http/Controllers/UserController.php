@@ -42,7 +42,6 @@ class UserController extends Controller
             });
         }
         $items = $items->paginate(10);
-        $key = $request->key;
         if ($request->has('key')) {
             $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
         }
@@ -370,4 +369,9 @@ class UserController extends Controller
         return ['success' => true];
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return ['success' => true];
+    }
 }
