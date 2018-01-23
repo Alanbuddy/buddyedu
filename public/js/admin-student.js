@@ -30,4 +30,33 @@ $(document).ready(function(){
       });
   $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+
+  $("#submit").click(function(){
+    var name = $("#name").val().trim();
+    var phone = $("#phone").val().trim();
+    var gender = $("#gender").val();
+    var birthday = $("#datepicker").val();
+    var mobile_retval = $.regex.isMobile(phone);
+    if (mobile_retval == false) {
+      showMsg("手机号错误", "center");
+      return false;
+    }else{
+      $.ajax({
+        type: 'post',
+        url: window.students_store,
+        data: {
+          name: name,
+          phone: phone,
+          gender: gender,
+          birthday: birthday
+        },
+        success: function(data){
+          if(data.success){
+            location.href = window.students_search;
+          }
+        }
+      });
+    }
+  });
 });

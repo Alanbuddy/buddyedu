@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/jquery-ui.min.css">
 :javascript
   window.students_search = "#{route('users.index')}"
-  window.students_store = "#{route('schedule.student.store')}"
+  window.students_store = "#{route('schedule.student.store', -1)}"
 
 @endsection
 
