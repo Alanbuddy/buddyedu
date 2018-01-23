@@ -84,7 +84,7 @@
         + "&state="+location.href
         + "&connect_redirect=1#wechat_redirect";
 
-    @if(!Auth::check())
+    @if(!Auth::check()&&!session()->has('openid'))
         if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger') {
             location.href = app_url;
         }
