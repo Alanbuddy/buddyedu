@@ -24,7 +24,7 @@ class Merchant extends Model
     public function courses()
     {
         return $this->belongsToMany(Course::class)
-            ->withTimestamps()->withPivot('status');
+            ->withTimestamps()->withPivot('status','is_batch');
     }
 
     public function teachers()
