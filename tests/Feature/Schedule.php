@@ -23,8 +23,10 @@ class Schedule extends TestCase
             'course_id' => 1,
             'point_id' => 1,
             'merchant_id' => 1,
-            'teachers' => [3, 4]
+            'teachers' => [3, 4],
+            'lessons_count'=>15
         ]);
+        dd( $response->getStatusCode());
         $response->assertStatus(200);
     }
 }

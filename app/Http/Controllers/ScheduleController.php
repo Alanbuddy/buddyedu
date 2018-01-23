@@ -19,11 +19,7 @@ class ScheduleController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant|operator'])->only([
-            'create',
-            'index',
-            'store'
-        ]);
+        $this->middleware(['auth', 'role:admin|merchant|operator'])->only([ 'create', 'index', 'store' ]);
     }
 
     //教师选班级
@@ -139,8 +135,9 @@ class ScheduleController extends Controller
     {
         $this->validate($request, [
             'course_id' => 'required|numeric',
-            'point_id' => 'required',
+            'point_id' => 'required|numeric',
             'quota' => 'sometimes|numeric',
+            'time' => 'sometimes|string|between:1,200',
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',

@@ -4671,6 +4671,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'Tests\\Feature\\RegisterTest' => __DIR__ . '/../..' . '/tests/Feature/RegisterTest.php',
         'Tests\\Feature\\Schedule' => __DIR__ . '/../..' . '/tests/Feature/Schedule.php',
         'Tests\\Feature\\SmsVerify' => __DIR__ . '/../..' . '/tests/Feature/SmsVerify.php',
+        'Tests\\Feature\\UpdateQuantityTest' => __DIR__ . '/../..' . '/tests/Feature/UpdateQuantityTest.php',
         'Tests\\Feature\\UserTest' => __DIR__ . '/../..' . '/tests/Feature/UserTest.php',
         'Tests\\Feature\\WithdrawApplicatonTest' => __DIR__ . '/../..' . '/tests/Feature/WithdrawApplicatonTest.php',
         'Tests\\Feature\\signIn' => __DIR__ . '/../..' . '/tests/Feature/signIn.php',

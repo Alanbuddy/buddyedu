@@ -4240,6 +4240,7 @@ return array(
     'Tests\\Feature\\RegisterTest' => $baseDir . '/tests/Feature/RegisterTest.php',
     'Tests\\Feature\\Schedule' => $baseDir . '/tests/Feature/Schedule.php',
     'Tests\\Feature\\SmsVerify' => $baseDir . '/tests/Feature/SmsVerify.php',
+    'Tests\\Feature\\UpdateQuantityTest' => $baseDir . '/tests/Feature/UpdateQuantityTest.php',
     'Tests\\Feature\\UserTest' => $baseDir . '/tests/Feature/UserTest.php',
     'Tests\\Feature\\WithdrawApplicatonTest' => $baseDir . '/tests/Feature/WithdrawApplicatonTest.php',
     'Tests\\Feature\\signIn' => $baseDir . '/tests/Feature/signIn.php',
