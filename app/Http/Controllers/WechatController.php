@@ -61,6 +61,7 @@ class WechatController extends Controller
                     $user->save();
                 } else {
                     if (empty($user->phone)) {
+                        session(['openid' => $data->openid]);
                         return view('mobile.info');
                     }
                 }
