@@ -41,8 +41,7 @@ class UserController extends Controller
             $items=$merchant->schedules()->join('schedule_user','schedule_user.schedule_id','=','schedules.id')
                 ->join('users','users.id','=','schedule_user.user_id')
                 ->where('schedule_user.type','student')
-                ->select('users.id')
-                ->groupBy('users.id');
+                ->select('users.id');
 
         }
         if ($request->has('key')) {
