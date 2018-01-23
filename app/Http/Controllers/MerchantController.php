@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Faker\Provider\File;
 use Faker\Provider\Uuid;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -483,5 +484,6 @@ class MerchantController extends Controller
             ]);
         return ['success' => true];
     }
+
 
 }

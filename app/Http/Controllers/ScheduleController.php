@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class ScheduleController extends Controller
 {
@@ -19,7 +20,7 @@ class ScheduleController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant|operator'])->only([ 'create', 'index', 'store' ]);
+        $this->middleware(['auth', 'role:admin|merchant|operator'])->only(['create', 'index', 'store', 'storeStudent']);
     }
 
     //教师选班级
@@ -137,7 +138,7 @@ class ScheduleController extends Controller
             'course_id' => 'required|numeric',
             'point_id' => 'required|numeric',
             'quota' => 'sometimes|numeric',
-            'time' => 'sometimes|string|between:1,200',
+            'time' => 'sometimes|string|max:200',
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',
@@ -363,5 +364,26 @@ class ScheduleController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
         return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
+    }
+
+    public function storeStudent(Request $request, Schedule $schedule)
+    {
+        $this->validate($request, [
+            'phone' => 'unique:users|max:20',
+            'name' => 'required|max:20',
+            'gender' => Rule::in(['male', 'female']),
+            'birthday' => 'required|date',
+        ]);
+        $user = null;
+        $result = null;
+        DB::transaction(function () use (&$user, $schedule, $request, &$result) {
+            $user = User::create(array_merge(
+                ['password' => bcrypt('secret')],
+                $request->only('phone', 'name', 'gender', 'birthday')
+            ));
+            $result = $this->enroll($schedule, $user->id);
+        });
+        dd(json_encode($result));
+        return ['success' => true];
     }
 }

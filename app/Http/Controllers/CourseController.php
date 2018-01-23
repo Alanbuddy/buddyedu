@@ -27,9 +27,10 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            if (!$this->isAdmin())
-                $items = $this->getMerchant()->courses();
-            else
+            if (!$this->isAdmin()) {
+                $merchant = $this->getMerchant();
+                $items = $merchant->courses()->withPivot('is_batch');
+            } else
                 $items = Course::query();
             $items = $items->orderBy('id', 'desc')->get();
             return ['success' => true, 'data' => $items];
