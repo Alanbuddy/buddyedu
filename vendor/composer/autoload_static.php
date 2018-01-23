@@ -5036,6 +5036,7 @@ class ComposerStaticInit113a004820ac2ca779a22ef66cbfc806
         'Tests\\Feature\\UserTest' => __DIR__ . '/../..' . '/tests/Feature/UserTest.php',
         'Tests\\Feature\\WithdrawApplicatonTest' => __DIR__ . '/../..' . '/tests/Feature/WithdrawApplicatonTest.php',
         'Tests\\Feature\\signIn' => __DIR__ . '/../..' . '/tests/Feature/signIn.php',
+        'Tests\\Feature\\storeStudentTest' => __DIR__ . '/../..' . '/tests/Feature/storeStudentTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',

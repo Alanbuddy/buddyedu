@@ -197,6 +197,9 @@ class ScheduleController extends Controller
         $item = $schedule;
         $progress = $schedule->attendances()->max('ordinal_no');
         $isAdmin = $this->isAdmin();
+        $schedule->course = $schedule->course;
+        $schedule->is_batch = $schedule->course->pivot->is_batch;
+        dd($schedule);
         return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('item', 'progress'));
     }
 
