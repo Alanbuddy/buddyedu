@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/jquery-ui.min.css">
 :javascript
   window.students_search = "#{route('users.index')}"
-  window.students_store = "#{route('schedule.student.store', -1)}"
+  window.students_store = "#{route('users.store')}"
 
 @endsection
 
@@ -28,7 +28,8 @@
       .user-search-box
         .search#search-btn
         %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
-      %img.add-icon{src: "/icon/add.png"}
+      - if($hasBatchCourse)
+        %img.add-icon{src: "/icon/add.png"}
   .desc-div
     - if(count($items) == 0)
       .undiscover.f14
