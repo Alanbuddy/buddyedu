@@ -18,11 +18,13 @@ $(document).ready(function(){
   $(".approve-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
     var remark = $("#operation-info").val().trim();
+    var is_batch = $("#course-type").val();
     $.ajax({
       type: 'get',
       url: window.approve.replace(/-1/, application_id),
       data: {
-        remark: remark
+        remark: remark,
+        is_batch: is_batch
       },
       success: function(data){
         if (data.success){

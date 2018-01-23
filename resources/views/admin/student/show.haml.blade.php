@@ -12,7 +12,7 @@
 
 .main-content
   .title-div
-    %img.title-icon{src: "/icon/back.png"}
+    %img.back-icon{src: "/icon/back.png"}
     %span.f16a.title 学生管理 >
     %span.f16a.title=$user->name
 

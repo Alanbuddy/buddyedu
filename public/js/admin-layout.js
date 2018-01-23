@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('.title-icon').click(function(){
+	$('.back-icon').click(function(){
     history.back();
   });
 

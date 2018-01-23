@@ -16,7 +16,7 @@
       %span.f24a.title 金额统计
     - else
       %a{href: route('orders.stat-group-by-merchant')}
-        %img.title-icon{src: "/icon/back.png"}
+        %img.back-icon{src: "/icon/back.png"}
       %span.f16a.title= '搜索"'.$key.'"'
     .ta_date#div_date1.date-box
       %span.date_title#date1

@@ -22,4 +22,33 @@ $(document).ready(function(){
     });
   });
 
+  $(".modify").click(function(){
+    $("#modifyModal").modal("show");
+    var course_name = $(this).siblings('.course-name');
+    var merchant_name = $(".merchant-name").text();
+    $("#modifyModal").find(".modify-title").text(merchant_name + "的" + course_name);
+  });
+  $(".close").click(function(){
+    $("#modifyModal").modal("hide");
+  });
+
+  $("#confirm-btn").click(function(){
+    var cid = $(".course-name").attr("data-id");
+    var quantity = $("#num").val().trim();
+    $.ajax({
+      type: 'post',
+      url: window.quantity,
+      data: {
+        quantity: quantity
+      },
+      success: function(data){
+        if(data.success){
+          $("#modifyModal").modal("hide");
+          showMsg("名额修改成功", "center");
+        }else{
+          showMsg("名额修改失败", "center");
+        }
+      }
+    });
+  });
 });

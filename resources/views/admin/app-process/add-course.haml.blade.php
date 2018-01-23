@@ -17,7 +17,7 @@
   - else
     .title-div
       %a{href: route('merchant.course.application')}
-        %img.title-icon{src: "/icon/back.png"}
+        %img.back-icon{src: "/icon/back.png"}
       %span.f16a.title= '搜索"'.$key.'"'
 
   .tab-title
@@ -47,6 +47,7 @@
               %th 申请课程
               %th 负责人
               %th 联系方式
+              %th 上课方式
               %th 管理备注
               %th 申请备注
               %th{colspan: 2} 操作
@@ -57,6 +58,7 @@
                 %td.course-name=$item->course_name
                 %td=$item->admin_name
                 %td=$item->admin_phone
+                %td= $item->is_batch
                 %td= $item->advice ? $item->advice : '——'
                 %td= $item->remark ? $item->remark : '——'
                 -if($item->status=='applying')
@@ -78,6 +80,12 @@
         %p.f24b.add-c 申请处理
         %p.f14d.approve-title 通过"某一机构名称"申请添加"这是一门课程名称"课程的申请？
         %p.application-id.hidden
+        .controls.controls-row.mg24
+          %label.input-caption.f14d.fn 上课方式
+          %select.f14d.form-control.input-width.course-type#course-type
+            %option 请选择上课方式
+            %option{value: 0} 公开报名
+            %option{value: 1} 封闭授课
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 处理说明
           %input.f14d.form-control.input-width#operation-info{:type => "text", placeholder: "非必填"}
