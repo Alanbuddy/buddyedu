@@ -155,12 +155,12 @@ class Test extends Command
                     $this->info($v);
             }
             $result = $this->postServerFile();
+//        $result = $this->postServerFile_Bone();
         }
 
-//        $result = $this->postServerFile_Bone();
         file_put_contents('dump.html', $result);
         Log::debug(__METHOD__ . __LINE__ . "\n" . $result);
-        dd($this->dumpBinaryData($result));
+        dd(strlen($result),$this->dumpBinaryData($result));
 //        $this->info($result);
 //        $bstr = file_get_contents('dump');
     }

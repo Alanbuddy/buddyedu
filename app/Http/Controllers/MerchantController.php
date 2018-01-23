@@ -222,6 +222,7 @@ class MerchantController extends Controller
         $items = $merchant->courses()
             ->orderBy('id', 'desc')
             ->wherePivot('status', 'approved')
+            ->withPivot('is_batch')
             ->paginate(10);
         return view('admin.org-manage.course-auth', compact('items', 'merchant'));
     }
