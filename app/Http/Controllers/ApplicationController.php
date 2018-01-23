@@ -164,7 +164,7 @@ class ApplicationController extends Controller
                 ->syncWithoutDetaching([
                     $course->id => [
                         'status' => 'approved',
-                        'is_batch' => $request->get(is_batch, false)
+                        'is_batch' => $request->get('is_batch', false)
                     ]
                 ]);
             $application->update(['status' => 'approved']);
