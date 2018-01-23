@@ -383,7 +383,7 @@ class ScheduleController extends Controller
             ));
             $result = $this->enroll($schedule, $user->id);
         });
-        dd(json_encode($result));
+//        dd(json_encode($result));
         return ['success' => true];
     }
 }
