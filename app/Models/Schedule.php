@@ -10,8 +10,9 @@ class Schedule extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class)->withPivot('is_batch');
     }
+
 
     public function merchant()
     {
