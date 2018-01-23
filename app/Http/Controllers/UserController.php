@@ -154,10 +154,9 @@ class UserController extends Controller
             'gender' => Rule::in(['male', 'female']),
             'birthday' => 'required|date',
         ]);
-        $user = null;
         $result = null;
+        $user = User::where('phone', $request->phone)->first();
         DB::transaction(function () use (&$user, $request, &$result) {
-            $user = User::where('phone', $request->phone)->first();
             if (!$user)
                 $user = User::create(array_merge(
                     ['password' => bcrypt('secret')],
