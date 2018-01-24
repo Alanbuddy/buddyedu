@@ -86,6 +86,6 @@ class RegisterController extends Controller
         if (!session()->has('openid'))
             $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax())
-            return ['success' => true, 'redirect' => redirect()->intended()->getTargetUrl()];
+            return ['success' => true, 'redirect' => session('wechat.redirect')];
     }
 }
