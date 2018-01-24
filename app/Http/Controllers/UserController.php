@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['']);
+        $this->middleware('auth')->except(['showBindPhoneForm']);
         $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules', 'drawings'
             , 'updateProfile', 'storeStudent', 'studentIndex']);
     }
