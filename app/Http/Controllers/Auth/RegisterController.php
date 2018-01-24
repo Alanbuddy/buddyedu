@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users',
             'password' => 'sometimes|string|min:6|confirmed',
-            'code' => 'required|sms'
+            'token' => 'required|sms'
         ]);
     }
 
