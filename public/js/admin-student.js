@@ -59,6 +59,7 @@ $(document).ready(function(){
             location.href = window.students_search;
           }else{
             $("#mobile-notice").css("visibility", "visible");
+            return false;
           }
         }
       });

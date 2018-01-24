@@ -85,7 +85,7 @@ $(document).ready(function(){
     var verify_code = $("#mobilecode").val().trim();
     $.ajax({
       type: 'post',
-      url: window.user_next,
+      url: window.register,
       data: {
         phone: phone,
         token: verify_code,
