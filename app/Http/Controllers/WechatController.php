@@ -52,6 +52,7 @@ class WechatController extends Controller
                 $data = json_decode($response["data"]);
                 $user = User::where('openid', $data->openid)->first();
                 Log::debug('wechat login parameter state :' . $request->state);
+                Log::debug('user:' . json_encode($user));
                 session(['wechat.redirect' => $request->state]);
                 if (!$user) {
                     $user = new User();
