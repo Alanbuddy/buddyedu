@@ -15,3 +15,9 @@ function timedProxy(Closure $closure)
     $timeCost = Time::milisecond() - $begin;
     return [$result, $timeCost];
 }
+if ( ! function_exists('sms_check')) {
+    function sms_check($value)
+    {
+        return app('sms')->check($value);
+    }
+}

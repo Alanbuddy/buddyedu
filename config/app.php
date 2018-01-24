@@ -181,6 +181,7 @@ return [
         Bkwld\LaravelHaml\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        \App\Providers\SmsServiceProvider::class,
 
     ],
 

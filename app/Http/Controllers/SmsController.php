@@ -16,10 +16,8 @@ class SmsController extends Controller
 
     public function send(Request $request)
     {
-        $phoneNo = $request->get('phone', 18911209450);
-        $content = $request->get('content', '【云片网】您的验证码是AJ');
-        $r = Sms::sendSingleSms($phoneNo, $content);
-        Log::debug($content,$r);
+        $this->validate($request, ['phone' => 'required|digits:11']);
+        return app('sms')->sendVerificationCode($request->phone);
     }
 
     public function addTpl(Request $request)

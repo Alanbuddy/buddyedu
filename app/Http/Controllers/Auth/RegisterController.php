@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'code' => 'required|sms'
         ]);
     }
 
@@ -80,8 +81,9 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+        //TODO  if (!session()->has('openid'))
         $user->attachRole(Role::where('name', 'operator')->first());
-        if ($request->ajax)
+        if ($request->ajax())
             return ['success' => true];
     }
 }

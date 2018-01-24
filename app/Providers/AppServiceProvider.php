@@ -28,6 +28,29 @@ class AppServiceProvider extends ServiceProvider
             ['mobile.*'],
             'App\Http\ViewComposers\WxComposer'
         );
+        $this->app['validator']->extend('sms', function($attribute, $value, $parameters)
+        {
+            return sms_check($value);
+        });
+    }
+
+    public function sms_check()
+    {
+        if ( ! $this->session->has('captcha'))
+        {
+            return false;
+        }
+
+        $key = $this->session->get('captcha.key');
+
+        if ( ! $this->session->get('captcha.sensitive'))
+        {
+            $value = $this->str->lower($value);
+        }
+
+        $this->session->remove('captcha');
+
+        return $this->hasher->check($value, $key);
     }
 
     /**

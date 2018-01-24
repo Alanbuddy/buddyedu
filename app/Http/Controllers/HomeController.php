@@ -15,6 +15,7 @@ class HomeController extends Controller
 
     public function index(Request $request, $schedule)
     {
+        dd(session()->all());
         $schedule = Schedule::where('id', $schedule)
             ->with('course', 'course.teachers')
             ->with('point')
