@@ -74,16 +74,18 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['phone'],
             $this->username() => $data[$this->username()],
-            'password' => bcrypt(array_key_exists('password',$data)?$data['password']:$data['phone'].'secret'),
-            'api_token' => Uuid::uuid()
+            'password' => bcrypt(array_key_exists('password', $data) ? $data['password'] : $data['phone'] . 'secret'),
+            'api_token' => Uuid::uuid(),
+            'openid' => session('openid')
         ]);
     }
 
     protected function registered(Request $request, $user)
     {
-        //TODO  if (!session()->has('openid'))
-        $user->attachRole(Role::where('name', 'operator')->first());
+        //TODO
+        if (!session()->has('openid'))
+            $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax())
-            return ['success' => true];
+            return ['success' => true, 'redirect' => redirect()->intended()];
     }
 }
