@@ -31,9 +31,9 @@ Route::middleware(['auth', 'role:admin'])
         }
     );
 
+Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
 Route::middleware('auth')
     ->group(function () {
-        Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
         Route::get('/user/drawings', 'UserController@drawings')->name('user.drawings');
         Route::get('/user/videos', 'UserController@videos')->name('user.videos');
