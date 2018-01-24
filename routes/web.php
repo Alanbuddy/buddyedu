@@ -21,6 +21,7 @@ Route::get('/schedules/enroll/{schedule}', 'HomeController@index')->name('landin
 Route::get('/share/{share}', 'HomeController@share')->name('share');
 //$this->app['router']->get('captcha/{config?}', '\Mews\Captcha\CaptchaController@getCaptcha')->middleware('web'); //vendor/mews/captcha/src/CaptchaServiceProvider.php:30
 Route::get('/verify/captcha', 'CaptchaController@verify')->name('captcha.verify');
+Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
 
 
 Route::middleware(['auth', 'role:admin'])
@@ -31,7 +32,6 @@ Route::middleware(['auth', 'role:admin'])
         }
     );
 
-Route::get('/bind/phone', 'UserController@showBindPhoneForm')->name('user.phone.bind.form');
 Route::middleware('auth')
     ->group(function () {
         Route::post('/bind/phone', 'UserController@bindPhone')->name('user.phone.bind');
