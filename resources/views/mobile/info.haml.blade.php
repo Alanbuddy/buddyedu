@@ -7,7 +7,7 @@
   window.landing = "#{route('landing',$schedule??1)}"
   window.sms_send = "#{route('sms.send')}"
   window.validmobile = "#{route('validate.phone')}"
-  window.login = "#{route('login')}"
+  window.register = "#{route('register')}"
 @endsection
 
 @section('content')
