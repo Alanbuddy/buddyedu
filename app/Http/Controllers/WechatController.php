@@ -55,8 +55,8 @@ class WechatController extends Controller
                 Log::debug('wechat login parameter state :' . $request->state);
                 Log::debug('user:' . json_encode($user));
                 session(['wechat.redirect' => $request->state]);
-                session(['wechat.openid' => $data->openid]);
                 if (!$user) {
+                    session(['wechat.openid' => $data->openid]);
                     session(['wechat.name' => $data->nickname]);
                     session(['wechat.avatar' => $data->headimgurl]);
                     session(['wechat.wx' => $response["data"]]);
