@@ -4,7 +4,7 @@
 :javascript
   window.token = "#{csrf_token()}"
   window.user_next = "#{route('user.phone.bind')}"
-  window.landing = "#{route('landing',$schedule)}"
+  window.landing = "#{route('landing',$schedule??1)}"
   window.sms_send = "#{route('sms.send')}"
   window.validmobile = "#{route('validate.phone')}"
   window.login = "#{route('login')}"

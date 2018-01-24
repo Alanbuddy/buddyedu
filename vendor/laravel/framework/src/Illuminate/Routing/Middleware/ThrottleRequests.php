@@ -3,6 +3,7 @@
 namespace Illuminate\Routing\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Illuminate\Support\Str;
 use Illuminate\Cache\RateLimiter;
@@ -92,6 +93,7 @@ class ThrottleRequests
         }
 
         if ($route = $request->route()) {
+            Log::debug($request->ip());
             return sha1($route->getDomain().'|'.$request->ip());
         }
 

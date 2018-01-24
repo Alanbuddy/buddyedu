@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $this->middleware('auth')->except(['']);
         $this->middleware('role:admin|merchant')->except(['showBindPhoneForm', 'bindPhone', 'profile', 'schedules', 'drawings'
-            , 'updateProfile', 'storeStudent']);
+            , 'updateProfile', 'storeStudent', 'studentIndex']);
     }
 
     public function index(Request $request)
@@ -60,6 +60,21 @@ class UserController extends Controller
         return view($this->isAdmin() ? 'admin.student.index'
             : 'agent.student.index', compact('items', 'key', 'hasBatchCourse'));
 
+    }
+
+    public function studentIndex(Request $request)
+    {
+        if ($this->isAdmin()) {
+            $items = User::leftJoin('role_user')
+                ->whereNull('role_id');
+        } else {
+            $merchant = $this->getMerchant();
+            $items = $merchant->users();
+        }
+
+        $items = $items->orderByDesc('id')
+            ->paginate(10);
+        return ['success' => true, 'data' => $items];
     }
 
     public function adminIndex(Request $request)
