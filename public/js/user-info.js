@@ -92,7 +92,6 @@ $(document).ready(function(){
         _token: window.token
       },
       success: function(data){
-        alert(data.redirect);
         if (data.success){
           location.href = data.redirect;
         }else{
