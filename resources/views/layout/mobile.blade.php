@@ -85,7 +85,6 @@
         + "&connect_redirect=1#wechat_redirect";
 
     @if(!Auth::check()&&!session()->has('wechat.openid'))
-        alert(course_show);
         if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) == 'micromessenger' && !window.course_show) {
             location.href = app_url;
         }
