@@ -51,6 +51,7 @@ class WechatController extends Controller
             if ($response["code"] == 200) {
                 $data = json_decode($response["data"]);
                 $user = User::where('openid', $data->openid)->first();
+                Log::debug($response['data']);
                 Log::debug('wechat login parameter state :' . $request->state);
                 Log::debug('user:' . json_encode($user));
                 session(['wechat.redirect' => $request->state]);
@@ -59,10 +60,9 @@ class WechatController extends Controller
                     session(['wechat.name' => $data->nickname]);
                     session(['wechat.avatar' => $data->avatar]);
                     session(['wechat.wx' => $response["data"]]);
-                }
-                if (empty($user->phone)) {
                     return view('mobile.info');
                 }
+
                 //Login
                 Auth::loginUsingId($user->id);
                 return redirect($request->get('state'));
