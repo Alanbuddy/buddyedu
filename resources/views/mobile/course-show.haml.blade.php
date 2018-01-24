@@ -52,7 +52,7 @@
 @section('foot-div')
 .footer-div
   -if($hasEnrolled)
-    -if(empty($user->phone))
+    -if(empty($user->name))
       .left-div
         %span.f16.fb.color2 交了钱未填个人资料
       .right-div

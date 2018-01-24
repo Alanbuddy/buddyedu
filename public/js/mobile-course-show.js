@@ -27,12 +27,19 @@ $(document).ready(function(){
   }
   init();
 
+  var appId = "{{config('wechat.mp.app_id')}}";
+  var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
+      + appId
+      + "&redirect_uri=http%3a%2f%2f"
+      + "cloud.buddyrobots.com/wechat/login&response_type=code&scope=snsapi_userinfo"
+      + "&state="+location.href
+      + "&connect_redirect=1#wechat_redirect";
   var order = null;
   var signPackage = null;
   var person_phone = $(".person-phone").text();
   $("#end_btn").click(function(){
     if(person_phone == ""){
-      location.href = window.user_phone;
+      location.href = app_url;
     }else{
       $.ajax({
         type: 'post',
@@ -90,7 +97,7 @@ $(document).ready(function(){
 
 
   $("#edit_btn").click(function(){
-    location.href = window.user_phone;
+    location.href = window.user_profile;
   });
 
   $("#review_btn").click(function(){

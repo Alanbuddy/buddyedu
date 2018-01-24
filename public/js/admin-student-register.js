@@ -19,6 +19,7 @@ $(document).ready(function(){
           url: window.students_index,      //提交到一般处理程序请求数据
           data: "page=" + (pageIndex + 1),          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)
           success: function(data) {
+            console.log(data);
             total = data.total;
             $(".checkbox-items .checkbox").remove();
             for(var i=0;i<data.data.length;i++){
