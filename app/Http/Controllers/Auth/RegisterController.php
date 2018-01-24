@@ -77,10 +77,10 @@ class RegisterController extends Controller
             'password' => bcrypt(array_key_exists('password', $data) ? $data['password'] : $data['phone'] . 'secret'),
             'api_token' => Uuid::uuid(),
         ];
-        if ($openid = session('wechat.openid')) {
-            $arr = array_merge($arr, ['name' => session('wechat.name'),
-                'avatar' => session('wechat.avatar'),
-                'wx' => session('wechat.wx'),
+        if ($openid = session()->pull('wechat.openid')) {
+            $arr = array_merge($arr, ['name' => session()->pull('wechat.name'),
+                'avatar' => session()->pull('wechat.avatar'),
+                'wx' => session()->pull('wechat.wx'),
                 'openid' => $openid,
             ]);
         }
