@@ -3,3 +3,76 @@
   cursor: pointer;
 }
 
+#addModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -250px;
+  margin-top: -210px;
+  width: 500px;
+  height: 420px;
+}
+
+#addModal .modal-backdrop {
+  background-color: #999;
+}
+
+#addModal .modal-content {
+  border-radius: 12px;
+}
+
+#addModal .modal-body {
+  margin: 0;
+  padding: 20px 40px;
+}
+
+#addModal .close {
+  position: absolute;
+  width: 64px;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 15;
+}
+
+#addModal .search-div {
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 20px;
+}
+
+#addModal .user-search-box {
+  width: 230px;
+}
+
+#addModal .input-style {
+  width: 200px;
+}
+
+#addModal .confirm-btn-position {
+  position: absolute;
+  right: 350px;
+  bottom: 60px;
+}
+
+#addModal #confirm-btn {
+  width: 100px;
+  color: #fff;
+  outline: none;
+  background: #10c078;
+}
+
+#addModal .select-page {
+  margin-top: 60px;
+}
+

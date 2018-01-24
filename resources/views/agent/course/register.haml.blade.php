@@ -1,6 +1,8 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin-register.css') }}">
+:javascript
+  window.students_index = "#{route('users.store')}"
 @endsection
 
 @section('content')
@@ -47,6 +49,24 @@
       .select-page 
         %span.choice-page
           != $items->links()
+
+#addModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1", style: "z-index: 10006"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body.f14
+        .search-div
+          %p.f24b 学生选择
+          .user-search-box
+            .search#modal-search-btn
+            %input.input-style#modal-search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+        .checkbox-items
+        
+        .select-page
+          %span.totalitems
+          .quotes#Pagination 
+        .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
 
 @endsection
 

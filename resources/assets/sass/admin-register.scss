@@ -2,3 +2,68 @@
   font-size: 12px;
   cursor: pointer;
 }
+#addModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -250px;
+    margin-top: -210px;
+    width: 500px;
+    height: 420px;
+  }
+  .modal-backdrop {
+    background-color: #999;
+  }
+  .modal-content {
+    border-radius: 12px;
+  }
+  .modal-body {
+    margin: 0;
+    padding: 20px 40px;
+  }
+  .close {
+    position: absolute;
+    width: 64px;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 15;
+  }
+  .search-div {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -os-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -os-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .user-search-box {
+    width: 230px;
+  }
+  .input-style {
+    width: 200px;
+  }
+  .confirm-btn-position {
+    position: absolute;
+    right: 350px;
+    bottom: 60px;
+  }
+  #confirm-btn {
+    width: 100px;
+    color: #fff;
+    outline: none;
+    background: #10c078;
+  }
+  .select-page {
+    margin-top: 60px;
+  }
+}
+
+
+

@@ -93,7 +93,7 @@ $(document).ready(function(){
       },
       success: function(data){
         if (data.success){
-          location.href = window.user_profile;
+          location.href = data.redirect;
         }else{
           $("#mobile_notice").text("验证码错误").css("visibility", "visible");
         }
