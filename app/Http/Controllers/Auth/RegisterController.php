@@ -71,13 +71,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $arr = [
             'name' => $data['phone'],
             $this->username() => $data[$this->username()],
             'password' => bcrypt(array_key_exists('password', $data) ? $data['password'] : $data['phone'] . 'secret'),
             'api_token' => Uuid::uuid(),
-            'openid' => session('openid')
-        ]);
+        ];
+        if ($openid = session('wechat.openid')) {
+            $arr = array_merge($arr, ['name' => session('wechat.name'),
+                'avatar' => session('wechat.avatar'),
+                'wx' => session('wechat.wx'),
+                'openid' => $openid,
+            ]);
+        }
+        return User::create($arr);
     }
 
     protected function registered(Request $request, $user)
