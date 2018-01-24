@@ -274,7 +274,10 @@ class ScheduleController extends Controller
         $items = $schedule->students()
             ->paginate(10);
         $isAdmin = $this->isAdmin();
-        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule'));
+        if (!$isAdmin){
+            $isBatch = $this->isBatch($this->getMerchant(), $schedule->course_id);
+        }
+        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule','isBatch'));
     }
 
     //报名成功
