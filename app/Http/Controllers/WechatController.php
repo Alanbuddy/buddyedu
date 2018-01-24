@@ -54,19 +54,14 @@ class WechatController extends Controller
                 Log::debug('wechat login parameter state :' . $request->state);
                 Log::debug('user:' . json_encode($user));
                 session(['wechat.redirect' => $request->state]);
+                session(['wechat.openid' => $data->openid]);
                 if (!$user) {
-                    $user = new User();
-                    $user->name = $data->nickname;
-                    $user->openid = $data->openid;
-                    $user->avatar = $data->headimgurl;
-                    $user->password = '123';
-                    $user->wx = $response["data"];
-                    $user->save();
-                } else {
-                    if (empty($user->phone)) {
-                        session(['openid' => $data->openid]);
-                        return view('mobile.info');
-                    }
+                    session(['wechat.name' => $data->nickname]);
+                    session(['wechat.avatar' => $data->avatar]);
+                    session(['wechat.wx' => $response["data"]]);
+                }
+                if (empty($user->phone)) {
+                    return view('mobile.info');
                 }
                 //Login
                 Auth::loginUsingId($user->id);

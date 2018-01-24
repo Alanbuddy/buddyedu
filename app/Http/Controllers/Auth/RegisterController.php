@@ -83,7 +83,7 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         //TODO
-        if (!session()->has('openid'))
+        if (empty($user->openid))
             $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax())
             return ['success' => true, 'redirect' => session('wechat.redirect')];
