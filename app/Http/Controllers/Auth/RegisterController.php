@@ -74,7 +74,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['phone'],
             $this->username() => $data[$this->username()],
-            'password' => bcrypt($data['password']),
+            'password' => bcrypt(array_key_exists($data,'password')?$data['password']:$data['phone'].'secret'),
             'api_token' => Uuid::uuid()
         ]);
     }
