@@ -49,13 +49,13 @@ class SmsService
         return false;
     }
 
-    public function exists($code)
+    public function exists($value)
     {
         $sms = session('sms');
         Log::debug(json_encode($sms));
         return $sms
             && !$this->codeExpired($sms['created_at'])
-            && $this->hasher->check($code, $sms['code']);
+            && $this->hasher->check($value, $sms['code']);
     }
 
     public function codeExpired($createdAt)

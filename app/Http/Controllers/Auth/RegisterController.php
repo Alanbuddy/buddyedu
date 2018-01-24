@@ -52,9 +52,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'code' => 'required|sms'
+            'email' => 'sometimes|string|email|max:255|unique:users',
+            'password' => 'sometimes|string|min:6|confirmed',
+            'token' => 'required|sms'
         ]);
     }
 
@@ -74,16 +74,18 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['phone'],
             $this->username() => $data[$this->username()],
-            'password' => bcrypt($data['password']),
-            'api_token' => Uuid::uuid()
+            'password' => bcrypt(array_key_exists('password', $data) ? $data['password'] : $data['phone'] . 'secret'),
+            'api_token' => Uuid::uuid(),
+            'openid' => session('openid')
         ]);
     }
 
     protected function registered(Request $request, $user)
     {
-        //TODO  if (!session()->has('openid'))
-        $user->attachRole(Role::where('name', 'operator')->first());
+        //TODO
+        if (!session()->has('openid'))
+            $user->attachRole(Role::where('name', 'operator')->first());
         if ($request->ajax())
-            return ['success' => true];
+            return ['success' => true, 'redirect' => redirect()->intended()];
     }
 }
