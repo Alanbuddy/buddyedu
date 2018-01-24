@@ -8,6 +8,7 @@
   window.user_phone = "#{route('user.phone.bind.form')}"
   window.review = "#{route('comments.store')}"
   window.landing = "#{route('landing',$schedule)}"
+  window.user_profile = "#{route('profile')}"
 @endsection
 
 @section('content')

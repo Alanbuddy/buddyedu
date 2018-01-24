@@ -31,6 +31,9 @@ $(document).ready(function(){
   $( "#datepicker" ).datepicker( $.datepicker.regional[ "zh-TW" ] );
   $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 
+  $("#phone").keyup(function(){
+    $("#mobile-notice").css("visibility", "hidden");
+  });
 
   $("#submit").click(function(){
     var name = $("#name").val().trim();
@@ -54,6 +57,9 @@ $(document).ready(function(){
         success: function(data){
           if(data.success){
             location.href = window.students_search;
+          }else{
+            $("#mobile-notice").css("visibility", "visible");
+            return false;
           }
         }
       });

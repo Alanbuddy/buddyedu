@@ -4,15 +4,16 @@
 :javascript
   window.token = "#{csrf_token()}"
   window.user_next = "#{route('user.phone.bind')}"
-  window.user_profile = "#{route('profile')}"
+  window.landing = "#{route('landing',$schedule)}"
   window.sms_send = "#{route('sms.send')}"
   window.validmobile = "#{route('validate.phone')}"
+  window.login = "#{route('login')}"
 @endsection
 
 @section('content')
 .desc-div
   .input-div
-    %p.f20.fb.title 个人资料
+    %p.f20.fb.title 登录
     .input-group.no-margin-bottom
       %span.input-group-addon.miniphoto
       %input.form-box.f14#mobile{placeholder: "请输入您的手机号", type: "text"}
@@ -22,7 +23,7 @@
       .input-inside-div
         %input.form-box.form-verify-box.f14#mobilecode{placeholder: "请输入验证码", type: "text"}
         %span.verify-code-span.f12.pointer#verifycode 获取验证码 
-    %button.btn.click-btn.f14#next_btn{type: "button"} 下一步
+    %button.btn.click-btn.f14#next_btn{type: "button"} 登录
 @endsection
 
 @section('script')

@@ -1,6 +1,6 @@
 @extends('layout.agent')
 @section('css')
-
+<link rel="stylesheet" href="{{ mix('/css/admin-register.css') }}">
 @endsection
 
 @section('content')
@@ -16,6 +16,11 @@
       %li
         %a.f14c{href: route('schedules.show', $schedule)} 基础信息
       %li.f14a.bg16b 报名情况
+    .search-add
+      .user-search-box
+        .search#search-btn
+        %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+      %img.add-icon{src: "/icon/add.png"}
 
   .desc-div
     - if(count($items) == 0) 
@@ -29,16 +34,15 @@
               %th 手机号
               %th 学生姓名
               %th 学生年龄
-              %th 报名时间
-              %th 报名状态
+              %th 操作
           %tbody
             -foreach($items as $item)
               %tr
                 %td=$item->phone
                 %td=$item->name
                 %td=(date('Y')-date('Y',strtotime($item->birthday))).'岁'
-                %td=$item->pivot->created_at
-                %td.green 已支付
+                %td
+                  %a.delete 删除
 
       .select-page 
         %span.choice-page
@@ -47,6 +51,6 @@
 @endsection
 
 @section('script')
-
+<script src= "/js/admin-student-register.js"></script>
 
 @endsection
