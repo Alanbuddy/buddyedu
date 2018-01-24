@@ -58,7 +58,7 @@ class WechatController extends Controller
                 session(['wechat.openid' => $data->openid]);
                 if (!$user) {
                     session(['wechat.name' => $data->nickname]);
-                    session(['wechat.avatar' => $data->avatar]);
+                    session(['wechat.avatar' => $data->headimgurl]);
                     session(['wechat.wx' => $response["data"]]);
                     return view('mobile.info');
                 }
