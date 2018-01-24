@@ -20,13 +20,15 @@ $(document).ready(function(){
           data: "page=" + (pageIndex + 1),          //提交两个参数：pageIndex(页面索引)，pageSize(显示条数)
           success: function(data) {
             console.log(data);
-            total = data.total;
+            console.log(data.data.data);
+            total = data.data.total;
             $(".checkbox-items .checkbox").remove();
-            for(var i=0;i<data.data.length;i++){
-              var check_item = $('<div class="checkbox">' +
-                                    '<label>' +
-                                      '<input type="checkbox" name="lesson-check" value=' + data.data[i].id + ' data-text="' + data.data[i].name + '"/>' + data.data[i].name +
+            for(var i=0;i<data.data.data.length;i++){
+              var check_item = $('<div class="checkbox f14d">' +
+                                    '<label style="width: 150px">' +
+                                      '<input type="checkbox" name="lesson-check" value=' + data.data.data[i].id + ' data-text="' + data.data.data[i].name + '"/>' + data.data.data[i].name +
                                     '</label>' +
+                                    '<span class="ml40">' + data.data.data[i].phone + '</span>' +
                                 '</div>');
               $(".checkbox-items").append(check_item);
             }
