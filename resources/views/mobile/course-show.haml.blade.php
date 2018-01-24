@@ -9,7 +9,7 @@
   window.review = "#{route('comments.store')}"
   window.landing = "#{route('landing',$schedule)}"
   window.user_profile = "#{route('profile')}"
-  window.course_show = true;
+  window.course_show = true
 @endsection
 
 @section('content')
