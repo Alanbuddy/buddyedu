@@ -53,4 +53,6 @@ $(document).ready(function(){
       }
     });
   });
+
+  $clamp(document.querySelector('.course-description'), {clamp: 3});
 });

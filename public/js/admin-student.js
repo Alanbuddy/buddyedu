@@ -55,13 +55,14 @@ $(document).ready(function(){
           birthday: birthday
         },
         success: function(data){
-          if(!data.success){
+          if(data.success){
             $("#addModal").modal("hide");
             location.href = window.students_search;
-          }else{
-            $("#mobile-notice").css("visibility", "visible");
-            return false;
           }
+        },
+        error: function(data){
+          $("#mobile-notice").css("visibility", "visible");
+          return false;
         }
       });
     }

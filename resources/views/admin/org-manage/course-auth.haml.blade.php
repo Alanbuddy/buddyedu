@@ -36,7 +36,7 @@
             %span.modify 修改
           - else
             %p.f12b= $item->merchants_count.'机构已添加'
-          %p.mt24.f12b= $item->description??'没有简介'
+          %p.mt24.f12b.course-description= $item->description??'没有简介'
           .add-div
             %span.f14b.cancel-course{style: "cursor: pointer"} 取消
 
@@ -67,6 +67,7 @@
 @endsection
 
 @section('script')
+<script src="/js/clamp.js"></script>
 <script src= "/js/admin-course-auth.js"></script>
 
 @endsection
