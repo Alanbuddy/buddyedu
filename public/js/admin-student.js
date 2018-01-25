@@ -3,7 +3,7 @@ $(document).ready(function(){
     var value = $("#search-input").val();
     location.href = window.students_search + "?key=" + value;
   }
-    
+
   $("#search-btn").click(function(){
     search();
   });
@@ -55,13 +55,18 @@ $(document).ready(function(){
           birthday: birthday
         },
         success: function(data){
+            alert(2);
+            alert(data);
           if(data.success){
             location.href = window.students_search;
           }else{
             $("#mobile-notice").css("visibility", "visible");
             return false;
           }
-        }
+        },
+          error:function (d) {
+              console.log(d);
+          }
       });
     }
   });

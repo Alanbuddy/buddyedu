@@ -35,28 +35,22 @@ class UserController extends Controller
         $isAdmin = $this->isAdmin();
         $items = User::orderBy('id', 'desc')
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-            ->whereNull('role_id')
-            ->withCount('enrolledShedules')
-            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id and orders.status=\'paid\') as total'));
+            ->whereNull('role_id');
         if (!$isAdmin) {
             $merchant = $this->getMerchant();
-            $items = $merchant->schedules()->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
-                ->join('users', 'users.id', '=', 'schedule_user.user_id')
-                ->where('schedule_user.type', 'student')
-                ->select('users.id');
+            $items = $merchant->users();
             $hasBatchCourse = $merchant->courses()->wherePivot('is_batch', true)->count();
         }
-        if ($request->has('key')) {
-            $items->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->key . '%')
-                    ->orWhere('phone', 'like', '%' . $request->key . '%');
+        $items->withCount('enrolledShedules')
+            ->addSelect(DB::raw('(select round(sum(amount/100),2) from orders where user_id=users.id and orders.status=\'paid\') as total'));
+        if ($key = $request->key) {
+            $items->where(function ($query) use ($key) {
+                $query->where('name', 'like', '%' . $key . '%')->orWhere('phone', 'like', '%' . $key . '%');
             });
         }
         $items = $items->paginate(10);
-        if ($request->has('key')) {
-            $items->withPath(route('users.index') . '?' . http_build_query(['key' => $request->key,]));
-        }
-        $key = $request->key;
+        if ($key)
+            $items->withPath(route('users.index') . '?' . http_build_query(['key' => $key,]));
         return view($this->isAdmin() ? 'admin.student.index'
             : 'agent.student.index', compact('items', 'key', 'hasBatchCourse'));
 
@@ -77,11 +71,9 @@ class UserController extends Controller
                 $query->where('name', 'like', '%' . $key . '%')->orWhere('phone', 'like', '%' . $key . '%');
             });
         }
-        $items = $items->paginate(10);
+        $items = $items->orderByDesc('id')->paginate(10);
         if ($key)
             $items->withPath(route('students.index') . '?' . http_build_query(['key' => $key,]));
-        $items = $items->orderByDesc('id')
-            ->paginate(10);
         return ['success' => true, 'data' => $items];
     }
 

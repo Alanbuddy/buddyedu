@@ -25,5 +25,6 @@ class ScheduleUserSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);
+        \App\Models\Merchant::find(1)->users()->attach($user);
     }
 }

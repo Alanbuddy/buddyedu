@@ -42,24 +42,25 @@ class enroll extends Command
      */
     public function handle()
     {
-        $course_id = $this->ask('course id');
-        $course = Schedule::find($course_id);
+        $course_id = $this->ask('schedule id');
+        $schedule = Schedule::find($course_id);
         $user_id = $this->ask("user id");
-        $result = $this->enroll($course, $user_id);
+        $result = $this->enroll($schedule, $user_id);
         $this->info(json_encode($result));
         $order = new Order();
         $order->fill([
-            'title' => 'test ' . $course->course->name,
+            'title' => 'test ' . $schedule->course->name,
             'user_id' => $user_id,
-            'product_id' => $course->id,
+            'product_id' => $schedule->id,
             'status' => 'paid',
-            'amount' => $course->price,
-            'merchant_id' => $course->merchant->id,
+            'amount' => $schedule->price,
+            'merchant_id' => $schedule->merchant->id,
             'uuid' => 'test'
         ]);
-        $merchant=$course->merchant;
-        $merchant->balance+=$course->price;
+        $merchant = $schedule->merchant;
+        $merchant->balance += $schedule->price;
         $merchant->save();
         $order->save();
+        $merchant->users()->syncWithoutDetaching([$order->user_id]);
     }
 }
