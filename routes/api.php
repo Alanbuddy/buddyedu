@@ -31,6 +31,7 @@ Route::middleware(['auth:api'])
             Route::get('/schedules/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
             Route::any('/schedules/sign-in', 'ScheduleController@signIn')->name('schedule.signIn');//签到
             Route::get('/schedules/attendances', 'ScheduleController@attendances')->name('schedule.attendances');
+            Route::get('/update', 'AiController@getAppUpdate')->name('api.app.update');
         });
 
 Route::post('/file', 'AiController@store');
@@ -43,4 +44,3 @@ Route::get('/login/sms', 'Auth\LoginController@sendVerificationCodeForLogin')->n
 Route::post('/login/sms', 'Auth\LoginController@loginBySms')->name('api.login.sms');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('api.password.reset');
-

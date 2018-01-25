@@ -383,9 +383,20 @@ class ScheduleController extends Controller
     {
         $this->validate($request, ['students' => 'required|array']);
         $ids = $request->get('students', []);
+        $merchant = $schedule->merchant;
+        $quantity = $this->getQuantity($merchant, $schedule->course_id);
+        $exist = $merchant->courses()->wherePivot('is_batch', true)
+            ->where('courses.id', $schedule->course_id)
+            ->join('schedules', 'schedules.course_id', '=', 'courses.id')
+            ->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
+            ->groupBy('user_id')
+            ->count();
+        $remain = $quantity > $exist ? $quantity - $exist : 0;
+        if (!$remain || $remain < count($ids))
+            return ['success' => false, 'message' => "not enough accounts,only $remain left,$exist accounts has been assigned"];
         DB::transaction(function () use ($ids, $schedule) {
             $arr = [];
-            array_walk($ids,function($v) use (&$arr) {
+            array_walk($ids, function ($v) use (&$arr) {
                 $arr[$v] = ['type' => 'student'];
             });
             Log::debug(json_encode($arr));

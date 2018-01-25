@@ -1,0 +1,1 @@
+zip $(git rev-parse HEAD).zip $(git --no-pager diff --name-only $1 $(git rev-parse HEAD))

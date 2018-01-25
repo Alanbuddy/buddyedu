@@ -37,4 +37,15 @@ class Controller extends BaseController
             ->first();
         return $record && $record->is_batch;
     }
+
+    public function getQuantity(Merchant $merchant, $courseId)
+    {
+        $record = DB::table('course_merchant')
+            ->select('quantity')
+            ->where('merchant_id', $merchant->id)
+            ->where('course_id', $courseId)
+            ->first();
+        return $record ? $record->quantity : 0;
+
+    }
 }
