@@ -55,9 +55,23 @@ class UsersTableSeeder extends Seeder
     public function seedMerchantAdmin()
     {
         DB::table('users')->insert([
-            'name' => 'merchant_admin_demo',
+            'name' => '田纯',
             'email' => str_random(10) . '@gmail.com',
             'phone' => '13470079150',
+            'password' => bcrypt('secret'),
+            'api_token' => \Faker\Provider\Uuid::uuid(),
+        ]);
+        DB::table('users')->insert([
+            'name' => '蔡德凤',
+            'email' => str_random(10) . '@gmail.com',
+            'phone' => '13693395551',
+            'password' => bcrypt('secret'),
+            'api_token' => \Faker\Provider\Uuid::uuid(),
+        ]);
+        DB::table('users')->insert([
+            'name' => '于导',
+            'email' => str_random(10) . '@gmail.com',
+            'phone' => '13811089551',
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);

@@ -269,22 +269,30 @@ class ScheduleController extends Controller
         return ['success' => true, 'data' => $items];
     }
 
-    public function enrolls(Schedule $schedule)
+    public function enrolls(Request $request, Schedule $schedule)
     {
-        $items = $schedule->students()
-            ->paginate(10);
+        $items = $schedule->students();
         $isAdmin = $this->isAdmin();
-        if (!$isAdmin){
+        if (!$isAdmin) {
             $isBatch = $this->isBatch($this->getMerchant(), $schedule->course_id);
         }
-        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule','isBatch'));
+
+        if ($key = $request->key) {
+            $items->where(function ($query) use ($key) {
+                $query->where('name', 'like', '%' . $key . '%')->orWhere('phone', 'like', '%' . $key . '%');
+            });
+        }
+        $items = $items->paginate(10);
+        if ($key)
+            $items->withPath(route('schedule.student', $schedule) . '?' . http_build_query(['key' => $key,]));
+        return view($isAdmin ? 'admin.course.course-register' : 'agent.course.register', compact('items', 'schedule', 'isBatch', 'key'));
     }
 
     //报名成功
     public function enrolled(Schedule $schedule)
     {
 //        return redirect(route('landing', $schedule));
-        return view('mobile.register-success', compact('schedule'));
+        return view('mobile . register - success', compact('schedule'));
 //        $user = auth()->user();
 //        $order = $this->getEnrollOrder($schedule);
 //        return $order ? $this->enroll($schedule, $user->id) : ['success' => false, 'message' => 'no finished order found'];
@@ -297,7 +305,7 @@ class ScheduleController extends Controller
             'merchant_id' => 'required',
             'point_id' => 'required',
             'schedule_id' => 'required',
-            'students' => 'sometimes|array'
+            'students' => 'sometimes | array'
         ]);
         $arr = $request->get('students', []);
         Log::debug('students: ' . json_encode($arr));
@@ -368,7 +376,7 @@ class ScheduleController extends Controller
             ->with('user')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
+        return $request->ajax() ? ['success' => true, compact('items')] : view('mobile . student - course - review', compact('items'));
     }
 
 }
