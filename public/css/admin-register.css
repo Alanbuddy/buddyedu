@@ -56,7 +56,7 @@
 }
 
 #addModal .input-style {
-  width: 200px;
+  width: 160px;
 }
 
 #addModal #confirm-btn {
@@ -79,5 +79,9 @@
   width: 100%;
   text-align: center;
   margin-top: 20px;
+}
+
+#addModal .back {
+  display: none;
 }
 
