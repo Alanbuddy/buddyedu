@@ -47,7 +47,7 @@
     width: 230px;
   }
   .input-style {
-    width: 200px;
+    width: 160px;
   }
   #confirm-btn {
     width: 100px;
@@ -66,6 +66,9 @@
     width: 100%;
     text-align: center;
     margin-top: 20px;
+  }
+  .back {
+    display: none;
   }
 }
 

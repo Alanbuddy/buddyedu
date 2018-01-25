@@ -55,18 +55,14 @@ $(document).ready(function(){
           birthday: birthday
         },
         success: function(data){
-            alert(2);
-            alert(data);
-          if(data.success){
+          if(!data.success){
+            $("#addModal").modal("hide");
             location.href = window.students_search;
           }else{
             $("#mobile-notice").css("visibility", "visible");
             return false;
           }
-        },
-          error:function (d) {
-              console.log(d);
-          }
+        }
       });
     }
   });

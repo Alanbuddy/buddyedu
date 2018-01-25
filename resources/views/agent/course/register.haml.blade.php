@@ -5,6 +5,7 @@
   window.students_index = "#{route('students.index')}"
   window.register_search = "#{route('schedule.student',$schedule)}"
   window.student_delete = "#{route('users.destroy',-1)}"
+  window.student_choice = "#{route('schedule.student.batch-enroll',$shcedule->id)}"
 @endsection
 
 @section('content')
@@ -65,6 +66,7 @@
           .user-search-box
             .search#modal-search-btn
             %input.input-style#modal-search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
+            %img.back{src: "/icon/smallclose.png"}
         .checkbox-items
 
         
