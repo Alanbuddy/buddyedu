@@ -156,7 +156,9 @@ class AiController extends Controller
         if (is_resource($process)) {
             fwrite($pipes[0], $request->v);
             fclose($pipes[0]);
-            echo stream_get_contents($pipes[1]);
+            $result = stream_get_contents($pipes[1]);
+//            $name=array_shift(explode('+', $result));
+            var_dump(array_shift(explode('+', $result)));
             fclose($pipes[1]);
             proc_close($process);   //在调用proc_close之前必须关闭所有管道
         }

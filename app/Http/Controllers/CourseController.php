@@ -45,7 +45,7 @@ class CourseController extends Controller
         if (!$isAdmin) {
             $merchant = auth()->user()->ownMerchant;
             if ($request->type == 'my') {
-                $items = $merchant->courses();
+                $items = $merchant->courses()->withPivot('is_batch');
                 $count = Course::count();
             } else {
                 $count = $merchant->courses()->count();
@@ -54,9 +54,9 @@ class CourseController extends Controller
 
         $items = $items->paginate(10);
         if (!$isAdmin && $request->type != 'my') {
-//            foreach ($items as $item) {
-//                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
-//            }
+            foreach ($items as $item) {
+                $item->remain = $this->getRemain($this->getMerchant(), $item->id);
+            }
             $items->getCollection()->each->markHasAddedByMerchant($merchant);
 //            array_map(function ($item) use ($merchant) {
 //                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程

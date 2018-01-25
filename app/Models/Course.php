@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Course extends Model
 {
@@ -67,11 +68,18 @@ class Course extends Model
 
     public function merchants()
     {
-        return $this->belongsToMany('App\Models\Merchant');
+        return $this->belongsToMany('App\Models\Merchant')->withPivot('is_batch');
     }
 
     public function markHasAddedByMerchant($merchant)
     {
         $this->added = $this->merchants->contains($merchant);
+    }
+
+    public function calculateRemain($merchant)
+    {
+
+
+        $this->remain = $this->merchants->contains($merchant);
     }
 }

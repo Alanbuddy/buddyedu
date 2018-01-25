@@ -48,4 +48,27 @@ class Controller extends BaseController
         return $record ? $record->quantity : 0;
 
     }
+
+    public function getRemain(Merchant $merchant, $courseId)
+    {
+        $quantity = $this->getQuantity($merchant, $courseId);
+        $exist = $this->getExist($merchant, $courseId);
+        return $quantity > $exist ? $quantity - $exist : 0;
+    }
+
+    /**
+     * @param Merchant $merchant
+     * @param $courseId
+     * @return int
+     */
+    public function getExist(Merchant $merchant, $courseId)
+    {
+        $exist = $merchant->courses()->wherePivot('is_batch', true)
+            ->where('courses.id', $courseId)
+            ->join('schedules', 'schedules.course_id', '=', 'courses.id')
+            ->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
+            ->groupBy('user_id')
+            ->count();
+        return $exist;
+    }
 }
