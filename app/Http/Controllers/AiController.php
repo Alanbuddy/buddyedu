@@ -157,11 +157,14 @@ class AiController extends Controller
             fwrite($pipes[0], $request->v);
             fclose($pipes[0]);
             $result = stream_get_contents($pipes[1]);
-//            $name=array_shift(explode('+', $result));
-            var_dump(array_shift(explode('+', $result)));
+            $name = explode('+', $result)[0];
             fclose($pipes[1]);
             proc_close($process);   //在调用proc_close之前必须关闭所有管道
         }
+        $content=file_get_contents("$cwd$name.zip");
+        return response($content, 200)
+            ->header('Content-Type', 'image/png')
+            ->header('Content-Disposition', 'attachment;filename=' . $name . '.zip');
     }
 
 }
