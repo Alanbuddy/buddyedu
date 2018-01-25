@@ -45,6 +45,42 @@ $(document).ready(function(){
           }
       });
     }
+    
     $("#addModal").modal("show");
+  });
+
+  function search(){
+    var value = $("#search-input").val();
+    location.href = window.register_search + "?key=" + value;
+  }
+    
+  $("#search-btn").click(function(){
+    search();
+  });
+
+  $("#search-input").keydown(function(event){
+    var code = event.which;
+    if (code == 13){
+      search();
+    }
+  });
+
+  $(".delete").click(function(){
+    var sid = $(this).attr("data-id");
+    var destroy = "DELETE";
+    var _this = $(this);
+    $.ajax({
+      url: window.student_delete.replace(/-1/, sid),
+      type: 'post',
+      data: {
+        _method: destroy,
+        _token: window.token
+      },
+      success: function(data){
+        if(data.success){
+          _this.closest('tr').remove();
+        }
+      }
+    });
   });
 });
