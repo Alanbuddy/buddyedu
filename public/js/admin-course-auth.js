@@ -32,6 +32,7 @@ $(document).ready(function(){
   });
   $(".close").click(function(){
     $("#modifyModal").modal("hide");
+    $("#num").val("");
   });
 
   $("#confirm-btn").click(function(){
@@ -47,6 +48,7 @@ $(document).ready(function(){
         if(data.success){
           $("#modifyModal").modal("hide");
           showMsg("名额修改成功", "center");
+          location.href = window.course_auth;
         }else{
           showMsg("名额修改失败", "center");
         }

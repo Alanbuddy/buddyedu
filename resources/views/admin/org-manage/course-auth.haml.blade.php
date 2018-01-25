@@ -5,6 +5,7 @@
   window.course_list = "#{route('merchants.show', $merchant->id)}}"
   window.course_revoke = "#{route('merchant.course.authorize',[$merchant,-1,'revoke'])}"
   window.quantity = "#{route('merchant.course.quantity.update',[$merchant->id,-1])}"
+  window.course_auth = "#{route('merchant.courses', $merchant->id)}"
 @endsection
 
 @section('content')
@@ -30,9 +31,9 @@
         .frame-div
           %img.course-icon{src: "icon/bird.png"}
           %p.course-name.f16b{"data-id" => $item->id}= $item->name
-          - if($item->is_batch)
+          - if($item->pivot->is_batch)
             %span.f12c 剩余名额:
-            %span.f12c.quantity 200
+            %span.f12c.quantity= $item->remain??'0'
             %span.modify 修改
           - else
             %p.f12b= $item->merchants_count.'机构已添加'
