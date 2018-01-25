@@ -72,6 +72,14 @@ class UserController extends Controller
             $items = $merchant->users();
         }
 
+        if ($key = $request->key) {
+            $items->where(function ($query) use ($key) {
+                $query->where('name', 'like', '%' . $key . '%')->orWhere('phone', 'like', '%' . $key . '%');
+            });
+        }
+        $items = $items->paginate(10);
+        if ($key)
+            $items->withPath(route('students.index') . '?' . http_build_query(['key' => $key,]));
         $items = $items->orderByDesc('id')
             ->paginate(10);
         return ['success' => true, 'data' => $items];
