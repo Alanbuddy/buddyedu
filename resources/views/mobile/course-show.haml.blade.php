@@ -51,48 +51,49 @@
 
 @endsection
 @section('foot-div')
-.footer-div
-  -if($hasEnrolled)
-    -if(empty($user->name))
-      .left-div
-        %span.f16.fb.color2 交了钱未填个人资料
-      .right-div
-        %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
-    -else
-      -if(strtotime($schedule->end) < time())
-        -if($hasCommented)
-          .left-div
-            %span.f16.fb.color2 您已成功评价该课程
-          .right-div
-            %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 评价完成
+- if($isBatch)
+  .footer-div
+    -if($hasEnrolled)
+      -if(empty($user->name))
+        .left-div
+          %span.f16.fb.color2 交了钱未填个人资料
+        .right-div
+          %button.btn.click-btn.f14#edit_btn{type: "button"} 填写资料
+      -else
+        -if(strtotime($schedule->end) < time())
+          -if($hasCommented)
+            .left-div
+              %span.f16.fb.color2 您已成功评价该课程
+            .right-div
+              %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 评价完成
+          -else
+            .left-div
+              %span.f16.fb.color2 课程已结束
+            .right-div
+              %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
         -else
           .left-div
-            %span.f16.fb.color2 课程已结束
+            %span.f16.fb.color2 已报名
           .right-div
-            %button.btn.gray-btn.f14#review_btn{type: "button"} 立即评价
-      -else
-        .left-div
-          %span.f16.fb.color2 已报名
-        .right-div
-          %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 您已报名
-  -else
-    -if($schedule->begin< date('Y-m-d H:i:s'))
-      .left-div
-        %span.f16.fb.color2 报名截止了
-      .right-div
-        %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 报名截止
+            %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 您已报名
     -else
-      -if($available)
+      -if($schedule->begin< date('Y-m-d H:i:s'))
         .left-div
-          %span.f16.fb.color2="￥".round($schedule->price/100,2)
-          %span.f14.fb.color2='(仅剩'.$available.'名额)'
+          %span.f16.fb.color2 报名截止了
         .right-div
-          %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
+          %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 报名截止
       -else
-        .left-div
-          %span.f16.fb.color2 没公开课名额了
-        .right-div
-          %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 暂无名额
+        -if($available)
+          .left-div
+            %span.f16.fb.color2="￥".round($schedule->price/100,2)
+            %span.f14.fb.color2='(仅剩'.$available.'名额)'
+          .right-div
+            %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
+        -else
+          .left-div
+            %span.f16.fb.color2 没公开课名额了
+          .right-div
+            %button.btn.gray-btn.f14#unclick_btn{type: "button", disabled: true} 暂无名额
 @endsection
 @section('modal-div')
 #reviewModal.modal.fade.bottom{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
