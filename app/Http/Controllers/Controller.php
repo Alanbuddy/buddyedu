@@ -30,10 +30,10 @@ class Controller extends BaseController
     public function isBatch($merchant, $courseId)
     {
 //        return DB::select("select is_batch from course_merchant where merchant_id={$merchant->id} and course_id=$courseId");
-        return DB::table('course_merchant')
-            ->select('is_batch')
-            ->where('merchant_id', $merchant->id)
-            ->where('course_id', $courseId)
-            ->first()->is_batch;
+        return $record = DB::table('course_merchant')
+                ->select('is_batch')
+                ->where('merchant_id', $merchant->id)
+                ->where('course_id', $courseId)
+                ->first() && $record->is_batch;
     }
 }
