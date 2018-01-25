@@ -38,22 +38,27 @@ $(document).ready(function(){
   $("#confirm-btn").click(function(){
     var cid = $(".course-name").attr("data-id");
     var quantity = $("#num").val().trim();
-    $.ajax({
-      type: 'post',
-      url: window.quantity.replace(/-1/, cid),
-      data: {
-        quantity: quantity
-      },
-      success: function(data){
-        if(data.success){
-          $("#modifyModal").modal("hide");
-          showMsg("名额修改成功", "center");
-          location.href = window.course_auth;
-        }else{
-          showMsg("名额修改失败", "center");
+    if($.isNumeric(quantity)){
+      $.ajax({
+        type: 'post',
+        url: window.quantity.replace(/-1/, cid),
+        data: {
+          quantity: quantity
+        },
+        success: function(data){
+          if(data.success){
+            $("#modifyModal").modal("hide");
+            location.href = window.course_auth;
+          }else{
+            showMsg("名额修改失败", "center");
+          }
         }
-      }
-    });
+      });
+    }else{
+      showMsg("名额不是数字", "center");
+      return false;
+    }
+    
   });
 
   $clamp(document.querySelector('.course-description'), {clamp: 3});
