@@ -197,6 +197,9 @@ $(document).ready(function(){
           });
           $("#addModal").modal("hide");
           location.href = window.register_search;
+        }else{
+         showMsg("无剩余名额", "center");
+         return false;
         }
       }
     });
