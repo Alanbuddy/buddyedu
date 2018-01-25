@@ -2,7 +2,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/admin-register.css') }}">
 :javascript
-  window.students_index = "#{route('users.store')}"
+  window.students_index = "#{route('students.index')}"
 @endsection
 
 @section('content')
@@ -23,6 +23,8 @@
         .search#search-btn
         %input.input-style#search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
       %img.add-icon{src: "/icon/add.png"}
+      // - if($isBatch)
+      //   %img.add-icon{src: "/icon/add.png"}
 
   .desc-div
     - if(count($items) == 0) 
@@ -65,8 +67,9 @@
         
         .select-page
           %span.totalitems
-          .quotes#Pagination 
-        .btn.font-color1.confirm-btn-position#confirm-btn{type: "button"} 确定
+          .quotes#Pagination
+        .btn-div
+          .btn.font-color1#confirm-btn{type: "button"} 确定
 
 @endsection
 

@@ -59,12 +59,6 @@
   width: 200px;
 }
 
-#addModal .confirm-btn-position {
-  position: absolute;
-  right: 350px;
-  bottom: 60px;
-}
-
 #addModal #confirm-btn {
   width: 100px;
   color: #fff;
@@ -73,6 +67,17 @@
 }
 
 #addModal .select-page {
-  margin-top: 60px;
+  margin-top: 20px;
+}
+
+#addModal .ml40 {
+  display: inline-block;
+  margin-left: 40px;
+}
+
+#addModal .btn-div {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 
