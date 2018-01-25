@@ -45,7 +45,7 @@ class CourseController extends Controller
         if (!$isAdmin) {
             $merchant = auth()->user()->ownMerchant;
             if ($request->type == 'my') {
-                $items = $merchant->courses();
+                $items = $merchant->courses()->withPivot('is_batch');
                 $count = Course::count();
             } else {
                 $count = $merchant->courses()->count();
@@ -54,19 +54,20 @@ class CourseController extends Controller
 
         $items = $items->paginate(10);
         if (!$isAdmin && $request->type != 'my') {
-//            foreach ($items as $item) {
-//                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
-//            }
             $items->getCollection()->each->markHasAddedByMerchant($merchant);
 //            array_map(function ($item) use ($merchant) {
 //                $item->added = $item->merchants->contains($merchant);//判断是否已添加课程
 //            }, $items->items());
         }
-
-        if ($request->key) {
-            $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $request->key,]));
+        if (!$isAdmin && $request->type == 'my') {
+            foreach ($items as $item) {
+                $item->remain = $item->pivot->is_batch ? $this->getRemain($this->getMerchant(), $item->id) : null;
+            }
         }
-        $key = $request->key;
+
+        if ($key = $request->key) {
+            $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $key,]));
+        }
         return view($isAdmin ? 'admin.auth-course.index' : ($request->type == 'my' ? 'agent.auth.self' : 'agent.auth.index'),
             compact('items', 'count', 'key'));
     }

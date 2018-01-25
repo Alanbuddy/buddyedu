@@ -145,14 +145,20 @@ class AiController extends Controller
         $descriptor = array(
             0 => array("pipe", "r"), //标准输入，子进程从此管道读取数据
             1 => array("pipe", "w"), //标准输出，子进程向此管道写入数据
-            2 => array("file", "/tmp/php/error-output.txt", "a")    //标准错误，写入到指定文件
+            2 => array("file", "/tmp/error-output.txt", "a")    //标准错误，写入到指定文件
         );
-        $process = proc_open("./updateAssetBundle ", $descriptor, $pipes);
+        $cwd = '/home/aj/projects/a.com/';
+        $process = proc_open("/home/aj/projects/a.com/updateAssetBundle " . $request->v, $descriptor, $pipes, $cwd);
+//        $cmd = 'zip $(git rev-parse HEAD).zip $(git --no-pager diff --name-only '.$request->v. '$(git rev-parse HEAD))';
+//        $cmd = 'zip $(git rev-parse HEAD).zip $(git --no-pager diff --name-only $1 $(git rev-parse HEAD))';
+//        $process = proc_open($cmd, $descriptor, $pipes);
 
         if (is_resource($process)) {
-            fwrite($pipes[0], $request->version);
+            fwrite($pipes[0], $request->v);
             fclose($pipes[0]);
-            echo stream_get_contents($pipes[1]);
+            $result = stream_get_contents($pipes[1]);
+//            $name=array_shift(explode('+', $result));
+            var_dump(array_shift(explode('+', $result)));
             fclose($pipes[1]);
             proc_close($process);   //在调用proc_close之前必须关闭所有管道
         }
