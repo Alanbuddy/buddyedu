@@ -47,6 +47,7 @@ Route::middleware('auth')
         Route::get('/schedules/{schedule}/enroll/success', 'ScheduleController@enrolled')->name('schedules.enrolled');//成功加入课程
         Route::post('/schedules/{schedule}/prepay', 'OrderController@prepay')->name('prepay');
         Route::get('/schedules/{schedule}/students', 'ScheduleController@enrolls')->name('schedule.student');//某一期课程下的学生
+        Route::post('/schedules/{schedule}/students', 'ScheduleController@batchEnroll')->name('schedule.student.batch-enroll');//某一期课程下的学生
         Route::get('/schedule/{schedule}/comments', 'ScheduleController@comments')->name('schedule.comments');
         Route::get('/schedules/{schedule}/{operation}', 'ScheduleController@approve')->name('schedule.approve');
         Route::resource('schedules', 'ScheduleController');

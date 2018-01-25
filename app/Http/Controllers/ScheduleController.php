@@ -379,4 +379,21 @@ class ScheduleController extends Controller
         return $request->ajax() ? ['success' => true, compact('items')] : view('mobile . student - course - review', compact('items'));
     }
 
+    public function batchEnroll(Request $request, Schedule $schedule)
+    {
+        $this->validate($request, ['students' => 'required|array']);
+        $ids = $request->get('students', []);
+        DB::transaction(function () use ($ids, $schedule) {
+            $arr = [];
+            array_walk($ids,function($v) use (&$arr) {
+                $arr[$v] = ['type' => 'student'];
+            });
+            Log::debug(json_encode($arr));
+            $changed = $schedule->students()->syncWithoutDetaching($arr);
+            Log::debug(json_encode($changed));
+            $this->getMerchant()->users()->syncWithoutDetaching($ids);
+        });
+        return ['success' => true];
+    }
+
 }

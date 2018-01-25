@@ -18,5 +18,12 @@ class MerchantCourseSeeder extends Seeder
             'updated_at'=>\Carbon\Carbon::now(),
             'status'=>'applying'
         ]);
+        DB::table('course_merchant')->insert([
+            'merchant_id' => 2,
+            'course_id' => 1,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+            'status'=>'applying'
+        ]);
     }
 }
