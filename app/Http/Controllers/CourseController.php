@@ -68,7 +68,6 @@ class CourseController extends Controller
         if ($key = $request->key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $key,]));
         }
-        dd($items);
         return view($isAdmin ? 'admin.auth-course.index' : ($request->type == 'my' ? 'agent.auth.self' : 'agent.auth.index'),
             compact('items', 'count', 'key'));
     }
