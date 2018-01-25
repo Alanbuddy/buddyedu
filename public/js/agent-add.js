@@ -55,6 +55,8 @@ $(document).ready(function(){
   });
 
   $("#apply").click(function(){
+    var is_batch = $("#course").find('option:selected').attr("data-batch");
+    console.log(is_batch);
   	var course = $("#course").val();
   	var point = $("#point").val();
   	var teacher = $("#teacher-select").val();
@@ -65,28 +67,51 @@ $(document).ready(function(){
     var price = $("#price").val().trim() * 100;
     var remark = $("#remark").val().trim();
     var lessons_count = $("#lessons-count").val().trim();
-  	$.ajax({
-  	  url: window.course_store,
-  	  type: 'post',
-  	  data: {
-  	    _token: window.token,
-  	    course_id: course,
-  	    point_id: point,
-  	    teachers: teacher,
-  	    quota: num,
-  	    begin: begin,
-  	    end: end,
-        time: time,
-        price: price,
-        remark: remark,
-        lessons_count: lessons_count
-  	  },
-  	  success: function( data ) {
-  	    if(data.success){
-          location.href = window.course_search;
+    if(!is_batch){
+      $.ajax({
+        url: window.course_store,
+        type: 'post',
+        data: {
+          _token: window.token,
+          course_id: course,
+          point_id: point,
+          teachers: teacher,
+          quota: num,
+          begin: begin,
+          end: end,
+          time: time,
+          price: price,
+          remark: remark,
+          lessons_count: lessons_count
+        },
+        success: function( data ) {
+          if(data.success){
+            location.href = window.course_search;
+          }
         }
-  	  }
-  	});
+      });
+    }else{
+      $.ajax({
+        url: window.course_store,
+        type: 'post',
+        data: {
+          _token: window.token,
+          course_id: course,
+          point_id: point,
+          teachers: teacher,
+          begin: begin,
+          end: end,
+          remark: remark,
+          lessons_count: lessons_count
+        },
+        success: function( data ) {
+          if(data.success){
+            location.href = window.course_search;
+          }
+        }
+      });
+    }
+  	
   });
 
   $( "#datepicker1" ).datepicker({
