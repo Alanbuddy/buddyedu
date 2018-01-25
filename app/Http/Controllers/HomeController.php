@@ -22,17 +22,18 @@ class HomeController extends Controller
             ->withCount('students')
             ->first();
         $user = auth()->user();
+        $isBatch = $this->isBatch($schedule->merchant, $schedule->course->id);
         $hasEnrolled = $user ? $this->hasEnrolled($schedule, $user) : false;
         if (!$hasEnrolled) {
             $available = $this->available($schedule);
         }
         $hasCommented = auth()->check() ? Comment::where('user_id', $user->id)->where('schedule_id', $schedule->id)->count() : false;
-        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user', 'hasCommented'));
+        return view('mobile.course-show', compact('schedule', 'hasEnrolled', 'isFull', 'available', 'user', 'hasCommented', 'isBatch'));
     }
 
     public function share(Request $request, $share)
     {
-        $drawing= File::where('uuid', $share)->where('extension', 'png')->where('uuid',$share)->first();
+        $drawing = File::where('uuid', $share)->where('extension', 'png')->where('uuid', $share)->first();
         $video = File::where('uuid', $share)->where('extension', 'mp4')->find($share);
 //        dd($drawing,$video);
 
