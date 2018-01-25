@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/admin-register.css') }}">
 :javascript
   window.students_index = "#{route('students.index')}"
+  window.register_search = "#{route('schedule.student',$schedule)}"
+  window.student_delete = "#{route('users.destroy',-1)}"
 @endsection
 
 @section('content')
@@ -46,7 +48,7 @@
                 %td=$item->name
                 %td=(date('Y')-date('Y',strtotime($item->birthday))).'岁'
                 %td
-                  %a.delete 删除
+                  %a.delete{"data-id" => $item->id} 删除
 
       .select-page 
         %span.choice-page
@@ -64,6 +66,7 @@
             .search#modal-search-btn
             %input.input-style#modal-search-input.f14e{:type => "text", :placeholder => "输入学生手机号/姓名", value: "", :onfocus=>"this.style.color='#5d6578'"}
         .checkbox-items
+
         
         .select-page
           %span.totalitems
