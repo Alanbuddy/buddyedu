@@ -138,7 +138,7 @@ class ScheduleController extends Controller
             'course_id' => 'required|numeric',
             'point_id' => 'required|numeric',
             'quota' => 'sometimes|numeric',
-            'time' => 'sometimes|string|max:200',
+            'time' => 'sometimes|max:200',
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',

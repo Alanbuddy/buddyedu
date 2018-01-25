@@ -3,7 +3,7 @@ $(document).ready(function(){
     var value = $("#search-input").val();
     location.href = window.students_search + "?key=" + value;
   }
-    
+
   $("#search-btn").click(function(){
     search();
   });
