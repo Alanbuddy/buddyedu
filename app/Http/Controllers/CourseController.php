@@ -37,7 +37,7 @@ class CourseController extends Controller
         }
 
         $items = Course::orderBy('id', 'desc')->withCount('merchants')->with('merchants');
-        if ($request->key) {
+        if ($key = $request->key) {
             $items->where('name', 'like', '%' . $request->get('key') . '%');
         }
 
@@ -65,7 +65,7 @@ class CourseController extends Controller
             }
         }
 
-        if ($key = $request->key) {
+        if ($key) {
             $items->withPath(route('courses.index') . '?' . http_build_query(['key' => $key,]));
         }
         return view($isAdmin ? 'admin.auth-course.index' : ($request->type == 'my' ? 'agent.auth.self' : 'agent.auth.index'),
