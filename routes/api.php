@@ -31,11 +31,11 @@ Route::middleware(['auth:api'])
             Route::get('/schedules/students', 'ScheduleController@students')->name('schedule.student');//某一期课程下的学生
             Route::any('/schedules/sign-in', 'ScheduleController@signIn')->name('schedule.signIn');//签到
             Route::get('/schedules/attendances', 'ScheduleController@attendances')->name('schedule.attendances');
-            Route::get('/update', 'AiController@getAppUpdate')->name('api.app.update');
         });
 
 Route::post('/file', 'AiController@store');
 //Route::get('/cut', 'AiController@cut')->name('cut');//调用django接口裁切App发送的原始图片
+Route::get('/update', 'AiController@getAppUpdate')->name('api.app.update');
 
 
 Route::get('/test', 'TestController@apiIndex');
