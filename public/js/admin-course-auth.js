@@ -26,9 +26,11 @@ $(document).ready(function(){
     $("#modifyModal").modal("show");
     var num = $(this).siblings(".quantity").text();
     var course_name = $(this).siblings('.course-name').text();
+    var course_id = $(this).siblings('.course-name').attr("data-id");
     var merchant_name = $(".merchant-name").text();
     $("#modifyModal").find(".modify-title").text(merchant_name + "的" + course_name);
     $("#num").val(num);
+    $("#modifyModal").find('.course-id').text(course_id);
   });
   $(".close").click(function(){
     $("#modifyModal").modal("hide");
@@ -36,14 +38,15 @@ $(document).ready(function(){
   });
 
   $("#confirm-btn").click(function(){
-    var cid = $(".course-name").attr("data-id");
+    var cid = $(".course-id").text();
     var quantity = $("#num").val().trim();
     if($.isNumeric(quantity)){
       $.ajax({
         type: 'post',
         url: window.quantity.replace(/-1/, cid),
         data: {
-          quantity: quantity
+          quantity: quantity,
+          _token: window.token
         },
         success: function(data){
           if(data.success){
@@ -55,7 +58,7 @@ $(document).ready(function(){
         }
       });
     }else{
-      showMsg("名额不是数字", "center");
+      showMsg("剩余名额必须为数字", "center");
       return false;
     }
     
