@@ -5,6 +5,7 @@
   window.students_index = "#{route('students.index')}"
   window.register_search = "#{route('schedule.student',$schedule)}"
   window.student_delete = "#{route('users.destroy',-1)}"
+  window.student_choice = "#{route('schedule.student.batch-enroll',$shcedule->id)}"
 @endsection
 
 @section('content')

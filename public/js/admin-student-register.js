@@ -156,7 +156,7 @@ $(document).ready(function(){
             for(var i=0;i<data.data.data.length;i++){
               var check_item = $('<div class="checkbox f14d">' +
                                     '<label style="width: 150px">' +
-                                      '<input type="checkbox" name="lesson-check" value=' + data.data.data[i].id + ' data-text="' + data.data.data[i].name + '"/>' + data.data.data[i].name +
+                                      '<input type="checkbox" name="student-check" value=' + data.data.data[i].id + ' data-text="' + data.data.data[i].name + '"/>' + data.data.data[i].name +
                                     '</label>' +
                                     '<span class="ml40">' + data.data.data[i].phone + '</span>' +
                                 '</div>');
@@ -179,6 +179,26 @@ $(document).ready(function(){
   });
 
   $("#confirm-btn").click(function(){
-    
+    var student_arr = [];
+    $("[name='student-check']:input:checked").each(function(){
+        var value = $(this).val();
+        student_arr.push(value);
+    });
+    $.ajax({
+      type: 'post',
+      url: window.student_choice,
+      data: {
+        students: student_arr
+      },
+      success: function(data){
+        if(data.success){
+          $("[name='student-check']:input:checked").each(function(){
+            this.checked = false;
+          });
+          $("#addModal").modal("hide");
+          location.href = window.students_index;
+        }
+      }
+    });
   });
 });
