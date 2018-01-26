@@ -17,7 +17,6 @@ class ScheduleUserSeeder extends Seeder
             'email' => str_random(10) . '@gmail.com',
             'phone' => '1' . rand(1000000000, 9999999999),
             'password' => bcrypt('secret'),
-            'merchant_id' => 1,
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);
         \App\Models\Schedule::find(1)->students()->attach($user , [
