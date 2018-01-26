@@ -50,7 +50,7 @@ class FileController extends Controller
             $entry = $this->store2DB($file, $target);
             $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id', 'ordinal_no', 'uuid'));
             DB::transaction(function () use ($entry, $request) {
-                File::where('uuid', $request->uuid)->update(['student_id', $request->student_id]);
+                File::where('uuid', $request->uuid)->update(['student_id'=> $request->student_id]);
                 $entry->save();
             });
         }
