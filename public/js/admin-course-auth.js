@@ -58,7 +58,7 @@ $(document).ready(function(){
         }
       });
     }else{
-      showMsg("剩余名额必须为数字", "center");
+      showMsg("名额必须为数字", "center");
       return false;
     }
     

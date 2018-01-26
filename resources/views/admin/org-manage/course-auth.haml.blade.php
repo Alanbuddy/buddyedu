@@ -29,7 +29,7 @@
     - else
       - foreach($items as $item)
         .frame-div
-          %img.course-icon{src: "icon/bird.png"}
+          %img.course-icon{src: $item->icon??'/icon/bird.png'}
           %p.course-name.f16b{"data-id" => $item->id}= $item->name
           - if($item->pivot->is_batch)
             %span.f12c 剩余名额:
@@ -62,7 +62,7 @@
         %p.f14d.modify-title 某一机构名称的一门课程名称
         %p.course-id
         .controls.controls-row.mg24
-          %label.input-caption.f14d.fn 剩余名额
+          %label.input-caption.f14d.fn 总名额
           %input.f14d.form-control.input-width#num
         %btn.f16d.add-btn-width#confirm-btn 确定 
 

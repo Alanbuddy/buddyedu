@@ -34,7 +34,7 @@
     - else
       - foreach($items as $item)
         %a.frame-div{href: route('courses.show',$item->id)}
-          %img.course-icon{src: $item->icon??'icon/bird.png'}
+          %img.course-icon{src: $item->icon??'/icon/bird.png'}
           %p.course-name.f16b=$item->name
           - if($item->pivot->is_batch)
             %span.f12c 剩余名额:
