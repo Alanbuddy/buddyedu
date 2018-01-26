@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'phone' => '1' . rand(1000000000, 9999999999),
                 'password' => bcrypt('secret'),
                 'gender' => $i % 2 == 0 ? 'male' : 'female',
-                'birthday' => date('Y-m-d H:i:s'),
+                'birthday' => date('Y-m-d H:i:s',strtotime('-8 years')),
                 'api_token' => \Faker\Provider\Uuid::uuid(),
             ]);
         }
