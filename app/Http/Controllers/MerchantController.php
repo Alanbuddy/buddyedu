@@ -223,7 +223,7 @@ class MerchantController extends Controller
         $items = $merchant->courses()
             ->orderBy('id', 'desc')
             ->wherePivot('status', 'approved')
-            ->withPivot('is_batch')
+            ->withPivot('is_batch','quantity')
             ->paginate(10);
         foreach ($items as $item) {
             $item->remain = $item->pivot->is_batch ? $this->getRemain($merchant, $item->id) : null;
