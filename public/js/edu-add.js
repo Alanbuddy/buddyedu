@@ -72,7 +72,6 @@ $(document).ready(function(){
     var county = $("#county").val();
     var street = $("#street").val();
     address = province + city + county + street;
-    console.log(address);
     geocoder.getLocation(address);
     geocoder.setComplete(function(result){
       map.setCenter(result.detail.location);
@@ -91,13 +90,13 @@ $(document).ready(function(){
     geocoder.setError(function(){
       alert('出错了，请输入正确的地址！！！');
     });
-      
+    return false;
   }
   $('.get-location').click(function(){
     codeAddress();
   });
 
-  $("#submit").click(function(){
+  $("#confirm").click(function(){
     var name = $("#edu-name").val();
     var area = $("#edu-area").val();
     var admin = $("#edu-admin").val();
@@ -110,36 +109,34 @@ $(document).ready(function(){
     var merchant_id = $("#merchant-id").attr("data-merchant");
     var remark = $("#remark").val().trim();
     if(address == null){
-      showMsg("没有选择省市区", "center");
-    }
-
-    $.ajax({
-      type: 'post',
-      url: window.points_store,
-      data: {
-        name: name,
-        admin: admin,
-        contact: contact,
-        area: area,
-        address: street,
-        province: province,
-        city: city,
-        county: county,
-        merchant_id: merchant_id,
-        geolocation: location,
-        remark: remark,
-        _token: window.token
-      },
-      success: function(data){
-        if(data.success){
-          $("#addModal").modal("hide");
-          showMsg("成功创立教学点", "center");
-          $("#addModal").on('hidden.bs.modal', function () {
-            location.href = window.points_index;
-          });
+      showMsg("没有填写详细地址", "center");
+      return false;
+    }else{
+      $.ajax({
+        type: 'post',
+        url: window.points_store,
+        data: {
+          name: name,
+          admin: admin,
+          contact: contact,
+          area: area,
+          address: street,
+          province: province,
+          city: city,
+          county: county,
+          merchant_id: merchant_id,
+          geolocation: location,
+          remark: remark,
+          _token: window.token
+        },
+        success: function(data){
+          if(data.success){
+            $("#addModal").modal("hide");
+            window.location.assign(window.points_index);
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   function search(){

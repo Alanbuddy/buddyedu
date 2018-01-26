@@ -99,7 +99,7 @@
           %span.get-location.f14b 获取地址
           #container
         .btn-div     
-          %btn.f16d.add-btn-width#submit 提交申请
+          %btn.f16d.add-btn-width#confirm 提交申请
 @endsection
 
 @section('script')

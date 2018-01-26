@@ -20,7 +20,7 @@
   .desc-div
     .name-money
       .name-div
-        %img.icon{src: $course->icon}
+        %img.icon{src: $course->icon??'/icon/bird.png'}
         %span.f24b=$course->name
         - if ($course->added)
           %span.added-div
