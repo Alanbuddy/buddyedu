@@ -150,7 +150,7 @@ $(document).ready(function(){
 
 
   $(".click-div").click(function(){
-    var uid = $(this).find("hidden").attr("data-id");
+    var uid = $(this).find(".hidden").attr("data-id");
     location.href = window.product_list + "?schedule_id=" + uid;
   });
 });
