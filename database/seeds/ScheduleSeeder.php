@@ -40,7 +40,7 @@ class ScheduleSeeder extends Seeder
                 'merchant_id' => 2,
                 'lessons_count'=>11,
             ]);
-            $schedule->teachers()->sync([5 => ['type' => 'teacher'], 6 => ['type' => 'teacher']]);
+            $schedule->teachers()->sync([7 => ['type' => 'teacher']]);
         }
     }
 }

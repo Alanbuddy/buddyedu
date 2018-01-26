@@ -50,9 +50,20 @@ class UsersTableSeeder extends Seeder
             'email' => str_random(10) . '@gmail.com',
             'phone' => '1' . rand(1000000000, 9999999999),
             'password' => bcrypt('secret'),
-            'birthday'=>'1972-08-08',
+            'birthday'=>'1982-08-08',
             'gender'=>'male',
             'extra'=>'{"cv": "儿童美术教学经验长达 12 年 中央美术学院博士毕业 二胎宝妈, 美育专家，艺术家 ", "id": "123192344211341234", "title": "美育专家", "school": "中央美术学院", "introduction": "北京理工大学教师", "teaching_age": "12", "certificate_id": "1234123413"}',
+            'merchant_id' => 1,
+            'api_token' => 'za262427-88c6-356a-a431-8686856c81b5',
+        ]);
+        DB::table('users')->insert([
+            'name' => '刘亚男',
+            'email' => str_random(10) . '@gmail.com',
+            'phone' => '1' . rand(1000000000, 9999999999),
+            'password' => bcrypt('secret'),
+            'birthday'=>'1972-08-08',
+            'gender'=>'male',
+            'extra'=>'{"cv": "大连外国语大学英语专业八级， 史家小学课外课教师5 年高端幼儿园（ 加拿大国际学校）讲师教学经验德国 HABA 品牌资深培训讲师和桌游翻译师", "id": "123192344211341234", "title": "德国 HABA 品牌资深培训讲师和桌游翻译师", "school": "中央美术学院", "introduction": "北京理工大学教师", "teaching_age": "10", "certificate_id": "1234123413"}',
             'merchant_id' => 1,
             'api_token' => 'za262427-88c6-356a-a431-8686856c81b5',
         ]);
