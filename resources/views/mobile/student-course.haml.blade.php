@@ -26,7 +26,7 @@
             %p.f14.text-color.title-margin= $item->course->name
             %p.f14.text-color.point-name= $item->point->name
           %a.click-div
-            %span.hidden{"data-id" => $item->schedule_id}
+            %span.hidden{"data-id" => $item->id}
             %span.f12.text-blue 我的作品
             %img.arrow{src: "/icon/mobile/more.png"}
 @endsection

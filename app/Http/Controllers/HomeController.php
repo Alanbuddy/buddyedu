@@ -33,10 +33,8 @@ class HomeController extends Controller
 
     public function share(Request $request, $share)
     {
-        $drawing = File::where('uuid', $share)->where('extension', 'png')->where('uuid', $share)->first();
-        $video = File::where('uuid', $share)->where('extension', 'mp4')->find($share);
-//        dd($drawing,$video);
-
+        $drawing = File::where('uuid', $share)->where('extension', 'png')->first();
+        $video = File::where('uuid', $share)->where('extension', 'mp4')->first();
         return view('mobile.student-product', compact('drawing', 'video'));
     }
 
