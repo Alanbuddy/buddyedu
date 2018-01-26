@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -44,11 +45,15 @@ class FileController extends Controller
             $entry = File::find($request->file_id);
             $entry->fill($this->getFileMeta($file));
             $entry->path = $this->getRelativePath($target);
+            $entry->save();
         } else {
             $entry = $this->store2DB($file, $target);
             $entry->fill($request->only('schedule_id', 'merchant_id', 'point_id', 'student_id', 'ordinal_no', 'uuid'));
+            DB::transaction(function () use ($entry, $request) {
+                File::where('uuid', $request->uuid)->update(['student_id', $request->student_id]);
+                $entry->save();
+            });
         }
-        $entry->save();
         if ($request->has('editor'))
             return ['errno' => 0, 'data' => [$entry->path]];
         return ['success' => true, 'data' => $entry];

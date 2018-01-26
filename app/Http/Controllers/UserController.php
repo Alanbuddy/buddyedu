@@ -271,7 +271,8 @@ class UserController extends Controller
 
     public function drawing(Request $request, File $drawing)
     {
-        return view('mobile.student-product', compact('drawing'));
+        $video = File::where('uuid', $drawing->uuid)->first();
+        return view('mobile.student-product', compact('drawing', 'video'));
     }
 
     public function schedules(Request $request)
