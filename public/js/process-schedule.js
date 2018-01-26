@@ -17,7 +17,7 @@ $(document).ready(function(){
 
   $(".approve").click(function(){
     var merchant_name = $(this).siblings('.merchant-name').text();
-    var course_name = $(this).siblings('.course-name').text();
+    var course_name = $(this).siblings('.course-name').find('a').text();
     var application_id = $(this).closest('tr').attr("data-id");
     $("#approveModal").modal("show");
     $("#approveModal").find(".approve-title").text('通过"' + merchant_name + '"申请开设"' + course_name + '"课程的申请？');
@@ -30,7 +30,7 @@ $(document).ready(function(){
 
   $(".reject").click(function(){
     var merchant_name = $(this).siblings('.merchant-name').text();
-    var course_name = $(this).siblings('.course-name').text();
+    var course_name = $(this).siblings('.course-name').find('a').text();
     var application_id = $(this).closest('tr').attr("data-id");
     $("#rejectModal").modal("show");
     $("#rejectModal").find(".reject-title").text('驳回"' + merchant_name + '"申请开设"' + course_name + '"课程的申请？');
@@ -43,12 +43,12 @@ $(document).ready(function(){
 
   $(".approve-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     $.ajax({
       type: 'get',
       url: window.approve.replace(/-1/, application_id),
       data: {
-        remark: remark
+        advice: advice
       },
       success: function(data){
         if (data.success){
@@ -60,12 +60,12 @@ $(document).ready(function(){
 
   $(".reject-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     $.ajax({
       type: 'get',
       url: window.reject.replace(/-1/, application_id),
       data: {
-        remark: remark
+        advice: advice
       },
       success: function(data){
         if (data.success){

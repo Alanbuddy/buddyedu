@@ -78,15 +78,14 @@ $(document).ready(function(){
 
   $(".approve-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     $.ajax({
       type: 'get',
       url: window.approve.replace(/-1/, application_id),
       data: {
-        remark: remark
+        advice: advice
       },
       success: function(data){
-        console.log(data);
         if (data.success){
           location.href = window.points_search;
         }
@@ -96,15 +95,14 @@ $(document).ready(function(){
 
   $(".reject-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     $.ajax({
       type: 'get',
       url: window.reject.replace(/-1/, application_id),
       data: {
-        remark: remark
+        advice: advice
       },
       success: function(data){
-        console.log(data);
         if (data.success){
           location.href = window.points_search;
         }

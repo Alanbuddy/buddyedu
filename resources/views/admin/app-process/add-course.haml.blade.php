@@ -58,7 +58,10 @@
                 %td.course-name=$item->course_name
                 %td=$item->admin_name
                 %td=$item->admin_phone
-                %td= $item->is_batch
+                - if($item->is_batch == "1")
+                  %td 封闭授课
+                - else
+                  %td 公开报名
                 %td= $item->advice ? $item->advice : '——'
                 %td= $item->remark ? $item->remark : '——'
                 -if($item->status=='applying')

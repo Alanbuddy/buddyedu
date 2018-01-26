@@ -17,31 +17,36 @@ $(document).ready(function(){
 
   $(".approve-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     var is_batch = $("#course-type").val();
-    $.ajax({
-      type: 'get',
-      url: window.approve.replace(/-1/, application_id),
-      data: {
-        remark: remark,
-        is_batch: is_batch
-      },
-      success: function(data){
-        if (data.success){
-          location.href = window.process_search;
+    if(is_batch == "请选择上课方式"){
+      showMsg("上课方式必须选择", "center");
+      return false;
+    }else{
+      $.ajax({
+        type: 'get',
+        url: window.approve.replace(/-1/, application_id),
+        data: {
+          advice: advice,
+          is_batch: is_batch
+        },
+        success: function(data){
+          if (data.success){
+            location.href = window.process_search;
+          }
         }
-      }
-    });
+      });
+    }
   });
 
   $(".reject-btn").click(function(){
     var application_id = $(this).siblings('.application-id').text();
-    var remark = $("#operation-info").val().trim();
+    var advice = $("#operation-info").val().trim();
     $.ajax({
       type: 'get',
       url: window.reject.replace(/-1/, application_id),
       data: {
-        remark: remark
+        advice: advice
       },
       success: function(data){
         if (data.success){
