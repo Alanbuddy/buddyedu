@@ -21,6 +21,7 @@ class PointSeeder extends Seeder
             'geolocation' => '[39.998424,116.469433]',
             'province' => '北京市',
             'city' => '北京市',
+            'approved'=>true,
             'county' => '朝阳区'
         ]);
 
@@ -34,6 +35,7 @@ class PointSeeder extends Seeder
             'geolocation' => '[39.96817,116.38042]',
             'province' => '北京市',
             'city' => '北京市',
+            'approved'=>true,
             'county' => '西城区'
         ]);
         DB::table('points')->insert([
@@ -46,6 +48,7 @@ class PointSeeder extends Seeder
             'geolocation' => '[39.96817,116.38042]',
             'province' => '北京市',
             'city' => '北京市',
+            'approved'=>true,
             'county' => '朝阳区'
         ]);
     }
