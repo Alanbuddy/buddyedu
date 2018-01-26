@@ -50,7 +50,7 @@
                 %td
                   %a{href: route('users.show', $item->id)}=$item->phone
                 %td=$item->name
-                %td=$item->birthday??'未知'
+                %td=$item->birthday?date('Y')-date('Y',strtotime($item->birthday)):'未知'
                 %td=$item->enrolled_shedules_count
                 %td.f12a='￥'.($item->total??0)
 
