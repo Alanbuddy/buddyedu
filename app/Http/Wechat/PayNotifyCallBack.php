@@ -65,7 +65,7 @@ class PayNotifyCallBack extends WxPayNotify
                 $order->save();
                 $this->enroll($schedule, $order->user_id);
                 $schedule->merchant->increment('balance', $order->amount);
-                $schedule->merchant()->users()->syncWithoutDetaching([$order->user_id]);
+                $schedule->merchant->users()->syncWithoutDetaching([$order->user_id]);
             });
 //            MessageFacade::sendBuyCompletedMessage(User::find($order->user_id), $schedule);
             Log::debug('paid successfully');
