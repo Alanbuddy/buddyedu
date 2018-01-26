@@ -35,18 +35,24 @@ class UsersTableSeeder extends Seeder
     public function seedTeachers()
     {
         DB::table('users')->insert([
-            'name' => 'teacher demo',
+            'name' => '贾金莉',
             'email' => str_random(10) . '@gmail.com',
             'phone' => '17610076052',
+            'birthday'=>'1972-08-08',
+            'gender'=>'male',
+            'extra'=>'{"cv": "北京理工大学教师\n旅法艺术家、学者\n全国高校美育学会会员、北京高校美学学会会员", "id": "123112344211341234", "title": "教授", "school": "北京理工大学教师", "introduction": "北京理工大学教师", "teaching_age": "12", "certificate_id": "1234123413"}',
             'password' => bcrypt('secret'),
             'merchant_id' => 1,
             'api_token' => 'da262427-88c6-356a-a431-8686856c81b3',
         ]);
         DB::table('users')->insert([
-            'name' => 'teacher demo 2',
+            'name' => '侯佩岑',
             'email' => str_random(10) . '@gmail.com',
             'phone' => '1' . rand(1000000000, 9999999999),
             'password' => bcrypt('secret'),
+            'birthday'=>'1972-08-08',
+            'gender'=>'male',
+            'extra'=>'{"cv": "儿童美术教学经验长达 12 年 中央美术学院博士毕业 二胎宝妈, 美育专家，艺术家 ", "id": "123192344211341234", "title": "美育专家", "school": "中央美术学院", "introduction": "北京理工大学教师", "teaching_age": "12", "certificate_id": "1234123413"}',
             'merchant_id' => 1,
             'api_token' => 'za262427-88c6-356a-a431-8686856c81b5',
         ]);
