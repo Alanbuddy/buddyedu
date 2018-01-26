@@ -225,6 +225,9 @@ class MerchantController extends Controller
             ->wherePivot('status', 'approved')
             ->withPivot('is_batch')
             ->paginate(10);
+        foreach ($items as $item) {
+            $item->remain = $item->pivot->is_batch ? $this->getRemain($merchant, $item->id) : null;
+        }
         return view('admin.org-manage.course-auth', compact('items', 'merchant'));
     }
 
