@@ -15,6 +15,7 @@ class ScheduleUserSeeder extends Seeder
         $user = User::create([
             'name' => 'user' . str_random(5),
             'email' => str_random(10) . '@gmail.com',
+            'birthday'=>'2010-08-08',
             'phone' => '1' . rand(1000000000, 9999999999),
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
