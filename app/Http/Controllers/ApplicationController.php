@@ -179,7 +179,7 @@ class ApplicationController extends Controller
             $application->merchant
                 ->courses()
                 ->detach($course->id);
-            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
+            $application->update(['status' => 'rejected', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
@@ -189,7 +189,7 @@ class ApplicationController extends Controller
         $schedule = Schedule::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $schedule, $application) {
             $schedule->update(['status' => 'approved']);
-            $application->update(['status' => 'approved', 'remark' => $request->remark]);
+            $application->update(['status' => 'approved', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
@@ -199,7 +199,7 @@ class ApplicationController extends Controller
         $schedule = Schedule::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $schedule, $application) {
             $schedule->update(['status' => 'rejected']);
-            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
+            $application->update(['status' => 'rejected', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
@@ -209,7 +209,7 @@ class ApplicationController extends Controller
         $point = Point::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $point, $application) {
             $point->update(['approved' => true]);
-            $application->update(['status' => 'approved', 'remark' => $request->remark]);
+            $application->update(['status' => 'approved', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
@@ -219,7 +219,7 @@ class ApplicationController extends Controller
         $point = Point::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $point, $application) {
             $point->update(['approved' => false]);
-            $application->update(['status' => 'rejected', 'remark' => $request->remark]);
+            $application->update(['status' => 'rejected', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
