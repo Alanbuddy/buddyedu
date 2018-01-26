@@ -24,7 +24,7 @@ class ScheduleSeeder extends Seeder
                 'merchant_id' => 1,
                 'lessons_count'=>12,
             ]);
-            $schedule->teachers()->sync([3 => ['type' => 'teacher'], 4 => ['type' => 'teacher']]);
+            $schedule->teachers()->sync([5 => ['type' => 'teacher'], 6 => ['type' => 'teacher']]);
         }
 
         for ($i = 0; $i < 4; $i++) {
@@ -40,7 +40,7 @@ class ScheduleSeeder extends Seeder
                 'merchant_id' => 2,
                 'lessons_count'=>11,
             ]);
-            $schedule->teachers()->sync([3 => ['type' => 'teacher'], 4 => ['type' => 'teacher']]);
+            $schedule->teachers()->sync([7 => ['type' => 'teacher']]);
         }
     }
 }

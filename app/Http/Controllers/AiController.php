@@ -163,7 +163,7 @@ class AiController extends Controller
         }
         $content=file_get_contents("$cwd$name.zip");
         return response($content, 200)
-            ->header('Content-Type', 'image/png')
+            ->header('Content-Type', 'application/x-zip-compressed')
             ->header('Content-Disposition', 'attachment;filename=' . $name . '.zip');
     }
 

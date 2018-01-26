@@ -393,7 +393,7 @@ class ScheduleController extends Controller
             ->count();
         $remain = $quantity > $exist ? $quantity - $exist : 0;
         if (!$remain || $remain < count($ids))
-            return ['success' => false, 'message' => "not enough accounts,only $remain left,$exist accounts has been assigned"];
+            return ['success' => false, 'data' => compact('exist', 'remain'), 'message' => "not enough accounts,only $remain left,$exist accounts has been assigned"];
         DB::transaction(function () use ($ids, $schedule) {
             $arr = [];
             array_walk($ids, function ($v) use (&$arr) {

@@ -44,7 +44,7 @@
           %span=$teacher->birthday?date('Y')-date('Y',strtotime($teacher->birthday)).'岁':''
         .pdiv
           %span 老师教龄：
-          %span= $teacher->teaching_age
+          %span=@$teacher->extra?json_decode($teacher->extra)->teaching_age:''
         .pdiv
           %span 资格证号：
           %span=@$teacher->extra?json_decode($teacher->extra)->certificate_id:''

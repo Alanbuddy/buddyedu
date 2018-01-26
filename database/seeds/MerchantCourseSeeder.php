@@ -14,16 +14,19 @@ class MerchantCourseSeeder extends Seeder
         DB::table('course_merchant')->insert([
             'merchant_id' => 1,
             'course_id' => 1,
-            'created_at'=>\Carbon\Carbon::now(),
-            'updated_at'=>\Carbon\Carbon::now(),
-            'status'=>'applying'
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'status' => 'approved',
+            'quantity' => 200,
+            'is_batch' => 1
         ]);
         DB::table('course_merchant')->insert([
             'merchant_id' => 2,
             'course_id' => 1,
-            'created_at'=>\Carbon\Carbon::now(),
-            'updated_at'=>\Carbon\Carbon::now(),
-            'status'=>'applying'
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+            'status' => 'approved',
+            'is_batch' => 0
         ]);
     }
 }
