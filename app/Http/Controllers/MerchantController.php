@@ -314,6 +314,7 @@ class MerchantController extends Controller
             ->addSelect('merchants.name as merchant_name')
             ->addSelect('applications.id as application_id')
             ->addSelect('applications.status as status')
+            ->addSelect(DB::raw('(select is_batch from course_merchant where course_id=courses.id and merchant_id=merchants.id) as is_batch '))
             ->addSelect(DB::raw('(select name from users where id=admin_id) as admin_name '))
             ->addSelect(DB::raw('(select phone from users where id=admin_id) as admin_phone '));
         if ($isAdmin) {
