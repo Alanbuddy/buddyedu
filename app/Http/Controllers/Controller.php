@@ -67,6 +67,8 @@ class Controller extends BaseController
             ->where('courses.id', $courseId)
             ->join('schedules', 'schedules.course_id', '=', 'courses.id')
             ->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
+            ->where('schedules.merchant_id', $merchant->id)
+            ->where('schedule_user.type','student')
             ->groupBy('user_id')
             ->count();
         return $exist;

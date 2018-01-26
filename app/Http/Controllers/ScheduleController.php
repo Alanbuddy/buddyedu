@@ -292,7 +292,7 @@ class ScheduleController extends Controller
     public function enrolled(Schedule $schedule)
     {
 //        return redirect(route('landing', $schedule));
-        return view('mobile . register - success', compact('schedule'));
+        return view('mobile.register-success', compact('schedule'));
 //        $user = auth()->user();
 //        $order = $this->getEnrollOrder($schedule);
 //        return $order ? $this->enroll($schedule, $user->id) : ['success' => false, 'message' => 'no finished order found'];
