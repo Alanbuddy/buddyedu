@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class);
+    }
+
     public function merchants()
     {
         return $this->belongsToMany(Merchant::class);

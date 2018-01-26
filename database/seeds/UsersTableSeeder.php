@@ -34,6 +34,7 @@ class UsersTableSeeder extends Seeder
 
     public function seedTeachers()
     {
+        //id=5
         DB::table('users')->insert([
             'name' => '贾金莉',
             'email' => str_random(10) . '@gmail.com',
@@ -71,6 +72,7 @@ class UsersTableSeeder extends Seeder
 
     public function seedMerchantAdmin()
     {
+        //id=2
         DB::table('users')->insert([
             'name' => '田纯',
             'email' => str_random(10) . '@gmail.com',
@@ -78,6 +80,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);
+        //id=3
         DB::table('users')->insert([
             'name' => '蔡德凤',
             'email' => str_random(10) . '@gmail.com',
@@ -85,6 +88,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'api_token' => \Faker\Provider\Uuid::uuid(),
         ]);
+        //id=4
         DB::table('users')->insert([
             'name' => '于导',
             'email' => str_random(10) . '@gmail.com',
