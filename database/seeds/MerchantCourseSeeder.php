@@ -16,7 +16,7 @@ class MerchantCourseSeeder extends Seeder
             'course_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
-            'status' => 'applying',
+            'status' => 'approved',
             'quantity' => 200,
             'is_batch' => 1
         ]);
@@ -25,7 +25,7 @@ class MerchantCourseSeeder extends Seeder
             'course_id' => 1,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
-            'status' => 'applying',
+            'status' => 'approved',
             'is_batch' => 0
         ]);
     }
