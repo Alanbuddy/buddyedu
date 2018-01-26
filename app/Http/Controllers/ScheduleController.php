@@ -376,7 +376,7 @@ class ScheduleController extends Controller
             ->with('user')
             ->orderBy('id', 'desc')
             ->paginate(10);
-        return $request->ajax() ? ['success' => true, compact('items')] : view('mobile . student - course - review', compact('items'));
+        return $request->ajax() ? ['success' => true, compact('items')] : view('mobile.student-course-review', compact('items'));
     }
 
     public function batchEnroll(Request $request, Schedule $schedule)
