@@ -157,6 +157,7 @@ class ApplicationController extends Controller
 
     public function approveCourse(Request $request, Application $application)
     {
+        $this->validate($request, ['is_batch' => 'numeric']);
         $course = Course::findOrFail($application->object_id);
         DB::transaction(function () use ($request, $course, $application) {
             $application->merchant
@@ -167,7 +168,7 @@ class ApplicationController extends Controller
                         'is_batch' => $request->get('is_batch', false)
                     ]
                 ]);
-            $application->update(['status' => 'approved']);
+            $application->update(['status' => 'approved', 'advice' => $request->advice]);
         });
         return ['success' => true];
     }
