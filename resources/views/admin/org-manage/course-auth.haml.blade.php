@@ -60,6 +60,7 @@
       .modal-body.clearfix
         %p.f24b.add-c 名额修改
         %p.f14d.modify-title 某一机构名称的一门课程名称
+        %p.course-id
         .controls.controls-row.mg24
           %label.input-caption.f14d.fn 剩余名额
           %input.f14d.form-control.input-width#num
