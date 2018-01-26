@@ -319,8 +319,12 @@ class Test extends Command
         $url = 'http://edu.com/api/v1/files';
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
+        $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
+        $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件
         $post_data = array(
             'file' => $upload_file,
+            'student_id'=>1,
+            'uuid'=>1,
             'api_token' => '1509a743-cd29-38fb-867c-c2cc42b84b3d'
         );
         return Curl::request($url, $post_data, 'post');
