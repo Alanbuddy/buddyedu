@@ -153,12 +153,14 @@ class OrderController extends Controller
      */
     public function store(Request $request, Schedule $schedule)
     {
-        $order = new Order();
-        $order->title = 'buy schedule ' . $schedule->name;
-        $order->merchant_id = $schedule->merchant->id;
-        $order->product_id = $schedule->id;
-        $order->amount = $schedule->price;
-        $order->uuid = $this->uuid();
+        $order = new Order([
+            'title' => 'buy schedule ' . $schedule->name,
+            'merchant_id' => $schedule->merchant->id,
+            'product_id' => $schedule->id,
+            'amount' => $schedule->price,
+            'uuid' => $this->uuid(),
+            'proportion' => $schedule->course->proportion
+        ]);
         auth()->user()->orders()->save($order);
         return $order;
     }
@@ -420,7 +422,7 @@ class OrderController extends Controller
             $content .= fread($fp, 1024);
         }
         fclose($fp);
-        $content = iconv('utf-8','gbk',$content);//转成gbk，否则excel打开乱码
+        $content = iconv('utf-8', 'gbk', $content);//转成gbk，否则excel打开乱码
         return (new Response($content, 200))//->header('Content-Type', "text/csv")
         ->header('Content-Type', "application/vnd.ms-excel")
             ->header('Content-Disposition', 'attachment;filename="breakdown.csv"');

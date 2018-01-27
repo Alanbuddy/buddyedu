@@ -59,9 +59,11 @@ class PayNotifyCallBack extends WxPayNotify
         if ($order) {
             $schedule = Schedule::find($order->product_id);
             DB::transaction(function () use ($data, $order, $schedule) {
-                $order->wx_transaction_id = $data["transaction_id"];
-                $order->wx_total_fee = $data["total_fee"];
-                $order->status = 'paid';
+                $order->fill([
+                    'wx_transaction_id' => $data["transaction_id"],
+                    'wx_total_fee' => $data["total_fee"],
+                    'status' => 'paid',
+                ]);
                 $order->save();
                 $this->enroll($schedule, $order->user_id);
                 $schedule->merchant->increment('balance', $order->amount);

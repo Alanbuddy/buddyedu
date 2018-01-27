@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Merchant;
+use App\Models\Schedule;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -63,14 +64,18 @@ class Controller extends BaseController
      */
     public function getExist(Merchant $merchant, $courseId)
     {
-        $exist = $merchant->courses()->wherePivot('is_batch', true)
-            ->where('courses.id', $courseId)
-            ->join('schedules', 'schedules.course_id', '=', 'courses.id')
-            ->join('schedule_user', 'schedule_user.schedule_id', '=', 'schedules.id')
-            ->where('schedules.merchant_id', $merchant->id)
-            ->where('schedule_user.type','student')
-            ->groupBy('user_id')
+        //$exist = $merchant->courses()->wherePivot('is_batch', true)
+        $exist = Schedule::where('merchant_id', $merchant->id)
+            ->where('course_id', $courseId)
+            ->join('schedule_user', function ($join) {
+                $join->on('schedule_user.schedule_id', '=', 'schedules.id')
+                    ->where('schedule_user.type', 'student');
+            })
+            ->select('user_id')
+            ->groupBy('user_id');
+
+        return DB::table(DB::raw("({$exist->toSql()}) as sub"))
+            ->mergeBindings($exist->getQuery())
             ->count();
-        return $exist;
     }
 }
