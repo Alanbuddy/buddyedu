@@ -71,6 +71,9 @@ class UserController extends Controller
                 $query->where('name', 'like', '%' . $key . '%')->orWhere('phone', 'like', '%' . $key . '%');
             });
         }
+        if ($scheduleId = $request->schedule_id) {
+            $items->addSelect(DB::Raw("(select count(*) from schedule_user where schedule_user.user_id=merchant_user.user_id and schedule_id=$scheduleId) as attended"));
+        }
         $items = $items->orderByDesc('id')->paginate(10);
         if ($key)
             $items->withPath(route('students.index') . '?' . http_build_query(['key' => $key,]));
