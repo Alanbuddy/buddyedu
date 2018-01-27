@@ -5,12 +5,17 @@ $(document).ready(function(){
     $("#addModal").find("input").val("");
   });
 
+  var student_arr = [];
   var total = 0;
   var pageIndex = 0;     //页面索引初始值
   var pageSize = 10;     //每页显示条数初始化，修改显示条数，修改这里即可
   $(".add-icon").click(function(){
     InitTable(0);
     function PageCallback(index, jq) {
+      $("[name='student-check']:input:checked").each(function(){
+          var value = $(this).val();
+          student_arr.push(value);
+      });
       InitTable(index);
       return false;
     }
@@ -90,6 +95,10 @@ $(document).ready(function(){
     var pageSize = 10;
     InitTable(0);
     function PageCallback(index, jq) {
+      $("[name='student-check']:input:checked").each(function(){
+          var value = $(this).val();
+          student_arr.push(value);
+      });
       InitTable(index);
       return false;
     }
@@ -179,11 +188,11 @@ $(document).ready(function(){
   });
 
   $("#confirm-btn").click(function(){
-    var student_arr = [];
     $("[name='student-check']:input:checked").each(function(){
         var value = $(this).val();
         student_arr.push(value);
     });
+    console.log(student_arr);
     $.ajax({
       type: 'post',
       url: window.student_choice,
@@ -195,11 +204,13 @@ $(document).ready(function(){
           $("[name='student-check']:input:checked").each(function(){
             this.checked = false;
           });
+          student_arr = [];
           $("#addModal").modal("hide");
           location.href = window.register_search;
         }else{
-         showMsg("无剩余名额", "center");
-         return false;
+          student_arr = [];
+          showMsg("无剩余名额", "center");
+          return false;
         }
       }
     });
