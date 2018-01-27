@@ -63,7 +63,6 @@ class PayNotifyCallBack extends WxPayNotify
                     'wx_transaction_id' => $data["transaction_id"],
                     'wx_total_fee' => $data["total_fee"],
                     'status' => 'paid',
-                    'proportion'=>$schedule->course->proportion
                 ]);
                 $order->save();
                 $this->enroll($schedule, $order->user_id);
