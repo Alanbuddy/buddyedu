@@ -23,7 +23,7 @@
       .name-div
         %p.f24b= $item->course->name
         %p.f12a.mt16= $item->point->name
-      - if($item->is_batch)
+      - if(!$item->is_batch)
         .money-div
           %span.f24c.mr8= $item->course->price ? "￥".$item->course->price : "暂无价格"
           %span.f12a="(".($item->course->proportion * 100)."%分成)"
@@ -35,7 +35,7 @@
       .p-div
         %span 课程进度：
         %span=$progress.'/'.$item->course->lessons_count
-        - if($item->is_batch)
+        - if(!$item->is_batch)
           %span.ml80 报名人数：
           %span= $item->students()->count()."/".$item->quota
       .p-div
@@ -44,7 +44,7 @@
       .p-div
         %span 结课时间：
         %span= $item->end
-      - if($item->is_batch)
+      - if(!$item->is_batch)
         .p-div
           %span 详细时间：
           %span= $item->time

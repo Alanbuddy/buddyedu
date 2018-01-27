@@ -67,9 +67,10 @@
                 -if($item->status=='applying')
                   %td#green.approve.pointer 通过
                   %td.f12e.reject.pointer 驳回
-                -if($item->status=='approved')
+                -else
                   %td.f12a 已处理
                   %td.f12a
+
       .select-page
         %span.choice-page
           != $items->links()
