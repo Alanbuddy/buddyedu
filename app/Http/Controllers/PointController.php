@@ -13,7 +13,7 @@ class PointController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant'])->except([]);
+        $this->middleware(['auth', 'role:admin|merchant'])->except(['nearby']);
     }
 
     /**
@@ -144,7 +144,7 @@ class PointController extends Controller
 
     public function nearby(Request $request)
     {
-        $location = $request->coordinate;
+        $location = $request->location;
         if ($location) {
             $items = Point::where('approved', true)->get();
             foreach ($items as $item) {
