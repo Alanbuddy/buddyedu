@@ -55,7 +55,8 @@ class enroll extends Command
             'status' => 'paid',
             'amount' => $schedule->price,
             'merchant_id' => $schedule->merchant->id,
-            'uuid' => 'test'
+            'uuid' => 'test',
+            'proportion' => '0.7'
         ]);
         $merchant = $schedule->merchant;
         $merchant->balance += $schedule->price;

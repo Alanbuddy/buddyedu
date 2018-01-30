@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Merchant;
+use Illuminate\Support\Facades\DB;
 
 trait WithdrawTrait
 {
@@ -28,6 +29,6 @@ trait WithdrawTrait
 
     public function withdrawableBalance($merchant)
     {
-        return round($this->withdrawableBalanceQuery($merchant)->sum('orders.amount') / 100, 2);
+        return round($this->withdrawableBalanceQuery($merchant)->sum(DB::raw('orders.amount* orders.proportion')) / 100, 2);
     }
 }

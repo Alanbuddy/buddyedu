@@ -16,7 +16,7 @@ class AiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('va')->except('getAppUpdate');
+        //$this->middleware('va')->except('getAppUpdate');
     }
 
     public function cut(Request $request)
