@@ -149,7 +149,7 @@ class PointController extends Controller
             $items = Point::where('approved', true)->get();
             foreach ($items as $item) {
                 $geo = json_decode($item->geolocation);
-                $item->distance = $this->distance($geo, $location);
+                $item->distance = count($geo) == 2 ? $this->distance($geo, $location) : INF;
             }
             $sorted = array_sort($items->all(), function ($v) {
                 return $v['distance'];
