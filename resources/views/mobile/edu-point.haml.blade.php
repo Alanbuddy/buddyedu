@@ -1,6 +1,8 @@
 @extends('layout.mobile')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/mobile-edu-point.css') }}">
+:javascript
+  window.point = "#{route('point.nearby')}"
 @endsection
 
 @section('content')

@@ -45,6 +45,8 @@
 
 
 <script>
+    var u_latitude = null;
+    var u_longitude = null;
     wx.config({
         beta: true,
         debug: false,
@@ -74,8 +76,17 @@
                 // 用户取消分享后执行的回调函数
             }
         });
+
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                u_latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                u_longitude = res.longitude ; // 经度，浮点数，范围为180 ~ -180。
+            }
+        });
     })
 
+    
     var appId = "{{config('wechat.mp.app_id')}}";
     var app_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="
         + appId
