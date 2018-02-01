@@ -286,7 +286,6 @@ class Test extends Command
 
     public function postServerFile()
     {
-//        $url = 'http://edu.com/file';
         $url = 'http://edu.com/api/v1/cut';
         $upload_file = new CURLFile('/home/aj/projects/django_demo/GetSegmentation.png');
         $upload_file->setMimeType("image/jpeg");//必须指定文件类型，否则会默认为application/octet-stream，二进制流文件

@@ -13,7 +13,7 @@ class PointController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'role:admin|merchant'])->except([]);
+        $this->middleware(['auth', 'role:admin|merchant'])->except(['nearby']);
     }
 
     /**
@@ -142,8 +142,26 @@ class PointController extends Controller
         //
     }
 
-    public function nearby()
+    public function nearby(Request $request)
     {
+        $location = $request->location;
+        if ($location) {
+            $items = Point::where('approved', true)->get();
+            foreach ($items as $item) {
+                $geo = json_decode($item->geolocation);
+                $item->distance = count($geo) == 2 ? $this->distance($geo, $location) : INF;
+            }
+            $sorted = array_sort($items->all(), function ($v) {
+                return $v['distance'];
+            });
+//        dd(array_slice($sorted, 2));
+            return $sorted;
+        }
         return view('mobile.edu-point');
+    }
+
+    public function distance($a, $b)
+    {
+        return pow($a[0] - $b[0], 2) + pow($a[1] - $b[1], 2);
     }
 }
