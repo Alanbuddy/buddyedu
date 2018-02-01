@@ -1,0 +1,264 @@
+.desc-div {
+  padding: 0.64rem 0.32rem 1rem 0.32rem;
+}
+
+.color1 {
+  color: #ee4c2c;
+}
+
+.more {
+  width: 0.14rem;
+  height: 0.22rem;
+}
+
+.item-div {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.head-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.color2 {
+  color: #908482;
+}
+
+.date-div {
+  background: rgba(238, 76, 44, 0.08);
+  height: 0.64rem;
+  line-height: 0.64rem;
+  padding-left: 0.24rem;
+  padding-right: 0.24rem;
+}
+
+.color3 {
+  color: #564e49;
+}
+
+.data-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 0.2rem;
+}
+
+.footer-div {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+}
+
+.click-btn {
+  width: 100%;
+  background: #ee4c2c;
+  border-radius: 0;
+  height: 0.96rem;
+  text-align: center;
+}
+
+#record_btn,
+#log_btn,
+#save_btn {
+  color: #fff;
+}
+
+.notice-div {
+  height: 0.64rem;
+  line-height: 0.64rem;
+  background: #fff4d2;
+  padding-left: 0.32rem;
+}
+
+.to-login {
+  text-decoration: underline;
+  color: #ee4c2c;
+}
+
+.to-login:link {
+  text-decoration: underline;
+  color: #ee4c2c;
+}
+
+.to-login:visited {
+  text-decoration: underline;
+  color: #ee4c2c;
+}
+
+.to-login:hover {
+  text-decoration: underline;
+  color: #ee4c2c;
+}
+
+.to-login:active {
+  text-decoration: underline;
+  color: #ee4c2c;
+}
+
+.content-div {
+  padding: 0.36rem 0.32rem;
+}
+
+.back {
+  width: 0.88rem;
+  height: 0.88rem;
+  margin-right: 0.1rem;
+}
+
+.vm {
+  vertical-align: middle;
+}
+
+.color3 {
+  color: #362c2a;
+}
+
+.color4 {
+  color: #564e4d;
+}
+
+.caption {
+  margin-bottom: 0.2rem;
+}
+
+.items-div {
+  background: rgba(238, 76, 44, 0.64);
+  border: 2px solid #ee4c2c;
+  border-radius: 8px;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  height: 2.4rem;
+  padding: 0 0.48rem;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.height {
+  width: 0.64rem;
+  height: 0.64rem;
+  margin-right: 0.48rem;
+}
+
+.more {
+  width: 0.14rem;
+  height: 0.22rem;
+}
+
+.fff {
+  color: #fff;
+}
+
+.color5 {
+  color: #908482;
+  margin-right: 0.32rem;
+}
+
+.mb48 {
+  margin-bottom: 0.48rem;
+}
+
+.mr88 {
+  margin-right: 0.88rem;
+}
+
+.input-div {
+  margin-top: 1.16rem;
+  padding: 0 0.32rem;
+}
+
+.input-group {
+  width: 100%;
+  padding: 0.26rem 0.48rem;
+  border: 1px solid #ee4c2c;
+  border-radius: 8px;
+  background: rgba(238, 76, 44, 0.08);
+}
+
+.form-box {
+  width: 3.2rem;
+  background: transparent;
+  color: #362c2a;
+}
+
+.ul-div {
+  background: rgba(238, 76, 44, 0.08);
+  height: 0.64rem;
+  line-height: 0.64rem;
+  padding-left: 0.24rem;
+  padding-right: 0.24rem;
+  margin-top: 0.36rem;
+  margin-bottom: 0.36rem;
+}
+
+.flex-div {
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.flex-div li {
+  width: 30%;
+  text-align: center;
+}
+
+.active {
+  color: #ee4c2c;
+}
+
