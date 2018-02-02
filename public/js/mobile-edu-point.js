@@ -14,14 +14,13 @@ $(document).ready(function(){
       origin = new qq.maps.Point(0, 0);
 
   function init() {
-    var center = new qq.maps.LatLng(u_latitude,u_longitude);
+    var center = new qq.maps.LatLng(40.001347,116.401764);
     map = new qq.maps.Map(document.getElementById('container'),{
       center: center,
       zoom: 10
     });
     geocoder = new qq.maps.Geocoder();
   }
-  init();
 
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
@@ -34,6 +33,7 @@ $(document).ready(function(){
       type: 'get',
       url: window.point + "?location=" + [40.001347,116.401764],
       success: function(res){
+        init();
         $.each(res, function(index, value){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
