@@ -22,7 +22,7 @@ $(document).ready(function(){
     geocoder = new qq.maps.Geocoder();
   }
   init();
-  
+
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longitude;
@@ -39,6 +39,7 @@ $(document).ready(function(){
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
         });
+        alert(latlngs);
         for(var i = 0;i < latlngs.length; i++) {
           (function(n){
             var marker = new qq.maps.Marker({
