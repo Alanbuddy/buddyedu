@@ -54,14 +54,16 @@ $(document).ready(function(){
     u_longitude = l.longitude;
     $.ajax({
       type: 'get',
-      url: window.point + "?location=" + [u_latitude,u_longitude],
+      url: window.point + "?location=" + [40.001347,116.401764],
       success: function(res){
-        init(u_latitude, u_longitude);
+        init(40.001347,116.401764);
         $.each(res, function(index, value){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
           node=render(index, value);
+          alert(222);
+          console.log(node);
           $(".item-div").append(node);
         });
         for(var i = 0;i < latlngs.length; i++) {
