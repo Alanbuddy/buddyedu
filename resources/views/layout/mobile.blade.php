@@ -45,8 +45,6 @@
 
 
 <script>
-    var u_latitude = null;
-    var u_longitude = null;
     wx.config({
         beta: true,
         debug: false,
@@ -58,7 +56,8 @@
             // 所有要调用的 API 都要加到这个列表中
             'onMenuShareTimeline',
             'scanQRCode',
-            'hideAllNonBaseMenuItem'
+            'hideAllNonBaseMenuItem',
+            'getLocation'
         ]
     });
     wx.ready(function () {
@@ -80,8 +79,7 @@
         wx.getLocation({
             type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
             success: function (res) {
-                u_latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                u_longitude = res.longitude ; // 经度，浮点数，范围为180 ~ -180。
+                $(window).trigger('location', {'latitude': res.latitude, 'longitude': res.longitude});
             }
         });
     })

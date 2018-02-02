@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  var u_latitude = null;
+  var u_longitude = null;
   var latlngs = [];
   var map = null;
   var geocoder = null;
@@ -10,6 +12,11 @@ $(document).ready(function(){
   var anchor = new qq.maps.Point(6, 6),
       size = new qq.maps.Size(24, 24),
       origin = new qq.maps.Point(0, 0);
+
+  $(window).on('location', function(e, l){
+    u_latitude = l.latitude;
+    u_longitude = l.longtitude;
+  });
 
 
   $.ajax({
