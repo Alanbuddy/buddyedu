@@ -15,7 +15,7 @@ $(document).ready(function(){
 
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
-    u_longitude = l.longtitude;
+    u_longitude = l.longitude;
     alert(222);
     alert(u_latitude);
     alert(333);
