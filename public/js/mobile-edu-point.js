@@ -35,7 +35,6 @@ $(document).ready(function(){
           <span>详细地址:</span>
           <span class='address'>北京市朝阳区安立路</span>
         </div>
-        <span class="distance f14">2.1km</span>
       </div>
     </div>
   `;
@@ -45,7 +44,7 @@ $(document).ready(function(){
     template.find('.point-caption').text(item.name);
     template.find('.contact').text(item.contact);
     template.find('.address').text(item.address);
-    template.find('.distance').text((item.distance/1000).toFixed(1) + "km");
+    // template.find('.distance').text((item.distance/1000).toFixed(1) + "km");
     return template.clone(true);
   }
   var node = null;
@@ -54,9 +53,9 @@ $(document).ready(function(){
     u_longitude = l.longitude;
     $.ajax({
       type: 'get',
-      url: window.point + "?location=" + [40.001347,116.401764],
+      url: window.point + "?location=" + [u_latitude,u_longitude],
       success: function(res){
-        init(40.001347,116.401764);
+        init(u_latitude,u_longitude);
         $.each(res, function(index, value){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
