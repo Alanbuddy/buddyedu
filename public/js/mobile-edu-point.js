@@ -45,7 +45,7 @@ $(document).ready(function(){
     template.find('.point-caption').text(item.name);
     template.find('.contact').text(item.contact);
     template.find('.address').text(item.address);
-    template.find('.distance').text(item.distance + "km");
+    template.find('.distance').text((item.distance/1000).toFixed(1) + "km");
     return template.clone(true);
   }
   var node = null;
@@ -61,9 +61,7 @@ $(document).ready(function(){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
-          node=render(index, value);
-          alert(222);
-          console.log(node);
+          node=render(index +1, value);
           $(".item-div").append(node);
         });
         for(var i = 0;i < latlngs.length; i++) {
