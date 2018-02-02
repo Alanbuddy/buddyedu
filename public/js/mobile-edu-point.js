@@ -13,6 +13,16 @@ $(document).ready(function(){
       size = new qq.maps.Size(24, 24),
       origin = new qq.maps.Point(0, 0);
 
+  function init() {
+    var center = new qq.maps.LatLng(u_latitude,u_longitude);
+    map = new qq.maps.Map(document.getElementById('container'),{
+      center: center,
+      zoom: 10
+    });
+    geocoder = new qq.maps.Geocoder();
+  }
+  init();
+  
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longitude;
@@ -42,13 +52,5 @@ $(document).ready(function(){
     });
   });
 
-  function init() {
-    var center = new qq.maps.LatLng(u_latitude,u_longitude);
-    map = new qq.maps.Map(document.getElementById('container'),{
-      center: center,
-      zoom: 10
-    });
-    geocoder = new qq.maps.Geocoder();
-  }
-  init();
+  
 });
