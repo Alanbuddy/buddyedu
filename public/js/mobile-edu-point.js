@@ -16,30 +16,26 @@ $(document).ready(function(){
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longtitude;
-  });
-  alert(222);
-  alert(u_latitude);
-  alert(333);
-  alert(u_longitude);
-  $.ajax({
-    type: 'get',
-    url: window.point + "?location=" + [u_latitude,u_longitude],
-    success: function(res){
-      $.each(res, function(index, value){
-        var len = value.geolocation.length;
-        var location = value.geolocation.slice(1, len -1).split(",");
-        latlngs.push(new qq.maps.LatLng(location[0],location[1]));
-      });
-      for(var i = 0;i < latlngs.length; i++) {
-        (function(n){
-          var marker = new qq.maps.Marker({
-            icon: new qq.maps.MarkerImage(icon_arr[n], size, origin, anchor),
-            map: map,
-            position: latlngs[n]
-          });
-        })(i);
+    $.ajax({
+      type: 'get',
+      url: window.point + "?location=" + [u_latitude,u_longitude],
+      success: function(res){
+        $.each(res, function(index, value){
+          var len = value.geolocation.length;
+          var location = value.geolocation.slice(1, len -1).split(",");
+          latlngs.push(new qq.maps.LatLng(location[0],location[1]));
+        });
+        for(var i = 0;i < latlngs.length; i++) {
+          (function(n){
+            var marker = new qq.maps.Marker({
+              icon: new qq.maps.MarkerImage(icon_arr[n], size, origin, anchor),
+              map: map,
+              position: latlngs[n]
+            });
+          })(i);
+        }
       }
-    }
+    });
   });
 
   function init() {
