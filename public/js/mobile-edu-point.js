@@ -32,7 +32,7 @@ $(document).ready(function(){
     alert(u_longitude);
     $.ajax({
       type: 'get',
-      url: window.point + "?location=" + [u_latitude,u_longitude],
+      url: window.point + "?location=" + [40.001347,116.401764],
       success: function(res){
         $.each(res, function(index, value){
           var len = value.geolocation.length;
@@ -43,7 +43,7 @@ $(document).ready(function(){
         for(var i = 0;i < latlngs.length; i++) {
           (function(n){
             var marker = new qq.maps.Marker({
-              icon: new qq.maps.MarkerImage(icon_arr[n], size, origin, anchor),
+              icon: new qq.maps.MarkerImage('/icon/mobile/point1.png', size, origin, anchor),
               map: map,
               position: latlngs[n]
             });
