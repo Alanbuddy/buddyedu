@@ -73,7 +73,6 @@ $(document).ready(function(){
               map: map,
               position: latlngs[n]
             });
-
           })(i);
         }
       }
