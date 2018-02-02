@@ -38,7 +38,7 @@ $(document).ready(function(){
         for(var i = 0;i < latlngs.length; i++) {
           (function(n){
             var marker = new qq.maps.Marker({
-              icon: new qq.maps.MarkerImage('/icon/mobile/point1.png', size, origin, anchor),
+              icon: new qq.maps.MarkerImage(icon_arr[n], size, origin, anchor),
               map: map,
               position: latlngs[n]
             });
