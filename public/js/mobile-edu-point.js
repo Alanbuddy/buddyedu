@@ -13,8 +13,8 @@ $(document).ready(function(){
       size = new qq.maps.Size(24, 24),
       origin = new qq.maps.Point(0, 0);
 
-  function init() {
-    var center = new qq.maps.LatLng(40.001347,116.401764);
+  function init(lat, lng) {
+    var center = new qq.maps.LatLng(lat,lng);
     map = new qq.maps.Map(document.getElementById('container'),{
       center: center,
       zoom: 10
@@ -25,21 +25,16 @@ $(document).ready(function(){
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longitude;
-    alert(222);
-    alert(u_latitude);
-    alert(333);
-    alert(u_longitude);
     $.ajax({
       type: 'get',
-      url: window.point + "?location=" + [40.001347,116.401764],
+      url: window.point + "?location=" + [u_latitude,u_longitude],
       success: function(res){
-        init();
+        init(u_latitude, u_longitude);
         $.each(res, function(index, value){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
         });
-        alert(latlngs);
         for(var i = 0;i < latlngs.length; i++) {
           (function(n){
             var marker = new qq.maps.Marker({
