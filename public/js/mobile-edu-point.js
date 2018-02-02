@@ -22,6 +22,33 @@ $(document).ready(function(){
     geocoder = new qq.maps.Geocoder();
   }
 
+  var temp = `
+    <div class="item clearfix mb60">
+      <p class="f18 fl fb num">1</p>
+      <div class="point-div">
+        <div class="point-caption f18 fb">教学点名称教学点名称教学点名称教学点名称教学点名称教学点名称</div>
+        <div class="content-span f14">
+          <span>联系方式:</span>
+          <span class='contact'>132444444444</span>
+        </div>
+        <div class="content-span f14">
+          <span>详细地址:</span>
+          <span class='address'>北京市朝阳区安立路</span>
+        </div>
+        <span class="distance f14">2.1km</span>
+      </div>
+    </div>
+  `;
+  var template = $(temp);
+  function render(index, item){
+    template.find('.num').text(index);
+    template.find('.point-caption').text(item.name);
+    template.find('.contact').text(item.contact);
+    template.find('.address').text(item.address);
+    template.find('.distance').text(item.distance + "km");
+    return template.clone(true);
+  }
+  var node = null;
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longitude;
@@ -34,6 +61,8 @@ $(document).ready(function(){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
+          node=render(index, value);
+          $(".item-div").append(node);
         });
         for(var i = 0;i < latlngs.length; i++) {
           (function(n){
@@ -42,6 +71,7 @@ $(document).ready(function(){
               map: map,
               position: latlngs[n]
             });
+
           })(i);
         }
       }
