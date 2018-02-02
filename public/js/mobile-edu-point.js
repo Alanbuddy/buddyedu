@@ -16,6 +16,10 @@ $(document).ready(function(){
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longtitude;
+    alert(222);
+    alert(u_latitude);
+    alert(333);
+    alert(u_longitude);
     $.ajax({
       type: 'get',
       url: window.point + "?location=" + [u_latitude,u_longitude],

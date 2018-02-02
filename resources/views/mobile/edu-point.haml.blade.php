@@ -26,5 +26,5 @@
 
 @section('script')
 <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
-<script src= "/js/mobile-edu-point.js"></script>
+<script src= "/js/mobile-edu-point.js?v=333"></script>
 @endsection
