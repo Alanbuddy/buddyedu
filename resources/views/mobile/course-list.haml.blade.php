@@ -19,7 +19,7 @@
             .title-div.clearfix
               .caption-div.fl
                 %span.f14.fb.caption= $item->course->name
-                - if($item->begin<date('Y-m-d H:i:s')&& $item->students_count<$item->quota)
+                - if($item->begin>date('Y-m-d H:i:s') && $item->students_count<$item->quota)
                   %span.status.f12 可报
               %p.course-price.fr.f14= '￥'.round($item->price/100,2)
             .time-div
