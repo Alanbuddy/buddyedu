@@ -1,0 +1,63 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.32rem;
+}
+
+.title {
+  color: #365ba9;
+  margin: 0.48rem 0;
+}
+
+.course-icon {
+  width: 0.96rem;
+  height: 0.96rem;
+  border-radius: 8px;
+  margin-right: 0.24rem;
+}
+
+.course-div {
+  width: 82%;
+}
+
+.caption {
+  color: #5d6578;
+  margin-right: 0.16rem;
+}
+
+.course-price {
+  color: #f58799;
+}
+
+.status {
+  display: inline-block;
+  width: 0.6rem;
+  border-radius: 4px;
+  height: 0.28rem;
+  line-height: 0.28rem;
+  background: #75cc7d;
+  color: #fff;
+  text-align: center;
+}
+
+.time-div {
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
+}
+
+.icon {
+  width: 0.24rem;
+  height: 0.24rem;
+  margin-right: 0.08rem;
+}
+
+.text-color {
+  display: inline-block;
+  color: #5d6578;
+  vertical-align: top;
+  width: 93%;
+}
+
+.item-div {
+  margin-bottom: 0.4rem;
+}
+
