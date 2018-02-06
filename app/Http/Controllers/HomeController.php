@@ -52,7 +52,6 @@ class HomeController extends Controller
 	    }
 		    
 	    $items=$items->paginate();
-        dd($items);
 	    //return redirect(route('schedules.index'));
 	return view('mobile.course-list',compact('items'));
     }
