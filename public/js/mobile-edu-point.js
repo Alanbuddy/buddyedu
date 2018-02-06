@@ -23,7 +23,7 @@ $(document).ready(function(){
   }
 
   var temp = `
-    <div class="item clearfix mb60">
+    <div class="item clearfix mb40">
       <p class="f18 fl fb num">1</p>
       <div class="point-div">
         <div class="point-caption f18 fb">教学点名称教学点名称教学点名称教学点名称教学点名称教学点名称</div>
@@ -48,6 +48,7 @@ $(document).ready(function(){
     return template.clone(true);
   }
   var node = null;
+
   $(window).on('location', function(e, l){
     u_latitude = l.latitude;
     u_longitude = l.longitude;
@@ -60,7 +61,7 @@ $(document).ready(function(){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
-          node=render(parseInt(index) + 1, value);
+          node=render((parseInt(index)+1), value);
           $(".item-div").append(node);
         });
         for(var i = 0;i < latlngs.length; i++) {
