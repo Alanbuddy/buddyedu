@@ -28,10 +28,6 @@ $(document).ready(function(){
       <div class="point-div">
         <div class="point-caption f18 fb">教学点名称教学点名称教学点名称教学点名称教学点名称教学点名称</div>
         <div class="content-span f14">
-          <span>联系方式:</span>
-          <span class='contact'>132444444444</span>
-        </div>
-        <div class="content-span f14">
           <span>详细地址:</span>
           <span class='address'>北京市朝阳区安立路</span>
         </div>
@@ -42,7 +38,7 @@ $(document).ready(function(){
   function render(index, item){
     template.find('.num').text(index);
     template.find('.point-caption').text(item.name);
-    template.find('.contact').text(item.contact);
+    // template.find('.contact').text(item.contact);
     template.find('.address').text(item.address);
     // template.find('.distance').text((item.distance/1000).toFixed(1) + "km");
     return template.clone(true);
