@@ -58,6 +58,7 @@
 }
 
 .item-div {
+  display: inline-block;
   margin-bottom: 0.4rem;
 }
 
