@@ -12,7 +12,7 @@
         %img.undiscover-icon{src: "/icon/undiscover.png"}
     - else
       - foreach($items as $item)
-        %a.item-div.clearfix{href: route('schedules.enrolled',$item->id)}
+        %a.item-div.clearfix{href: route('landing',$item->id)}
           .img-div.fl
             %img.course-icon{src: $item->icon??'/icon/bird.png'}
           .course-div.fr
