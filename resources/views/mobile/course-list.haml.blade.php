@@ -19,7 +19,8 @@
             .title-div.clearfix
               .caption-div.fl
                 %span.f14.fb.caption= $item->course->name
-                %span.status.f12 可报
+                - if($item->status)
+                  %span.status.f12 可报
               %p.course-price.fr.f14= '￥'.$item->course->price
             .time-div
               %img.icon{src: '/icon/mobile/timemini.png'}
