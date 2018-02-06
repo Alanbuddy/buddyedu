@@ -34,5 +34,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.sass('resources/assets/sass/mobile-edu-point.scss', 'public/css')
 	.sass('resources/assets/sass/student-add.scss', 'public/css')
 	.sass('resources/assets/sass/admin-register.scss', 'public/css')
-	.sass('resources/assets/sass/class_info.scss', 'public/css');
+	.sass('resources/assets/sass/class_info.scss', 'public/css')
+
+
+	.sass('resources/assets/sass/grow-record.scss', 'public/css');
    // .sass('resources/assets/sass/app.scss', 'public/css');
