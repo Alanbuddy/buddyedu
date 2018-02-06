@@ -40,11 +40,12 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-	    return redirect(route('schedules.index'));
-        $items = auth()->user()->enrolledShedules()
-            ->with('point', 'course')
-            ->paginate();
-        dd($items);
+	    $items = Schedule::where('status','approved')
+		    ->orderByDesc('id')
+		    ->paginate();
+        //dd($items);
+	    //return redirect(route('schedules.index'));
+	return view('mobile.course-list',compact('items'));
     }
 
     public function qr(Request $request)
