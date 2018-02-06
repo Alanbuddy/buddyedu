@@ -90,7 +90,7 @@ class MerchantController extends Controller
                 'name' => $data['adminName'],
                 'phone' => $data['phone'],
                 'password' => bcrypt($data['password']),
-                'status' => 'approved',
+                'status' => 'enabled',
                 'api_token' => Uuid::uuid(),
             ]);
             $admin->save();
