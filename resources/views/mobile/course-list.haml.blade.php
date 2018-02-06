@@ -6,23 +6,28 @@
 
 @section('content')
 .desc-div
-  %p.f20.fb.title 北京市北京市
   .items-div
-    %a.item-div.clearfix{href: "#"}
-      .img-div.fl
-        %img.course-icon{src: '/icon/bird.png'}
-      .course-div.fr
-        .title-div.clearfix
-          .caption-div.fl
-            %span.f14.fb.caption 动物园
-            %span.status.f12 可报
-          %p.course-price.fr.f14 ￥1600
-        .time-div
-          %img.icon{src: '/icon/mobile/timemini.png'}
-          %span.f12.text-color 日期格式北京市某一街道的详细地址北京市某一街道的
-        .address-div
-          %img.icon{src: '/icon/mobile/locationmini.png'}
-          %span.f12.text-color 北京市某一街道的详细地址北京市某一街道的详细地址
+    - if(count($items) == 0)
+      .undiscover
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      - foreach($items as $item)
+        %a.item-div.clearfix{href: route('schedules.enrolled',$item->id)}
+          .img-div.fl
+            %img.course-icon{src: $item->icon??'/icon/bird.png'}
+          .course-div.fr
+            .title-div.clearfix
+              .caption-div.fl
+                %span.f14.fb.caption= $item->course->name
+                - if($item->status)
+                  %span.status.f12 可报
+              %p.course-price.fr.f14= '￥'.$item->course->price
+            .time-div
+              %img.icon{src: '/icon/mobile/timemini.png'}
+              %span.f12.text-color= $item->begin.'~'.$item->end
+            .address-div
+              %img.icon{src: '/icon/mobile/locationmini.png'}
+              %span.f12.text-color= $item->point->address
 
 @endsection
 
