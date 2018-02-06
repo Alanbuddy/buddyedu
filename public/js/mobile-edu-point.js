@@ -60,7 +60,7 @@ $(document).ready(function(){
           var len = value.geolocation.length;
           var location = value.geolocation.slice(1, len -1).split(",");
           latlngs.push(new qq.maps.LatLng(location[0],location[1]));
-          node=render(index +1, value);
+          node=render(parseInt(index) + 1, value);
           $(".item-div").append(node);
         });
         for(var i = 0;i < latlngs.length; i++) {
