@@ -41,6 +41,10 @@ class HomeController extends Controller
     public function home(Request $request)
     {
 	    $items = Schedule::where('status','approved')
+		    ->with('course', 'course.teachers')
+		    ->with('point')
+		    ->withCount('teachers')
+		    ->withCount('students')
 		    ->orderByDesc('id')
 		    ->paginate();
         //dd($items);

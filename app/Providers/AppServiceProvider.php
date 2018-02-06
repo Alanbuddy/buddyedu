@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-	URL::forceScheme('https');
+	if(env('FORCE_HTTPS')) URL::forceScheme('https');
 //        监听查询事件
         DB::listen(function ($query) {
             Log::debug($query->sql);
