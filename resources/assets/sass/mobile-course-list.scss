@@ -1,6 +1,7 @@
 .desc-div {
   position: relative;
   padding: 0 0.32rem;
+  padding-top: 0.48rem;
 }
 .title {
   color: #365ba9;
@@ -48,5 +49,6 @@
   width: 93%;
 }
 .item-div {
+  display: inline-block;
   margin-bottom: 0.4rem;
 }
