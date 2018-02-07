@@ -63,7 +63,7 @@ trait AuthenticatesUsersBySms
     {
         $user = $this->validateCredentials($request->only(['phone', 'token']));
         if ($request->phone == '12312341234')
-            $user = User::wher('phone', '12312341234')->first();
+            $user = User::where('phone', '12312341234')->first();
         if (!$user instanceof CanResetPassword) {
             return ['success' => false, 'message' => trans($user)];
         }
