@@ -41,7 +41,6 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-        dd(auth()->user());
 	    $items = Schedule::where('status','approved')
 		    ->with('course', 'course.teachers')
 		    ->with('point')
