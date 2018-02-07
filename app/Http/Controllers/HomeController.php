@@ -44,6 +44,7 @@ class HomeController extends Controller
 	    $items = Schedule::where('status','approved')
 		    ->with('course', 'course.teachers')
 		    ->with('point')
+		    ->with('merchant')
 		    ->withCount('teachers')
 		    ->withCount('students')
 		    ->orderByDesc('id');
