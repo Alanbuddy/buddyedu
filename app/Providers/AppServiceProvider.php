@@ -17,7 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-	URL::forceScheme('https');
+        if (env('FORCE_HTTPS'))
+            URL::forceScheme('https');
 //        监听查询事件
         DB::listen(function ($query) {
             Log::debug($query->sql);
@@ -30,23 +31,20 @@ class AppServiceProvider extends ServiceProvider
             ['mobile.*'],
             'App\Http\ViewComposers\WxComposer'
         );
-        $this->app['validator']->extend('sms', function($attribute, $value, $parameters)
-        {
+        $this->app['validator']->extend('sms', function ($attribute, $value, $parameters) {
             return sms_check($value);
         });
     }
 
     public function sms_check()
     {
-        if ( ! $this->session->has('captcha'))
-        {
+        if (!$this->session->has('captcha')) {
             return false;
         }
 
         $key = $this->session->get('captcha.key');
 
-        if ( ! $this->session->get('captcha.sensitive'))
-        {
+        if (!$this->session->get('captcha.sensitive')) {
             $value = $this->str->lower($value);
         }
 
