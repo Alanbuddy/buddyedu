@@ -42,7 +42,7 @@
             %p.f12.color3.teacher-introduction=$item->title
     .course-div
       %span.f16.fb.color2 课程介绍
-      .f14.color3.course-info=$schedule->course->description
+      .f14.color3.course-info!=$schedule->course->detail
     .location-div
       %span.f16.fb.color2 详细地址
       %span.hidden.point-location= $schedule->point->geolocation

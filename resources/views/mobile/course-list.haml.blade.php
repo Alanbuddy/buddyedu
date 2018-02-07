@@ -14,17 +14,19 @@
       - foreach($items as $item)
         %a.item-div.clearfix{href: route('landing',$item->id)}
           .img-div.fl
-            %img.course-icon{src: $item->course->icon??'/icon/bird.png'}
+            %img.course-icon{src: $item->course->icon??'/icon/logo.png'}
           .course-div.fr
-            .title-div.clearfix
-              .caption-div.fl
+            .title-div
+              .caption-div
                 %span.f14.fb.caption= $item->course->name
                 - if($item->begin>date('Y-m-d H:i:s') && $item->students_count<$item->quota && !$item->attended)
                   %span.status.f12 可报
-              %p.course-price.fr.f14= '￥'.round($item->price/100,2)
             .time-div
               %img.icon{src: '/icon/mobile/timemini.png'}
-              %span.f12.text-color= $item->begin.'~'.$item->end
+              %span.f12.text-color= date('Y/m/d', strtotime($item->begin)).'~'.date('Y/m/d', strtotime($item->end))
+            .merchant-div.mb10
+              %img.icon{src: '/icon/mobile/point.png'}
+              %span.f12.text-color= $item->merchant->name 
             .address-div
               %img.icon{src: '/icon/mobile/locationmini.png'}
               %span.f12.text-color= $item->point->address
