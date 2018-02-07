@@ -19,7 +19,7 @@
             .title-div
               .caption-div
                 %span.f14.fb.caption= $item->course->name
-                - if($item->begin>date('Y-m-d H:i:s') && $item->students_count<$item->quota)
+                - if($item->begin>date('Y-m-d H:i:s') && $item->students_count<$item->quota && !$item->attended)
                   %span.status.f12 可报
             .time-div
               %img.icon{src: '/icon/mobile/timemini.png'}
