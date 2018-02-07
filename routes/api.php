@@ -39,7 +39,7 @@ Route::get('/update', 'AiController@getAppUpdate')->name('api.app.update');
 
 
 Route::get('/test', 'TestController@apiIndex');
-Route::post('/login', 'Auth\LoginController@login')->name('api.login');
+//Route::post('/login', 'Auth\LoginController@login')->name('api.login');
 Route::get('/login/sms', 'Auth\LoginController@sendVerificationCodeForLogin')->name('api.login.sms.send');
 Route::post('/login/sms', 'Auth\LoginController@loginBySms')->name('api.login.sms');
 Route::post('/register', 'Auth\RegisterController@register')->name('api.register');
