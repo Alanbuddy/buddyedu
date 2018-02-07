@@ -14,12 +14,13 @@
       %li 1~3岁
       %li 3~7岁
   .curve-box
-    #curve
+    #curve{style: "width: 1000px"}
   
 
 
 @endsection
 
 @section('script')
+<script src="/js/highcharts.js"></script>
 <script src= "/js/grow-curve.js"></script>
 @endsection

@@ -12,7 +12,7 @@
 .course-icon {
   width: 0.96rem;
   height: 0.96rem;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-right: 0.24rem;
 }
 
@@ -59,7 +59,11 @@
 }
 
 .item-div {
-  display: inline-block;
+  display: block;
   margin-bottom: 0.4rem;
+}
+
+.mb10 {
+  margin-bottom: 0.1rem;
 }
 

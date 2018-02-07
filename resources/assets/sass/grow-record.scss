@@ -228,10 +228,12 @@
 
 .curve-box {
   width: 100%;
-  height: 6.4rem;
+  height: 8rem;
   margin-top: 0.36rem;
-  overflow: hidden;
+  overflow-x: hidden;
 }
-
+#curve {
+  width: 15rem;
+}
 
 
