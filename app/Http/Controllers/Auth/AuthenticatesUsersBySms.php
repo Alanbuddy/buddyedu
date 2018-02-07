@@ -53,8 +53,8 @@ trait AuthenticatesUsersBySms
         if ($phone == '12312341234') $code = 123456;
         Log::debug($code);
         $content = Sms::createVerificationCodeText($code);
-        $result = Sms::sendSingleSms($phone, $content);
         if ($phone == '12312341234') return [['success' => true], $code];
+        $result = Sms::sendSingleSms($phone, $content);
         Log::debug($code);
         return [$result, $code];
     }
