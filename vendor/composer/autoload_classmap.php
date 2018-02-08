@@ -4581,6 +4581,7 @@ return array(
     'Tests\\Feature\\Point' => $baseDir . '/tests/Feature/Point.php',
     'Tests\\Feature\\RegisterTest' => $baseDir . '/tests/Feature/RegisterTest.php',
     'Tests\\Feature\\Schedule' => $baseDir . '/tests/Feature/Schedule.php',
+    'Tests\\Feature\\SmsLoginTest' => $baseDir . '/tests/Feature/SmsLoginTest.php',
     'Tests\\Feature\\SmsVerify' => $baseDir . '/tests/Feature/SmsVerify.php',
     'Tests\\Feature\\UpdateQuantityTest' => $baseDir . '/tests/Feature/UpdateQuantityTest.php',
     'Tests\\Feature\\UserTest' => $baseDir . '/tests/Feature/UserTest.php',

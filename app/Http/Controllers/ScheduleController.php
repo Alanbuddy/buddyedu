@@ -222,7 +222,8 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        $schedule->update(['hidden' => $request->hidden]);
+        return ['success' => true];
     }
 
     /**

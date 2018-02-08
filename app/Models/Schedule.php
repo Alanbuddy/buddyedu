@@ -54,5 +54,15 @@ class Schedule extends Model
     {
         return $this->hasMany(Application::class, 'object_id');
     }
+
+    public function scopeHidden($query)
+    {
+        return $query->where('hidden', true);
+    }
+
+    public function scopeNotHidden($query)
+    {
+        return $query->where('hidden', false);
+    }
 }
 
