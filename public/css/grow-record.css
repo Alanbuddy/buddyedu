@@ -275,6 +275,7 @@
   height: 8rem;
   margin-top: 0.36rem;
   overflow-x: hidden;
+  margin-left: -0.16rem;
 }
 
 #curve {
