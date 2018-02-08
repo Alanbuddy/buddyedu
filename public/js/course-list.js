@@ -26,7 +26,7 @@ $(document).ready(function(){
         url: window.course_display.replace(/-1/, cid),
         data: {
           _method: put,
-          hidden: false
+          hidden: 0
         },
         success: function(data){
           if(data.success){
@@ -40,7 +40,7 @@ $(document).ready(function(){
         url: window.course_display.replace(/-1/, cid),
         data: {
           _method: put,
-          hidden: true
+          hidden: 1
         },
         success: function(data){
           if(data.success){
