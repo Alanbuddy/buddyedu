@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
 :javascript
   window.course_search = "#{route('schedules.index')}"
+  window.course_display = "#{route('schedules.update',-1')}"
 @endsection
 
 @section('content')
@@ -42,6 +43,7 @@
               %th 上课老师
               %th 报名人数/班级人数
               %th 课程状态
+              %th 操作
           %tbody
             - foreach ($items as $item)
               %tr
@@ -57,6 +59,7 @@
                   %td.green 上课中
                 - if ($item->begin > date('Y-m-d H:i:s'))
                   %td.orange 报名中
+                %td.f12a.display{"data-id" => $item->id} 展示
 
       .select-page 
         %span.choice-page
