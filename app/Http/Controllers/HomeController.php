@@ -39,22 +39,24 @@ class HomeController extends Controller
         return view('mobile.student-product', compact('drawing', 'video'));
     }
 
+    //首页
     public function home(Request $request)
     {
-	    $items = Schedule::where('status','approved')
-		    ->with('course', 'course.teachers')
-		    ->with('point')
-		    ->with('merchant')
-		    ->withCount('teachers')
-		    ->withCount('students')
-		    ->orderByDesc('id');
-	    if($user=auth()->user()){
-		    $items ->addSelect(DB::Raw("(select count(*) from schedule_user where schedule_user.schedule_id=schedules.id and type='student' and schedule_user.user_id=$user->id) as attended"));
-	    }
-		    
-	    $items=$items->paginate();
-	    //return redirect(route('schedules.index'));
-	return view('mobile.course-list',compact('items'));
+        $items = Schedule::where('status', 'approved')
+            ->with('course', 'course.teachers')
+            ->with('point')
+            ->with('merchant')
+            ->withCount('teachers')
+            ->withCount('students')
+            ->notHidden()
+            ->orderByDesc('id');
+        if ($user = auth()->user()) {
+            $items->addSelect(DB::Raw("(select count(*) from schedule_user where schedule_user.schedule_id=schedules.id and type='student' and schedule_user.user_id=$user->id) as attended"));
+        }
+
+        $items = $items->paginate();
+        //return redirect(route('schedules.index'));
+        return view('mobile.course-list', compact('items'));
     }
 
     public function qr(Request $request)
