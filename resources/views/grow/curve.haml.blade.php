@@ -12,7 +12,7 @@
     %ul.flex-div.f14
       %li.active 0~1岁
       %li 1~3岁
-      %li 3~7岁
+      %li 3~5岁
   .curve-box
     #curve{style: "width: 1000px"}
   
