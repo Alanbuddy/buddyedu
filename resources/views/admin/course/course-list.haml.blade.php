@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ mix('/css/admin_course.css') }}">
 :javascript
   window.course_search = "#{route('schedules.index')}"
-  window.course_display = "#{route('schedules.update',-1')}"
+  window.course_display = "#{route('schedules.update',-1)}"
 @endsection
 
 @section('content')
@@ -59,7 +59,11 @@
                   %td.green 上课中
                 - if ($item->begin > date('Y-m-d H:i:s'))
                   %td.orange 报名中
-                %td.f12a.display{"data-id" => $item->id} 展示
+                - if($item->hidden)
+                  %td.f12a.display{"data-id" => $item->id} 展示
+                - else
+                  %td.f12a.display{"data-id" => $item->id} 隐藏
+
 
       .select-page 
         %span.choice-page
