@@ -15,21 +15,40 @@ $(document).ready(function(){
     }
   });
   
-  $(".dipslay").click(function(){
+  $(".display").click(function(){
     var cid = $(this).attr("data-id");
-    // var _this = $(this);
-    $.ajax({
-      type: 'post',
-      url: window.course_display.replace(/-1/, cid),
-      data: {
-
-      },
-      success: function(data){
-        if(data.success){
-          $(this).text("隐藏");
+    var status = $(this).text();
+    var put = "PUT";
+    var _this = $(this);
+    if(status == "展示"){
+      $.ajax({
+        type: 'put',
+        url: window.course_display.replace(/-1/, cid),
+        data: {
+          _method: put,
+          hidden: false
+        },
+        success: function(data){
+          if(data.success){
+            _this.text("隐藏");
+          }
         }
-      }
-    });
+      });
+    }else{
+      $.ajax({
+        type: 'put',
+        url: window.course_display.replace(/-1/, cid),
+        data: {
+          _method: put,
+          hidden: true
+        },
+        success: function(data){
+          if(data.success){
+            _this.text("展示");
+          }
+        }
+      });
+    }
   });
 
 });
