@@ -44634,34 +44634,43 @@ $(document).ready(function(){
     [1856,  52.642],
   ];
   
-  $('#curve').highcharts({
+  var chart = null;
+  chart = new Highcharts.Chart('curve', {
     chart: {
       type: 'spline',
-      zoomType: 'x',
-      panning: true
+      panning: true,
+      pinchType: 'x',
+      // zoomType: 'x',
+      resetZoomButton: {
+            position: {
+                y: -1000
+            }
+        },
     },
     title: "",
     colors: ['red', 'blue'],
     xAxis: {
       min: 0,
-      max: 1860,
+      max: 1856,
       tickInterval: 30,
-        labels: {
-            formatter: function(){
-              var arr = [];
-              for(let i = 0; i < b_h_data1.length;i++){
-                if(i == 0){
-                  arr[i] = "出生";
-                }else{
-                  arr[i] = i/30 + "个月";
-                }
+      tickLength: 5,
+      minPadding:0 ,
+      labels: {
+          formatter: function(){
+            var arr = [];
+            for(let i = 0; i < b_h_data1.length;i++){
+              if(i == 0){
+                arr[i] = "出生";
+              }else{
+                arr[i] = i/30 + "个月";
               }
-              return arr[this.value];
             }
-        },
-        title: {
-            text:null
-        },
+            return arr[this.value];
+          }
+      },
+      title: {
+          text:null
+      },
     },
     yAxis: {
         startOnTick: true,
@@ -44674,19 +44683,23 @@ $(document).ready(function(){
         }
     },
     tooltip: {
-        headerFormat: '天数: {point.x} 天<br>',
-        pointFormat: '身高：{point.y} cm ',
-        followTouchMove: true,
+      headerFormat: '天数: {point.x} 天<br>',
+      pointFormat: '身高：{point.y} cm ',
+      followTouchMove: false,
     },
     legend: {
-        enabled: false
+        enabled: false,
     },
     credits: { enabled: false },
     plotOptions: {
       spline: {
         lineWidth: 1,
         dashStyle: 'Dash',
-        color: 'brown',
+      },
+      series: {
+        connectNulls: true,
+        stickyTracking: false,
+        allowPointSelect: true,
       }
     },
     series: [{
@@ -44708,6 +44721,8 @@ $(document).ready(function(){
     },
     {}
     ]
+  }, function(c){
+    c.xAxis[0].setExtremes(1, 500);
   });
 
 
