@@ -28,7 +28,7 @@ class ApplicationController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Application::WithdrawType()
+        $items = Application::withdrawType()
             ->orderBy('id', 'desc')
             ->paginate(10);
         $key = $request->key;
