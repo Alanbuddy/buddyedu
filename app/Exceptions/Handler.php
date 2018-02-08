@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use Log;
+use Mail;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Str;
