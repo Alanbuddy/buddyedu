@@ -42,7 +42,6 @@ class HomeController extends Controller
     //首页
     public function home(Request $request)
     {
-        dd($a);
         $items = Schedule::where('status', 'approved')
             ->with('course', 'course.teachers')
             ->with('point')
