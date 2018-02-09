@@ -201,5 +201,4 @@
 |        | GET|HEAD                               | wechat/users/{user}/userinfo                           | wechat.userinfo                 | App\Http\Controllers\WechatController@userInfo                             | web                                     |
 |        | GET|HEAD                               | withdraw/breakdown                                     | withdraw.breakdown              | App\Http\Controllers\OrderController@withdrawBreakdown                     | web,auth                                |
 +--------+----------------------------------------+--------------------------------------------------------+---------------------------------+----------------------------------------------------------------------------+-----------------------------------------+
-
 </pre>
