@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     //
+    use EntrustUserTrait;
+    protected $guarded = [];
 }

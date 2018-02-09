@@ -2,7 +2,7 @@
 
 return [
 
-    'model'=>'App\Models\User',
+    'model' => 'App\Models\User',
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -72,6 +72,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -105,7 +109,7 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 10,//10 minutes
-            'column'=>'phone'
+            'column' => 'phone'
         ],
     ],
 

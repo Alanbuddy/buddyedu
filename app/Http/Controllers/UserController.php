@@ -420,7 +420,6 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $data = $request->only('name', 'gender', 'birthday');
-        Log::debug($data);
         auth()->user()->update($data);
         return ['success' => true];
     }
