@@ -19,4 +19,5 @@ function createSchema(){
 	}
 	echo $return_value;
 }
+
 createSchema();
