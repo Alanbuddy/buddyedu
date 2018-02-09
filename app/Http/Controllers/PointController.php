@@ -128,7 +128,8 @@ class PointController extends Controller
      */
     public function update(Request $request, Point $point)
     {
-        //
+        $point->update($request->all());
+        return ['success' => true];
     }
 
     /**

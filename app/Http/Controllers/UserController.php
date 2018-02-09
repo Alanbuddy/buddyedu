@@ -232,7 +232,8 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $data = $request->only('birthday', 'name', 'gender');
+//        $data = $request->only('birthday', 'name', 'gender');
+        $data = $request->all();
         $user->update($data);
         return ['success' => true];
     }
