@@ -85,7 +85,7 @@ $(document).ready(function(){
       success: function(data){
         if(data.success){
           $("#addModal").modal("hide");
-          location.href = window.courses_show;
+          location.href = window.course_show;
         }
       }
 

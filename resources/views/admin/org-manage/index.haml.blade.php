@@ -4,6 +4,7 @@
 :javascript
   window.merchants_index = "#{route('merchants.index')}"
   window.merchants_store = "#{route('merchants.store')}"
+  window.merchant_update = "#{route('merchants.update', -1)}"
 
 @endsection
 
@@ -40,12 +41,12 @@
           %tbody
             -foreach($items as $item)
               %tr
-                %td
+                %td.merchant-name
                   %a{href: route('merchants.show', $item->id)}=$item->name
                 %td=$item->ongoingSchedules.'/'.$item->schedules_count
-                %td=$item->admin->name
-                %td=$item->admin->phone
-                %td.f12a.edit 编辑
+                %td.admin=$item->admin->name
+                %td.phone=$item->admin->phone
+                %td.f12a.edit{"data-id" => $item->id} 编辑
     .select-page 
       %span.choice-page
         != $items->links()
@@ -57,6 +58,7 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body
         %p.f24b.add-c 添加机构
+        %span#merchant-id{style: "display: none"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 机构名称:
           %input.form-control.input-width#name{:type => "text"}
