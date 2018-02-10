@@ -31,6 +31,10 @@ $(document).ready(function(){
     $("#addModal").modal("hide");
   });
 
+  $(".upload-btn").click(function(){
+    $(".hidden").click();
+  });
+
   var E = window.wangEditor;
   var editor = new E('#edit-area');
   editor.customConfig.uploadImgParams = {
@@ -86,5 +90,14 @@ $(document).ready(function(){
       }
 
     });
+  });
+
+  $(".icon-name").click(function(){
+    $(".upload-btn").click();
+  });
+
+  $(".delete-icon").click(function(){
+    $(".upload-btn").show();
+    $(".icon-name").hide();
   });
 });
