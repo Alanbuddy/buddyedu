@@ -44,6 +44,7 @@
               %th 负责人
               %th 联系方式
               %th 详细地址
+              %th 操作
           %tbody
           -foreach($items as $item)
             %tr
@@ -59,6 +60,7 @@
                   %p 地址信息:
                   %p= $item->address
                   .container
+              %td.f12a.edit 编辑
       .select-page 
         %span.choice-page
           != $items->links()

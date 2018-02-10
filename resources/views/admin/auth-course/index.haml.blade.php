@@ -44,7 +44,7 @@
   .modal-dialog
     .modal-content
       .modalheader
-        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "icon/close.png"}
+        %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body.clearfix
         %p.f24b.add-c 添加课程
         .controls.controls-row.mb24

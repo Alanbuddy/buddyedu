@@ -105,3 +105,151 @@
   vertical-align: top;
 }
 
+#addModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -440px;
+  margin-top: -348px;
+  width: 880px;
+  height: 696px;
+}
+
+#addModal .modal-backdrop {
+  background-color: rgba(51, 58, 72, 0.16);
+}
+
+#addModal .modal-body {
+  margin: 0;
+  padding-left: 40px;
+  padding-bottom: 40px;
+}
+
+#addModal .close {
+  position: absolute;
+  width: 64px;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 15;
+}
+
+#addModal .add-c {
+  margin-top: 30px;
+  margin-bottom: 24px;
+}
+
+#addModal .input-width {
+  width: 160px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 40px;
+}
+
+#addModal #auth-price {
+  padding: 0;
+  padding-left: 4px;
+}
+
+#addModal .upload-btn {
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  margin-left: 8px;
+  margin-right: 40px;
+  background: #f4fafe;
+  border: 2px solid #e4f3ff;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#addModal .mb24 {
+  margin-bottom: 24px;
+}
+
+#addModal .input-web-width {
+  width: 709px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 40px;
+}
+
+#addModal .input-web1-width {
+  width: 435px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 40px;
+}
+
+#addModal .area-width {
+  display: inline-block;
+  width: 709px;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+#addModal .input-top {
+  vertical-align: top;
+}
+
+#addModal .area-height {
+  display: inline-block;
+  height: 240px;
+}
+
+#addModal .add-btn-width {
+  display: inline-block;
+  width: 240px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #365ba9;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+#addModal .w-e-text-container {
+  height: 200px !important;
+}
+
+#addModal .delete-icon {
+  width: 12px;
+}
+
+#addModal .course-icon-name {
+  display: inline-block;
+  width: 144px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+#addModal .icon-name {
+  display: inline-block;
+  width: 160px;
+  height: 30px;
+  line-height: 30px;
+  display: none;
+  margin-left: 8px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.modify-btn-width {
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #365ba9;
+  cursor: pointer;
+}
+
+#modify {
+  color: #fff;
+}
+
