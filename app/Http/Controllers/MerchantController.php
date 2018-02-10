@@ -165,7 +165,9 @@ class MerchantController extends Controller
                     'admin_id' => $admin->id,
                     'status' => 'authorized'
                 ]);
+
                 $oldAdmin->delete();
+
             } else {
                 //update old admin
                 $merchant->update([
@@ -180,6 +182,7 @@ class MerchantController extends Controller
                 }
             }
         });
+
         return ['success' => true];
     }
 

@@ -121,14 +121,35 @@ class PointController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Models\Point $point
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Point $point)
     {
-        //
+        $point->fill($request->only([
+            'name',
+            'admin',
+            'contact',
+            'area',
+            'address',
+            'province',
+            'city',
+            'county',
+            'geolocation',
+        ]));
+
+        $application = new Application(
+            $request->only('remark')
+        );
+
+        DB::transaction(function () use ($point, $application) {
+            $point->save();
+            $application->fill([
+                'type' => 'point',
+                'status' => 'applying',
+                'merchant_id' => $this->getMerchant()->id
+            ]);
+            $point->applications()->save($application);
+        });
+        return ['success'=>true];
     }
 
     /**
