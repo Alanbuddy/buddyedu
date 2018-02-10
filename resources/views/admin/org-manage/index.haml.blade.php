@@ -36,6 +36,7 @@
               %th 当前开课/历史开课
               %th 负责人
               %th 联系方式
+              %th 操作
           %tbody
             -foreach($items as $item)
               %tr
@@ -43,7 +44,8 @@
                   %a{href: route('merchants.show', $item->id)}=$item->name
                 %td=$item->ongoingSchedules.'/'.$item->schedules_count
                 %td=$item->admin->name
-                %td.f12a=$item->admin->phone
+                %td=$item->admin->phone
+                %td.f12a.edit 编辑
     .select-page 
       %span.choice-page
         != $items->links()
