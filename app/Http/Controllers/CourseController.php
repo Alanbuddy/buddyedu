@@ -149,9 +149,8 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         $course = $course->fill($request->only([
-            'name', 'price', 'discount'
+            'name', 'guide_price', 'proportion', 'icon', 'url', 'description', 'detail', 'lessons_count'
         ]));
-        $course->status = 'draft';
         $course->update();
         return ['success' => true, 'data' => $course];
     }
