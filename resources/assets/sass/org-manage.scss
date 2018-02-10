@@ -1,6 +1,6 @@
 
 
-#addModal {
+#addModal, #editModal {
   .modal-dialog {
     position:absolute;
     left: 50%;
@@ -18,7 +18,7 @@
     padding-left: 40px;
     padding-bottom: 40px;
   }
-  .close {
+  .close, .edit-close {
     position: absolute;
     width: 64px;
     right: 0;
@@ -58,4 +58,7 @@
   cursor: pointer;
 }
 
+.password-con {
+  display: none;
+}
 
