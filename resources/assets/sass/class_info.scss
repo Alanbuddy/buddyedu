@@ -223,5 +223,91 @@
 }
 
 
+#editModal {
+  .modal-dialog {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -240px;
+    margin-top: -377px;
+    width: 480px;
+    height: 754px;
+  }
+  .modal-backdrop {
+    background-color: rgba(51, 58, 72, 0.16);
+  }
+  .modal-body {
+    margin: 0;
+    padding-left: 40px;
+    padding-bottom: 40px;
+  }
+  select {
+    padding: 0;
+    padding-left: 5px;
+  }
+  .close {
+    position: absolute;
+    width: 64px;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    z-index: 15;
+  }
+  .add-c {
+    margin-top: 30px;
+    margin-bottom: 24px;
+  }
+  .input-width {
+    width: 300px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 40px;
+  }
+  .mb24 {
+    margin-bottom: 24px;
+  }
+  .add-btn-width {
+    display: inline-block;
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #365ba9;
+    margin-left: 80px;
+    cursor: pointer;
+  }
+  .manager {
+    margin-left: 22px;
+  }
+  .teacher {
+    margin-right: 8px;
+  }
+  .unvisible {
+    visibility: hidden;
+    vertical-align: top;
+  }
+  .hide-notice {
+    display: inline-block;
+    width: 300px;
+    margin-left: 8px;
+    color: #8C929F;
+    font-size: 12px;
+    height: 20px;
+  }
+  .mtb {
+    margin: 2px 0;
+  }
+  .time {
+    vertical-align: top;
+  }
+  #time {
+    height: 54px;
+  }
+  #desc {
+    display: none;
+  }
+}
+
 
 

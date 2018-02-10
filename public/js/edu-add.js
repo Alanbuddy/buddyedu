@@ -154,4 +154,16 @@ $(document).ready(function(){
       search();
     }
   });
+
+  $(".edit").click(function(){
+    $("#edu-name").val($(this).siblings('.name').text());
+    $("#edu-area").val($(this).siblings('.area').text());
+    $("#edu-admin").val($(this).siblings('.admin').text());
+    $("#edu-phone").val($(this).siblings('.contact').text());
+    $("#province").val($(this).siblings('.province').text());
+    $("#city").val($(this).siblings('.city').text());
+    $("#county").val($(this).siblings('.county').text());
+    $("#street").val($(this).siblings('.tip-parent').find('.address').text());
+    $("#addModal").modal("show");
+  });
 });

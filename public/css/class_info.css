@@ -253,3 +253,103 @@
   color: #fff;
 }
 
+#editModal .modal-dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -240px;
+  margin-top: -377px;
+  width: 480px;
+  height: 754px;
+}
+
+#editModal .modal-backdrop {
+  background-color: rgba(51, 58, 72, 0.16);
+}
+
+#editModal .modal-body {
+  margin: 0;
+  padding-left: 40px;
+  padding-bottom: 40px;
+}
+
+#editModal select {
+  padding: 0;
+  padding-left: 5px;
+}
+
+#editModal .close {
+  position: absolute;
+  width: 64px;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  z-index: 15;
+}
+
+#editModal .add-c {
+  margin-top: 30px;
+  margin-bottom: 24px;
+}
+
+#editModal .input-width {
+  width: 300px;
+  height: 30px;
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 40px;
+}
+
+#editModal .mb24 {
+  margin-bottom: 24px;
+}
+
+#editModal .add-btn-width {
+  display: inline-block;
+  width: 240px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #365ba9;
+  margin-left: 80px;
+  cursor: pointer;
+}
+
+#editModal .manager {
+  margin-left: 22px;
+}
+
+#editModal .teacher {
+  margin-right: 8px;
+}
+
+#editModal .unvisible {
+  visibility: hidden;
+  vertical-align: top;
+}
+
+#editModal .hide-notice {
+  display: inline-block;
+  width: 300px;
+  margin-left: 8px;
+  color: #8C929F;
+  font-size: 12px;
+  height: 20px;
+}
+
+#editModal .mtb {
+  margin: 2px 0;
+}
+
+#editModal .time {
+  vertical-align: top;
+}
+
+#editModal #time {
+  height: 54px;
+}
+
+#editModal #desc {
+  display: none;
+}
+

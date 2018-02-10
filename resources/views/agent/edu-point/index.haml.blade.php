@@ -48,19 +48,22 @@
           %tbody
           -foreach($items as $item)
             %tr
-              %td=$item->name
-              %td= $item->area.'m²'
-              %td= $item->admin
-              %td= $item->contact
+              %td.name=$item->name
+              %td.area= $item->area.'m²'
+              %td.admin= $item->admin
+              %td.contact= $item->contact
               %td.tip-parent{"data-geo" => $item->geolocation}
                 %img{src: "/icon/location.png"}
                 .tooltip-div.f14d
                   .triangle
                   %img.close{src: "/icon/smallclose.png"}
                   %p 地址信息:
-                  %p= $item->address
+                  %p.address= $item->address
                   .container
               %td.f12a.edit 编辑
+              %td.province{style: "display: none"}= $item->province
+              %td.city{style: "display: none"}= $item->city
+              %td.county{style: "display: none"}= $item->county
       .select-page 
         %span.choice-page
           != $items->links()
@@ -101,7 +104,7 @@
           %span.get-location.f14b 获取地址
           #container
         .btn-div     
-          %btn.f16d.add-btn-width#confirm 提交申请
+          %btn.f16d.add-btn-width#confirm 确定
 @endsection
 
 @section('script')

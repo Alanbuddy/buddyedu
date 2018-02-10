@@ -58,7 +58,6 @@
         %img.close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
       .modal-body
         %p.f24b.add-c 添加机构
-        %span#merchant-id{style: "display: none"}
         .controls.controls-row.mb24
           %label.input-caption.f14d 机构名称:
           %input.form-control.input-width#name{:type => "text"}
@@ -72,7 +71,30 @@
           %label.input-caption.f14d 初始密码:
           %input.form-control.input-width#password{:type => "text"}
         .btn-div     
-          %btn.f16d.add-btn-width#submit 立即添加
+          %btn.f16d.add-btn-width#submit 确定
+
+#editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
+  .modal-dialog
+    .modal-content
+      .modalheader
+        %img.edit-close{"aria-hidden" => "true", "data-dismiss" => "modal", src: "/icon/close.png"}
+      .modal-body
+        %p.f24b.add-c 修改机构
+        %span#merchant-id{style: "display: none"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 机构名称:
+          %input.form-control.input-width#edit-name{:type => "text"}
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 负责人:
+          %input.form-control.input-width.manager#edit-admin{:type => "text"}  
+        .controls.controls-row.mb24
+          %label.input-caption.f14d 手机号码:
+          %input.form-control.input-width#edit-phone{:type => "text"}
+        .controls.controls-row.mb24.password-con
+          %label.input-caption.f14d 初始密码:
+          %input.form-control.input-width#edit-password{:type => "text"}
+        .btn-div     
+          %btn.f16d.add-btn-width#confirm 确定
 @endsection
 
 @section('script')
