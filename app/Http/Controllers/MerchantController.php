@@ -148,6 +148,7 @@ class MerchantController extends Controller
     {
         DB::transaction(function () use ($merchant, $request) {
             $oldAdmin = $merchant->admin;
+            //assign a new admin to merchant
             if ($request->phone != $oldAdmin->phone) {
                 $admin = new User([
                     'name' => $request->adminName,
@@ -166,6 +167,7 @@ class MerchantController extends Controller
                 ]);
                 $oldAdmin->delete();
             } else {
+                //update old admin
                 $merchant->update([
                     'name' => $request->name,
                 ]);
