@@ -3,13 +3,14 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\Mail;
 use Log;
-use Mail;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,7 @@ class Handler extends ExceptionHandler
         Log::error('Exception :' . $exception->getMessage());
         //Expected response code 250 but got code "553", with message "553 Mail from must equal authorized user"
         if (!$exception instanceof NotFoundHttpException) {
+            Log::error('==================================');
             try {
                 Mail::send('errors.email', ['user' => $user, 'e' => $exception], function ($m) use ($exception) {
                     $m->to(env('REPORT_EMAIL'), 'wkk')->subject('ERROR!' . $exception->getMessage());
