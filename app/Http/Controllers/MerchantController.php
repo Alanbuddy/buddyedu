@@ -146,11 +146,38 @@ class MerchantController extends Controller
      */
     public function update(Request $request, Merchant $merchant)
     {
-        $data = $request->only([
-            'name',
-            'address',
-        ]);
-        $merchant->update($data);
+        DB::transaction(function () use ($merchant, $request) {
+            $oldAdmin = $merchant->admin;
+            if ($request->phone != $oldAdmin->phone) {
+                $admin = new User([
+                    'name' => $request->adminName,
+                    'phone' => $request->phone,
+                    'status' => 'enabled',
+                    'api_token' => Uuid::uuid(),
+                ]);
+                $admin->password = bcrypt($request['password']);
+                $admin->save();
+                $admin->attachRole(Role::find(2));
+
+                $merchant->update([
+                    'name' => $request->name,
+                    'admin_id' => $admin->id,
+                    'status' => 'authorized'
+                ]);
+                $oldAdmin->delete();
+            } else {
+                $merchant->update([
+                    'name' => $request->name,
+                ]);
+                $oldAdmin->update([
+                    'name' => $request->adminName
+                ]);
+                if ($request->password) {
+                    $oldAdmin->password = bcrypt($request['password']);
+                    $oldAdmin->update();
+                }
+            }
+        });
         return ['success' => true];
     }
 
@@ -223,7 +250,7 @@ class MerchantController extends Controller
         $items = $merchant->courses()
             ->orderBy('id', 'desc')
             ->wherePivot('status', 'approved')
-            ->withPivot('is_batch','quantity')
+            ->withPivot('is_batch', 'quantity')
             ->paginate(10);
         foreach ($items as $item) {
             $item->remain = $item->pivot->is_batch ? $this->getRemain($merchant, $item->id) : null;
