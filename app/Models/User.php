@@ -41,7 +41,7 @@ class User extends Authenticatable
 
     public function videos()
     {
-        return $this->hasMany(File::class,'student_id')
+        return $this->hasMany(File::class, 'student_id')
             ->where('extension', 'mp4');
     }
 

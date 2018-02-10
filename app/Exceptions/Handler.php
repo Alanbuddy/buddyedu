@@ -44,10 +44,9 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         $user = auth()->user();
-        Log::error('Exception :' . $exception->getMessage());
+        Log::error('========Exception :'. $exception->getMessage());
         //Expected response code 250 but got code "553", with message "553 Mail from must equal authorized user"
         if (!$exception instanceof NotFoundHttpException) {
-            Log::error('==================================');
             try {
                 Mail::send('errors.email', ['user' => $user, 'e' => $exception], function ($m) use ($exception) {
                     $m->to(env('REPORT_EMAIL'), 'wkk')->subject('ERROR!' . $exception->getMessage());
