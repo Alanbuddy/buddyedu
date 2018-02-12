@@ -17,12 +17,13 @@
       %li.f14a.bg16b 公告详情
 
   .desc-div
-    .name-money
-      .name-div
-        %p.f24b 公告的标题
-        %p.f12a.mt16 时间
-    .info-div.f14d
-      公告内容
+    .content-div
+      .name-money
+        .name-div
+          %p.f24b= $notice->title
+          %p.f12a.mt16= $notice->created_at
+      .info-div.f14d
+        .content!= $notice->content
   
 @endsection
 
