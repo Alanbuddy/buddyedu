@@ -44,6 +44,7 @@ $(document).ready(function(){
   $("#submit").click(function(){
     var title = $("#title").val().trim();
     var content = editor.txt.html();
+    console.log(content);
     var content_info = false;
     $("#edit-area .w-e-text ").last().find('p').each(function(){
       if($(this).text()!=''){
