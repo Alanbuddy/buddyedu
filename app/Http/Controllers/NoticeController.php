@@ -18,7 +18,7 @@ class NoticeController extends Controller
         $items = Notice::orderByDesc('id');
         if ($key = $request->key) {
             $items->where(function ($query) use ($key) {
-                $query->where('name', 'like', '%' . $key . '%')->orWhere('content', 'like', '%' . $key . '%');
+                $query->where('title', 'like', '%' . $key . '%')->orWhere('content', 'like', '%' . $key . '%');
             });
         }
         $items = $items->paginate(10);
