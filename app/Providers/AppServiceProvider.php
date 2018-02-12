@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    public function sms_check()
+    public function sms_check($value)
     {
         if (!$this->session->has('captcha')) {
             return false;

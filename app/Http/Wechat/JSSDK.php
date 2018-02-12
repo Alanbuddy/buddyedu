@@ -88,7 +88,7 @@ class JSSDK
 //            $ticket = $data->jsapi_ticket;
         }
 
-            $ticket = $data->jsapi_ticket;
+        $ticket = $data->jsapi_ticket;
         return $ticket;
     }
 
