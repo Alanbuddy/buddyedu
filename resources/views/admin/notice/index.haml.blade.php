@@ -39,7 +39,7 @@
           .item
             %p.caption.f20a= $item->title
             %p.date.f12a= $item->created_at
-            %p.content= $item->content
+            .content!= $item->content
       .select-page 
         %span.choice-page
           != $items->links()
