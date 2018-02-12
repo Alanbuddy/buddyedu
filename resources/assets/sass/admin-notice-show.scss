@@ -1,0 +1,27 @@
+.name-money {
+  background: #f4fafe;
+  height: 120px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -os-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -os-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -os-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  padding: 40px;
+}
+.mt16 {
+  margin-top: 10px;
+}
+.info-div {
+  padding-top: 40px;
+  padding-left: 40px;
+}

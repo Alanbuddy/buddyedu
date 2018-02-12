@@ -37,6 +37,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.sass('resources/assets/sass/class_info.scss', 'public/css')
 	.sass('resources/assets/sass/mobile-course-list.scss', 'public/css')
 	.sass('resources/assets/sass/admin-notice-index.scss', 'public/css')
+	.sass('resources/assets/sass/admin-notice-show.scss', 'public/css')
 
 
 	.sass('resources/assets/sass/grow-record.scss', 'public/css');

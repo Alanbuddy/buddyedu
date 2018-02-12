@@ -72,4 +72,23 @@ $(document).ready(function(){
       }
     });
   });
+
+  $("#delete").click(function(){
+    var nid = $(this).attr("data-id");
+    var destroy = "DELETE";
+    var _this = $(this);
+    $.ajax({
+      type: 'post',
+      url: window.notice_delete.replace(/-1/, nid),
+      data: {
+        _method: destroy,
+        _token: window.token
+      },
+      success: function(data){
+        if(data.success){
+          _this.closest('.item').remove();
+        }
+      }
+    });
+  });
 });
