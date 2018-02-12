@@ -4,6 +4,7 @@
 :javascript
   window.notice_index = "#{route('notices.index')}"
   window.notice_store = "#{route('notices.store')}"
+  window.notice_delete = "#{route('notices.destroy', -1)}"
 
 @endsection
 
@@ -22,7 +23,7 @@
 
   .tab-title
     %ul.clearfix
-      %li.f14a.bg16b='所有公告('.$items->count().')'
+      %li.f14a.bg16b='所有公告('.$items->total().')'
     .search-add
       .user-search-box
         .search#search-btn
@@ -36,10 +37,11 @@
     - else
       .items-div
         - foreach($items as $item)
-          .item
+          %a.item{href: route('notices.show', $item->id)}
             %p.caption.f20a= $item->title
             %p.date.f12a= $item->created_at
             .content!= $item->content
+            %btn.delete-btn#delete{"data-id" => $item->id} 删除
       .select-page 
         %span.choice-page
           != $items->links()
