@@ -10,14 +10,16 @@ class NoticeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
         $items = Notice::orderByDesc('id');
         if ($key = $request->key) {
-            $items->join('courses', 'courses.id', '=', 'schedules.course_id')
-                ->where('courses.name', 'like', "%$key%");
+            $items->where(function ($query) use ($key) {
+                $query->where('name', 'like', '%' . $key . '%')->orWhere('content', 'like', '%' . $key . '%');
+            });
         }
         $items = $items->paginate(10);
         if ($key)
