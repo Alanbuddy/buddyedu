@@ -43,7 +43,7 @@ class NoticeController extends Controller
             'content' => 'required'
         ]);
         $item = Notice::create($request->only([
-            'title', 'content,'
+            'title', 'content'
         ]));
         return ['success' => true, 'data' => $item];
     }
