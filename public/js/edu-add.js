@@ -36,6 +36,7 @@ $(document).ready(function(){
   });
 
   $(".add-icon").click(function(){
+    map_init('container');
     $("#addModal").modal("show");
   });
   $(".close").click(function(){
@@ -52,9 +53,9 @@ $(document).ready(function(){
       origin = new qq.maps.Point(0, 0),
       icon = new qq.maps.MarkerImage('/icon/tick.png', size, origin, anchor);
 
-  function map_init() {
+  function map_init(container) {
     var center = new qq.maps.LatLng(39.87601941962116, 116.43310546875);
-    map = new qq.maps.Map(document.getElementById('container'),{
+    map = new qq.maps.Map(document.getElementById(container),{
       center: center,
       zoom: 12
     });
@@ -64,13 +65,9 @@ $(document).ready(function(){
     });
     geocoder = new qq.maps.Geocoder();
   }
-  map_init();
+  
 
-  function codeAddress(){
-    var province = $("#province").val();
-    var city = $("#city").val();
-    var county = $("#county").val();
-    var street = $("#street").val();
+  function codeAddress(province, city, county, street){
     address = province + city + county + street;
     geocoder.getLocation(address);
     geocoder.setComplete(function(result){
@@ -93,10 +90,14 @@ $(document).ready(function(){
     return false;
   }
   $('.get-location').click(function(){
-    codeAddress();
+    var province = $("#province").val();
+    var city = $("#city").val();
+    var county = $("#county").val();
+    var street = $("#street").val();
+    codeAddress(province, city, county, street);
   });
 
-  $("#confirm").click(function(){
+  $("#submit").click(function(){
     var name = $("#edu-name").val();
     var area = $("#edu-area").val();
     var admin = $("#edu-admin").val();
@@ -155,15 +156,5 @@ $(document).ready(function(){
     }
   });
 
-  $(".edit").click(function(){
-    $("#edu-name").val($(this).siblings('.name').text());
-    $("#edu-area").val($(this).siblings('.area').text());
-    $("#edu-admin").val($(this).siblings('.admin').text());
-    $("#edu-phone").val($(this).siblings('.contact').text());
-    $("#province").val($(this).siblings('.province').text());
-    $("#city").val($(this).siblings('.city').text());
-    $("#county").val($(this).siblings('.county').text());
-    $("#street").val($(this).siblings('.tip-parent').find('.address').text());
-    $("#addModal").modal("show");
-  });
+  
 });
