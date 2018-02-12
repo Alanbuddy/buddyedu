@@ -109,6 +109,7 @@ Route::middleware('auth')
         Route::get('/applications/{application}/reject', 'ApplicationController@reject')->name('application.reject');
         Route::get('/applications/{application}/approve', 'ApplicationController@approve')->name('application.approve');
         Route::resource('applications', 'ApplicationController');
+        Route::resource('notices', 'NoticeController');
     });
 
 Route::get('/qr', 'HomeController@qr')->name('qr');
