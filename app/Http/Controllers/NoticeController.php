@@ -23,7 +23,7 @@ class NoticeController extends Controller
         }
         $items = $items->paginate(10);
         if ($key)
-            $items->withPath(route('notice.index') . '?' . http_build_query(['key' => $key,]));
+            $items->withPath(route('notices.index') . '?' . http_build_query(['key' => $key,]));
         return view('admin.notice.index', compact('items', 'key'));
     }
 
