@@ -41,6 +41,10 @@
                   %img.mini-icon{src: "/icon/3A.png"}
                   %span.fb.sidebar-title 机构管理
               %li
+                %a.a-item{:href => route('notices.index')}
+                  %img.mini-icon{src: "/icon/11A.png"}
+                  %span.fb.sidebar-title 公告管理
+              %li
                 %a.a-item{:href => route('users.index')}
                   %img.mini-icon{src: "/icon/4A.png"}
                   %span.fb.sidebar-title 学生管理
