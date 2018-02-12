@@ -32,18 +32,18 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+        $item = Notice::create($request->only([
+            'title', 'body'
+        ]));
+        return ['success' => true, 'data' => $item];
     }
 
     /**
@@ -54,7 +54,7 @@ class NoticeController extends Controller
      */
     public function show(Notice $notice)
     {
-        //
+        return view('admin.notice.show', compact('notice'));
     }
 
     /**
@@ -80,14 +80,9 @@ class NoticeController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Notice $notice
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Notice $notice)
     {
-        //
+        $notice->delete();
+        return ['success' => true];
     }
 }
