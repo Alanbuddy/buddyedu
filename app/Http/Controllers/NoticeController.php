@@ -21,7 +21,7 @@ class NoticeController extends Controller
                 $query->where('title', 'like', '%' . $key . '%')->orWhere('content', 'like', '%' . $key . '%');
             });
         }
-        $items = $items->paginate(10);
+        $items = $items->paginate(4);
         if ($key)
             $items->withPath(route('notices.index') . '?' . http_build_query(['key' => $key,]));
         return view('admin.notice.index', compact('items', 'key'));
