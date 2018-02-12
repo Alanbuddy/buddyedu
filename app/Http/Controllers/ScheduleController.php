@@ -72,8 +72,7 @@ class ScheduleController extends Controller
         if ($isAdmin) {
             $items = Schedule::where('schedules.end', $finished ? '<' : '>', date('Y-m-d H:i:s'))
                 ->with(['course', 'point', 'merchant', 'teachers'])
-                ->withCount('students')
-                ->orderBy('id', 'desc');
+                ->withCount('students');
             if ($finished)
                 $onGoingSchedulesCount = $this->onGoingSchedules()->count();
             else
@@ -92,7 +91,7 @@ class ScheduleController extends Controller
             $items->join('courses', 'courses.id', '=', 'schedules.course_id')
                 ->where('courses.name', 'like', "%$key%");
         }
-        $items = $items->paginate(10);
+        $items = $items->orderByDesc('id')->paginate(10);
         if ($key)
             $items->withPath(route('schedules.index') . '?' . http_build_query(['key' => $key,]));
         return view($isAdmin ? ($finished ? 'admin.course.history-course' : 'admin.course.course-list') : ($finished ? 'agent.course.history-course' : 'agent.course.index'),
