@@ -222,8 +222,10 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        $schedule->update(['hidden' => $request->hidden]);
-        return ['success' => true];
+        if ($request->hidden)
+            return $this->toggleHidden($request, $schedule);
+
+
     }
 
     /**
@@ -405,6 +407,17 @@ class ScheduleController extends Controller
             Log::debug(json_encode($changed));
             $this->getMerchant()->users()->syncWithoutDetaching($ids);
         });
+        return ['success' => true];
+    }
+
+    /**
+     * @param Request $request
+     * @param Schedule $schedule
+     * @return array
+     */
+    public function toggleHidden(Request $request, Schedule $schedule)
+    {
+        $schedule->update(['hidden' => $request->hidden]);
         return ['success' => true];
     }
 
