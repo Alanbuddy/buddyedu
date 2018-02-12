@@ -145,10 +145,18 @@ class ScheduleController extends Controller
             'lessons_count' => 'required|numeric',
         ]);
 
+        $arr = [];
+        foreach ($request->teachers as $k => $v) {
+            $arr[$v] = [
+                'type' => 'teacher',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+        }
         $application = new Application(
             $request->only('remark')
         );
-        DB::transaction(function () use ($application, $request) {
+        DB::transaction(function () use ($arr, $application, $request) {
             $schedule = new Schedule();
             $schedule->fill($request->only([
                 'begin',
@@ -165,14 +173,6 @@ class ScheduleController extends Controller
             $schedule->merchant_id = auth()->user()->ownMerchant->id;
             $schedule->save();
             //save teachers
-            $arr = [];
-            foreach ($request->teachers as $k => $v) {
-                $arr[$v] = [
-                    'type' => 'teacher',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ];
-            }
             $schedule->teachers()->sync($arr);
 
             //save application
@@ -222,9 +222,45 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        if ($request->hidden)
+        if ($request->has('hidden'))
             return $this->toggleHidden($request, $schedule);
 
+        $application = new Application(
+            $request->only('remark')
+        );
+
+        $arr = [];
+        foreach ($request->teachers as $k => $v) {
+            $arr[$v] = [
+                'type' => 'teacher',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+        }
+
+        DB::transaction(function () use ($arr, $schedule, $application, $request) {
+            $properties = $schedule->getAttributes();
+            array_splice($properties, 0, 1);
+            Schedule::create(array_merge(['parent' => $schedule->id], $properties));
+
+            $schedule->update(array_merge(
+                ['status' => 'applying'],
+                $request->only(['begin', 'end', 'time', 'course_id', 'point_id', 'price', 'lessons_count', 'quota']
+                )));
+
+            //save teachers
+            $schedule->teachers()->sync($arr);
+
+            //save application
+            $application->fill([
+                'type' => 'schedule',
+                'status' => 'applying',
+                'merchant_id' => $this->getMerchant()->id
+            ]);
+            $schedule->applications()->save($application);
+        });
+
+        return ['success' => true];
 
     }
 
