@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ mix('/css/admin-notice-index.css') }}">
 :javascript
   window.notice_index = "#{route('notices.index')}"
+  window.notice_store = "#{route('notices.store')}"
+
 @endsection
 
 @section('content')
@@ -14,7 +16,7 @@
       %span.f24a.title 公告发布
   - else
     .title-div
-      %a{href: route('courses.index')}
+      %a{href: route('notices.index')}
         %img.back-icon{src: "/icon/back.png"}
       %span.f16a.title= '搜索"'.$key.'"'
 

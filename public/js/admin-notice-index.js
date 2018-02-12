@@ -40,4 +40,36 @@ $(document).ready(function(){
       search();
     }
   });
+
+  $("#submit").click(function(){
+    var title = $("#title").val().trim();
+    var content = editor.txt.html();
+    var content_info = false;
+    $("#edit-area .w-e-text ").last().find('p').each(function(){
+      if($(this).text()!=''){
+        content_info =  true; 
+      }
+    });
+    if(content_info == false && title == ""){
+      showMsg("有关键内容没有填写", "center");
+      return false;
+    }
+
+    $.ajax({
+      type: 'post',
+      url: window.notice_store,
+      data: {
+        title: title,
+        content: content,
+        _token: window.token
+      },
+      success: function(data){
+        if(data.success){
+          $("#addModal").modal("hide");
+          location.href = window.notice_index;
+        }
+      }
+
+    });
+  });
 });
