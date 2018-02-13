@@ -45,7 +45,7 @@
           %span= $schedule->students()->count()."/".$schedule->quota
       .p-div
         %span 开课时间：
-        %span= $schedule->begin
+        %span= date('Y/m/d',strtotime($schedule->begin))
       .p-div
         %span 结课时间：
         %span= $schedule->end
@@ -75,7 +75,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"} 
-            - foreach($item->merchant->points()->where('approved',1)->get() as $item)
+            - foreach($schedule->merchant->points()->where('approved',1)->get() as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row#course-price.mb24
           %label.input-caption.f14d 课程定价:
@@ -89,7 +89,7 @@
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
-            - foreach($item->merchant->teachers as $item)
+            - foreach($teachers as $item)
               %option{value: $item->id}= $item->name
         .controls.controls-row.mb24#course-num
           %label.input-caption.f14d 班级人数:
