@@ -49,7 +49,6 @@ class AiController extends Controller
             $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
         } catch (\Exception $e) {
         }
-
         return $result;
     }
 
