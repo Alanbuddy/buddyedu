@@ -67,7 +67,6 @@ $(document).ready(function(){
     var price = $("#price").val().trim() * 100;
     var remark = $("#remark").val().trim();
     var lessons_count = $("#lessons-count").val().trim();
-    console.log(price);
     if(is_batch == 0){
       $.ajax({
         url: window.course_store,

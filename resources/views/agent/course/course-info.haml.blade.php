@@ -154,7 +154,7 @@
           %input.form-control.input-width#datepicker2{:type => "text", value: $schedule->end}
         .controls.controls-row.mb24#course-time
           %label.input-caption.f14d.time 详细时间:
-          %textarea.form-control.input-width.f14d#time{:type => "text", value: $schedule->time??""}
+          %textarea.form-control.input-width.f14d#time{:type => "text"}= $schedule->time??""
         .controls.controls-row.mb24
           %label.input-caption.f14d 申请备注:
           %input.form-control.input-width.f14d#remark{:type => "text", placeholder: "非必填"}
