@@ -43,35 +43,71 @@
             %span.f24e.mr8= $schedule->course->price ? "￥".$schedule->course->price : "暂无价格"
           %span.f12a="(".($schedule->course->proportion * 100)."%分成)"
     .info-div.f14d
-      .p-div
-        %span 授课老师：
-        - if(!$old)
+      - if(!$old)
+        .p-div
+          %span 授课老师：
           - foreach ($schedule->teachers as $teacher)
             %span.teacher= $teacher->name
-        - else
+      - else
+        .p-div
+          %span 授课老师: 
           - foreach ($old->teachers as $teacher)
             %span.teacher.through= $teacher->name
+        .p-div
+          %span.old-visibility 授课老师: 
           - foreach ($schedule->teachers as $teacher)
             %span.teacher.pink= $teacher->name
       .p-div
         %span 课程进度：
-        %span=$progress.'/'.$schedule->lessons_count
+        - if(!$old)
+          %span=$progress.'/'.$schedule->lessons_count
+        - else
+          %span.through=$progress.'/'.$old->lessons_count
+          %span.pink=$progress.'/'.$schedule->lessons_count
         - if(!$schedule->is_batch)
           %span.ml80 报名人数：
-          %span= $schedule->students()->count()."/".$schedule->quota
+          - if(!$old)
+            %span= $schedule->students()->count()."/".$schedule->quota
+          - else
+            %span.through= $old->students()->count()."/".$old->quota
+            %span.pink= $schedule->students()->count()."/".$schedule->quota
       .p-div
         %span 开课时间：
-        %span.begin= date('Y-m-d',strtotime($schedule->begin))
+        - if(!$old)
+          %span.begin= date('Y-m-d',strtotime($schedule->begin))
+        - else
+          %span.through= date('Y-m-d',strtotime($old->begin))
+          %span.begin.pink= date('Y-m-d',strtotime($schedule->begin))
       .p-div
         %span 结课时间：
-        %span.end= date('Y-m-d', strtotime($schedule->end))
+        - if(!$old)
+          %span.end= date('Y-m-d', strtotime($schedule->end))
+        - else
+          %span.through= date('Y-m-d', strtotime($old->end))
+          %span.end.pink= date('Y-m-d', strtotime($schedule->end))
       - if(!$schedule->is_batch)
+        - if(!$old)
+          .p-div
+            %span 详细时间：
+            %span= $schedule->time
+        - else
+          .p-div
+            %span 详细时间：
+            %span.through= $old->time
+          .p-div
+            %span.old-visibility 详细时间：
+            %span.pink= $schedule->time
+      - if(!$old)
         .p-div
-          %span 详细时间：
-          %span= $schedule->time
-      .p-div
-        %span 上课地点：
-        %span= $schedule->point->address
+          %span 上课地点：
+          %span= $schedule->point->address
+      - else
+        .p-div
+          %span 上课地点：
+          %span.through= $old->point->address
+        .p-div
+          %span.old-visibility 上课地点：
+          %span.pink= $schedule->point->address
       .p-div
         %span.left-span 课程介绍：
         %span.right-span= $schedule->course->description

@@ -51,7 +51,7 @@ $(document).ready(function(){
     var price = $("#price").val().trim() * 100;
     var remark = $("#remark").val().trim();
     var lessons_count = $("#lessons-count").val().trim();
-    if(!is_batch){
+    if(is_batch == 0){
       $.ajax({
         url: window.course_update.replace(/-1/, cid),
         type: 'put',
