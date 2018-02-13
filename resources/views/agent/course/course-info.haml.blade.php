@@ -6,6 +6,8 @@
 
 :javascript
   window.course_select = "#{route('courses.index')}"
+  window.course_update = "#{route('schedules.update', -1)}"
+  window.course_show = "#{route('schedules.show',$schedule->id)}"
 @endsection
 
 @section('content')
@@ -26,7 +28,12 @@
     .name-money
       .name-div
         %p.f24b= $schedule->course->name
-        %p.f12a.mt16= $schedule->point->name
+        - if(!$old)
+          %p.f12a.mt16= $schedule->point->name
+        - else
+          %p.f12a.mt16= $old->point->name
+          %p.f12e.mt16= $schedule->point->name
+
         %p.is-batch.hidden= $schedule->is_batch
       - if(!$schedule->is_batch)
         .money-div
@@ -45,10 +52,10 @@
           %span= $schedule->students()->count()."/".$schedule->quota
       .p-div
         %span 开课时间：
-        %span= date('Y/m/d',strtotime($schedule->begin))
+        %span.begin= date('Y-m-d',strtotime($schedule->begin))
       .p-div
         %span 结课时间：
-        %span= $schedule->end
+        %span.end= date('Y-m-d', strtotime($schedule->end))
       - if(!$schedule->is_batch)
         .p-div
           %span 详细时间：
@@ -60,7 +67,7 @@
         %span.left-span 课程介绍：
         %span.right-span= $schedule->course->description
       .p-div
-        %btn.modify-btn-width.fr#modify{"data-id" => $schedule->course->id} 修改
+        %btn.modify-btn-width.fr#modify{"data-id" => $schedule->id} 修改
 
 #editModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"} 
   .modal-dialog
@@ -71,7 +78,7 @@
         %p.f24b.add-c 修改课程
         .controls.controls-row.mb24
           %label.input-caption.f14d 开设课程:
-          %span.input-width.f14d#course= $schedule->course->name
+          %span.input-width.f14d#course{"data-id" => $schedule->course->id}= $schedule->course->name
         .controls.controls-row.mb24
           %label.input-caption.f14d 教学点:
           %select.form-control.input-width.manager.f14d#point{:type => "text"} 
@@ -79,7 +86,7 @@
               %option{value: $item->id}= $item->name
         .controls.controls-row#course-price.mb24
           %label.input-caption.f14d 课程定价:
-          %input.form-control.input-width.f14d#price{:type => "text", value: $schedule->course->price??"暂无"}
+          %input.form-control.input-width.f14d#price{:type => "text", value: $schedule->course->price??""}
         .controls.controls-row#desc
           %label.input-caption.f14d.unvisible 故意隐藏:
           %span.hide-notice.mtb#course-desc
@@ -90,10 +97,10 @@
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
             - foreach($teachers as $item)
-              %option{value: $item->id}= $item->name
+              %option{value: $item->id, selected: $item->selected}= $item->name
         .controls.controls-row.mb24#course-num
           %label.input-caption.f14d 班级人数:
-          %input.form-control.input-width.f14d#num{:type => "text", value: $schedule->quota??"暂无"}
+          %input.form-control.input-width.f14d#num{:type => "text", value: $schedule->quota??""}
         .controls.controls-row.mb24
           %label.input-caption.f14d 开课时间:
           %input.form-control.input-width#datepicker1{:type => "text", value: $schedule->begin}
@@ -102,7 +109,7 @@
           %input.form-control.input-width#datepicker2{:type => "text", value: $schedule->end}
         .controls.controls-row.mb24#course-time
           %label.input-caption.f14d.time 详细时间:
-          %textarea.form-control.input-width.f14d#time{:type => "text", value: $schedule->time??"暂无"}
+          %textarea.form-control.input-width.f14d#time{:type => "text", value: $schedule->time??""}
         .controls.controls-row.mb24
           %label.input-caption.f14d 申请备注:
           %input.form-control.input-width.f14d#remark{:type => "text", placeholder: "非必填"}
