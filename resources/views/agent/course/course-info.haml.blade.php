@@ -131,7 +131,7 @@
               %option{value: $item->id}= $item->name
         .controls.controls-row#course-price.mb24
           %label.input-caption.f14d 课程定价:
-          %input.form-control.input-width.f14d#price{:type => "text", value: $schedule->course->price??""}
+          %input.form-control.input-width.f14d#price{:type => "text", value: $schedule->price??""}
         .controls.controls-row#desc
           %label.input-caption.f14d.unvisible 故意隐藏:
           %span.hide-notice.mtb#course-desc
