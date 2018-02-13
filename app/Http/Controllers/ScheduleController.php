@@ -212,7 +212,8 @@ class ScheduleController extends Controller
             if ($teachers->contains($t))
                 $teachers->find($t)->selected = true;
         }
-        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('schedule', 'progress', 'teachers'));
+        $old = Schedule::where('parent', $schedule->id)->orderByDesc('id')->first();
+        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('schedule', 'progress', 'teachers', 'old'));
     }
 
     /**
