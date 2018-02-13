@@ -207,7 +207,12 @@ class ScheduleController extends Controller
         $isAdmin = $this->isAdmin();
         $schedule->course = $schedule->merchant->courses()->where('id', $schedule->course_id)->first();
         $schedule->is_batch = $schedule->course->pivot->is_batch;
-        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('schedule', 'progress'));
+        $teachers = $schedule->merchant->teachers;
+        foreach ($schedule->teachers as $t) {
+            if ($teachers->contains($t))
+                $teachers->find($t)->selected = true;
+        }
+        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('schedule', 'progress', 'teachers'));
     }
 
     /**
