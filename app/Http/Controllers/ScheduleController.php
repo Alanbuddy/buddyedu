@@ -254,10 +254,10 @@ class ScheduleController extends Controller
             ];
         }
 
-        DB::transaction(function () use ($arr, $schedule, $application, $request) {
+        DB::transaction(function () use ( $arr, $schedule, $application, $request) {
             $properties = $schedule->getAttributes();
             array_splice($properties, 0, 1);
-            Schedule::create(array_merge($properties, ['parent' => $schedule->id]));
+            $revisionSchedule=Schedule::create(array_merge($properties, ['parent' => $schedule->id]));
 
             $schedule->update(array_merge(
                 ['status' => 'applying'],
@@ -266,6 +266,7 @@ class ScheduleController extends Controller
 
             //save teachers
             $schedule->teachers()->sync($arr);
+            $revisionSchedule->teachers()->sync($arr);
 
             //save application
             $application->fill([
