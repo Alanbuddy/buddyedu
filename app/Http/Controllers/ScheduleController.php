@@ -133,6 +133,11 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        $courseHasBeenAuthorized = $this->getMerchant()->courses()->where('id', $request->course_id)->count();
+        if (!$courseHasBeenAuthorized) {
+            throw new \Exception('course has not authorized');
+//            abort(500, 'course has not authorized');
+        }
         $this->validate($request, [
             'course_id' => 'required|numeric',
             'point_id' => 'required|numeric',
@@ -143,6 +148,11 @@ class ScheduleController extends Controller
             'teachers' => 'required|array',
             'lessons_count' => 'required|numeric',
         ]);
+        //检查机构是否已经取得课程授权
+        $courseHasBeenAuthorized = $this->getMerchant()->courses()->where('id', $request->course_id)->count();
+        if (!$courseHasBeenAuthorized) {
+            abort(500, 'course has not authorized');
+        }
 
         $arr = [];
         foreach ($request->teachers as $k => $v) {

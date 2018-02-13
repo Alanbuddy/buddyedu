@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         $user = auth()->user();
-        Log::error('========Exception :'. $exception->getMessage());
+        Log::error('========Exception :' . $exception->getMessage());
         //Expected response code 250 but got code "553", with message "553 Mail from must equal authorized user"
         if (!$exception instanceof NotFoundHttpException) {
             try {
@@ -72,15 +72,15 @@ class Handler extends ExceptionHandler
             return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
         }
 //        if ($request->route() && collect($request->route()->computedMiddleware)->contains('api')) {
-        if (Str::startsWith($request->getRequestUri(), '/api')||$request->ajax()) {
+        if (Str::startsWith($request->getRequestUri(), '/api') || $request->ajax()) {
             if ($exception instanceof HttpException) {
-                return response()->json(['success' => false, 'message' => class_basename($exception)], $exception->getStatusCode());
+                return response()->json(['success' => false, 'message' => $exception->getMessage() . class_basename($exception)], $exception->getStatusCode());
             } else if ($exception instanceof AuthenticationException) {
                 return response()->json(['success' => false, 'message' => $exception->getMessage()], 401);
             } else if ($exception instanceof ValidationException) {
                 return response()->json(['success' => false, 'message' => $exception->getMessage(), 'data' => $exception->errors()], $exception->status);
             } else {
-                return response()->json(['success' => false, 'message' => $exception->getMessage() .' exception position:'. $exception->getFile() . $exception->getLine()],
+                return response()->json(['success' => false, 'message' => $exception->getMessage() . ' exception position:' . $exception->getFile() . $exception->getLine()],
                     property_exists($exception, 'status') ? $exception->status : 500);
             }
         }
