@@ -22,7 +22,7 @@
         %p.f24b= $schedule->course->name 
         %p.f12a.mt16= $schedule->point->name 
       .money-div
-        %span.f24c.mr8= $schedule->price ? "￥".round($schedule->price/100, 2) : "暂无价格"
+        %span.f24c.mr8= $schedule->price ? "￥".$schedule->price : "暂无价格"
         %span.f12a="(".($schedule->course->proportion * 100)."%分成)"
     .info-div.f14d
       .p-div
