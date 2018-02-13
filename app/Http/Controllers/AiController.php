@@ -16,7 +16,7 @@ class AiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('va')->except('getAppUpdate');
+//        $this->middleware('va')->except('getAppUpdate');
     }
 
     public function cut(Request $request)
@@ -45,7 +45,10 @@ class AiController extends Controller
         $merchant_id = 1;
         $student_id = 1;
         $schedule_id = 1;
-        $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
+        try {
+            $this->recordApiCall($request->route()->getName(), $entry->path, $timeCost, $merchant_id, $schedule_id, $student_id, $result);
+        } catch (\Exception $e) {
+        }
 
         return $result;
     }
@@ -161,7 +164,7 @@ class AiController extends Controller
             fclose($pipes[1]);
             proc_close($process);   //在调用proc_close之前必须关闭所有管道
         }
-        $content=file_get_contents("$cwd$name.zip");
+        $content = file_get_contents("$cwd$name.zip");
         return response($content, 200)
             ->header('Content-Type', 'application/x-zip-compressed')
             ->header('Content-Disposition', 'attachment;filename=' . $name . '.zip');
