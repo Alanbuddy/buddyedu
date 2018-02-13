@@ -39,8 +39,8 @@
           - if(!$old)
             %span.f24c.mr8= $schedule->price ? "￥".$schedule->price : "暂无价格"
           - else
-            %span.f24c.mr8.through= $old->price ? "￥".$schedule->price : "暂无价格"
-            %span.f24e.mr8= $schedule->course->price ? "￥".$schedule->course->price : "暂无价格"
+            %span.f24c.mr8.through= $old->price ? "￥".$old->price : "暂无价格"
+            %span.f24e.mr8= $schedule->price ? "￥".$schedule->price : "暂无价格"
           %span.f12a="(".($schedule->course->proportion * 100)."%分成)"
     .info-div.f14d
       - if(!$old)
