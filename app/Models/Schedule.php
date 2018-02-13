@@ -64,5 +64,10 @@ class Schedule extends Model
     {
         return $query->where('hidden', false);
     }
+
+    public function getPriceAttribute($value)
+    {
+        return round($value/100,2);
+    }
 }
 

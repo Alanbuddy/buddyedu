@@ -85,7 +85,7 @@
       -else
         -if($available)
           .left-div
-            %span.f16.fb.color2="￥".round($schedule->price/100,2)
+            %span.f16.fb.color2="￥".$schedule->price
             %span.f14.fb.color2='(仅剩'.$available.'名额)'
           .right-div
             %button.btn.click-btn.f14#end_btn{type: "button"} 立即报名
