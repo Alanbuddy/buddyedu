@@ -353,3 +353,11 @@
   display: none;
 }
 
+.through {
+  text-decoration: line-through;
+}
+
+.pink {
+  color: #f58799;
+}
+
