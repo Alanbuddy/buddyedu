@@ -31,19 +31,28 @@
         - if(!$old)
           %p.f12a.mt16= $schedule->point->name
         - else
-          %p.f12a.mt16= $old->point->name
+          %p.f12a.mt16.through= $old->point->name
           %p.f12e.mt16= $schedule->point->name
-
         %p.is-batch.hidden= $schedule->is_batch
       - if(!$schedule->is_batch)
         .money-div
-          %span.f24c.mr8= $schedule->course->price ? "￥".$schedule->course->price : "暂无价格"
+          - if(!$old)
+            %span.f24c.mr8= $schedule->course->price ? "￥".$schedule->course->price : "暂无价格"
+          - else
+            %span.f24c.mr8.through= $old->course->price ? "￥".$schedule->course->price : "暂无价格"
+            %span.f24e.mr8= $schedule->course->price ? "￥".$schedule->course->price : "暂无价格"
           %span.f12a="(".($schedule->course->proportion * 100)."%分成)"
     .info-div.f14d
       .p-div
         %span 授课老师：
-        - foreach ($schedule->teachers as $teacher)
-          %span.teacher= $teacher->name
+        - if(!$old)
+          - foreach ($schedule->teachers as $teacher)
+            %span.teacher= $teacher->name
+        - else
+          - foreach ($old->teachers as $teacher)
+            %span.teacher.through= $teacher->name
+          - foreach ($schedule->teachers as $teacher)
+            %span.teacher.pink= $teacher->name
       .p-div
         %span 课程进度：
         %span=$progress.'/'.$schedule->lessons_count
