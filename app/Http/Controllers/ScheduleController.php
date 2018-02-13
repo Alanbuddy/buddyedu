@@ -133,21 +133,22 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $courseHasBeenAuthorized = $this->getMerchant()->courses()->where('id', $request->course_id)->count();
-        if (!$courseHasBeenAuthorized) {
-            throw new \Exception('course has not authorized');
-//            abort(500, 'course has not authorized');
-        }
         $this->validate($request, [
             'course_id' => 'required|numeric',
             'point_id' => 'required|numeric',
-            'quota' => 'sometimes|numeric',
-            'time' => 'sometimes|max:200',
             'begin' => 'required|date',
             'end' => 'required|date',
             'teachers' => 'required|array',
             'lessons_count' => 'required|numeric',
         ]);
+        $merchant = $this->getMerchant();
+        $isBatch = $this->isBatch($merchant, $request->course_id);
+        if (!$isBatch)
+            $this->validate($request, [
+                'quota' => 'numeric',
+                'time' => 'max:200',
+            ]);
+
         //检查机构是否已经取得课程授权
         $courseHasBeenAuthorized = $this->getMerchant()->courses()->where('id', $request->course_id)->count();
         if (!$courseHasBeenAuthorized) {
@@ -255,7 +256,7 @@ class ScheduleController extends Controller
         DB::transaction(function () use ($arr, $schedule, $application, $request) {
             $properties = $schedule->getAttributes();
             array_splice($properties, 0, 1);
-            Schedule::create(array_merge( $properties,['parent' => $schedule->id]));
+            Schedule::create(array_merge($properties, ['parent' => $schedule->id]));
 
             $schedule->update(array_merge(
                 ['status' => 'applying'],
