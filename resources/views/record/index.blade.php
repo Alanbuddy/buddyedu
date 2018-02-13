@@ -34,8 +34,12 @@
                 {{$item->merchant_id}}
             </td>
             <td>
-                {{substr($item->result,0,10)}}
+                {!! substr($item->result,0,10) !!}
+            </td>
+            <td>
+                {!! substr($item->result,0,10) !!}
             </td>
         </tr>
     @endforeach
 </table>
+{!! $item->render() !!}
