@@ -145,8 +145,9 @@ class ScheduleController extends Controller
         $isBatch = $this->isBatch($merchant, $request->course_id);
         if (!$isBatch)
             $this->validate($request, [
-                'quota' => 'numeric',
-                'time' => 'max:200',
+                'quota' => 'required|numeric',
+                'price' => 'required|numeric',
+                'time' => 'max:200'
             ]);
 
         //检查机构是否已经取得课程授权
