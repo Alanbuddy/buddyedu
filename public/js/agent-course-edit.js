@@ -13,10 +13,6 @@ $(document).ready(function(){
     $("#editModal").modal("hide");
   });
 
-  var teacher = {};
-  $("#teacher-select option").each(function(){
-
-  });
   $('#teacher-select').select2({
     placeholder: "请选择教师名"
   });
