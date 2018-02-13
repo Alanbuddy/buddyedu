@@ -85,7 +85,7 @@
           %span.hide-notice.mtb#course-desc
         .controls.controls-row.mb24
           %label.input-caption.f14d 课程次数:
-          %input.form-control.input-width.f14d#lessons-count{:type => "text", value: $item->course->lessons_count}
+          %input.form-control.input-width.f14d#lessons-count{:type => "text", value: json_encode($item)}
         .controls.controls-row.mb24
           %label.input-caption.f14d.teacher 授课老师:
           %select.form-control.input-width#teacher-select.f14d{multiple: "multiple"}
