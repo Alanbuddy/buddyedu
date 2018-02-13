@@ -203,12 +203,11 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        $item = $schedule;
         $progress = $schedule->attendances()->max('ordinal_no');
         $isAdmin = $this->isAdmin();
         $schedule->course = $schedule->merchant->courses()->where('id', $schedule->course_id)->first();
         $schedule->is_batch = $schedule->course->pivot->is_batch;
-        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('item', 'progress'));
+        return view(($isAdmin ? 'admin' : 'agent') . '.course.course-info', compact('schedule', 'progress'));
     }
 
     /**
