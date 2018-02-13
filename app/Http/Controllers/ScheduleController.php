@@ -255,7 +255,7 @@ class ScheduleController extends Controller
         DB::transaction(function () use ($arr, $schedule, $application, $request) {
             $properties = $schedule->getAttributes();
             array_splice($properties, 0, 1);
-            Schedule::create(array_merge(['parent' => $schedule->id], $properties));
+            Schedule::create(array_merge( $properties,['parent' => $schedule->id]));
 
             $schedule->update(array_merge(
                 ['status' => 'applying'],
