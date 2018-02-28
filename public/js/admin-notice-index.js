@@ -73,13 +73,14 @@ $(document).ready(function(){
     });
   });
 
-  $("#delete").click(function(){
+  $(".delete-btn").click(function(e){
+    e.preventDefault();
     var nid = $(this).attr("data-id");
     var destroy = "DELETE";
     var _this = $(this);
     $.ajax({
-      type: 'post',
       url: window.notice_delete.replace(/-1/, nid),
+      type: 'post',
       data: {
         _method: destroy,
         _token: window.token
@@ -87,6 +88,7 @@ $(document).ready(function(){
       success: function(data){
         if(data.success){
           _this.closest('.item').remove();
+          location.href = window.notice_index;
         }
       }
     });
