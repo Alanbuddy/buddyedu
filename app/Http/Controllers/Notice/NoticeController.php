@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Notice;
 
-use App\Http\Controllers\Controller;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 
-class NoticeController extends Controller
+class NoticeController extends AbstractNoticeController
 {
     public function index(Request $request, Notice $notice)
     {
@@ -21,4 +20,5 @@ class NoticeController extends Controller
     {
         return view('mobile.notice-show', compact('notice'));
     }
+
 }
