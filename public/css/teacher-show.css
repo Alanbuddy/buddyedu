@@ -62,15 +62,11 @@
 }
 
 .name-div {
-  width: 300px;
+  width: 500px;
 }
 
 .teacher {
   float: left;
-}
-
-.teacher-title {
-  margin-left: 13px;
 }
 
 .desc-div {

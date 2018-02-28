@@ -1,0 +1,40 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.32rem;
+  padding-top: 0.48rem;
+}
+
+.title {
+  color: #365ba9;
+}
+
+.item {
+  display: block;
+  padding: 0.48rem 0;
+  border-bottom: 1px solid #e4f3ff;
+}
+
+.caption {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #5d6578;
+}
+
+.notice-content {
+  color: #5d6578;
+  margin-top: 0.14rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+}
+
+.undiscover {
+  margin-top: 0.48rem;
+  text-align: center;
+}
+
