@@ -109,8 +109,13 @@ Route::middleware('auth')
         Route::get('/applications/{application}/reject', 'ApplicationController@reject')->name('application.reject');
         Route::get('/applications/{application}/approve', 'ApplicationController@approve')->name('application.approve');
         Route::resource('applications', 'ApplicationController');
-        Route::resource('notices', 'NoticeController');
+        Route::prefix('admin')->group(function () {
+            Route::resource('notices', 'Notice\AdminNoticeController');
+        });
     });
+
+Route::get('/notices', 'Notice\NoticeController@index')->name('notice.list');
+Route::get('/notices/{notice}/show', 'Notice\NoticeController@show')->name('notice.detail');
 
 Route::get('/qr', 'HomeController@qr')->name('qr');
 Route::get('/form', 'AiController@form')->name('form');
