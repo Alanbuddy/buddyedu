@@ -24,6 +24,9 @@
     "/css/admin-register.css": "/css/admin-register.css",
     "/css/class_info.css": "/css/class_info.css",
     "/css/mobile-course-list.css": "/css/mobile-course-list.css",
+    "/css/mobile-notice-list.css": "/css/mobile-notice-list.css",
+    "/css/mobile-notice-show.css": "/css/mobile-notice-show.css",
+    "/css/point-show.css": "/css/point-show.css",
     "/css/admin-notice-index.css": "/css/admin-notice-index.css",
     "/css/admin-notice-show.css": "/css/admin-notice-show.css",
     "/css/grow-record.css": "/css/grow-record.css"

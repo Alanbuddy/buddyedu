@@ -44,7 +44,7 @@ class PointController extends Controller
             $items->withPath(route('points.index') . '?' . http_build_query(['key' => $request->key,]));
         }
         $key = $request->key;
-        return view('agent.edu-point.index', compact('items', 'key'));
+        return view('agent.edu-point.show', compact('items', 'key'));
     }
 
     /**

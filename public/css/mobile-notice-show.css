@@ -1,0 +1,25 @@
+.desc-div {
+  position: relative;
+  padding: 0 0.32rem;
+}
+
+.title {
+  color: #365ba9;
+  margin: 0.48rem 0;
+}
+
+.caption {
+  color: #5d6578;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.24rem;
+}
+
+.desc {
+  color: #5d6578;
+  line-height: 200%;
+}
+
