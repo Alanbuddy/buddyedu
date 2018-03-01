@@ -18,7 +18,7 @@
 
   .desc-div
     .name-div
-      %p.f24b 教学点的长名称
+      %p.f24b= $point->name
     .info-div.f14d
       .p-div
         %span.left 占地面积：
