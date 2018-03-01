@@ -8,8 +8,8 @@
 .desc-div
   %p.title.fb.f20 公告详情
   .item
-    %span.caption.f16.fb 很长很长的公告名称
-    .desc.f14 很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称很长很长的公告名称
+    %span.caption.f16.fb= $notice->title
+    .desc.f14!= $notice->content
   
 
 @endsection
