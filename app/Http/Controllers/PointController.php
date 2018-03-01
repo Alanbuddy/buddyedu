@@ -105,7 +105,7 @@ class PointController extends Controller
      */
     public function show(Point $point)
     {
-        //
+	    return view('agent.edu-point.show',$point);
     }
 
     /**
