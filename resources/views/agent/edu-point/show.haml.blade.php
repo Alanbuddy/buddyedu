@@ -1,7 +1,9 @@
 @extends('layout.agent')
 @section('css')
 <link rel="stylesheet" href="{{ mix('/css/point-show.css') }}">
-
+:javascript
+  window.point_update = "#{route('points.update',$point->id)}"
+  window.point_show = "#{route('points.show', $point->id)}"
 @endsection
 
 @section('content')
@@ -18,35 +20,40 @@
 
   .desc-div
     .name-div
-      %p.f24b= $point->name
+      %p.f24b#edu-name= $point->name
     .info-div.f14d
       .p-div
         %span.left 占地面积：
-        %span.unedit= $point->area.'m²'
-        %input.form-control.edit-input
+        %span.unedit#area= $point->area.'m²'
+        %input.form-control.edit-input#edu-area{value: $point->area}
       .p-div
         %span.left 负责人：
-        %span.unedit= $point->admin
-        %input.form-control.edit-input
+        %span.unedit#admin= $point->admin
+        %input.form-control.edit-input#edu-admin{value: $point->admin}
       .p-div
         %span.left 联系方式：
-        %span.unedit= $point->contact
-        %input.form-control.edit-input
+        %span.unedit#contact= $point->contact
+        %input.form-control.edit-input#edu-phone{value: $point->contact}
       .p-div
         %span.left 地址信息：
-        %span.unedit= $point->province.$point->city.$point->county.$point->address
+        %span.unedit#location{"data-pro" => $point->province, "data-ci" => $point->city, "data-co" => $point->county}= $point->province.$point->city.$point->county.$point->address
         %span.citys.edit
           %select.form-control#province
           %select.form-control#city
           %select.form-control#county
+      .p-div.edit
+        %span.left 详细地址：
+        %input.form-control.edit-input#street{value: $point->address}
+      .p-div.edit
+        %span.left 申请备注：
+        %input.form-control.edit-input#remark{:type => "text", placeholder: "必填"}
       .p-div.clearfix
         %span.left#map.fl{"data-geo" => $point->geolocation} 所在地：
-        %span.unedit#container
-        .new-map.edit
-          %p.get-location 获取地址
-          #new-container
+        .new-map
+          %p.get-location.edit 获取地址
+          #container
       .p-div
-        %btn.modify-btn-width.fr#modify 修改
+        %btn.modify-btn-width.fr#point-modify{"data-text" => "true"} 修改
       .p-div
         %btn.modify-btn-width.fr#confirm 确定
 

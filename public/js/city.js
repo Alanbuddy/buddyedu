@@ -466,4 +466,14 @@ function preselect(p_key, p_city, p_town) {
 }
 
 init();
-preselect('北京市');
+
+var edit = $("#point-modify").attr("data-text");
+if(edit){
+	var pro = $("#location").attr("data-pro");
+	var ci = $("#location").attr("data-ci");
+	var co = $("#location").attr("data-co");
+	preselect(pro, ci, co);
+}else{
+	preselect('北京市');
+}
+

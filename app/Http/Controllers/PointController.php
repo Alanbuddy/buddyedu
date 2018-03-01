@@ -104,7 +104,7 @@ class PointController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Point $point)
-    {
+    {   
 	    return view('agent.edu-point.show',compact('point'));
     }
 
