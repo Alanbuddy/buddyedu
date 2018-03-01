@@ -22,25 +22,25 @@
     .info-div.f14d
       .p-div
         %span.left 占地面积：
-        %span.unedit 200m²
+        %span.unedit= $point->area.'m²'
         %input.form-control.edit-input
       .p-div
         %span.left 负责人：
-        %span.unedit 王老师
+        %span.unedit= $point->admin
         %input.form-control.edit-input
       .p-div
         %span.left 联系方式：
-        %span.unedit 1882334544355
+        %span.unedit= $point->contact
         %input.form-control.edit-input
       .p-div
         %span.left 地址信息：
-        %span.unedit 北京市朝阳区
+        %span.unedit= $point->province.$point->city.$point->county.$point->address
         %span.citys.edit
           %select.form-control#province
           %select.form-control#city
           %select.form-control#county
       .p-div.clearfix
-        %span.left#map.fl 所在地：
+        %span.left#map.fl{"data-geo" => $point->geolocation} 所在地：
         %span.unedit#container
         .new-map.edit
           %p.get-location 获取地址
