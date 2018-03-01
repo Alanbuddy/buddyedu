@@ -44,11 +44,11 @@
               %th 负责人
               %th 联系方式
               %th 详细地址
-              %th 操作
           %tbody
           -foreach($items as $item)
             %tr
-              %td.name=$item->name
+              %td
+                %a.name{href: route('points.show', $item->id)}=$item->name
               %td.area= $item->area.'m²'
               %td.admin= $item->admin
               %td.contact= $item->contact
@@ -60,10 +60,6 @@
                   %p 地址信息:
                   %p.address= $item->address
                   .container
-              %td.f12a.edit 编辑
-              %td.province{style: "display: none"}= $item->province
-              %td.city{style: "display: none"}= $item->city
-              %td.county{style: "display: none"}= $item->county
       .select-page 
         %span.choice-page
           != $items->links()

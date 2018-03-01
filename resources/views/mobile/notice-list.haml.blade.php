@@ -8,11 +8,14 @@
 .desc-div
   %p.title.fb.f20 公告信息
   .items-div
-    .undiscover
-      %img.undiscover-icon{src: "/icon/undiscover.png"}
-    %a.item{href:'#'}
-      %span.caption.fb.f16 很长很长的标题很很很很很很很长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题
-      .notice-content 很很很很很很很很很长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题长很长的标题
+    - if(count($items) == 0)
+      .undiscover
+        %img.undiscover-icon{src: "/icon/undiscover.png"}
+    - else
+      - foreach($items as $item)
+        %a.item{href: route('notice.detail',$item->id)}
+          %span.caption.fb.f16= $item->title 
+          .notice-content!= $item->content
 
 @endsection
 
